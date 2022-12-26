@@ -91,7 +91,6 @@
                         "backgroundColor": "transparent"
                     }
                 ],
-                "cmake.configureOnOpen": false,
                 "json.maxItemsComputed": 50000000000,
                 "editor.suggestSelection": "first",
                 "editor.largeFileOptimizations": false,
@@ -103,8 +102,6 @@
             "extensions": [
                 "mutantdino.resourcemonitor",
                 "mhutchie.git-graph",
-                "ms-azuretools.vscode-docker",
-                "p1c2u.docker-compose",
                 "mads-hartmann.bash-ide-vscode",
                 "njpwerner.autodocstring",
                 "kevinkyang.auto-comment-blocks",
@@ -129,14 +126,11 @@
                 "Guyutongxue.cpp-reference",
                 "bbenoist.Doxygen",
                 "cschlosser.doxdocgen",
-                "hediet.vscode-drawio",
-                "nopeslide.vscode-drawio-plugin-mermaid",
                 "tamasfe.even-better-toml",
                 "ypresto.vscode-intelli-refactor",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "PKief.material-icon-theme",
                 "surajbarkale.ninja",
-                "2gua.rainbow-brackets",
                 "redhat.vscode-commons",
                 "foxundermoon.shell-format",
                 "timonwong.shellcheck",
@@ -152,7 +146,7 @@
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "gcc -v && sed -i '$ s/$/fs.inotify.max_user_watches=524288/' /etc/sysctl.conf && sysctl -p",
+    "postCreateCommand": "gcc -v && sudo sed -i '$ s/$/fs.inotify.max_user_watches=524288/' /etc/sysctl.conf && sudo sysctl -p",
     // Comment out this line to run as root instead.
     "remoteUser": "vscode"
 }
