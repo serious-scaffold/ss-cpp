@@ -1,7 +1,8 @@
 file(GLOB_RECURSE api_srcs "*.cpp")
 file(GLOB_RECURSE api_hdrs "*.hpp")
 
-set(public_headers src/api.hpp)
+set(public_headers ${CMAKE_CURRENT_SOURCE_DIR}/src/api.hpp
+                   ${CMAKE_CURRENT_SOURCE_DIR}/src/impl/impl.hpp)
 
 # shared library
 add_library(api-shared SHARED "")
@@ -41,7 +42,10 @@ target_include_directories(
 target_compile_options(
   api-shared PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
-target_link_libraries(api-shared PUBLIC OpenMP::OpenMP_CXX PRIVATE msft_proxy)
+target_link_libraries(
+  api-shared
+  PUBLIC OpenMP::OpenMP_CXX
+  PRIVATE msft_proxy)
 
 set_target_properties(
   api-shared
@@ -76,7 +80,10 @@ target_include_directories(
 target_compile_options(
   api-static PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
-target_link_libraries(api-static PUBLIC OpenMP::OpenMP_CXX PRIVATE msft_proxy)
+target_link_libraries(
+  api-static
+  PUBLIC OpenMP::OpenMP_CXX
+  PRIVATE msft_proxy)
 
 set_target_properties(
   api-static
@@ -86,7 +93,8 @@ set_target_properties(
     DEBUG_POSTFIX "_sd"
     RELEASE_POSTFIX "_s"
     PUBLIC_HEADER
-    "${public_headers};${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/api_export.hpp")
+    "${public_headers};${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/api_export.hpp"
+)
 
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")

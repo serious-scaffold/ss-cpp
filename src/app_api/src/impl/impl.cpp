@@ -16,19 +16,19 @@ private:
 };
 namespace geo {
 
-std::string PrintDrawableToString(pro::proxy<DrawableF> p) {
+pro::proxy<DrawableFacade> CreateRectangleAsDrawable(int width, int height) {
+    Rectangle rect;
+    rect.SetWidth(width);
+    rect.SetHeight(height);
+    return pro::make_proxy<DrawableFacade>(rect); // No heap allocation is expected
+}
+
+std::string PrintDrawableToString(pro::proxy<DrawableFacade> p) {
     std::stringstream result;
     result << "shape = ";
     p.invoke<Draw>(result);                    // Polymorphic call
     result << ", area = " << p.invoke<Area>(); // Polymorphic call
     return std::move(result).str();
 }
-
-pro::proxy<DrawableF> CreateRectangleAsDrawable(int width, int height) {
-    Rectangle rect;
-    rect.SetWidth(width);
-    rect.SetHeight(height);
-    return pro::make_proxy<DrawableF>(rect); // No heap allocation is expected
-}
-} // namespace geo
-} // namespace api
+}; // namespace geo
+}; // namespace api
