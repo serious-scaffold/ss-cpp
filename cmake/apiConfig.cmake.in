@@ -1,0 +1,52 @@
+# apiConfig.cmake
+# -------------------
+#
+# api cmake module.
+# This module sets the following variables in your project:
+#
+# ::
+#
+#   api_FOUND - true if api found on the system
+#   api_VERSION - api version in format Major.Minor.Release
+#
+#
+# Exported targets:
+#
+# ::
+#
+# If api is found, this module defines the following :prop_tgt:`IMPORTED`
+# targets. ::
+#   api::api-shared - the main api shared library with header & defs attached.
+#   api::api-static - the main api static library with header & defs attached.
+#
+#
+# Suggested usage:
+#
+# ::
+#
+#   find_package(api)
+#   find_package(api 1.1.7 CONFIG REQUIRED)
+#
+#
+# The following variables can be set to guide the search for this package:
+#
+# ::
+#
+#   api_DIR - CMake variable, set to directory containing this Config file
+#   CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package
+#   PATH - environment variable, set to bin directory of this package
+#   CMAKE_DISABLE_FIND_PACKAGE_api - CMake variable, disables
+#       find_package(api) perhaps to force internal build
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(Threads REQUIRED)
+find_dependency(OpenMP REQUIRED)
+
+include("${CMAKE_CURRENT_LIST_DIR}/apiTargets.cmake")
+check_required_components(
+  "api-shared"
+  "api-static"
+  )

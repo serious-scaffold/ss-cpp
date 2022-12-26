@@ -1,0 +1,227 @@
+﻿# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+---
+Language: Cpp
+# 访问说明符(public、protected、private)不偏移
+AccessModifierOffset: -4
+# 开括号(开圆括号、开尖括号、开方括号)后的参数换行需要对齐
+AlignAfterOpenBracket: Align
+# 连续赋值时，不对齐所有等号
+AlignConsecutiveAssignments: false
+# 连续声明时，不对齐所有声明的变量名
+AlignConsecutiveDeclarations: false
+# 对齐连续宏定义的样式
+AlignConsecutiveMacros: true
+# 将转义的换行符(\)尽可能向左对齐
+AlignEscapedNewlines: Left
+# 水平对齐二元和三元表达式的操作数
+AlignOperands: true
+# 对齐连续的尾部注释
+AlignTrailingComments: true
+# 允许函数的所有参数放到下一行
+AllowAllArgumentsOnNextLine: false
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+# 不允许短的代码块放在同一行，如 while 代码块
+AllowShortBlocksOnASingleLine: false
+# 不允许短的 case 标签代码块放在同一行
+AllowShortCaseLabelsOnASingleLine: false
+# 不允许在类外定义的非空函数放在同一行
+AllowShortFunctionsOnASingleLine: Inline
+# 不允许短的 if 语句放在同一行
+AllowShortIfStatementsOnASingleLine: false
+# 不允许短的循环代码块放在同一行
+AllowShortLoopsOnASingleLine: false
+# 不要主动在函数定义返回类型处换行，除非超过行字符数限制必须换行
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+# 不允许在多行 string 前换行
+AlwaysBreakBeforeMultilineStrings: false
+# 总是在 template 声明后换行
+AlwaysBreakTemplateDeclarations: Yes
+# 不要求函数实参换行时必须每个参数各自一行
+BinPackArguments: false
+# 不要求函数形参换行时必须每个参数各自一行
+BinPackParameters: false
+# 配置大括号是否换行
+BraceWrapping:
+  # case 标签后面大括号不换行
+  AfterCaseLabel: false
+  # class 定义后面大括号不换行
+  AfterClass: false
+  # 控制语句后面大括号不换行
+  AfterControlStatement: false
+  # enum 定义后面大括号不换行
+  AfterEnum: false
+  # 函数定义后面大括号不换行
+  AfterFunction: false
+  # 命名空间定义后面大括号不换行
+  AfterNamespace: false
+  # struct 定义后面大括号不换行
+  AfterStruct: false
+  # union 定义后面大括号不换行
+  AfterUnion: false
+  # extern 块后面大括号不换行
+  AfterExternBlock: false
+  # catch 之前需要换行
+  BeforeCatch: true
+  # else 之前需要换行
+  BeforeElse: true
+  # lambda 大括号不换行
+  BeforeLambdaBody: false
+  # while 之前需要换行
+  BeforeWhile: true
+  # 不要缩进大括号
+  IndentBraces: false
+  # 空函数体可以在同一行
+  SplitEmptyFunction: false
+  # 空语句可以在同一行
+  SplitEmptyRecord: false
+  # 空命名空间可以在同一行
+  SplitEmptyNamespace: false
+# 需要换行时在二元操作符前换行，除了赋值操作符
+BreakBeforeBinaryOperators: NonAssignment
+# 在 BraceWrapping 中自定义
+BreakBeforeBraces: Custom
+# 继承列表换行时逗号不换行
+BreakBeforeInheritanceComma: false
+# 继承列表换行时冒号换行，逗号不换行
+BreakInheritanceList: BeforeColon
+# 在三元运算操作符之前换行
+BreakBeforeTernaryOperators: true
+# 构造函数初始化列表换行时逗号不换行
+BreakConstructorInitializersBeforeComma: false
+# 构造函数初始化列表换行时冒号换行，逗号不换行
+BreakConstructorInitializers: BeforeColon
+# 允许断开字符串文字
+BreakStringLiterals: true
+# 每行字符数限制
+ColumnLimit: 120
+CommentPragmas: "^ IWYU pragma:"
+# 不允许不同的命名空间定义在同一行
+CompactNamespaces: false
+# 构造函数初始化列表要么都在一行，要么每个变量一行
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+# 构造函数初始化列表需要 4 个缩进
+ConstructorInitializerIndentWidth: 4
+# 换行后下一行需要 4 个 缩进
+ContinuationIndentWidth: 4
+# 变量初始化列表前后不需要空格
+Cpp11BracedListStyle: true
+DerivePointerAlignment: true
+DisableFormat: false
+ExperimentalAutoDetectBinPacking: false
+# 自动为命名空间结尾处添加注释
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+  - Q_FOREACH
+  - BOOST_FOREACH
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex: '^<ext/.*\.h>'
+    Priority: 2
+  - Regex: "StdAfx.h"
+    Priority: -1
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: "^<.*"
+    Priority: 2
+  - Regex: ".*"
+    Priority: 3
+IncludeIsMainRegex: "([-_](test|unittest))?$"
+# switch 里的 case 需要缩进
+IndentCaseLabels: true
+# extern 里的代码块需要缩进
+IndentExternBlock: Indent
+# 预处理指令不能有缩进
+IndentPPDirectives: None
+# 使用 4 个缩进
+IndentWidth: 4
+# 函数声明、定义时在返回类型处换行时，下一行不要缩进
+IndentWrappedFunctionNames: false
+# 代码块开始处不要有空行
+KeepEmptyLinesAtTheStartOfBlocks: false
+MacroBlockBegin: ""
+MacroBlockEnd: ""
+# 不能有连续2个及以上的空行
+MaxEmptyLinesToKeep: 1
+# 命名空间内的内容不要缩进
+NamespaceIndentation: None
+PenaltyBreakAssignment: 2
+PenaltyBreakBeforeFirstCallParameter: 1
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 200
+# * & 紧挨类型名
+PointerAlignment: Left
+RawStringFormats:
+  - Language: Cpp
+    Delimiters:
+      - cc
+      - CC
+      - cpp
+      - Cpp
+      - CPP
+      - "c++"
+      - "C++"
+    CanonicalDelimiter: ""
+    BasedOnStyle: google
+  - Language: TextProto
+    Delimiters:
+      - pb
+      - PB
+      - proto
+      - PROTO
+    EnclosingFunctions:
+      - EqualsProto
+      - EquivToProto
+      - PARSE_PARTIAL_TEXT_PROTO
+      - PARSE_TEST_PROTO
+      - PARSE_TEXT_PROTO
+      - ParseTextOrDie
+      - ParseTextProtoOrDie
+    CanonicalDelimiter: ""
+    BasedOnStyle: google
+# 允许对注释重新排版
+ReflowComments: true
+# 允许对 #include 排序
+SortIncludes: true
+# 允许对 using 声明排序
+SortUsingDeclarations: true
+# c 风格类型转换括号后不要有空格
+SpaceAfterCStyleCast: false
+# template 关键字后面需要一个空格
+SpaceAfterTemplateKeyword: true
+# 赋值运算符两边需要空格
+SpaceBeforeAssignmentOperators: true
+# 变量初始化列表大括号前不要有空格
+SpaceBeforeCpp11BracedList: false
+# 构造函数初始化冒号前需要空格
+SpaceBeforeCtorInitializerColon: true
+# 继承语句冒号前需要一个空格
+SpaceBeforeInheritanceColon: true
+# 控制语句后面需要一个空格(if/for/while...)
+SpaceBeforeParens: ControlStatements
+# 基于范围循环的冒号前需要一个空格
+SpaceBeforeRangeBasedForLoopColon: true
+# 不要在空的圆括号内添加空格
+SpaceInEmptyParentheses: false
+# 同行尾随注释 // 前面需要一个空格
+SpacesBeforeTrailingComments: 1
+# 尖括号前后没有空格
+SpacesInAngles: false
+# c 风格类型转换的括号中前后没有空格
+SpacesInCStyleCastParentheses: false
+# 圆括号前后没有空格
+SpacesInParentheses: false
+# 方括号前后没有空格
+SpacesInSquareBrackets: false
+Standard: Auto
+StatementMacros:
+  - Q_UNUSED
+  - QT_REQUIRE_VERSION
+TabWidth: 4
+UseTab: Never

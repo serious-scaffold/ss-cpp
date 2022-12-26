@@ -1,0 +1,158 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
+{
+    "name": "C++",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "args": {
+            "VARIANT": "ubuntu-21.04"
+        }
+    },
+    "runArgs": [
+        "--cap-add=SYS_PTRACE",
+        "--security-opt",
+        "seccomp=unconfined"
+    ],
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "[dockerfile]": {
+                    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+                },
+                "[cmake]": {
+                    "editor.defaultFormatter": "cheshirekow.cmake-format"
+                },
+                "c-cpp-flylint.clang.enable": false,
+                "cmakeLanguageSupport.enableFileAPI": true,
+                "cmake.generator": "Ninja Multi-Config",
+                "terminal.integrated.shellIntegration.history": 666,
+                "editor.renderWhitespace": "all",
+                "editor.foldingMaximumRegions": 65000,
+                "C_Cpp.default.cppStandard": "c++20",
+                "C_Cpp.default.cStandard": "c17",
+                "files.maxMemoryForLargeFilesMB": 12288,
+                "diffEditor.ignoreTrimWhitespace": false,
+                "editor.unicodeHighlight.ambiguousCharacters": false,
+                "security.workspace.trust.untrustedFiles": "open",
+                "workbench.productIconTheme": "fluent-icons",
+                "vsicons.dontShowNewVersionMessage": true,
+                "cmake.configureOnEdit": false,
+                "c-cpp-flylint.flawfinder.enable": false,
+                "c-cpp-flylint.flexelint.enable": false,
+                "c-cpp-flylint.lizard.enable": false,
+                "terminal.integrated.cursorStyle": "line",
+                "terminal.integrated.detectLocale": "on",
+                "CppHelper.SourceNotFoundBehavior": "Create source file",
+                "redhat.telemetry.enabled": true,
+                "explorer.confirmDelete": false,
+                "xml.symbols.maxItemsComputed": 50000000,
+                "[xml]": {
+                    "editor.defaultFormatter": "redhat.vscode-xml"
+                },
+                "git.ignoreLegacyWarning": true,
+                "git.autofetch": true,
+                "git.ignoreWindowsGit27Warning": true,
+                "doxdocgen.generic.useGitUserEmail": true,
+                "doxdocgen.generic.useGitUserName": true,
+                "git.enableSmartCommit": true,
+                "git.ignoreRebaseWarning": true,
+                "workbench.iconTheme": "vscode-icons",
+                "better-comments.highlightPlainText": true,
+                "better-comments.tags": [
+                    {
+                        "tag": "!",
+                        "color": "#FF2D00",
+                        "strikethrough": false,
+                        "backgroundColor": "transparent"
+                    },
+                    {
+                        "tag": "?",
+                        "color": "#3498DB",
+                        "strikethrough": false,
+                        "backgroundColor": "transparent"
+                    },
+                    {
+                        "tag": "//",
+                        "color": "#474747",
+                        "strikethrough": true,
+                        "backgroundColor": "transparent"
+                    },
+                    {
+                        "tag": "todo",
+                        "color": "#FF8C00",
+                        "strikethrough": false,
+                        "backgroundColor": "transparent"
+                    },
+                    {
+                        "tag": "*",
+                        "color": "#98C379",
+                        "strikethrough": false,
+                        "backgroundColor": "transparent"
+                    }
+                ],
+                "cmake.configureOnOpen": false,
+                "json.maxItemsComputed": 50000000000,
+                "editor.suggestSelection": "first",
+                "editor.largeFileOptimizations": false,
+                "editor.maxTokenizationLineLength": 2000000000,
+                "editor.wordWrap": "on",
+                "editor.formatOnSaveMode": "modifications",
+                "diffEditor.maxComputationTime": 0
+            },
+            "extensions": [
+                "mutantdino.resourcemonitor",
+                "mhutchie.git-graph",
+                "ms-azuretools.vscode-docker",
+                "p1c2u.docker-compose",
+                "mads-hartmann.bash-ide-vscode",
+                "njpwerner.autodocstring",
+                "kevinkyang.auto-comment-blocks",
+                "ms-dotnettools.vscode-dotnet-runtime",
+                "wwm.better-align",
+                "jeff-hykin.better-cpp-syntax",
+                "aaron-bond.better-comments",
+                "ms-vscode.cpptools",
+                "jbenden.c-cpp-flylint",
+                "Hyeon.c-math-viewer",
+                "birgersp.cpp-header-refactor",
+                "amiralizadeh9480.cpp-helper",
+                "wmaurer.change-case",
+                "xaver.clang-format",
+                "twxs.cmake",
+                "josetr.cmake-language-support-vscode",
+                "ms-vscode.cmake-tools",
+                "fredericbonnet.cmake-test-adapter",
+                "cheshirekow.cmake-format",
+                "moshfeu.compare-folders",
+                "wenpan.unicode2chinese",
+                "Guyutongxue.cpp-reference",
+                "bbenoist.Doxygen",
+                "cschlosser.doxdocgen",
+                "hediet.vscode-drawio",
+                "nopeslide.vscode-drawio-plugin-mermaid",
+                "tamasfe.even-better-toml",
+                "ypresto.vscode-intelli-refactor",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "PKief.material-icon-theme",
+                "surajbarkale.ninja",
+                "2gua.rainbow-brackets",
+                "redhat.vscode-commons",
+                "foxundermoon.shell-format",
+                "timonwong.shellcheck",
+                "Remisa.shellman",
+                "albert.TabOut",
+                "ms-vscode.test-adapter-converter",
+                "hbenl.vscode-test-explorer",
+                "llvm-vs-code-extensions.vscode-clangd"
+            ]
+        }
+    },
+    "shutdownAction": "none",
+    // Use 'forwardPorts' to make a list of ports inside the container available locally.
+    // "forwardPorts": [],
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "gcc -v && sed -i '$ s/$/fs.inotify.max_user_watches=524288/' /etc/sysctl.conf && sysctl -p",
+    // Comment out this line to run as root instead.
+    "remoteUser": "vscode"
+}
