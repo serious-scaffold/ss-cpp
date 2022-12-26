@@ -7,6 +7,9 @@ set(CMAKE_TOOLCHAIN_FILE
     ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
     CACHE STRING "Vcpkg toolchain file")
 
+# import custom cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 project(
   cppblueprint
   LANGUAGES CXX
@@ -61,6 +64,13 @@ endif()
 find_package(OpenMP REQUIRED)
 # Runtime Polymorphism
 find_package(proxy CONFIG REQUIRED)
+
+option(ENABLE_PRE_COMMIT "Enable pre-commit" OFF)
+if(ENABLE_PRE_COMMIT)
+  message(STATUS "Enable pre-commit: ${ENABLE_PRE_COMMIT}")
+  include(PreCommit)
+  config_pre_commit()
+endif()
 
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
