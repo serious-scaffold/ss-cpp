@@ -14,6 +14,7 @@
         "seccomp=unconfined"
     ],
     "features": {
+        "ghcr.io/shinepukur/devcontainer-features/vale:latest": {},
         "ghcr.io/msclock/features/vcpkg:latest": {}
     },
     // Configure tool-specific properties.
@@ -142,7 +143,8 @@
                 "albert.TabOut",
                 "ms-vscode.test-adapter-converter",
                 "hbenl.vscode-test-explorer",
-                "llvm-vs-code-extensions.vscode-clangd"
+                "llvm-vs-code-extensions.vscode-clangd",
+                "errata-ai.vale-server"
             ]
         }
     },

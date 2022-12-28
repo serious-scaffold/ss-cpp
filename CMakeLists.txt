@@ -115,7 +115,7 @@ endforeach()
 add_subdirectory(src)
 
 # tests
-add_subdirectory(tests)
+add_subdirectory(tests EXCLUDE_FROM_ALL)
 
 # CPack Configuration
 

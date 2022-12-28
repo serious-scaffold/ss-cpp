@@ -3,6 +3,10 @@
 ARG VARIANT=debian-11
 FROM mcr.microsoft.com/vscode/devcontainers/cpp:${VARIANT}
 
+RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak \
+    && sed -i 's|http://archive.ubuntu.com/ubuntu|http://mirrors.huaweicloud.com/repository/ubuntu|g' /etc/apt/sources.list \
+    && apt-get update && apt-get install -y apt-transport-https ca-certificates
+
 # [Optional] Uncomment this section to install additional packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
