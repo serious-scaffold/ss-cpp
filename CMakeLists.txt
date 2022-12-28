@@ -1,11 +1,11 @@
-﻿cmake_minimum_required(VERSION 3.20)
+﻿cmake_minimum_required(VERSION 3.18)
 
-set(VCPKG_ROOT "C:/Opt/vcpkg")
+message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
+set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
 
 # set cmake tool chain
 set(CMAKE_TOOLCHAIN_FILE
-    ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-    CACHE STRING "Vcpkg toolchain file")
+    ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
 
 # import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
