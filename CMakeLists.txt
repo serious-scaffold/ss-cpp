@@ -4,11 +4,16 @@ message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
 set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
 
 # set cmake tool chain
-set(CMAKE_TOOLCHAIN_FILE
-    ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
+set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
+
+set(VCPKG_VERBOSE
+    ON
+    CACHE BOOL "Vcpkg VCPKG_VERBOSE")
 
 # import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(OSInstall)
 
 project(
   cppblueprint
@@ -82,14 +87,23 @@ set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH OFF)
 
 if(CMAKE_HOST_UNIX)
-  # add system lib auto dly-load such as
-  list(APPEND CMAKE_INSTALL_RPATH "/usr/local/lib")
+  # add system bin auto dly-load such as
+  list(APPEND CMAKE_INSTALL_RPATH
+       "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/bin;/usr/local/lib")
 endif()
+
 # add the automatically determined parts of the RPATH which point to directories
 # outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 message(STATUS "CMAKE_INSTALL_RPATH:${CMAKE_INSTALL_RPATH}")
+
+# dynamic path specify the 3rd party short deps path depends on os-platform
+set(dynamic_path $<IF:$<PLATFORM_ID:Windows>,bin,lib>)
+message(STATUS "dynamic libraries path search: ${dynamic_path}")
+set(my_dependency_paths
+    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<IF:$<CONFIG:Debug>,/deubg/${dynamic_path},/${dynamic_path}>
+)
 
 # show installation directories
 foreach(_p LIB BIN INCLUDE CMAKE)

@@ -3,7 +3,9 @@
 option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
 message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
 
+# todo filter gtest install artifacts
 if(ENABLE_UNIT_TESTS)
+
   # add memcheck test action
   include(CTest)
   enable_testing()
