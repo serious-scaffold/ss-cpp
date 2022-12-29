@@ -13,6 +13,7 @@
         "--security-opt",
         "seccomp=unconfined"
     ],
+    // https://github.com/devcontainers/features
     "features": {
         "ghcr.io/shinepukur/devcontainer-features/vale:latest": {},
         "ghcr.io/msclock/features/vcpkg:latest": {}
