@@ -148,11 +148,11 @@
             ]
         }
     },
-    "shutdownAction": "none",
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     // "forwardPorts": [],
-    // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "gcc -v && sudo sed -i '$ s/$/fs.inotify.max_user_watches=524288/' /etc/sysctl.conf && sudo sysctl -p",
     // Comment out this line to run as root instead.
-    "remoteUser": "vscode"
+    "remoteUser": "vscode",
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "gcc -v",
+    "shutdownAction": "none"
 }
