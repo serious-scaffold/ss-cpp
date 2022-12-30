@@ -16,6 +16,7 @@
     // https://github.com/devcontainers/features
     "features": {
         "ghcr.io/shinepukur/devcontainer-features/vale:latest": {},
+        "ghcr.io/devcontainers/features/dotnet:1": {},
         "ghcr.io/msclock/features/vcpkg:latest": {}
     },
     // Configure tool-specific properties.
