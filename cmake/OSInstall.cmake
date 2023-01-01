@@ -1,13 +1,15 @@
+# cmake-format: off
 # A function to enable applocal install of dependencies as part of the `make install` process
 # Arguments:
 #   TARGETS - a list of installed targets to have dependencies copied for (required)
 #   DESTINATION - the runtime directory for those targets (usually `bin`)
 #   DIRECTORIES - the directories to search dependencies (required)
-#   PRE_EXCLUDE_REGEXES - regular expressions to handle results (optinal)
-#   POST_EXCLUDE_REGEXES - regular expressions to handle results (optinal)
-#   POST_INCLUDE_REGEXES - regular expressions to handle results (optinal)
+#   PRE_EXCLUDE_REGEXES - regular expressions to handle results (optional)
+#   POST_EXCLUDE_REGEXES - regular expressions to handle results (optional)
+#   POST_INCLUDE_REGEXES - regular expressions to handle results (optional)
 #
 # Note that this function requires CMake 3.14 for policy CMP0087
+# cmake-format: on
 function(install_local_dependencies)
   if(CMAKE_VERSION VERSION_LESS "3.16")
     message(FATAL_ERROR "install_local_dependencies require at least CMake 3.16
@@ -39,7 +41,7 @@ function(install_local_dependencies)
 
   # Install CODE|SCRIPT allow the use of generator expressions
   cmake_policy(PUSH)
-  # set CMP0087 install code for g    enerator-expression
+  # set CMP0087 install code for generator-expression
   if(POLICY CMP0048)
     cmake_policy(SET CMP0087 NEW)
   endif()
@@ -151,12 +153,12 @@ function(install_local_dependencies)
                     DESTINATION "${arg_DESTINATION}"
                     TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
             endforeach()
-        
+
             list(LENGTH _u_deps _u_length)
             if("${_u_length}" GREATER 0)
                 message(WARNING "Unresolved dependencies detected:${_u_deps}")
             endif()
-            
+
             foreach(_filename ${_c_deps_FILENAMES})
                 set(_c_file_list ${_c_deps_${_filename}})
                 message(STATUS "conflict ${_filename} list ${_c_file_list}")

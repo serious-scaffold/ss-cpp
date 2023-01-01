@@ -16,7 +16,8 @@ fail_fast: false
 exclude: |
   (?x)(
     ^(3rdParty/.*) |
-    ^.*\.drawio
+    ^.*\.drawio |
+    noxfile.py
   )
 files: '' # set '' as default
 

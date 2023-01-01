@@ -34,8 +34,6 @@ Attributes:
 
 About nox, please see https://github.com/wntrblm/nox.git.
 """
-import math
-import multiprocessing
 import os
 import sys
 from subprocess import CalledProcessError, SubprocessError
@@ -174,4 +172,3 @@ def lint(session: nox.Session) -> None:
             "--hook-type",
             "pre-commit",
         )
-

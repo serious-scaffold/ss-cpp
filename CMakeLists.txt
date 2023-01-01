@@ -1,4 +1,4 @@
-﻿cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.18)
 
 message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
 set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")

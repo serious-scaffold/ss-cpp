@@ -10,5 +10,13 @@ std::string version_api() noexcept {
     return "dev";
 #endif
 }
+
+bool api_EXPORT is_debug() noexcept {
+#ifdef _DEBUG
+    return true;
+#else
+    return false;
+#endif
+}
 } // namespace info
 } // namespace api

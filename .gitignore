@@ -334,3 +334,7 @@ ASALocalRun/
 # Build output for this sample
 *.out
 /out
+
+# Python lint or env cache
+.nox
+.mypy_cache

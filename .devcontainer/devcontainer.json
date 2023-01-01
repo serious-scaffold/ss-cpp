@@ -15,8 +15,14 @@
     ],
     // https://github.com/devcontainers/features
     "features": {
-        "ghcr.io/shinepukur/devcontainer-features/vale:latest": {},
+        // add docker host
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            // using docker-compose v2
+            "dockerDashComposeVersion": "v2"
+        },
+        // add dotnet sdk
         "ghcr.io/devcontainers/features/dotnet:1": {},
+        // add a new vcpkg instead of built-in in image
         "ghcr.io/msclock/features/vcpkg:latest": {}
     },
     // Configure tool-specific properties.
@@ -25,9 +31,6 @@
             "settings": {
                 "[dockerfile]": {
                     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-                },
-                "[cmake]": {
-                    "editor.defaultFormatter": "cheshirekow.cmake-format"
                 },
                 "cmake.buildDirectory": "${workspaceFolder}/.build",
                 "c-cpp-flylint.clang.enable": false,
@@ -146,7 +149,6 @@
                 "ms-vscode.test-adapter-converter",
                 "hbenl.vscode-test-explorer",
                 "llvm-vs-code-extensions.vscode-clangd",
-                "errata-ai.vale-server"
             ]
         }
     },

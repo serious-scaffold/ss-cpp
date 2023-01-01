@@ -1,3 +1,4 @@
+# cmake-format: off
 # apiConfig.cmake
 # -------------------
 #
@@ -37,7 +38,7 @@
 #   PATH - environment variable, set to bin directory of this package
 #   CMAKE_DISABLE_FIND_PACKAGE_api - CMake variable, disables
 #       find_package(api) perhaps to force internal build
-
+# cmake-format: on
 @PACKAGE_INIT@
 
 include(CMakeFindDependencyMacro)
@@ -48,7 +49,4 @@ find_dependency(OpenMP REQUIRED)
 find_dependency(proxy REQUIRED)
 
 include("${CMAKE_CURRENT_LIST_DIR}/apiTargets.cmake")
-check_required_components(
-  "api-shared"
-  "api-static"
-  )
+check_required_components("api-shared" "api-static")
