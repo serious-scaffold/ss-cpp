@@ -21,7 +21,10 @@
             "dockerDashComposeVersion": "v2"
         },
         // add dotnet sdk
-        "ghcr.io/devcontainers/features/dotnet:1": {},
+        // "ghcr.io/devcontainers/features/dotnet:1": {
+        //     "version": "6.0",
+        //     "runtimeOnly": true
+        // },
         // add a new vcpkg instead of built-in in image
         "ghcr.io/msclock/features/vcpkg:latest": {}
     },
@@ -55,9 +58,6 @@
                 "redhat.telemetry.enabled": true,
                 "explorer.confirmDelete": false,
                 "xml.symbols.maxItemsComputed": 50000000,
-                "[xml]": {
-                    "editor.defaultFormatter": "redhat.vscode-xml"
-                },
                 "git.ignoreLegacyWarning": true,
                 "git.autofetch": true,
                 "git.ignoreWindowsGit27Warning": true,
@@ -116,12 +116,9 @@
                 "njpwerner.autodocstring",
                 "kevinkyang.auto-comment-blocks",
                 "ms-dotnettools.vscode-dotnet-runtime",
-                "wwm.better-align",
-                "jeff-hykin.better-cpp-syntax",
                 "aaron-bond.better-comments",
                 "ms-vscode.cpptools",
                 "jbenden.c-cpp-flylint",
-                "Hyeon.c-math-viewer",
                 "birgersp.cpp-header-refactor",
                 "amiralizadeh9480.cpp-helper",
                 "wmaurer.change-case",
@@ -136,11 +133,9 @@
                 "Guyutongxue.cpp-reference",
                 "bbenoist.Doxygen",
                 "cschlosser.doxdocgen",
-                "tamasfe.even-better-toml",
                 "ypresto.vscode-intelli-refactor",
                 "VisualStudioExptTeam.vscodeintellicode",
                 "PKief.material-icon-theme",
-                "surajbarkale.ninja",
                 "redhat.vscode-commons",
                 "foxundermoon.shell-format",
                 "timonwong.shellcheck",
@@ -148,7 +143,7 @@
                 "albert.TabOut",
                 "ms-vscode.test-adapter-converter",
                 "hbenl.vscode-test-explorer",
-                "llvm-vs-code-extensions.vscode-clangd",
+                "llvm-vs-code-extensions.vscode-clangd"
             ]
         }
     },
@@ -158,5 +153,16 @@
     "remoteUser": "vscode",
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "gcc -v",
+    // uncomment out this two lines to make a volume and clone srcs to cppblueprint folder for performance
+    // "workspaceFolder": "/workspaces",
+    // "workspaceMount": "type=volume,source=cppblueprint-src,target=/workspace,consistency=cached",
+    // uncomment out this line to make a volume vscode extensions bind for performance
+    // "mounts": [
+    //     {
+    //         "type": "volume",
+    //         "source": "vscode-exts",
+    //         "target": "/root/.vscode-server/extensions"
+    //     }
+    // ],
     "shutdownAction": "none"
 }
