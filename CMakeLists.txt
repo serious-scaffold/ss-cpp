@@ -117,14 +117,11 @@ add_subdirectory(src)
 # tests
 add_subdirectory(tests EXCLUDE_FROM_ALL)
 
+# cmake-format: off
 # CPack Configuration
-
 # set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-
 # set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-
 # set(CPACK_PACKAGE_DIRECTORY ${CMAKE_BINARY_DIR})
-
 # set(CPACK_PACKAGE_CONTACT "CppBlueprint@email.com")
-
 # include(CPack)
+# cmake-format: on
