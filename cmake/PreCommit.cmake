@@ -1,3 +1,20 @@
+# cmake-format: off
+# A function to enable pre-commit to integrated with the current project.
+#
+# Note that this feature requires python runtime based on system.
+#
+# Suggested usage:
+#
+# ::
+#
+#   option(ENABLE_PRE_COMMIT "Enable pre-commit" OFF)
+#   if(ENABLE_PRE_COMMIT)
+#     message(STATUS "Enable pre-commit: ${ENABLE_PRE_COMMIT}")
+#     include(PreCommit)
+#     config_pre_commit()
+#   endif()
+#
+# cmake-format: on
 function(config_pre_commit)
   # Pre-commit hooks
   if(NOT EXISTS ${CMAKE_CURRENT_LIST_DIR}/.git/hooks/pre-commit)

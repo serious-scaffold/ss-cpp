@@ -3,31 +3,52 @@
 {
     "name": "C++",
     "build": {
-        "dockerfile": "Dockerfile",
+        "dockerfile": "Dockerfile.dev",
         "args": {
-            "VARIANT": "ubuntu-22.04"
-        }
+            // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+            // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+            "VARIANT": "ubuntu-22.04",
+            // User in container
+            "USERNAME": "vscode"
+        },
+        "context": "./.."
     },
+    // "image": "msclock/commoncpp:2023.1.6",
     "runArgs": [
+        // Enable ptrace-based debugging for C++
         "--cap-add=SYS_PTRACE",
+        "--cap-add=NET_RAW",
+        "--cap-add=NET_ADMIN",
         "--security-opt",
-        "seccomp=unconfined"
+        "seccomp=unconfined",
+        // Enable docker-in-docker configuration. Comment out if not using for better security.
+        "--privileged",
+        // Run the entrypoint defined in container image.
+        "--init"
     ],
     // https://github.com/devcontainers/features
-    "features": {
-        // add docker host
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            // using docker-compose v2
-            "dockerDashComposeVersion": "v2"
-        },
-        // add dotnet sdk
-        // "ghcr.io/devcontainers/features/dotnet:1": {
-        //     "version": "6.0",
-        //     "runtimeOnly": true
-        // },
-        // add a new vcpkg instead of built-in in image
-        "ghcr.io/msclock/features/vcpkg:latest": {}
-    },
+    // Using features in vscode requires access github with uncomment the below
+    // "features": {
+    //     // add docker in docker
+    //     "ghcr.io/devcontainers/features/docker-in-docker:2": {
+    //         "dockerDashComposeVersion": "v2",
+    //         "moby": false
+    //     },
+    //     // Fetch python
+    //     "ghcr.io/devcontainers/features/python:1": {
+    //         "installTools": false
+    //     },
+    //     // Fetch git
+    //     "ghcr.io/devcontainers/features/git:1": {},
+    //     // Fetch kubectl helm minikube
+    //     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+    //     // Fetch node
+    //     // "ghcr.io/devcontainers/features/node:1": {},
+    //     // Fetch Github CL
+    //     // "ghcr.io/devcontainers/features/github-cli:1": {},
+    //     // Fetch stable vcpkg
+    //     "ghcr.io/msclock/features/vcpkg:latest": {}
+    // },
     // Configure tool-specific properties.
     "customizations": {
         "vscode": {
@@ -153,16 +174,8 @@
     "remoteUser": "vscode",
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "gcc -v",
-    // uncomment out this two lines to make a volume and clone srcs to cppblueprint folder for performance
+    // Uncomment out this line to make a volume to clone repository inside and bind for performance
     // "workspaceFolder": "/workspaces",
     // "workspaceMount": "type=volume,source=cppblueprint-src,target=/workspace,consistency=cached",
-    // uncomment out this line to make a volume vscode extensions bind for performance
-    // "mounts": [
-    //     {
-    //         "type": "volume",
-    //         "source": "vscode-exts",
-    //         "target": "/root/.vscode-server/extensions"
-    //     }
-    // ],
     "shutdownAction": "none"
 }

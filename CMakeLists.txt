@@ -17,7 +17,7 @@ include(OSInstall)
 
 project(
   cppblueprint
-  LANGUAGES CXX
+  LANGUAGES CXX # enable language check for cxx
   VERSION 1.0.0)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -61,11 +61,13 @@ set(INSTALL_CMAKEDIR
     ${DEF_INSTALL_CMAKEDIR}
     CACHE PATH "Installation directory for CMake files")
 
-# configure valgrind
-if(CMAKE_HOST_UNIX)
-  include(ConfigValgrind)
-  config_valgrind()
-endif()
+# cmake-format: off
+# # configure valgrind
+# if(CMAKE_HOST_UNIX)
+#   include(ConfigValgrind)
+#   config_valgrind()
+# endif()
+# cmake-format: on
 
 # Runtime parallism
 find_package(OpenMP REQUIRED)
@@ -111,6 +113,15 @@ foreach(_p LIB BIN INCLUDE CMAKE)
   message(STATUS "Show installing ${_p} components to ${_path}")
   unset(_path)
 endforeach()
+
+# sanitizer for memcheck for debug
+if(CMAKE_HOST_UNIX)
+  set(CMAKE_CXX_FLAGS_DEBUG
+      "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,leak -fno-omit-frame-pointer"
+  )
+elseif()
+  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize")
+endif()
 
 add_subdirectory(src)
 
