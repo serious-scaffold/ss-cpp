@@ -26,7 +26,7 @@
 # ::
 #
 #   find_package(api)
-#   find_package(api 1.1.7 CONFIG REQUIRED)
+#   find_package(api CONFIG REQUIRED)
 #
 #
 # The following variables can be set to guide the search for this package:
