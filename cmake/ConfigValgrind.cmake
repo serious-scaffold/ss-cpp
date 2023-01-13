@@ -33,3 +33,9 @@ macro(config_valgrind)
     message(WARNING "Not found valgrind directory")
   endif()
 endmacro()
+
+# configure valgrind
+option(ENABLE_VALGRIND "enable valgrind to check memory issues")
+if(ENABLE_VALGRIND AND CMAKE_HOST_UNIX)
+  config_valgrind()
+endif()

@@ -9,7 +9,7 @@ if(ENABLE_UNIT_TESTS)
   include(CTest)
   enable_testing()
 
-  # fatch googletest since 3.11
+  # fetch googletest since cmake > 3.11
   include(FetchContent)
 
   FetchContent_Declare(

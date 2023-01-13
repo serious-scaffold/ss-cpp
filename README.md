@@ -12,6 +12,8 @@
 
 ## CMake integration 
 
+CMake common workflow command.
+
 ```bash
 # Configure
 cmake -S . -B build

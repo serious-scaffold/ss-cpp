@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 
+# Vcpkg build environment
 message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
 set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
 
@@ -10,11 +11,7 @@ set(VCPKG_VERBOSE
     ON
     CACHE BOOL "Vcpkg VCPKG_VERBOSE")
 
-# import custom cmake modules
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-include(OSInstall)
-
+# Project settings
 project(
   cppblueprint
   LANGUAGES CXX # enable language check for cxx
@@ -61,25 +58,18 @@ set(INSTALL_CMAKEDIR
     ${DEF_INSTALL_CMAKEDIR}
     CACHE PATH "Installation directory for CMake files")
 
-# cmake-format: off
-# # configure valgrind
-# if(CMAKE_HOST_UNIX)
-#   include(ConfigValgrind)
-#   config_valgrind()
-# endif()
-# cmake-format: on
+# CMake module tools
+# import custom cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
+include(OSInstall)
+include(ConfigValgrind)
+include(PreCommit)
 
 # Runtime parallism
 find_package(OpenMP REQUIRED)
 # Runtime Polymorphism
 find_package(proxy CONFIG REQUIRED)
-
-option(ENABLE_PRE_COMMIT "Enable pre-commit" OFF)
-if(ENABLE_PRE_COMMIT)
-  message(STATUS "Enable pre-commit: ${ENABLE_PRE_COMMIT}")
-  include(PreCommit)
-  config_pre_commit()
-endif()
 
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -114,14 +104,17 @@ foreach(_p LIB BIN INCLUDE CMAKE)
   unset(_path)
 endforeach()
 
-# sanitizer for memcheck for debug
-if(CMAKE_HOST_UNIX)
-  set(CMAKE_CXX_FLAGS_DEBUG
-      "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,leak -fno-omit-frame-pointer"
-  )
-elseif()
-  set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize")
-endif()
+# # sanitizer for memcheck for debug
+# if(CMAKE_HOST_UNIX)
+#   set(CMAKE_CXX_FLAGS_DEBUG
+#       "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,undefined -fno-omit-frame-pointer"
+#   )
+#   set(CMAKE_LINKER_FLAGS_DEBUG
+#       "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address,undefined -fno-omit-frame-pointer"
+#   )
+# elseif()
+#   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize")
+# endif()
 
 add_subdirectory(src)
 
