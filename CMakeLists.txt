@@ -58,13 +58,14 @@ set(INSTALL_CMAKEDIR
     ${DEF_INSTALL_CMAKEDIR}
     CACHE PATH "Installation directory for CMake files")
 
-# CMake module tools
-# import custom cmake modules
+# CMake module tools import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(OSInstall)
 include(ConfigValgrind)
 include(PreCommit)
+include(ConfigCcache)
+include(ConfigIPO)
 
 # Runtime parallism
 find_package(OpenMP REQUIRED)
