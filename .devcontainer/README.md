@@ -31,8 +31,6 @@ The built images are listed below:
 
 ## Usage
 
-### Devcontainer rerference
+### Devcontainer reference
 
 - https://code.visualstudio.com/docs/devcontainers/containers
-
-

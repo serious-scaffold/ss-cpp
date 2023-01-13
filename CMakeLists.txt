@@ -66,6 +66,7 @@ include(ConfigValgrind)
 include(PreCommit)
 include(ConfigCcache)
 include(ConfigIPO)
+include(ConfigDocs)
 
 # Runtime parallism
 find_package(OpenMP REQUIRED)
@@ -105,17 +106,12 @@ foreach(_p LIB BIN INCLUDE CMAKE)
   unset(_path)
 endforeach()
 
-# # sanitizer for memcheck for debug
-# if(CMAKE_HOST_UNIX)
-#   set(CMAKE_CXX_FLAGS_DEBUG
-#       "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address,undefined -fno-omit-frame-pointer"
-#   )
-#   set(CMAKE_LINKER_FLAGS_DEBUG
-#       "${CMAKE_LINKER_FLAGS_DEBUG} -fsanitize=address,undefined -fno-omit-frame-pointer"
-#   )
-# elseif()
-#   set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize")
-# endif()
+# # sanitizer for memcheck for debug if(CMAKE_HOST_UNIX)
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}
+# -fsanitize=address,undefined -fno-omit-frame-pointer" )
+# set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG}
+# -fsanitize=address,undefined -fno-omit-frame-pointer" ) elseif()
+# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize") endif()
 
 add_subdirectory(src)
 

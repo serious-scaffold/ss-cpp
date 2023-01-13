@@ -48,13 +48,13 @@ RUN apt-get update \
     # Other features scripts
     && git clone --depth=1 https://github.com/msclock/features.git /tmp/msclock/features  \
     #
-    # Accessible adress substitution
+    # Accessible address substitution
     && find /tmp/ -type f | xargs sed -i 's@"https://\(github\|raw\.githubusercontent\).com/@"https://ghproxy.com/https://\1.com/@g' \
     && sed -i '/bootstrap-vcpkg.sh/i sed -i "s@https://github.com/@https://ghproxy.com/https://github.com/@g" "${VCPKG_ROOT}"\/bootstrap-vcpkg.sh' /tmp/msclock/features/src/vcpkg/main.sh \
-    # 
+    #
     # Install needed packages and setup the environment and non-root user
     && USERNAME="${USERNAME}" USERUID="${USER_UID}" USERGID="${USER_GID}" bash /tmp/devcontainers/features/src/common-utils/install.sh \
-    # 
+    #
     # Install Docker CLI and Engine for Docker-in-Docker
     && DOCKERDASHCOMPOSEVERSION="v2" MOBY="false" bash /tmp/devcontainers/features/src/docker-in-docker/install.sh \
     #
@@ -74,7 +74,7 @@ RUN apt-get update \
     && mv -f -t /usr/local/share/ /tmp/staging/devcontainer-init.sh \
     && chmod +x /usr/local/share/devcontainer-init.sh \
     && chown ${USERNAME}:root /usr/local/share/devcontainer-init.sh \
-    # 
+    #
     # Set permissions for workspace folder
     && mkdir -p /workspaces && chown ${USERNAME}:${USERNAME} /workspaces /home/${USERNAME} \
     #

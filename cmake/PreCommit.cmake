@@ -43,7 +43,6 @@ function(config_pre_commit)
   endif()
 endfunction(config_pre_commit)
 
-
 option(ENABLE_PRE_COMMIT "Enable pre-commit" OFF)
 if(ENABLE_PRE_COMMIT)
   message(STATUS "Enable pre-commit: ${ENABLE_PRE_COMMIT}")

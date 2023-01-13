@@ -8,9 +8,10 @@
 - `Vcpkg` integration.
 - Standard dev source layout based on cmake.
 - Lint tool `pre-commit` integration.
+- Sphinx integration as the sync docs tool.
 
 
-## CMake integration 
+## CMake integration
 
 CMake common workflow command.
 
