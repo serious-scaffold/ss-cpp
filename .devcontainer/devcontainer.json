@@ -2,18 +2,18 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
 {
     "name": "C++",
-    "build": {
-        "dockerfile": "Dockerfile.dev",
-        "args": {
-            // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
-            // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
-            "VARIANT": "ubuntu-22.04",
-            // User in container
-            "USERNAME": "vscode"
-        },
-        "context": "./.."
-    },
-    // "image": "msclock/commoncpp:2023.1.6",
+    // "build": {
+    //     "dockerfile": "Dockerfile.dev",
+    //     "args": {
+    //         // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+    //         // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+    //         "VARIANT": "ubuntu-22.04",
+    //         // User in container
+    //         "USERNAME": "vscode"
+    //     },
+    //     "context": "./.."
+    // },
+    "image": "msclock/commoncpp:2023.1.6",
     "runArgs": [
         // Enable ptrace-based debugging for C++
         "--cap-add=SYS_PTRACE",
@@ -49,6 +49,8 @@
     //     // Fetch stable vcpkg
     //     "ghcr.io/msclock/features/vcpkg:latest": {}
     // },
+    // Always run image-defined default command
+    "overrideCommand": false,
     // Configure tool-specific properties.
     "customizations": {
         "vscode": {
