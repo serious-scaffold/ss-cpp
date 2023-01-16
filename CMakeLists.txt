@@ -68,6 +68,11 @@ include(ConfigCcache)
 include(ConfigIPO)
 include(ConfigDocs)
 
+# IPO for release
+if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+  link_time_optimization()
+endif()
+
 # Runtime parallism
 find_package(OpenMP REQUIRED)
 # Runtime Polymorphism
