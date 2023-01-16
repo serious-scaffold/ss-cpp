@@ -62,7 +62,6 @@ set(INSTALL_CMAKEDIR
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 include(OSInstall)
-include(ConfigValgrind)
 include(PreCommit)
 include(ConfigCcache)
 include(ConfigIPO)
@@ -72,6 +71,12 @@ include(ConfigDocs)
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
   link_time_optimization()
 endif()
+
+# Valgrind
+include(ConfigValgrind)
+
+# Sanitizer
+include(ConfigSanitizers)
 
 # Runtime parallism
 find_package(OpenMP REQUIRED)
