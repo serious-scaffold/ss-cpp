@@ -84,13 +84,13 @@ if(CMAKE_HOST_UNIX)
   # add system bin auto dly-load such as
   list(APPEND CMAKE_INSTALL_RPATH
        "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/bin;/usr/local/lib")
+  # only show rpath on unix-like os
+  message(STATUS "CMAKE_INSTALL_RPATH:${CMAKE_INSTALL_RPATH}")
 endif()
 
 # add the automatically determined parts of the RPATH which point to directories
 # outside the build tree to the install RPATH
 set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
-
-message(STATUS "CMAKE_INSTALL_RPATH:${CMAKE_INSTALL_RPATH}")
 
 # dynamic path specify the 3rd party short deps path depends on os-platform
 set(dynamic_path $<IF:$<PLATFORM_ID:Windows>,bin,lib>)
@@ -105,13 +105,6 @@ foreach(_p LIB BIN INCLUDE CMAKE)
   message(STATUS "Show installing ${_p} components to ${_path}")
   unset(_path)
 endforeach()
-
-# # sanitizer for memcheck for debug if(CMAKE_HOST_UNIX)
-# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}
-# -fsanitize=address,undefined -fno-omit-frame-pointer" )
-# set(CMAKE_LINKER_FLAGS_DEBUG "${CMAKE_LINKER_FLAGS_DEBUG}
-# -fsanitize=address,undefined -fno-omit-frame-pointer" ) elseif()
-# set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /fsanitize") endif()
 
 add_subdirectory(src)
 
