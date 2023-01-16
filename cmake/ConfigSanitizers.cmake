@@ -66,7 +66,7 @@
 # ~~~
 # Multiple values are allowed, e.g. -DUSE_SANITIZER=Address,Leak but some
 # sanitizers cannot be combined together, e.g.-DUSE_SANITIZER=Address,Memory
-# will result in configuration error. The delimeter character is not required
+# will result in configuration error. The delimiter character is not required
 # and -DUSE_SANITIZER=AddressLeak would work as well.
 
 include(CheckCXXSourceCompiles)
