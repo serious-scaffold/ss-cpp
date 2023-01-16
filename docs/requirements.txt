@@ -1,0 +1,5 @@
+sphinx
+furo
+breathe
+sphinx-copybutton
+cmake

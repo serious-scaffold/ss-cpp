@@ -18,7 +18,7 @@ macro(configDoxygen)
     # give viewer a quick idea about the purpose of the project. Keep the
     # description short.
 
-    set(DOXYGEN_BRIEF "Recognition api document")
+    set(DOXYGEN_BRIEF "Api Document")
 
     # The PROJECT_NUMBER tag can be used to enter a project or revision number.
     # This could be handy for archiving the generated documentation or if some

@@ -32,9 +32,7 @@ release = '1.0.0'
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
     'breathe',
-    'sphinx_rtd_theme',
-    'sphinx.ext.pngmath',
-    'sphinx.ext.todo',
+    'sphinx_copybutton',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -61,8 +59,8 @@ cpp_id_attributes=["api_EXPORT"]
 # default theme
 # html_theme = 'alabaster'
 #
-# use sphinx_rtd_theme
-html_theme = "sphinx_rtd_theme"
+# use furo
+html_theme = "furo"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

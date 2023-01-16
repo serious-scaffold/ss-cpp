@@ -6,7 +6,7 @@ configdoxygen()
 
 if(DOXYGEN_FOUND)
 
-  find_package(Sphinx REQUIRED breathe exhale)
+  find_package(Sphinx REQUIRED breathe)
 
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
