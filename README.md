@@ -32,6 +32,8 @@ cmake -S . --list-presets         # list all configure presets
 cmake -S . --preset=<preset>      # configure using desired configure preset
 cmake --build --list-presets      # list all build presets
 cmake --build --preset=<preset>   # build the desired build preset
+ctest --list-presets              # list all test presets
+ctest --preset=<preset>           # test the desired test preset
 ```
 
 todo : https://devblogs.microsoft.com/cppblog/using-multi-stage-containers-for-c-development/

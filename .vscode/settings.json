@@ -1,0 +1,13 @@
+{
+    "cmake.useCMakePresets": "always",
+    "files.exclude": {
+        "**/.clangd/**": true
+    },
+    "files.watcherExclude": {
+        "**/vcpkg/**": true,
+        "**/build/**": true,
+        "**/.build/**": true,
+        "**/out/**": true,
+        "**/.clangd/**": true
+    },
+}
