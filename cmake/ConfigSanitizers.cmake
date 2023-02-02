@@ -1,6 +1,8 @@
 #
 # Copyright (C) 2018-2022 by George Cave - gcave@stablecoder.ca
 #
+# Copyright (c) 2022, 2023 msclock - msclock@qq.com
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
 # the License at
@@ -106,12 +108,10 @@ function(test_san_flags return_var flags)
 endfunction()
 
 if(USE_SANITIZER)
-  append("-fno-omit-frame-pointer" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
 
   unset(SANITIZER_SELECTED_FLAGS)
-
-  if(UNIX)
-
+  if(NOT MSVC AND CMAKE_HOST_UNIX)
+    append("-fno-omit-frame-pointer" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
     if(uppercase_CMAKE_BUILD_TYPE STREQUAL "DEBUG")
       append("-O1" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
     endif()
@@ -259,14 +259,17 @@ if(USE_SANITIZER)
     endif()
   elseif(MSVC)
     if(USE_SANITIZER MATCHES "([Aa]ddress)")
-      message(STATUS "Building with Address sanitizer")
-      append("-fsanitize=address" CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
+      message(STATUS "Building with MSVC sanitizer")
+      append("${CMAKE_CXX_FLAGS_DEBUG} /fsanitize=address /Zi /Oy"
+             CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
 
       if(AFL)
         append_quoteless(AFL_USE_ASAN=1 CMAKE_C_COMPILER_LAUNCHER
                          CMAKE_CXX_COMPILER_LAUNCHER)
       endif()
     else()
+      # llvm tool chain has same definition which is conflicit on windows with
+      # symbol _calloc_dbg.
       message(
         FATAL_ERROR
           "This sanitizer not yet supported in the MSVC environment: ${USE_SANITIZER}"
