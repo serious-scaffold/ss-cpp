@@ -58,6 +58,10 @@ set(INSTALL_CMAKEDIR
     ${DEF_INSTALL_CMAKEDIR}
     CACHE PATH "Installation directory for CMake files")
 
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+  add_definitions(-D_DEBUG)
+endif()
+
 # CMake module tools import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
