@@ -15,6 +15,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 #
+# See https://github.com/StableCoder/cmake-scripts/blob/main/sanitizers.cmake.
 # ---------------
 # Sanitizers are tools that perform checks during a program’s runtime and
 # returns issues, and as such, along with unit testing, code coverage and static

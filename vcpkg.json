@@ -4,6 +4,10 @@
     "dependencies": [
         {
             "name": "proxy"
-        }
+        },
+        {
+            "name": "fmt"
+        },
+        "zlib"
     ]
 }

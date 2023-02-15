@@ -45,7 +45,7 @@ target_compile_options(
 target_link_libraries(
   api-shared
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy)
+  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt)
 
 set_target_properties(
   api-shared
@@ -83,14 +83,14 @@ target_compile_options(
 target_link_libraries(
   api-static
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy)
+  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt)
 
 set_target_properties(
   api-static
   PROPERTIES
     POSITION_INDEPENDENT_CODE 1
-    ARCHIVE_OUTPUT_NAME "api"
-    DEBUG_POSTFIX "_sd"
+    ARCHIVE_OUTPUT_NAME "api_s"
+    DEBUG_POSTFIX "_d"
     RELEASE_POSTFIX "_s"
     PUBLIC_HEADER
     "${public_headers};${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/api_export.hpp"

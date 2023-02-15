@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.18)
+message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
 # Vcpkg build environment
 message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
@@ -72,6 +73,7 @@ set(CMAKE_DEBUG_POSTFIX "_d")
 # CMake module tools import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+include(DefineDefaults)
 include(OSInstall)
 include(PreCommit)
 include(ConfigCcache)
@@ -93,6 +95,10 @@ include(ConfigSanitizers)
 find_package(OpenMP REQUIRED)
 # Runtime Polymorphism
 find_package(proxy CONFIG REQUIRED)
+# Runtime fmt
+find_package(fmt CONFIG REQUIRED)
+# Runtime zlib
+find_package(ZLIB REQUIRED)
 
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
