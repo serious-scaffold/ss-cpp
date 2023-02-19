@@ -9,4 +9,5 @@ foreach(_file ${files})
 
   gtest_discover_tests(${file_basename})
 
+  # add_test(NAME ${file_basename}_test COMMAND $<TARGET_FILE:${file_basename}>)
 endforeach()

@@ -79,6 +79,7 @@ include(PreCommit)
 include(ConfigCcache)
 include(ConfigIPO)
 include(ConfigDocs)
+include(ConfigFetchDeps)
 
 # IPO for release
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")

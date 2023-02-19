@@ -45,7 +45,7 @@ target_compile_options(
 target_link_libraries(
   api-shared
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt)
+  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt absl::base absl::log absl::strings)
 
 set_target_properties(
   api-shared
@@ -83,7 +83,14 @@ target_compile_options(
 target_link_libraries(
   api-static
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt)
+  PRIVATE msft_proxy
+          ZLIB::ZLIB
+          fmt::fmt
+          # for static lib generate, static deps do no need to
+          # export when installing
+          $<BUILD_INTERFACE:absl::base
+          absl::log
+          absl::strings>)
 
 set_target_properties(
   api-static

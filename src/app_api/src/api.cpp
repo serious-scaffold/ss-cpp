@@ -1,4 +1,5 @@
 #include "api.hpp"
+#include <absl/log/log.h>
 #include "impl/impl.hpp"
 
 namespace api {
@@ -12,6 +13,8 @@ std::string version_api() noexcept {
 }
 
 bool api_EXPORT is_debug() noexcept {
+    // Using abseil logging library
+    LOG_IF(INFO, _DEBUG) << "This is a debug distribution.";
 #ifdef _DEBUG
     return true;
 #else
