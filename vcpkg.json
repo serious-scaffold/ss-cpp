@@ -2,12 +2,8 @@
     "name": "cppblueprint",
     "version": "1.0.0",
     "dependencies": [
-        {
-            "name": "proxy"
-        },
-        {
-            "name": "fmt"
-        },
+        "proxy",
+        "fmt",
         "zlib"
     ]
 }
