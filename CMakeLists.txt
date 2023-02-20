@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.18)
+cmake_minimum_required(VERSION 3.20)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
 # Vcpkg build environment

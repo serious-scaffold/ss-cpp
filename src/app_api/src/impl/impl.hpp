@@ -16,7 +16,7 @@ namespace geo {
 // proxy-runtime-polymorphism,see
 // https://devblogs.microsoft.com/cppblog/proxy-runtime-polymorphism-made-easier-than-ever/
 
-// Abstraction
+// Abstraction Draw interface for polymorphic call
 struct api_EXPORT Draw : pro::dispatch<void(std::ostream&)> {
 public:
     template <class T>
@@ -25,6 +25,7 @@ public:
     }
 };
 
+// Abstraction Area interface for polymorphic call
 struct api_EXPORT Area : pro::dispatch<double()> {
 public:
     template <class T>
@@ -33,6 +34,7 @@ public:
     }
 };
 
+// Interafce facade for Draw, Area
 struct api_EXPORT DrawableFacade : pro::facade<Draw, Area> {};
 
 // Client API - Consumer
