@@ -108,6 +108,61 @@ function(test_san_flags return_var flags)
   set(CMAKE_REQUIRED_QUIET "${QUIET_BACKUP}")
 endfunction()
 
+#[[=[
+A function to copy sanitizer runtime when open ASAN flags on windows.Basically,
+it copy clang_rt.asan*.dll to target location.
+Arguments:
+  target - a target added by add_library, add_executable instructions.
+=]]
+function(copy_sanitizer_runtime target)
+  if(NOT WIN32 OR NOT USE_SANITIZER)
+    return()
+  endif()
+
+  if(CMAKE_SIZEOF_VOID_P EQUAL 8) # 64-bit build
+    set(ASAN_ARCHITECTURE "x86_64")
+    set(ASAN_LIBRARY_HINT_DIR $ENV{VCToolsInstallDir}/bin/Hostx64/x64)
+  else()
+    set(ASAN_ARCHITECTURE "i386")
+    set(ASAN_LIBRARY_HINT_DIR $ENV{VCToolsInstallDir}/bin/Hostx86/x86)
+  endif()
+
+  if(CMAKE_BUILD_TYPE STREQUAL Debug)
+    set(ASAN_LIBRARY_NAME "clang_rt.asan_dbg_dynamic-${ASAN_ARCHITECTURE}.dll")
+  else()
+    set(ASAN_LIBRARY_NAME "clang_rt.asan_dynamic-${ASAN_ARCHITECTURE}.dll")
+  endif()
+  set(LLVM_SYMBOLIZER_NAME "llvm-symbolizer.exe")
+
+  set(CMAKE_INSTALL_SYSTEM_RUNTIME_LIBS ${ASAN_LIBRARY_NAME})
+  find_file(
+    ASAN_LIBRARY_SOURCE
+    NAMES ${ASAN_LIBRARY_NAME} REQUIRED
+    HINTS ${ASAN_LIBRARY_HINT_DIR} $ENV{LIBPATH}
+    DOC "Clang AddressSanitizer runtime")
+
+  find_file(
+    LLVM_SYMBOLIZER_SOURCE
+    NAMES ${LLVM_SYMBOLIZER_NAME} REQUIRED
+    HINTS ${ASAN_LIBRARY_HINT_DIR} $ENV{LIBPATH}
+    DOC "LLVM symbolizer executable")
+
+  add_custom_command(
+    COMMENT "Copying ${ASAN_LIBRARY_SOURCE} to $<TARGET_FILE_DIR:${target}>"
+    MAIN_DEPENDENCY ${ASAN_LIBRARY_SOURCE}
+    TARGET ${target} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${ASAN_LIBRARY_SOURCE}
+            $<TARGET_FILE_DIR:${target}>)
+
+  add_custom_command(
+    COMMENT "Copying ${LLVM_SYMBOLIZER_SOURCE} to $<TARGET_FILE_DIR:${target}>"
+    MAIN_DEPENDENCY ${LLVM_SYMBOLIZER_SOURCE}
+    TARGET ${target} POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${LLVM_SYMBOLIZER_SOURCE}
+            $<TARGET_FILE_DIR:${target}>)
+
+endfunction()
+
 if(USE_SANITIZER)
 
   unset(SANITIZER_SELECTED_FLAGS)
@@ -261,13 +316,16 @@ if(USE_SANITIZER)
   elseif(MSVC)
     if(USE_SANITIZER MATCHES "([Aa]ddress)")
       message(STATUS "Building with MSVC sanitizer")
-      append("${CMAKE_CXX_FLAGS_DEBUG} /fsanitize=address /Zi /Oy"
-             CMAKE_C_FLAGS CMAKE_CXX_FLAGS)
-
+      # https://learn.microsoft.com/en-us/answers/questions/864574/enabling-address-sanitizer-results-in-error-lnk203
+      # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
+      add_compile_definitions(_DISABLE_VECTOR_ANNOTATION)
+      append("${CMAKE_CXX_FLAGS} /fsanitize=address" CMAKE_CXX_FLAGS)
+      append("${CMAKE_C_FLAGS} /fsanitize=address" CMAKE_C_FLAGS)
       if(AFL)
         append_quoteless(AFL_USE_ASAN=1 CMAKE_C_COMPILER_LAUNCHER
                          CMAKE_CXX_COMPILER_LAUNCHER)
       endif()
+
     else()
       # llvm tool chain has same definition which is conflicit on windows with
       # symbol _calloc_dbg.

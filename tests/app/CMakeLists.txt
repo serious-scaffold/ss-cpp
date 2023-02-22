@@ -8,6 +8,6 @@ foreach(_file ${files})
                                                     ${file_basename}_test)
 
   gtest_discover_tests(${file_basename})
-
+  copy_sanitizer_runtime(${file_basename})
   # add_test(NAME ${file_basename}_test COMMAND $<TARGET_FILE:${file_basename}>)
 endforeach()

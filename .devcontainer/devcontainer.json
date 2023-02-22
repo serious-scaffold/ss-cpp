@@ -2,18 +2,18 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
 {
     "name": "C++",
-    // "build": {
-    //     "dockerfile": "Dockerfile.dev",
-    //     "args": {
-    //         // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
-    //         // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
-    //         "VARIANT": "ubuntu-22.04",
-    //         // User in container
-    //         "USERNAME": "vscode"
-    //     },
-    //     "context": "./.."
-    // },
-    "image": "msclock/commoncpp:2023.1.6",
+    "build": {
+        "dockerfile": "Dockerfile.dev",
+        "args": {
+            // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
+            // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
+            "VARIANT": "ubuntu-22.04",
+            // User in container
+            "USERNAME": "vscode"
+        },
+        "context": "./.."
+    },
+    // "image": "msclock/commoncpp:2023.1.6",
     "runArgs": [
         // Enable ptrace-based debugging for C++
         "--cap-add=SYS_PTRACE",
@@ -21,36 +21,36 @@
         "--cap-add=NET_ADMIN",
         "--security-opt",
         "seccomp=unconfined",
-        // Enable docker-in-docker configuration. Comment out if not using for better security.
-        "--privileged",
         // Run the entrypoint defined in container image.
-        "--init"
+        // "--init",
+        // Enable docker-in-docker configuration. Comment out if not using for better security.
+        "--privileged"
     ],
     // https://github.com/devcontainers/features
     // Using features in vscode requires access github with uncomment the below
-    // "features": {
-    //     // add docker in docker
-    //     "ghcr.io/devcontainers/features/docker-in-docker:2": {
-    //         "dockerDashComposeVersion": "v2",
-    //         "moby": false
-    //     },
-    //     // Fetch python
-    //     "ghcr.io/devcontainers/features/python:1": {
-    //         "installTools": false
-    //     },
-    //     // Fetch git
-    //     "ghcr.io/devcontainers/features/git:1": {},
-    //     // Fetch kubectl helm minikube
-    //     "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
-    //     // Fetch node
-    //     // "ghcr.io/devcontainers/features/node:1": {},
-    //     // Fetch Github CL
-    //     // "ghcr.io/devcontainers/features/github-cli:1": {},
-    //     // Fetch stable vcpkg
-    //     "ghcr.io/msclock/features/vcpkg:latest": {}
-    // },
+    "features": {
+        // add docker in docker
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "dockerDashComposeVersion": "v2",
+            "moby": false
+        },
+        // Fetch python
+        "ghcr.io/devcontainers/features/python:1": {
+            "installTools": false
+        },
+        // Fetch git
+        "ghcr.io/devcontainers/features/git:1": {},
+        // Fetch kubectl helm minikube
+        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
+        // Fetch node
+        // "ghcr.io/devcontainers/features/node:1": {},
+        // Fetch Github CL
+        // "ghcr.io/devcontainers/features/github-cli:1": {},
+        // Fetch stable vcpkg
+        "ghcr.io/msclock/features/vcpkg:latest": {}
+    },
     // Always run image-defined default command
-    "overrideCommand": false,
+    // "overrideCommand": false,
     // Configure tool-specific properties.
     "customizations": {
         "vscode": {

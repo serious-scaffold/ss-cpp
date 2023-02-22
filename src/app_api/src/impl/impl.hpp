@@ -12,8 +12,8 @@
 namespace api {
 namespace geo {
 
-// https://github.com/microsoft/proxy
 // proxy-runtime-polymorphism,see
+// https://github.com/microsoft/proxy
 // https://devblogs.microsoft.com/cppblog/proxy-runtime-polymorphism-made-easier-than-ever/
 
 // Abstraction Draw interface for polymorphic call

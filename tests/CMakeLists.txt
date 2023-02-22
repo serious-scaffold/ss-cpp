@@ -1,14 +1,7 @@
 # we will use the network to fetch Google Test sources make it possible to
 # disable unit tests when not on network
-option(ENABLE_UNIT_TESTS "Enable unit tests" ON)
-message(STATUS "Enable testing: ${ENABLE_UNIT_TESTS}")
-
-if(ENABLE_UNIT_TESTS)
-  # add memcheck test action
-  include(CTest)
-  include(Dart)
-  enable_testing()
-
+message(STATUS "Enable testing: ${BUILD_TESTING}")
+if(BUILD_TESTING)
   # fetch googletest since cmake > 3.11
   include(FetchContent)
 

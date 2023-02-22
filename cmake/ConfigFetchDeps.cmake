@@ -3,7 +3,7 @@ Fetch Deps
 ----------
 
 Deps list:
-- abseil
+# - abseil
 # - protobuff
 # - grpc
 
@@ -11,12 +11,26 @@ Deps list:
 
 include(FetchContent)
 
-# Open FetchContent fetching logs.
-set(FETCHCONTENT_QUIET OFF)
+#[[===
+# abseil fetching example
 
-# abseil
+# abseil builds in a static mode preferentially
+```cmake
 FetchContent_Declare(
   abseil
   GIT_REPOSITORY https://github.com/abseil/abseil-cpp.git
-  GIT_TAG 20230125.0)
+  GIT_TAG 20230125.1)
+
+if(WIN32)
+  # dll build on windows as default
+  set(ABSL_BUILD_DLL ON)
+else()
+  # static build on non-windows as default
+  set(ABSL_BUILD_DLL OFF)
+endif()
 FetchContent_MakeAvailable(abseil)
+```
+
+===]]
+
+message(STATUS "Register fetching extra deps")

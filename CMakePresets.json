@@ -192,32 +192,65 @@
   ],
   "testPresets": [
     {
+      "name": "base",
+      "output": {
+        "outputOnFailure": true
+      },
+      "hidden": true,
+      "execution": {
+        "noTestsAction": "error",
+        "timeout": 180,
+        "jobs": 8
+      }
+    },
+    {
       "name": "x64-Debug-MSVC",
-      "configurePreset": "x64-Debug-MSVC"
+      "configurePreset": "x64-Debug-MSVC",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Release-MSVC",
-      "configurePreset": "x64-Release-MSVC"
+      "configurePreset": "x64-Release-MSVC",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Debug-Clang",
-      "configurePreset": "x64-Debug-Clang"
+      "configurePreset": "x64-Debug-Clang",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Release-Clang",
-      "configurePreset": "x64-Release-Clang"
+      "configurePreset": "x64-Release-Clang",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Debug-GNUC",
-      "configurePreset": "x64-Debug-GNUC"
+      "configurePreset": "x64-Debug-GNUC",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Release-GNUC",
-      "configurePreset": "x64-Release-GNUC"
+      "configurePreset": "x64-Release-GNUC",
+      "inherits": [
+        "base"
+      ]
     },
     {
       "name": "x64-Debug-MSVC-asan",
-      "configurePreset": "x64-Debug-MSVC-asan"
+      "configurePreset": "x64-Debug-MSVC-asan",
+      "inherits": [
+        "base"
+      ]
     }
   ]
 }

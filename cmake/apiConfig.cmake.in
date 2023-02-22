@@ -47,6 +47,8 @@ find_dependency(Threads REQUIRED)
 find_dependency(OpenMP REQUIRED)
 # something third library dependency check
 find_dependency(proxy REQUIRED)
+find_dependency(fmt REQUIRED)
+
 
 include("${CMAKE_CURRENT_LIST_DIR}/apiTargets.cmake")
 check_required_components("api-shared" "api-static")

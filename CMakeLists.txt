@@ -62,13 +62,7 @@ set(INSTALL_CMAKEDIR
 # Debug configuration
 if(CMAKE_BUILD_TYPE STREQUAL Debug)
   add_definitions(-D_DEBUG)
-  if(MSVC
-     AND WIN32
-     AND NOT MSVC_VERSION VERSION_LESS 142)
-    set(CMAKE_CXX_FLAGS_DEBUG "/ZI")
-  endif()
 endif()
-set(CMAKE_DEBUG_POSTFIX "_d")
 
 # CMake module tools import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -79,7 +73,7 @@ include(PreCommit)
 include(ConfigCcache)
 include(ConfigIPO)
 include(ConfigDocs)
-include(ConfigFetchDeps)
+
 
 # IPO for release
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
@@ -92,14 +86,14 @@ include(ConfigValgrind)
 # Sanitizer
 include(ConfigSanitizers)
 
-# Runtime parallism
+# Fetch deps
+include(ConfigFetchDeps)
+
+# Package dependencies using find_package
 find_package(OpenMP REQUIRED)
-# Runtime Polymorphism
 find_package(proxy CONFIG REQUIRED)
-# Runtime fmt
 find_package(fmt CONFIG REQUIRED)
-# Runtime zlib
-find_package(ZLIB REQUIRED)
+find_package(absl CONFIG REQUIRED)
 
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -137,4 +131,7 @@ endforeach()
 add_subdirectory(src)
 
 # tests
-add_subdirectory(tests EXCLUDE_FROM_ALL)
+include(CTest)
+include(Dart)
+enable_testing()
+add_subdirectory(tests)

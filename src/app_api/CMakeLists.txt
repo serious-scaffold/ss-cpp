@@ -45,7 +45,8 @@ target_compile_options(
 target_link_libraries(
   api-shared
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt absl::base absl::log absl::strings)
+  PRIVATE msft_proxy fmt::fmt
+  PRIVATE absl::base absl::log)
 
 set_target_properties(
   api-shared
@@ -80,12 +81,12 @@ target_include_directories(
 target_compile_options(
   api-static PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
+# Static dependencies, such as absl, do no need to export when installing
 target_link_libraries(
   api-static
   PUBLIC OpenMP::OpenMP_CXX
-  PRIVATE msft_proxy ZLIB::ZLIB fmt::fmt
-          # Static dependencies do no need to export when installing
-          $<BUILD_INTERFACE:absl::base absl::log absl::strings>)
+  PRIVATE msft_proxy fmt::fmt
+  PRIVATE absl::base absl::log)
 
 set_target_properties(
   api-static

@@ -1,9 +1,14 @@
 {
+    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
     "name": "cppblueprint",
     "version": "1.0.0",
     "dependencies": [
         "proxy",
-        "fmt",
-        "zlib"
-    ]
+        {
+            "name": "fmt",
+            "version>=": "9.1.0"
+        },
+        "abseil"
+    ],
+    "builtin-baseline": "703a8113f42e794534df5dfc5cece5dabcb949d0"
 }
