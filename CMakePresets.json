@@ -251,6 +251,34 @@
       "inherits": [
         "base"
       ]
+    },
+    {
+      "name": "x64-Debug-GNUC-asan",
+      "configurePreset": "x64-Debug-GNUC-asan",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "x64-Debug-GNUC-tsan",
+      "configurePreset": "x64-Debug-GNUC-tsan",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "x64-Debug-GNUC-lsan",
+      "configurePreset": "x64-Debug-GNUC-lsan",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "x64-Debug-GNUC-usan",
+      "configurePreset": "x64-Debug-GNUC-usan",
+      "inherits": [
+        "base"
+      ]
     }
   ]
 }
