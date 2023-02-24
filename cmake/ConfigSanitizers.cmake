@@ -1,3 +1,4 @@
+#[[==
 #
 # Copyright (C) 2018-2022 by George Cave - gcave@stablecoder.ca
 #
@@ -24,53 +25,50 @@
 # CMake, allowing any project and developer to quickly and easily use.
 #
 # A quick rundown of the tools available, and what they do:
-#
+
 # LeakSanitizer detects memory leaks, or issues where memory is allocated and
 # never deallocated, causing programs to slowly consume more and more memory,
 # eventually leading to a crash.
-#
+
 # AddressSanitizer is a fast memory error detector. It is useful for detecting
 # most issues dealing with memory, such as:
-# ~~~
-# - Out of bounds accesses to heap, stack, global
-# - Use after free
-# - Use after return
-# - Use after scope
-# - Double-free, invalid free
-# - Memory leaks (using LeakSanitizer)
-# ~~~
-#
+#   - Out of bounds accesses to heap, stack, global
+#   - Use after free
+#   - Use after return
+#   - Use after scope
+#   - Double-free, invalid free
+#   - Memory leaks (using LeakSanitizer)
+
 # ThreadSanitizer detects data races for multi-threaded code.
 #
 # UndefinedBehaviourSanitizer detects the use of various features of C/C++ that
 # are explicitly listed as resulting in undefined behaviour. Most notably:
-# ~~~
-# - Using misaligned or null pointer.
-# - Signed integer overflow
-# - Conversion to, from, or between floating-point types which would overflow the destination
-# - Division by zero
-# - Unreachable code
-# ~~~
+#   - Using misaligned or null pointer.
+#   - Signed integer overflow
+#   - Conversion to, from, or between floating-point types which would overflow the destination
+#   - Division by zero
+#   - Unreachable code
 #
+
 # MemorySanitizer detects uninitialized reads.
 #
 # Control Flow Integrity is designed to detect certain forms of undefined
 # behaviour that can potentially allow attackers to subvert the program's
 # control flow. These are used by declaring the USE_SANITIZER CMake variable as
 # string containing any of:
-# ~~~
-# - Address
-# - Memory
-# - MemoryWithOrigins
-# - Undefined
-# - Thread
-# - Leak
-# - CFI
-# ~~~
+#   - Address
+#   - Memory
+#   - MemoryWithOrigins
+#   - Undefined
+#   - Thread
+#   - Leak
+#   - CFI
+
 # Multiple values are allowed, e.g. -DUSE_SANITIZER=Address,Leak but some
 # sanitizers cannot be combined together, e.g.-DUSE_SANITIZER=Address,Memory
 # will result in configuration error. The delimiter character is not required
 # and -DUSE_SANITIZER=AddressLeak would work as well.
+==]]
 
 include(CheckCXXSourceCompiles)
 
@@ -318,14 +316,13 @@ if(USE_SANITIZER)
       message(STATUS "Building with MSVC sanitizer")
       # https://learn.microsoft.com/en-us/answers/questions/864574/enabling-address-sanitizer-results-in-error-lnk203
       # https://learn.microsoft.com/en-us/cpp/sanitizers/error-container-overflow?view=msvc-170
-      add_compile_definitions(_DISABLE_VECTOR_ANNOTATION)
+      # add_compile_definitions(_DISABLE_VECTOR_ANNOTATION)
       append("${CMAKE_CXX_FLAGS} /fsanitize=address" CMAKE_CXX_FLAGS)
       append("${CMAKE_C_FLAGS} /fsanitize=address" CMAKE_C_FLAGS)
       if(AFL)
         append_quoteless(AFL_USE_ASAN=1 CMAKE_C_COMPILER_LAUNCHER
                          CMAKE_CXX_COMPILER_LAUNCHER)
       endif()
-
     else()
       # llvm tool chain has same definition which is conflicit on windows with
       # symbol _calloc_dbg.
