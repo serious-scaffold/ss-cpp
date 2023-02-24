@@ -274,8 +274,8 @@
       ]
     },
     {
-      "name": "x64-Debug-GNUC-usan",
-      "configurePreset": "x64-Debug-GNUC-usan",
+      "name": "x64-Debug-GNUC-ubsan",
+      "configurePreset": "x64-Debug-GNUC-ubsan",
       "inherits": [
         "base"
       ]
