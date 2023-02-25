@@ -6,6 +6,7 @@ set(public_headers ${CMAKE_CURRENT_SOURCE_DIR}/src/api.hpp
 
 # shared library
 add_library(api-shared SHARED "")
+target_code_coverage(api-shared AUTO ALL EXCLUDE tests/*)
 
 include(GenerateExportHeader)
 generate_export_header(

@@ -23,7 +23,7 @@ pro::proxy<DrawableFacade> CreateRectangleAsDrawable(int width, int height) {
     return pro::make_proxy<DrawableFacade>(rect); // No heap allocation is expected
 }
 
-std::string PrintDrawableToString(pro::proxy<DrawableFacade> p) {
+std::string PrintDrawableToString(const pro::proxy<DrawableFacade>& p) {
     std::stringstream result;
     result << "shape = ";
     p.invoke<Draw>(result);                    // Polymorphic call

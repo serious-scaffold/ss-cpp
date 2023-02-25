@@ -1,7 +1,5 @@
 #pragma once
 
-#include <iostream>
-
 #include <string>
 #include "api_export.hpp"
 #include "proxy/proxy.h"
@@ -38,7 +36,7 @@ public:
 struct api_EXPORT DrawableFacade : pro::facade<Draw, Area> {};
 
 // Client API - Consumer
-std::string api_EXPORT PrintDrawableToString(pro::proxy<DrawableFacade> p);
+std::string api_EXPORT PrintDrawableToString(const pro::proxy<DrawableFacade>& p);
 
 // Client API - Producer
 pro::proxy<DrawableFacade> api_EXPORT CreateRectangleAsDrawable(int width, int height);

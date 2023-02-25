@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "api.hpp"
+#include "impl/impl.hpp"
 
 // Main function can be ignored with configuration in test CMakeLists.txt:
 //  include(GoogleTest)
@@ -21,4 +22,10 @@ TEST(app_api_info, distribution) {
 #else
     GTEST_ASSERT_FALSE(is_debug);
 #endif
+}
+
+TEST(app_api, create_rect) {
+    const auto drawable = api::geo::CreateRectangleAsDrawable(100, 100);
+    GTEST_ASSERT_EQ("shape = {Rectangle: width = 100, height = 100}, area = 10000",
+                    api::geo::PrintDrawableToString(drawable));
 }

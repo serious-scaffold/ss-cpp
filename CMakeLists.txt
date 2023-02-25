@@ -74,7 +74,6 @@ include(ConfigCcache)
 include(ConfigIPO)
 include(ConfigDocs)
 
-
 # IPO for release
 if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
   link_time_optimization()
@@ -85,6 +84,10 @@ include(ConfigValgrind)
 
 # Sanitizer
 include(ConfigSanitizers)
+
+# Coverage
+include(CodeCoverage)
+add_code_coverage_all_targets(EXCLUDE ${CMAKE_BINARY_DIR}/* /usr/include/*)
 
 # Fetch deps
 include(ConfigFetchDeps)
