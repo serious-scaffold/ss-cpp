@@ -1,6 +1,8 @@
 #
 # Copyright (C) 2018-2020 by George Cave - gcave@stablecoder.ca
 #
+# Copyright (c) 2022, 2023 msclock - msclock@qq.com
+#
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
 # the License at
@@ -72,6 +74,9 @@
 # add_executable(theExe main.cpp non_covered.cpp)
 # target_code_coverage(theExe AUTO ALL EXCLUDE non_covered.cpp test/*) # As an executable target, adds to the 'ccov' and ccov-all' targets, and the reports will exclude the non-covered.cpp file, and any files in a test/ folder.
 # ~~~
+#
+# Enable ctest *Coverage, such as ctest -T Experimental[Coverage] by msclock
+#
 
 # Options
 option(
