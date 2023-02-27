@@ -77,6 +77,23 @@
       }
     },
     {
+      "name": "ClangCL",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "clang-cl",
+        "CMAKE_CXX_COMPILER": "clang-cl"
+      },
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "toolset": {
+        "value": "host=x64",
+        "strategy": "external"
+      }
+    },
+    {
       "name": "GNUC",
       "hidden": true,
       "cacheVariables": {
@@ -131,6 +148,26 @@
         "x64",
         "Release",
         "Clang"
+      ]
+    },
+    {
+      "name": "x64-Debug-ClangCL",
+      "description": "Clang/LLVM for x64 (Debug)",
+      "inherits": [
+        "base",
+        "x64",
+        "Debug",
+        "ClangCL"
+      ]
+    },
+    {
+      "name": "x64-Release-ClangCL",
+      "description": "ClangCL/LLVM for x64 (Release)",
+      "inherits": [
+        "base",
+        "x64",
+        "Release",
+        "ClangCL"
       ]
     },
     {
@@ -227,6 +264,20 @@
     {
       "name": "x64-Release-Clang",
       "configurePreset": "x64-Release-Clang",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "x64-Debug-ClangCL",
+      "configurePreset": "x64-Debug-ClangCL",
+      "inherits": [
+        "base"
+      ]
+    },
+    {
+      "name": "x64-Release-ClangCL",
+      "configurePreset": "x64-Release-ClangCL",
       "inherits": [
         "base"
       ]
