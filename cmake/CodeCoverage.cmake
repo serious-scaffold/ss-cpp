@@ -199,7 +199,12 @@ if(CODE_COVERAGE AND NOT CODE_COVERAGE_ADDED)
     # Targets
     add_custom_target(ccov-clean COMMAND ${LCOV_PATH} --directory
                                          ${CMAKE_BINARY_DIR} --zerocounters)
-
+  elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC" OR CMAKE_CXX_COMPILER_ID MATCHES
+                                               "MSVC")
+    # Enable VS CodeCoverage by static code coverage
+    if(WIN32 AND MSVC)
+      add_link_options(/PROFILE)
+    endif()
   else()
     message(FATAL_ERROR "Code coverage requires Clang or GCC. Aborting.")
   endif()
@@ -477,45 +482,49 @@ function(target_code_coverage TARGET_NAME)
             ${COVERAGE_INFO}
           DEPENDS ccov-capture-${target_code_coverage_COVERAGE_TARGET_NAME})
       endif()
+      if(NOT MSVC)
+        add_custom_command(
+          TARGET ccov-${target_code_coverage_COVERAGE_TARGET_NAME}
+          POST_BUILD
+          COMMAND ;
+          COMMENT
+            "Open ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/${target_code_coverage_COVERAGE_TARGET_NAME}/index.html in your browser to view the coverage report."
+        )
 
-      add_custom_command(
-        TARGET ccov-${target_code_coverage_COVERAGE_TARGET_NAME}
-        POST_BUILD
-        COMMAND ;
-        COMMENT
-          "Open ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/${target_code_coverage_COVERAGE_TARGET_NAME}/index.html in your browser to view the coverage report."
-      )
-
-      # AUTO
-      if(target_code_coverage_AUTO)
-        if(NOT TARGET ccov)
-          add_custom_target(ccov)
-        endif()
-        add_dependencies(ccov ccov-${target_code_coverage_COVERAGE_TARGET_NAME})
-
-        if(NOT CMAKE_C_COMPILER_ID MATCHES "GNU" AND NOT CMAKE_CXX_COMPILER_ID
-                                                     MATCHES "GNU")
-          if(NOT TARGET ccov-report)
-            add_custom_target(ccov-report)
+        # AUTO
+        if(target_code_coverage_AUTO)
+          if(NOT TARGET ccov)
+            add_custom_target(ccov)
           endif()
+          add_dependencies(ccov
+                           ccov-${target_code_coverage_COVERAGE_TARGET_NAME})
+
+          if(NOT CMAKE_C_COMPILER_ID MATCHES "GNU"
+             AND NOT CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+            if(NOT TARGET ccov-report)
+              add_custom_target(ccov-report)
+            endif()
+            add_dependencies(
+              ccov-report
+              ccov-report-${target_code_coverage_COVERAGE_TARGET_NAME})
+          endif()
+        endif()
+
+        # ALL
+        if(target_code_coverage_ALL)
+          if(NOT TARGET ccov-all-processing)
+            message(
+              FATAL_ERROR
+                "Calling target_code_coverage with 'ALL' must be after a call to 'add_code_coverage_all_targets'."
+            )
+          endif()
+
           add_dependencies(
-            ccov-report
-            ccov-report-${target_code_coverage_COVERAGE_TARGET_NAME})
-        endif()
-      endif()
-
-      # ALL
-      if(target_code_coverage_ALL)
-        if(NOT TARGET ccov-all-processing)
-          message(
-            FATAL_ERROR
-              "Calling target_code_coverage with 'ALL' must be after a call to 'add_code_coverage_all_targets'."
-          )
+            ccov-all-processing
+            ccov-run-${target_code_coverage_COVERAGE_TARGET_NAME})
         endif()
 
-        add_dependencies(ccov-all-processing
-                         ccov-run-${target_code_coverage_COVERAGE_TARGET_NAME})
-      endif()
+      endif(NOT MSVC)
     endif()
   endif()
 endfunction()
@@ -693,12 +702,15 @@ function(add_code_coverage_all_targets)
 
     endif()
 
-    add_custom_command(
-      TARGET ccov-all
-      POST_BUILD
-      COMMAND ;
-      COMMENT
-        "Open ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/all-merged/index.html in your browser to view the coverage report."
-    )
+    if(NOT MSVC)
+      add_custom_command(
+        TARGET ccov-all
+        POST_BUILD
+        COMMAND ;
+        COMMENT
+          "Open ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/all-merged/index.html in your browser to view the coverage report."
+      )
+    endif(NOT MSVC)
+
   endif()
 endfunction()
