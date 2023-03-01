@@ -23,10 +23,6 @@ Example:
         lint -s lint
 
 Attributes:
-    GITHUB_MIRROR (str): A github mirror can be used to expedite lint
-        session. Default to https://ghproxy.com/https://github.com/, but an env
-        variable will be preferred.
-
     PRE_COMMIT_HOME (str): A tool called as pre-commit use a path to cache
         some repos from github or other binaries,it aims to help lint session.
 
@@ -59,75 +55,10 @@ def get_home_dir():
         raise RuntimeError(f"Error! Not this system. {sys.platform}")
     return homedir
 
-
-GITHUB_MIRROR = os.environ.get(
-    "GITHUB_MIRROR", "https://ghproxy.com/https://github.com/"
-)
 PRE_COMMIT_HOME = os.environ.get(
     "PRE_COMMIT_HOME",
     os.path.join(get_home_dir(), ".cache", "pre-commit"),
 )
-
-
-class GitHubAddressSpeedUp:
-    """
-    This is a context class that speed up github access based on nox.
-
-    Example:
-        with GitHubAddressSpeedUp(session=session) as:
-            session.run('git','branch','-a')
-    """
-
-    config_prefix = (
-        "git",
-        "config",
-        "--global",
-    )
-
-    def __init__(self, session: nox.Session) -> None:
-        self.address_translate_str = f"url.{GITHUB_MIRROR}.insteadOf"
-        self.session = session
-
-    def __enter__(self):
-        self.config_set("--list")
-        self.config_set(
-            self.address_translate_str,
-            "https://github.com/",
-        )
-        self.config_set(
-            "http.sslVerify",
-            "false",
-        )
-        self.config_set(
-            "http.postBuffer",
-            "1048576000",
-        )
-
-    def config_set(self, *set_args):
-        """set git config with args"""
-        return self.session.run(
-            *self.config_prefix,
-            *set_args,
-            external=True,
-        )
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        if exc_type or exc_val or exc_tb:
-            self.session.log("Type: ", exc_type)
-            self.session.log("Value:", exc_val)
-            self.session.log("TreacBack:", exc_tb)
-
-        self.unset_config(self.address_translate_str)
-
-    def unset_config(self, *unset_args):
-        """unset git config with args"""
-        return self.session.run(
-            *self.config_prefix,
-            "--unset",
-            *unset_args,
-            external=True,
-        )
-
 
 @nox.session
 def lint(session: nox.Session) -> None:
@@ -151,16 +82,15 @@ def lint(session: nox.Session) -> None:
         session.run("pre-commit", "install", "--hook-type", "commit-msg")
 
     # try to install hooks from github
-    with GitHubAddressSpeedUp(session=session):
-        for _ in range(3):
-            try:
-                session.run("pre-commit", "install-hooks")
-                session.log("install hooks successfully")
-                break
-            except (CalledProcessError, SubprocessError):
-                maybe_retry(session)
-            except Exception:  # pylint: disable=[W0703]
-                maybe_retry(session)
+    for _ in range(3):
+        try:
+            session.run("pre-commit", "install-hooks")
+            session.log("install hooks successfully")
+            break
+        except (CalledProcessError, SubprocessError):
+            maybe_retry(session)
+        except Exception:  # pylint: disable=[W0703]
+            maybe_retry(session)
 
     session.run("pre-commit", "run", "-a")
     if os.environ.get("CI", None):
