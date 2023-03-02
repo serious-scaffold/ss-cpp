@@ -32,7 +32,7 @@ public:
     }
 };
 
-// Interafce facade for Draw, Area
+// Interface facade for Draw, Area
 struct api_EXPORT DrawableFacade : pro::facade<Draw, Area> {};
 
 // Client API - Consumer
