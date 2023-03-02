@@ -279,21 +279,15 @@ function(target_code_coverage TARGET_NAME)
     # Add code coverage instrumentation to the target's linker command
     if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
        OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
-      target_compile_options(
-        ${TARGET_NAME}
-        ${TARGET_VISIBILITY}
-        -fprofile-arcs
-        -ftest-coverage
-        -fprofile-instr-generate
-        -fcoverage-mapping
-        $<$<COMPILE_LANGUAGE:CXX>:-fno-elide-constructors>)
+      target_compile_options(${TARGET_NAME} ${TARGET_VISIBILITY} --coverage
+                             -fprofile-instr-generate -fcoverage-mapping)
       target_link_options(${TARGET_NAME} ${TARGET_VISIBILITY}
                           -fprofile-instr-generate -fcoverage-mapping)
       target_link_libraries(${TARGET_NAME} ${TARGET_LINK_VISIBILITY} gcov)
     elseif(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES
                                                 "GNU")
       target_compile_options(
-        ${TARGET_NAME} ${TARGET_VISIBILITY} -fprofile-arcs -ftest-coverage
+        ${TARGET_NAME} ${TARGET_VISIBILITY} --coverage
         $<$<COMPILE_LANGUAGE:CXX>:-fno-elide-constructors> -fno-default-inline)
       target_link_libraries(${TARGET_NAME} ${TARGET_LINK_VISIBILITY} gcov)
     endif()
