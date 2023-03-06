@@ -282,8 +282,7 @@ function(target_code_coverage TARGET_NAME)
       target_compile_options(${TARGET_NAME} ${TARGET_VISIBILITY} --coverage
                              -fprofile-instr-generate -fcoverage-mapping)
       target_link_options(${TARGET_NAME} ${TARGET_VISIBILITY}
-                          -fprofile-instr-generate -fcoverage-mapping)
-      target_link_libraries(${TARGET_NAME} ${TARGET_LINK_VISIBILITY} gcov)
+                          -fprofile-instr-generate -fcoverage-mapping --coverage)
     elseif(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES
                                                 "GNU")
       target_compile_options(
