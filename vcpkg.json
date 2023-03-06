@@ -3,14 +3,8 @@
     "name": "cppblueprint",
     "version": "1.0.0",
     "dependencies": [
-        "proxy",
-        {
-            "name": "libredwg",
-            "features": [
-                "tools"
-            ]
-        },
+        "abseil",
         "fmt",
-        "abseil"
+        "proxy"
     ]
 }
