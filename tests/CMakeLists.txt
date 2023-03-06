@@ -7,8 +7,8 @@ if(BUILD_TESTING)
 
   FetchContent_Declare(
     googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    GIT_TAG 3d787f5a0d58cfc37a0563bb15647a0d8aa2c1bf)
+    GIT_REPOSITORY https://gitlab.com/immersaview/public/remotes/googletest.git
+    GIT_TAG cead3d57c93ff8c4e5c1bbae57a5c0b0b0f6e168)
 
   # For Windows: Prevent overriding the parent project's compiler/linker
   # settings
