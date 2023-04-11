@@ -29,6 +29,8 @@
     // https://github.com/devcontainers/features
     // Using features in vscode requires access github with uncomment the below
     "features": {
+        // Fetch Light-weight Desktop (desktop-lite)
+        "ghcr.io/devcontainers/features/desktop-lite:1": {},
         // add docker in docker
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "dockerDashComposeVersion": "v2",
@@ -58,10 +60,8 @@
                 "[dockerfile]": {
                     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
                 },
-                "cmake.buildDirectory": "${workspaceFolder}/.build",
                 "c-cpp-flylint.clang.enable": false,
                 "cmakeLanguageSupport.enableFileAPI": true,
-                "cmake.generator": "Ninja Multi-Config",
                 "terminal.integrated.shellIntegration.history": 666,
                 "editor.renderWhitespace": "all",
                 "editor.foldingMaximumRegions": 65000,
