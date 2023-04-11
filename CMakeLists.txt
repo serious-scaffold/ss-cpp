@@ -103,7 +103,6 @@ add_code_coverage_all_targets(EXCLUDE ${CMAKE_BINARY_DIR}/* /usr/include/*)
 include(ConfigFetchDeps)
 
 # Package dependencies using find_package
-find_package(OpenMP REQUIRED)
 find_package(proxy CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)

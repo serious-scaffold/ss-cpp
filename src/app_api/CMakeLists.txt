@@ -45,7 +45,6 @@ target_compile_options(
 
 target_link_libraries(
   api-shared
-  PUBLIC OpenMP::OpenMP_CXX
   PRIVATE msft_proxy fmt::fmt
   PRIVATE absl::base absl::log)
 
@@ -85,7 +84,6 @@ target_compile_options(
 # Static dependencies, such as absl, do no need to export when installing
 target_link_libraries(
   api-static
-  PUBLIC OpenMP::OpenMP_CXX
   PRIVATE msft_proxy fmt::fmt
   PRIVATE absl::base absl::log)
 

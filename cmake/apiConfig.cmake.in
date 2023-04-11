@@ -43,9 +43,8 @@
 
 include(CMakeFindDependencyMacro)
 
+# third library dependency check
 find_dependency(Threads REQUIRED)
-find_dependency(OpenMP REQUIRED)
-# something third library dependency check
 find_dependency(proxy REQUIRED)
 find_dependency(fmt REQUIRED)
 
