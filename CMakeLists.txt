@@ -102,29 +102,13 @@ add_code_coverage_all_targets(EXCLUDE ${CMAKE_BINARY_DIR}/* /usr/include/*)
 # Fetch deps
 include(ConfigFetchDeps)
 
+# Runpath setup
+include(Runpath)
+
 # Package dependencies using find_package
 find_package(proxy CONFIG REQUIRED)
 find_package(fmt CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
-
-# use, i.e. don't skip the full RPATH for the build tree
-set(CMAKE_SKIP_BUILD_RPATH FALSE)
-
-# when building, don't use the install RPATH already (but later on when
-# installing)
-set(CMAKE_BUILD_WITH_INSTALL_RPATH OFF)
-
-if(CMAKE_HOST_UNIX)
-  # add system bin auto dly-load such as
-  list(APPEND CMAKE_INSTALL_RPATH
-       "${CMAKE_INSTALL_PREFIX}/lib;${CMAKE_INSTALL_PREFIX}/bin;/usr/local/lib")
-  # only show rpath on unix-like os
-  message(STATUS "CMAKE_INSTALL_RPATH:${CMAKE_INSTALL_RPATH}")
-endif()
-
-# add the automatically determined parts of the RPATH which point to directories
-# outside the build tree to the install RPATH
-set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 
 # dynamic path specify the 3rd party short deps path depends on os-platform
 set(dynamic_path $<IF:$<PLATFORM_ID:Windows>,bin,lib>)
