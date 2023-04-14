@@ -1,3 +1,9 @@
+#[[==
+# This scripts setup a runpath properly when use add_library to generate
+# a shared library. The path of shared libraries will be pointed to lib 
+# directory by variable CMAKE_INSTALL_BIN.
+#==]]
+
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
 
