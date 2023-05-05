@@ -1,8 +1,12 @@
-#[[==
-# This scripts setup a runpath properly when use add_library to generate
-# a shared library. The path of shared libraries will be pointed to lib 
-# directory by variable CMAKE_INSTALL_BIN.
-#==]]
+#[=======================================================================[.rst:
+Runpath Configuration
+------------------
+
+This scripts setup a runpath properly when use add_library to generate
+a shared library. The path of shared libraries will be pointed to lib
+directory by variable CMAKE_INSTALL_BIN.
+
+#]=======================================================================]
 
 # use, i.e. don't skip the full RPATH for the build tree
 set(CMAKE_SKIP_BUILD_RPATH FALSE)
@@ -12,7 +16,8 @@ set(CMAKE_SKIP_BUILD_RPATH FALSE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH OFF)
 
 # Prepare RPATH
-file(RELATIVE_PATH _rel ${CMAKE_INSTALL_FULL_BINDIR} ${CMAKE_INSTALL_FULL_LIBDIR})
+file(RELATIVE_PATH _rel ${CMAKE_INSTALL_FULL_BINDIR}
+     ${CMAKE_INSTALL_FULL_LIBDIR})
 message(STATUS "_rel:${_rel}")
 if(APPLE)
   set(_rpath "@loader_path/${_rel}")

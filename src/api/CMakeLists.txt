@@ -1,8 +1,7 @@
 file(GLOB_RECURSE api_srcs "*.cpp")
 file(GLOB_RECURSE api_hdrs "*.hpp")
-
-set(public_headers ${CMAKE_CURRENT_SOURCE_DIR}/src/api.hpp
-                   ${CMAKE_CURRENT_SOURCE_DIR}/src/impl/impl.hpp)
+# Public Header
+file(GLOB_RECURSE public_headers ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
 
 # shared library
 add_library(api-shared SHARED "")
@@ -36,8 +35,8 @@ target_compile_definitions(
 
 target_include_directories(
   api-shared
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}> # export header
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
          $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>)
 
 target_compile_options(
@@ -56,7 +55,6 @@ set_target_properties(
     VISIBILITY_INLINES_HIDDEN 1
     SOVERSION ${PROJECT_VERSION_MAJOR}
     OUTPUT_NAME "api"
-    DEBUG_POSTFIX "_d"
     PUBLIC_HEADER
     "${public_headers};${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/api_export.hpp"
     MACOSX_RPATH ON)
@@ -75,7 +73,7 @@ target_compile_definitions(
 target_include_directories(
   api-static
   PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>
+         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
          $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>)
 
 target_compile_options(
@@ -92,7 +90,6 @@ set_target_properties(
   PROPERTIES
     POSITION_INDEPENDENT_CODE 1
     ARCHIVE_OUTPUT_NAME "api_s"
-    DEBUG_POSTFIX "_d"
     RELEASE_POSTFIX "_s"
     PUBLIC_HEADER
     "${public_headers};${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}/api_export.hpp"
@@ -110,21 +107,35 @@ if(CMAKE_HOST_WIN32 AND $<CXX_COMPILER_ID:MSVC>)
 endif()
 
 install(
-  TARGETS api-shared api-static
-  EXPORT apiTargets
+  TARGETS api-shared
+  EXPORT api-targets
   ARCHIVE DESTINATION ${INSTALL_LIBDIR}$<$<CONFIG:Debug>:/../debug/lib>
-          COMPONENT lib
+          COMPONENT api_runtime
   RUNTIME DESTINATION ${INSTALL_BINDIR}$<$<CONFIG:Debug>:/../debug/bin>
-          COMPONENT bin
+          COMPONENT api_runtime
   LIBRARY DESTINATION ${INSTALL_LIBDIR}$<$<CONFIG:Debug>:/../debug/lib>
-          COMPONENT lib
-  PUBLIC_HEADER DESTINATION ${INSTALL_INCLUDEDIR}/api COMPONENT dev)
+          COMPONENT api_runtime
+          NAMELINK_COMPONENT api_development
+  PUBLIC_HEADER DESTINATION ${INSTALL_INCLUDEDIR}/api COMPONENT api_development)
 
 install(
-  EXPORT apiTargets
-  NAMESPACE "api::"
+  TARGETS api-static
+  EXPORT api-targets
+  ARCHIVE DESTINATION ${INSTALL_LIBDIR}$<$<CONFIG:Debug>:/../debug/lib>
+          COMPONENT api_runtime
+  RUNTIME DESTINATION ${INSTALL_BINDIR}$<$<CONFIG:Debug>:/../debug/bin>
+          COMPONENT api_runtime
+  LIBRARY DESTINATION ${INSTALL_LIBDIR}$<$<CONFIG:Debug>:/../debug/lib>
+          COMPONENT api_runtime
+          NAMELINK_COMPONENT api_development
+  PUBLIC_HEADER DESTINATION ${INSTALL_INCLUDEDIR}/api COMPONENT api_development)
+
+install(
+  EXPORT api-targets
+  FILE apiTargets.cmake
+  NAMESPACE api::
   DESTINATION ${INSTALL_CMAKEDIR}
-  COMPONENT dev)
+  COMPONENT api_development)
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
@@ -133,10 +144,18 @@ write_basic_package_version_file(
   COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-  ${PROJECT_SOURCE_DIR}/cmake/apiConfig.cmake.in
+  ${CMAKE_CURRENT_LIST_DIR}/apiConfig.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/apiConfig.cmake
   INSTALL_DESTINATION ${INSTALL_CMAKEDIR})
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/apiConfig.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/apiConfigVersion.cmake
         DESTINATION ${INSTALL_CMAKEDIR})
+
+# Export from build tree
+export(
+  EXPORT api-targets
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/apiTargets.cmake
+  NAMESPACE api::)
+
+export(PACKAGE api)

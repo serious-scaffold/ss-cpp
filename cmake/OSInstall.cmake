@@ -1,15 +1,17 @@
-# cmake-format: off
-# A function to enable applocal install of dependencies as part of the `make install` process
-# Arguments:
-#   TARGETS - a list of installed targets to have dependencies copied for (required)
-#   DESTINATION - the runtime directory for those targets (usually `bin`)
-#   DIRECTORIES - the directories to search dependencies (required)
-#   PRE_EXCLUDE_REGEXES - regular expressions to handle results (optional)
-#   POST_EXCLUDE_REGEXES - regular expressions to handle results (optional)
-#   POST_INCLUDE_REGEXES - regular expressions to handle results (optional)
-#
-# Note that this function requires CMake 3.14 for policy CMP0087
-# cmake-format: on
+#[=======================================================================[.rst:
+A function to enable applocal install of dependencies as part of the
+ `make install` process
+
+Arguments:
+  TARGETS - a list of installed targets to have dependencies copied for (required)
+  DESTINATION - the runtime directory for those targets (usually `bin`)
+  DIRECTORIES - the directories to search dependencies (required)
+  PRE_EXCLUDE_REGEXES - regular expressions to handle results (optional)
+  POST_EXCLUDE_REGEXES - regular expressions to handle results (optional)
+  POST_INCLUDE_REGEXES - regular expressions to handle results (optional)
+
+Note that this function requires CMake 3.14 for policy CMP0087
+#]=======================================================================]
 function(install_local_dependencies)
   if(CMAKE_VERSION VERSION_LESS "3.16")
     message(FATAL_ERROR "install_local_dependencies require at least CMake 3.16

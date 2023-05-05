@@ -1,19 +1,19 @@
-# cmake-format: off
-# A macro to enable valgrind to check memcheck on testsuit
-#
-# Note that this macro requires enable the testing in cmake.
-#
-# Suggested usage:
-#
-# ::
-#
-#   # configure valgrind
-#   if(CMAKE_HOST_UNIX)
-#     include(ConfigValgrind)
-#     config_valgrind()
-#   endif()
-#
-# cmake-format: on
+#[=======================================================================[.rst:
+A macro to enable valgrind to check memcheck on testsuit
+
+Note that this macro requires enable the testing in cmake.
+
+Suggested usage:
+
+.. code-block:: cmake
+
+    # configure valgrind
+    if(CMAKE_HOST_UNIX)
+      include(ConfigValgrind)
+      config_valgrind()
+    endif()
+
+#]=======================================================================]
 macro(config_valgrind)
   # find valgrind executable
   find_program(VALGRIND_COMMAND NAMES valgrind)
