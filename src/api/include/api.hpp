@@ -6,14 +6,14 @@
 namespace api {
 namespace info {
 /**
- * \brief get api version string
- * \note a string "dev" will be returned when no version configuration.
- * \return the distribution api version provided.
+ * \brief Get api version string
+ * \return The distribution api version provided.
+ * \note A string "dev" will be returned when no version configuration.
  */
 std::string api_EXPORT version_api() noexcept;
 
 /**
- * \return a bool represents if debug when building.
+ * \return A bool represents if debug when building.
  */
 bool api_EXPORT is_debug() noexcept;
 }; // namespace info

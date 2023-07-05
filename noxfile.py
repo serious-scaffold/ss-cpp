@@ -55,50 +55,19 @@ def get_home_dir():
         raise RuntimeError(f"Error! Not this system. {sys.platform}")
     return homedir
 
+
 PRE_COMMIT_HOME = os.environ.get(
     "PRE_COMMIT_HOME",
     os.path.join(get_home_dir(), ".cache", "pre-commit"),
 )
+
 
 @nox.session
 def lint(session: nox.Session) -> None:
     """
     Lint the codebase.
     """
-
-    def maybe_retry(session: nox.Session):
-        import shutil
-        import time
-
-        # reset cache
-        session.log(f"PRE_COMMIT_HOME:{PRE_COMMIT_HOME}")
-        if os.path.exists(PRE_COMMIT_HOME):
-            shutil.rmtree(path=PRE_COMMIT_HOME, ignore_errors=True)
-        session.log("retry this after 60s")
-        time.sleep(60)
-
     session.install("pre-commit")
-    if not os.environ.get("CI", None):
-        session.run("pre-commit", "install", "--hook-type", "commit-msg")
-
-    # try to install hooks from github
-    for _ in range(3):
-        try:
-            session.run("pre-commit", "install-hooks")
-            session.log("install hooks successfully")
-            break
-        except (CalledProcessError, SubprocessError):
-            maybe_retry(session)
-        except Exception:  # pylint: disable=[W0703]
-            maybe_retry(session)
-
+    session.run("pre-commit", "install-hooks")
+    session.log("install hooks successfully")
     session.run("pre-commit", "run", "-a")
-    if os.environ.get("CI", None):
-        session.run_always(
-            "pre-commit",
-            "uninstall",
-            "--hook-type",
-            "commit-msg",
-            "--hook-type",
-            "pre-commit",
-        )

@@ -14,6 +14,7 @@ private:
     double width_;
     double height_;
 };
+
 namespace geo {
 
 pro::proxy<DrawableFacade> CreateRectangleAsDrawable(int width, int height) {

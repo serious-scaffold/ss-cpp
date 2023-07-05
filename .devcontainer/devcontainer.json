@@ -3,7 +3,7 @@
 {
     "name": "C++",
     "build": {
-        "dockerfile": "Dockerfile.dev",
+        "dockerfile": "Dockerfile",
         "args": {
             // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
             // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
@@ -13,7 +13,6 @@
         },
         "context": "./.."
     },
-    // "image": "msclock/commoncpp:2023.1.6",
     "runArgs": [
         // Enable ptrace-based debugging for C++
         "--cap-add=SYS_PTRACE",
@@ -45,9 +44,7 @@
         // Fetch kubectl helm minikube
         "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
         // Fetch node
-        // "ghcr.io/devcontainers/features/node:1": {},
-        // Fetch Github CL
-        // "ghcr.io/devcontainers/features/github-cli:1": {},
+        "ghcr.io/devcontainers/features/node:1": {},
         // Fetch stable vcpkg
         "ghcr.io/msclock/features/vcpkg:latest": {}
     },
@@ -175,7 +172,7 @@
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "gcc -v",
     // Uncomment out this line to make a volume to clone repository inside and bind for performance
-    // "workspaceFolder": "/workspaces",
+    // "workspaceFolder": "/workspace",
     // "workspaceMount": "type=volume,source=cppblueprint-src,target=/workspace,consistency=cached",
     "shutdownAction": "none"
 }
