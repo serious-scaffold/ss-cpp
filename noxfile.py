@@ -32,7 +32,6 @@ About nox, please see https://github.com/wntrblm/nox.git.
 """
 import os
 import sys
-from subprocess import CalledProcessError, SubprocessError
 
 import nox
 

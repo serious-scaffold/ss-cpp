@@ -170,9 +170,5 @@
     // Comment out this line to run as root instead.
     "remoteUser": "vscode",
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "gcc -v",
-    // Uncomment out this line to make a volume to clone repository inside and bind for performance
-    // "workspaceFolder": "/workspace",
-    // "workspaceMount": "type=volume,source=cppblueprint-src,target=/workspace,consistency=cached",
-    "shutdownAction": "none"
+    "postCreateCommand": "gcc -v"
 }
