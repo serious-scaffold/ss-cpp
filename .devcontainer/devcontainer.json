@@ -2,171 +2,27 @@
 // https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
 {
     "name": "C++",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            // Update 'VARIANT' to pick an Ubuntu OS version: ubuntu-22.04, ubuntu-21.04, ubuntu-20.04, ubuntu-18.04
-            // Use Ubuntu 18.04 or Ubuntu 21.04 on local arm64/Apple Silicon
-            "VARIANT": "ubuntu-22.04",
-            // User in container
-            "USERNAME": "vscode"
-        },
-        "context": "./.."
-    },
+    "image": "mcr.microsoft.com/devcontainers/base:jammy",
     "runArgs": [
         // Enable ptrace-based debugging for C++
         "--cap-add=SYS_PTRACE",
-        "--cap-add=NET_RAW",
-        "--cap-add=NET_ADMIN",
+        "--gpus=all",
         "--security-opt",
-        "seccomp=unconfined",
-        // Run the entrypoint defined in container image.
-        // "--init",
-        // Enable docker-in-docker configuration. Comment out if not using for better security.
-        "--privileged"
+        "seccomp=unconfined"
     ],
     // https://github.com/devcontainers/features
     // Using features in vscode requires access github with uncomment the below
-    "features": {
-        // add docker in docker
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {
-            "dockerDashComposeVersion": "v2",
-            "moby": false
-        },
-        // Fetch python
-        "ghcr.io/devcontainers/features/python:1": {
-            "installTools": false
-        },
-        // Fetch git
-        "ghcr.io/devcontainers/features/git:1": {},
-        // Fetch kubectl helm minikube
-        "ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {},
-        // Fetch node
-        "ghcr.io/devcontainers/features/node:1": {},
-        // Fetch stable vcpkg
-        "ghcr.io/msclock/features/vcpkg:latest": {}
-    },
-    // Always run image-defined default command
-    // "overrideCommand": false,
-    // Configure tool-specific properties.
-    "customizations": {
-        "vscode": {
-            "settings": {
-                "[dockerfile]": {
-                    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-                },
-                "c-cpp-flylint.clang.enable": false,
-                "cmakeLanguageSupport.enableFileAPI": true,
-                "terminal.integrated.shellIntegration.history": 666,
-                "editor.renderWhitespace": "all",
-                "editor.foldingMaximumRegions": 65000,
-                "files.maxMemoryForLargeFilesMB": 12288,
-                "diffEditor.ignoreTrimWhitespace": false,
-                "editor.unicodeHighlight.ambiguousCharacters": false,
-                "security.workspace.trust.untrustedFiles": "open",
-                "workbench.productIconTheme": "fluent-icons",
-                "vsicons.dontShowNewVersionMessage": true,
-                "cmake.configureOnEdit": false,
-                "c-cpp-flylint.flawfinder.enable": false,
-                "c-cpp-flylint.flexelint.enable": false,
-                "c-cpp-flylint.lizard.enable": false,
-                "terminal.integrated.cursorStyle": "line",
-                "terminal.integrated.detectLocale": "on",
-                "CppHelper.SourceNotFoundBehavior": "Create source file",
-                "redhat.telemetry.enabled": true,
-                "explorer.confirmDelete": false,
-                "xml.symbols.maxItemsComputed": 50000000,
-                "git.ignoreLegacyWarning": true,
-                "git.autofetch": true,
-                "git.ignoreWindowsGit27Warning": true,
-                "doxdocgen.generic.useGitUserEmail": true,
-                "doxdocgen.generic.useGitUserName": true,
-                "git.enableSmartCommit": true,
-                "git.ignoreRebaseWarning": true,
-                "workbench.iconTheme": "vscode-icons",
-                "better-comments.highlightPlainText": true,
-                "better-comments.tags": [
-                    {
-                        "tag": "!",
-                        "color": "#FF2D00",
-                        "strikethrough": false,
-                        "backgroundColor": "transparent"
-                    },
-                    {
-                        "tag": "?",
-                        "color": "#3498DB",
-                        "strikethrough": false,
-                        "backgroundColor": "transparent"
-                    },
-                    {
-                        "tag": "//",
-                        "color": "#474747",
-                        "strikethrough": true,
-                        "backgroundColor": "transparent"
-                    },
-                    {
-                        "tag": "todo",
-                        "color": "#FF8C00",
-                        "strikethrough": false,
-                        "backgroundColor": "transparent"
-                    },
-                    {
-                        "tag": "*",
-                        "color": "#98C379",
-                        "strikethrough": false,
-                        "backgroundColor": "transparent"
-                    }
-                ],
-                "cmake.configureOnOpen": false,
-                "json.maxItemsComputed": 50000000000,
-                "editor.suggestSelection": "first",
-                "editor.largeFileOptimizations": false,
-                "editor.maxTokenizationLineLength": 2000000000,
-                "editor.wordWrap": "on",
-                "editor.formatOnSaveMode": "modifications",
-                "diffEditor.maxComputationTime": 0
-            },
-            "extensions": [
-                "mhutchie.git-graph",
-                "ms-azuretools.vscode-docker",
-                "p1c2u.docker-compose",
-                "mads-hartmann.bash-ide-vscode",
-                "njpwerner.autodocstring",
-                "kevinkyang.auto-comment-blocks",
-                "aaron-bond.better-comments",
-                "ms-vscode.cpptools",
-                "jbenden.c-cpp-flylint",
-                "birgersp.cpp-header-refactor",
-                "amiralizadeh9480.cpp-helper",
-                "wmaurer.change-case",
-                "xaver.clang-format",
-                "twxs.cmake",
-                "ms-vscode.cmake-tools",
-                "fredericbonnet.cmake-test-adapter",
-                "cheshirekow.cmake-format",
-                "moshfeu.compare-folders",
-                "wenpan.unicode2chinese",
-                "Guyutongxue.cpp-reference",
-                "bbenoist.Doxygen",
-                "cschlosser.doxdocgen",
-                "ypresto.vscode-intelli-refactor",
-                "VisualStudioExptTeam.vscodeintellicode",
-                "PKief.material-icon-theme",
-                "redhat.vscode-commons",
-                "foxundermoon.shell-format",
-                "timonwong.shellcheck",
-                "Remisa.shellman",
-                "albert.TabOut",
-                "ms-vscode.test-adapter-converter",
-                "hbenl.vscode-test-explorer",
-                "llvm-vs-code-extensions.vscode-clangd"
-            ]
-        }
-    },
-    // Use 'forwardPorts' to make a list of ports inside the container available locally.
-    // "forwardPorts": [],
-    // Comment out this line to run as root instead.
-    "remoteUser": "vscode",
-    // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "gcc -v"
+	"features": {
+		"ghcr.io/devcontainers/features/common-utils:2": {
+			"upgradePackages": false,
+			"username": "vscode",
+			"configureZshAsDefaultShell": true
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {},
+		"ghcr.io/devcontainers/features/python:1": {
+			"installTools": false
+		},
+		"ghcr.io/dhoeric/features/act:1": {},
+		"ghcr.io/msclock/features/vcpkg:1": {}
+	}
 }
