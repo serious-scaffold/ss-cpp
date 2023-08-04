@@ -28,8 +28,6 @@
     // https://github.com/devcontainers/features
     // Using features in vscode requires access github with uncomment the below
     "features": {
-        // Fetch Light-weight Desktop (desktop-lite)
-        "ghcr.io/devcontainers/features/desktop-lite:1": {},
         // add docker in docker
         "ghcr.io/devcontainers/features/docker-in-docker:2": {
             "dockerDashComposeVersion": "v2",
