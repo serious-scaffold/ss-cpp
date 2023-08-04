@@ -35,7 +35,8 @@ target_compile_definitions(
 
 target_include_directories(
   api-shared
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}> # export header
+  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${INSTALL_INCLUDEDIR}> # export
+                                                                      # header
          $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
          $<INSTALL_INTERFACE:${INSTALL_INCLUDEDIR}>)
 

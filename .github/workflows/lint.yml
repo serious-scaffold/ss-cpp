@@ -34,4 +34,3 @@ jobs:
         if: failure()
         with:
           commit_message: "ci: auto fixes from pre-commit"
-
