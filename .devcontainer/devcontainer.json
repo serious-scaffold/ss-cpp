@@ -3,11 +3,11 @@
 {
     "name": "C++",
     "image": "mcr.microsoft.com/devcontainers/base:jammy",
-    "runArgs": [
+    "capAdd": [
         // Enable ptrace-based debugging for C++
-        "--cap-add=SYS_PTRACE",
-        "--gpus=all",
-        "--security-opt",
+        "SYS_PTRACE"
+    ],
+    "securityOpt": [
         "seccomp=unconfined"
     ],
     // https://github.com/devcontainers/features
