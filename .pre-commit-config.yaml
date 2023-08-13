@@ -15,8 +15,6 @@
 fail_fast: false
 exclude: |
   (?x)(
-    ^(3rdParty/.*) |
-    ^.*\.drawio |
     noxfile.py
   )
 files: '' # set '' as default
@@ -24,31 +22,39 @@ files: '' # set '' as default
 repos:
   # Standard hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: "v4.3.0"
+    rev: v4.3.0
     hooks:
       - id: check-added-large-files
-        args: ['--maxkb=4096']
+        args: [--maxkb=4096]
       - id: check-case-conflict
       - id: check-docstring-first
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-toml
-      - id: check-yaml
       - id: debug-statements
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: requirements-txt-fixer
       - id: trailing-whitespace
 
+  # Check yaml
+  - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+    rev: v2.10.0
+    hooks:
+      - id: pretty-format-yaml
+        args:
+          - --autofix
+          - --offset=2
+
   # Changes tabs to spaces
   - repo: https://github.com/Lucas-C/pre-commit-hooks
-    rev: "v1.3.1"
+    rev: v1.3.1
     hooks:
       - id: remove-tabs
 
   # CMake formatting
   - repo: https://github.com/cheshirekow/cmake-format-precommit
-    rev: "v0.6.13"
+    rev: v0.6.13
     hooks:
       - id: cmake-format
         additional_dependencies: [pyyaml]
@@ -57,7 +63,7 @@ repos:
 
   # Check for spelling
   - repo: https://github.com/codespell-project/codespell
-    rev: "v2.2.1"
+    rev: v2.2.1
     hooks:
       - id: codespell
         args:
@@ -73,7 +79,7 @@ repos:
 
   # Clang format the codebase automatically
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: "v14.0.6"
+    rev: v14.0.6
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]

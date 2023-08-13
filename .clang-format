@@ -1,4 +1,5 @@
-﻿# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+---
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
 ---
 Language: Cpp
 # 访问说明符(public、protected、private)不偏移
@@ -96,7 +97,7 @@ BreakConstructorInitializers: BeforeColon
 BreakStringLiterals: true
 # 每行字符数限制
 ColumnLimit: 120
-CommentPragmas: "^ IWYU pragma:"
+CommentPragmas: '^ IWYU pragma:'
 # 不允许不同的命名空间定义在同一行
 CompactNamespaces: false
 # 构造函数初始化列表要么都在一行，要么每个变量一行
@@ -118,17 +119,17 @@ ForEachMacros:
   - BOOST_FOREACH
 IncludeBlocks: Preserve
 IncludeCategories:
-  - Regex: '^<ext/.*\.h>'
+  - Regex: ^<ext/.*\.h>
     Priority: 2
-  - Regex: "StdAfx.h"
+  - Regex: StdAfx.h
     Priority: -1
-  - Regex: '^<.*\.h>'
+  - Regex: ^<.*\.h>
     Priority: 1
-  - Regex: "^<.*"
+  - Regex: ^<.*
     Priority: 2
-  - Regex: ".*"
+  - Regex: .*
     Priority: 3
-IncludeIsMainRegex: "([-_](test|unittest))?$"
+IncludeIsMainRegex: ([-_](test|unittest))?$
 # switch 里的 case 需要缩进
 IndentCaseLabels: true
 # extern 里的代码块需要缩进
@@ -141,8 +142,8 @@ IndentWidth: 4
 IndentWrappedFunctionNames: false
 # 代码块开始处不要有空行
 KeepEmptyLinesAtTheStartOfBlocks: false
-MacroBlockBegin: ""
-MacroBlockEnd: ""
+MacroBlockBegin: ''
+MacroBlockEnd: ''
 # 不能有连续2个及以上的空行
 MaxEmptyLinesToKeep: 1
 # 命名空间内的内容不要缩进
@@ -165,9 +166,9 @@ RawStringFormats:
       - cpp
       - Cpp
       - CPP
-      - "c++"
-      - "C++"
-    CanonicalDelimiter: ""
+      - c++
+      - C++
+    CanonicalDelimiter: ''
     BasedOnStyle: google
   - Language: TextProto
     Delimiters:
@@ -183,7 +184,7 @@ RawStringFormats:
       - PARSE_TEXT_PROTO
       - ParseTextOrDie
       - ParseTextProtoOrDie
-    CanonicalDelimiter: ""
+    CanonicalDelimiter: ''
     BasedOnStyle: google
 # 允许对注释重新排版
 ReflowComments: true

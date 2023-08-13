@@ -3,7 +3,7 @@ name: pre-commit update
 on:
   # every midnight on the first day of every month
   schedule:
-    - cron: "0 0 1 * *"
+    - cron: 0 0 1 * *
   # on demand
   workflow_dispatch:
 
@@ -26,6 +26,6 @@ jobs:
         with:
           branch: update/pre-commit-hooks
           title: Update pre-commit hooks
-          commit-message: "ci: update pre-commit hooks"
+          commit-message: 'ci: update pre-commit hooks'
           body: Update available versions of pre-commit hooks to latest version.
           delete-branch: true
