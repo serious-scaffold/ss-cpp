@@ -2,7 +2,9 @@
 # CPP Project Blueprint
 
 ---
+
 ## Dev project features
+
 - Customizable container development environment(vscode dev container).
 - `Googletest` integration.
 - `Vcpkg` integration.
@@ -36,4 +38,4 @@ ctest --list-presets              # list all test presets
 ctest --preset=<preset>           # test the desired test preset
 ```
 
-todo : https://devblogs.microsoft.com/cppblog/using-multi-stage-containers-for-c-development/
+todo : <https://devblogs.microsoft.com/cppblog/using-multi-stage-containers-for-c-development/>
