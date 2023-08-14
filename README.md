@@ -1,8 +1,6 @@
 
 # CPP Project Blueprint
 
----
-
 ## Dev project features
 
 - Customizable container development environment(vscode dev container).
