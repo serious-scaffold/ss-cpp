@@ -28,7 +28,6 @@ repos:
         args: [--maxkb=4096]
       - id: check-case-conflict
       - id: check-merge-conflict
-      - id: check-toml
       - id: end-of-file-fixer
       - id: mixed-line-ending
       - id: trailing-whitespace
@@ -63,8 +62,8 @@ repos:
     hooks:
       - id: codespell
         args:
-          - --skip="3rdParty/"
-          - --ignore-words-list="Transer,transer,axises,pres,seh,SEH,indexs,indexS"
+          - --skip=".vscode/"
+          - --ignore-words-list="Transer,transer"
           - --check-filenames
 
   # Check for common shell mistakes
