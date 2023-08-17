@@ -1,8 +1,0 @@
-{
-    "default": true,
-    "MD024": false,
-    "line_length": false,
-    "no-hard-tabs": false,
-    "whitespace": false,
-    "html": false
-}
