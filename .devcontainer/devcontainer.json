@@ -10,6 +10,9 @@
     "securityOpt": [
         "seccomp=unconfined"
     ],
+    "containerEnv": {
+        "TZ": "Asia/Shanghai"
+    },
     // https://github.com/devcontainers/features
     // Using features in vscode requires access github with uncomment the below
     "features": {
