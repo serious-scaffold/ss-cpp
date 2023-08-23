@@ -11,20 +11,19 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
   doxygen_add_docs(
-    api_doxygen 
-      "${CMAKE_BINARY_DIR}/include"
-      "${PROJECT_SOURCE_DIR}/src/api/include"
+    api_doxygen "${CMAKE_BINARY_DIR}/include"
+    "${PROJECT_SOURCE_DIR}/src/api/include"
     COMMENT "gen doxygen style docs automatically")
 
   sphinx_add_docs(
     api_sphinx
     BREATHE_PROJECTS
-      api_doxygen
+    api_doxygen
     BUILDER
-      html
+    html
     # BREATH_DEBUG True
     CONF_FILE
-      ${PROJECT_SOURCE_DIR}/docs/conf.py.in
+    ${PROJECT_SOURCE_DIR}/docs/conf.py.in
     SOURCE_DIRECTORY
-      docs)
+    docs)
 endif()
