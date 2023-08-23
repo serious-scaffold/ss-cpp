@@ -1,7 +1,10 @@
 include(FindPackageHandleStandardArgs)
 
 macro(_Sphinx_find_executable _exe)
+  # Convert the executable name to uppercase
   string(TOUPPER "${_exe}" _uc)
+
+  # Find the Sphinx executable
   # sphinx-(build|quickstart)-3 x.x.x FIXME: This works on Fedora (and probably
   # most other UNIX like targets). Windows targets and PIP installs might need
   # some work.
@@ -9,6 +12,7 @@ macro(_Sphinx_find_executable _exe)
                NAMES "sphinx-${_exe}-3" "sphinx-${_exe}" "sphinx-${_exe}.exe")
 
   if(SPHINX_${_uc}_EXECUTABLE)
+    # Check the version of the Sphinx executable
     execute_process(
       COMMAND "${SPHINX_${_uc}_EXECUTABLE}" --version
       RESULT_VARIABLE _result
@@ -19,6 +23,7 @@ macro(_Sphinx_find_executable _exe)
     endif()
 
     if(NOT TARGET Sphinx::${_exe})
+      # Create an imported global target for the Sphinx executable
       add_executable(Sphinx::${_exe} IMPORTED GLOBAL)
       set_target_properties(
         Sphinx::${_exe} PROPERTIES IMPORTED_LOCATION
@@ -32,19 +37,28 @@ macro(_Sphinx_find_executable _exe)
 endmacro()
 
 macro(_Sphinx_find_module _name _module)
+  # Convert _name to uppercase
   string(TOUPPER "${_name}" _Sphinx_uc)
+
+  # Check if SPHINX_PYTHON_EXECUTABLE is available
   if(SPHINX_PYTHON_EXECUTABLE)
+    # Execute the Sphinx Python module with the version argument
     execute_process(
       COMMAND ${SPHINX_PYTHON_EXECUTABLE} -m ${_module} --version
       RESULT_VARIABLE _result
       OUTPUT_VARIABLE _output
       OUTPUT_STRIP_TRAILING_WHITESPACE ERROR_QUIET)
+
+    # If the execution is successful
     if(_result EQUAL 0)
+      # Extract the version number from the output
       if(_output MATCHES " v?([0-9]+\\.[0-9]+\\.[0-9]+)$")
         set(SPHINX_${_Sphinx_uc}_VERSION "${CMAKE_MATCH_1}")
       endif()
 
+      # If the Sphinx target is not already defined
       if(NOT TARGET Sphinx::${_name})
+        # Set the Sphinx executable and create an imported target
         set(SPHINX_${_Sphinx_uc}_EXECUTABLE
             "${SPHINX_PYTHON_EXECUTABLE} -m ${_module}")
         add_executable(Sphinx::${_name} IMPORTED GLOBAL)
@@ -52,24 +66,33 @@ macro(_Sphinx_find_module _name _module)
           Sphinx::${_name} PROPERTIES IMPORTED_LOCATION
                                       "${SPHINX_PYTHON_EXECUTABLE}")
       endif()
+
+      # Set the Sphinx arguments and mark the module as found
       set(Sphinx_${_name}_ARGS -m ${_module})
       set(Sphinx_${_name}_FOUND TRUE)
     else()
+      # If the execution is not successful, mark the module as not found
       set(Sphinx_${_name}_FOUND FALSE)
     endif()
   else()
+    # If SPHINX_PYTHON_EXECUTABLE is not available, mark the module as not found
     set(Sphinx_${_name}_FOUND FALSE)
   endif()
+
   unset(_Sphinx_uc)
 endmacro()
 
 macro(_Sphinx_find_extension _ext)
+  # Check if the Sphinx Python executable is available
   if(SPHINX_PYTHON_EXECUTABLE)
+    # Use the Sphinx Python executable to import the extension module
     execute_process(COMMAND ${SPHINX_PYTHON_EXECUTABLE} -c "import ${_ext}"
                     RESULT_VARIABLE _result)
+    # If the import is successful, set the extension as found
     if(_result EQUAL 0)
       set(Sphinx_${_ext}_FOUND TRUE)
     else()
+      # If the import fails, set the extension as not found
       set(Sphinx_${_ext}_FOUND FALSE)
     endif()
   endif()
@@ -178,7 +201,7 @@ find_package_handle_standard_args(
 # sphinx-quickstart allows for quiet operation and a lot of settings can be
 # specified as command line arguments, therefore its not required to parse the
 # generated conf.py.
-function(_Sphinx_generate_confpy _target _cachedir)
+function(_sphinx_generate_conf_py _target _cachedir)
   if(NOT TARGET Sphinx::quickstart)
     message(FATAL_ERROR "sphinx-quickstart is not available, needed by"
                         "sphinx_add_docs for target ${_target}")
@@ -283,6 +306,7 @@ function(_Sphinx_generate_confpy _target _cachedir)
 endfunction()
 
 function(sphinx_add_docs _target)
+  # Set options
   set(_opts)
   set(_single_opts BUILDER OUTPUT_DIRECTORY SOURCE_DIRECTORY CONF_FILE
                    BREATH_DEBUG)
@@ -292,23 +316,27 @@ function(sphinx_add_docs _target)
 
   unset(SPHINX_BREATHE_PROJECTS)
 
+  # Check if required arguments are provided
   if(NOT _args_BUILDER)
     message(FATAL_ERROR "Sphinx builder not specified for target ${_target}")
   elseif(NOT _args_SOURCE_DIRECTORY)
     message(
       FATAL_ERROR "Sphinx source directory not specified for target ${_target}")
   else()
+    # Check if source directory is absolute or relative
     if(NOT IS_ABSOLUTE "${_args_SOURCE_DIRECTORY}")
       get_filename_component(_sourcedir "${_args_SOURCE_DIRECTORY}" ABSOLUTE)
     else()
       set(_sourcedir "${_args_SOURCE_DIRECTORY}")
     endif()
+    # Check if source directory exists
     if(NOT IS_DIRECTORY "${_sourcedir}")
       message(FATAL_ERROR "Sphinx source directory '${_sourcedir}' for"
                           "target ${_target} does not exist")
     endif()
   endif()
 
+  # Set builder and output directory
   set(_builder "${_args_BUILDER}")
   if(_args_OUTPUT_DIRECTORY)
     set(_outputdir "${_args_OUTPUT_DIRECTORY}")
@@ -316,21 +344,25 @@ function(sphinx_add_docs _target)
     set(_outputdir "${CMAKE_CURRENT_BINARY_DIR}/${_target}")
   endif()
 
+  # Check if breathe projects are specified
   if(_args_BREATHE_PROJECTS)
     if(NOT Sphinx_breathe_FOUND)
       message(FATAL_ERROR "Sphinx extension 'breathe' is not available. Needed"
                           "by sphinx_add_docs for target ${_target}")
     endif()
+    # Add 'breathe' extension to SPHINX_EXTENSIONS
     list(APPEND SPHINX_EXTENSIONS breathe)
 
+    # Iterate through each breathe project
     foreach(_doxygen_target ${_args_BREATHE_PROJECTS})
       if(TARGET ${_doxygen_target})
         list(APPEND _depends ${_doxygen_target})
 
-        # Doxygen targets are supported. Verify that a Doxyfile exists.
+        # Check if Doxyfile exists for the doxygen target
         get_target_property(_dir ${_doxygen_target} BINARY_DIR)
-
         set(_doxyfile "${_dir}/Doxyfile.${_doxygen_target}")
+
+        # Verify the existence of Doxyfile
         if(NOT EXISTS "${_doxyfile}")
           message(
             FATAL_ERROR
@@ -347,6 +379,7 @@ function(sphinx_add_docs _target)
               "Doxygen target ${_doxygen_target} does not"
               "generate XML, needed by sphinx_add_docs for" "target ${_target}")
         elseif(_contents MATCHES "OUTPUT_DIRECTORY *= *([^ ][^\n]*)")
+          # Retrieve the output directory from Doxyfile
           string(STRIP "${CMAKE_MATCH_1}" _dir)
           set(_name "${_doxygen_target}")
           set(_dir "${_dir}/xml")
@@ -362,6 +395,7 @@ function(sphinx_add_docs _target)
         string(STRIP "${CMAKE_MATCH_2}" _dir)
       endif()
 
+      # Add breathe project to the list
       if(_name AND _dir)
         if(_breathe_projects)
           set(_breathe_projects
@@ -369,6 +403,8 @@ function(sphinx_add_docs _target)
         else()
           set(_breathe_projects "\"${_name}\": \"${_dir}\"")
         endif()
+
+        # Set the first breathe project as the default project
         if(NOT _breathe_default_project)
           set(_breathe_default_project "${_name}")
         endif()
@@ -376,23 +412,35 @@ function(sphinx_add_docs _target)
     endforeach()
   endif()
 
+  # Set BREATH_DEBUG based on the value of _args_BREATH_DEBUG
   if(_args_BREATH_DEBUG)
     set(BREATH_DEBUG ${_args_BREATH_DEBUG})
   else()
     set(BREATH_DEBUG False)
   endif()
 
+  # Set the path for the cache directory
   set(_cachedir "${CMAKE_CURRENT_BINARY_DIR}/${_target}.cache")
   file(MAKE_DIRECTORY "${_cachedir}")
+
+  # Check if _args_CONF_FILE exists and configure the project accordingly
   if(_args_CONF_FILE AND EXISTS ${_args_CONF_FILE})
+    # Set BREATHE_DEFAULT_PROJECT and BREATHE_PROJECTS
     set(BREATHE_DEFAULT_PROJECT ${_breathe_default_project})
     set(BREATHE_PROJECTS ${_breathe_projects})
+
+    # Copy the _args_CONF_FILE to the cache directory and copy all docs files to the cache directory
     configure_file(${_args_CONF_FILE} ${_cachedir}/conf.py)
     file(GLOB all_docs_files ${_sourcedir}/*)
     file(COPY ${all_docs_files} DESTINATION ${_cachedir})
   else()
+    # Create the _static directory in the cache directory
     file(MAKE_DIRECTORY "${_cachedir}/_static")
-    _sphinx_generate_confpy(${_target} "${_cachedir}")
+
+    # Generate the conf.py file using _sphinx_generate_conf_py function
+    _sphinx_generate_conf_py(${_target} "${_cachedir}")
+
+    # Append breathe_projects and breathe_default_project to conf.py if _breathe_projects is set
     if(_breathe_projects)
       file(APPEND "${_cachedir}/conf.py"
            "\nbreathe_projects = { ${_breathe_projects} }"
@@ -402,7 +450,10 @@ function(sphinx_add_docs _target)
     endif()
   endif()
 
+  # Replace spaces with semicolons in SPHINX_BUILD_EXECUTABLE
   string(REPLACE " " ";" _Sphinx_executable ${SPHINX_BUILD_EXECUTABLE})
+
+  # Add a custom target with the specified dependencies
   add_custom_target(
     ${_target} ALL
     COMMAND ${_Sphinx_executable} -b ${_builder} -c "${_cachedir}"
