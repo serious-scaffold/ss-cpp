@@ -4,10 +4,9 @@ macro(_Sphinx_find_executable _exe)
   # Convert the executable name to uppercase
   string(TOUPPER "${_exe}" _uc)
 
-  # Find the Sphinx executable
-  # sphinx-(build|quickstart)-3 x.x.x FIXME: This works on Fedora (and probably
-  # most other UNIX like targets). Windows targets and PIP installs might need
-  # some work.
+  # Find the Sphinx executable sphinx-(build|quickstart)-3 x.x.x FIXME: This
+  # works on Fedora (and probably most other UNIX like targets). Windows targets
+  # and PIP installs might need some work.
   find_program(SPHINX_${_uc}_EXECUTABLE
                NAMES "sphinx-${_exe}-3" "sphinx-${_exe}" "sphinx-${_exe}.exe")
 
@@ -429,7 +428,8 @@ function(sphinx_add_docs _target)
     set(BREATHE_DEFAULT_PROJECT ${_breathe_default_project})
     set(BREATHE_PROJECTS ${_breathe_projects})
 
-    # Copy the _args_CONF_FILE to the cache directory and copy all docs files to the cache directory
+    # Copy the _args_CONF_FILE to the cache directory and copy all docs files to
+    # the cache directory
     configure_file(${_args_CONF_FILE} ${_cachedir}/conf.py)
     file(GLOB all_docs_files ${_sourcedir}/*)
     file(COPY ${all_docs_files} DESTINATION ${_cachedir})
@@ -440,7 +440,8 @@ function(sphinx_add_docs _target)
     # Generate the conf.py file using _sphinx_generate_conf_py function
     _sphinx_generate_conf_py(${_target} "${_cachedir}")
 
-    # Append breathe_projects and breathe_default_project to conf.py if _breathe_projects is set
+    # Append breathe_projects and breathe_default_project to conf.py if
+    # _breathe_projects is set
     if(_breathe_projects)
       file(APPEND "${_cachedir}/conf.py"
            "\nbreathe_projects = { ${_breathe_projects} }"
