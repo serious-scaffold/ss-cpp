@@ -23,7 +23,7 @@ if(DOXYGEN_FOUND)
     html
     # BREATH_DEBUG True
     CONF_FILE
-    ${PROJECT_SOURCE_DIR}/docs/conf.py.in
+    ${PROJECT_SOURCE_DIR}/docs/conf.py
     SOURCE_DIRECTORY
     docs)
 endif()

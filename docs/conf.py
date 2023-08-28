@@ -66,10 +66,3 @@ html_theme = "furo"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
-# -- breath configuration ---------------------------------------------------
-
-breathe_default_project = '${BREATHE_DEFAULT_PROJECT}'
-breathe_projects ={ ${BREATHE_PROJECTS} }
-
-breathe_debug_trace_directives = ${BREATH_DEBUG}
