@@ -128,6 +128,5 @@ add_subdirectory(src)
 
 # tests
 include(CTest)
-# include(Dart)
 enable_testing()
 add_subdirectory(tests)
