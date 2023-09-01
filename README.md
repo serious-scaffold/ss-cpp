@@ -1,5 +1,5 @@
 
-# CPP Project Blueprint
+# CPP Project Templates
 
 ## Dev project features
 
