@@ -15,7 +15,7 @@
 fail_fast: false
 exclude: |
   (?x)(
-    noxfile.py
+    ^(.vscode/.*)
   )
 files: '' # set '' as default
 
@@ -62,8 +62,7 @@ repos:
     hooks:
       - id: codespell
         args:
-          - --skip=".vscode/"
-          - --ignore-words-list="Transer,transer"
+          - -L=lang
           - --check-filenames
 
   # Check for common shell mistakes
