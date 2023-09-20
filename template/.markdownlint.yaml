@@ -1,0 +1,10 @@
+default: true
+
+# Multiple headings with the same content
+MD024: false
+# First line in a file should be a top-level heading
+MD041: false
+line_length: false
+no-hard-tabs: false
+whitespace: false
+html: false

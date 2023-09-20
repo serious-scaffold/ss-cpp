@@ -1,0 +1,31 @@
+# Auto-update pre-commit
+name: pre-commit update
+on:
+  # every midnight on the first day of every month
+  schedule:
+    - cron: 0 0 1 * *
+  # on demand
+  workflow_dispatch:
+
+jobs:
+  auto-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+
+      - name: Update pre-commit hooks
+        uses: browniebroke/pre-commit-autoupdate-action@main
+
+      - name: Create pull request on pre-commit updates
+        uses: peter-evans/create-pull-request@v3
+        if: ${{ always() }}
+        with:
+          branch: update/pre-commit-hooks
+          title: Update pre-commit hooks
+          commit-message: 'ci: update pre-commit hooks'
+          body: Update available versions of pre-commit hooks to latest version.
+          delete-branch: true
