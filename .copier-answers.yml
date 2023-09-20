@@ -1,0 +1,17 @@
+_commit: 12b9114
+_src_path: .
+author_email: 'msclock@126.com
+
+    '
+author_name: msclock
+copyright_holder: msclock
+copyright_license: MIT License
+copyright_year: 2022-2023
+create_devcontainer: true
+docs_type: sphinx
+organization_name: msclock
+project_description: A development-focused Cpp project template.
+project_name: Cpp Scaffold
+repo_host_type: github.com
+repo_name: cpp-scaffold
+repo_namespace: msclock

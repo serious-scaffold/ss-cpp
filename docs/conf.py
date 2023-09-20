@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'cppblueprint'
-copyright = '2023, Msclock'
-author = 'Msclock'
+project = 'Cpp Scaffold'
+copyright = '2022-2023 msclock'
+author = 'msclock'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0.0'
@@ -31,10 +31,14 @@ release = '1.0.0'
 # ones.
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
+    'myst_parser',
     'breathe',
     'sphinx_copybutton',
 ]
-
+source_suffix = {
+    ".rst": "restructuredtext",
+    ".md": "markdown",
+}
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

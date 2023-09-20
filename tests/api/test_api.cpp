@@ -10,12 +10,12 @@
 //     return RUN_ALL_TESTS();
 // }
 
-TEST(app_api_info, version) {
+TEST(api_test, version) {
     const auto version = api::info::version_api();
     GTEST_ASSERT_EQ("1.0.0", version);
 }
 
-TEST(app_api_info, distribution) {
+TEST(api_test, distribution) {
     const auto is_debug = api::info::is_debug();
 #ifdef _DEBUG
     GTEST_ASSERT_TRUE(is_debug);
@@ -24,7 +24,7 @@ TEST(app_api_info, distribution) {
 #endif
 }
 
-TEST(app_api, create_rect) {
+TEST(api_test, create_rect) {
     const auto drawable = api::geo::CreateRectangleAsDrawable(100, 100);
     GTEST_ASSERT_EQ("shape = {Rectangle: width = 100, height = 100}, area = 10000",
                     api::geo::PrintDrawableToString(drawable));

@@ -24,7 +24,7 @@ set(VCPKG_VERBOSE
 
 # Project settings
 project(
-  cppblueprint
+  cpp-scaffold
   LANGUAGES CXX # enable language check for cxx
   VERSION 1.0.0)
 
@@ -107,7 +107,6 @@ include(Runpath)
 
 # Package dependencies using find_package
 find_package(proxy CONFIG REQUIRED)
-find_package(fmt CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
 
 # dynamic path specify the 3rd party short deps path depends on os-platform

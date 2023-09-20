@@ -1,0 +1,35 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
+{
+  "name": "{{ repo_name }}",
+  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "capAdd": [
+    // Enable ptrace-based debugging for C++
+    "SYS_PTRACE"
+  ],
+  "securityOpt": [
+    "seccomp=unconfined"
+  ],
+  "containerEnv": {
+    "TZ": "Asia/Shanghai"
+  },
+  // https://github.com/devcontainers/features
+  // Using features in vscode requires access github with uncomment the below
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+    "ghcr.io/devcontainers/features/python:1": {
+      "installTools": false
+    },
+    "ghcr.io/dhoeric/features/act:1": {},
+    "ghcr.io/msclock/features/vcpkg:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "username": "vscode"
+    }
+  },
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": {
+    "git-completions": "echo 'source /usr/share/bash-completion/completions/git' >> ~/.bashrc"
+  },
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+  "remoteUser": "vscode"
+}
