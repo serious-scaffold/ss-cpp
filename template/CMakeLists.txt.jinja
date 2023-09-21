@@ -1,16 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
-# Error if building out of a build directory
-file(TO_CMAKE_PATH "${PROJECT_BINARY_DIR}/CMakeLists.txt" LOC_PATH)
-if(EXISTS "${LOC_PATH}")
-  message(
-    FATAL_ERROR
-      "You cannot build in a source directory (or any directory with "
-      "CMakeLists.txt file). Please make a build subdirectory. Feel free to "
-      "remove CMakeCache.txt and CMakeFiles.")
-endif()
-
 # Vcpkg build environment
 message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
 set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
@@ -48,38 +38,15 @@ message(STATUS "VCPKG_TARGET_IS_MINGW ${VCPKG_TARGET_IS_MINGW}")
 
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
-# GNU install standard
-include(GNUInstallDirs)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
-
-set(INSTALL_LIBDIR
-    ${CMAKE_INSTALL_LIBDIR}
-    CACHE PATH "Installation directory for libraries")
-set(INSTALL_BINDIR
-    ${CMAKE_INSTALL_BINDIR}
-    CACHE PATH "Installation directory for executables")
-set(INSTALL_INCLUDEDIR
-    ${CMAKE_INSTALL_INCLUDEDIR}
-    CACHE PATH "Installation directory for header files")
-
-set(DEF_INSTALL_CMAKEDIR share/${PROJECT_NAME})
-set(INSTALL_CMAKEDIR
-    ${DEF_INSTALL_CMAKEDIR}
-    CACHE PATH "Installation directory for CMake files")
-
-# Debug configuration
-if(CMAKE_BUILD_TYPE STREQUAL Debug)
-  add_definitions(-D_DEBUG)
-endif()
-
 # CMake module tools import custom cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+include(CheckBuildDirectory)
+include(ConfigGNUInstallDirs)
 include(DefineDefaults)
 include(OSInstall)
 include(PreCommit)
+include(ConfigDebug)
 include(ConfigCcache)
 include(ConfigIPO)
 include(ConfigDocs)
