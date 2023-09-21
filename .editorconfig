@@ -13,5 +13,11 @@ trim_trailing_whitespace = true
 [*.{yml,yaml,json,toml,jinja,css}]
 indent_size = 2
 
+[CMakeLists.txt]
+indent_size = 2
+
+[*.{cmake}]
+indent_size = 2
+
 [Makefile]
 indent_style = tab
