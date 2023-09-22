@@ -52,9 +52,11 @@ function(install_local_dependencies)
     set(arg_DESTINATION "\${CMAKE_INSTALL_PREFIX}/${arg_DESTINATION}")
   endif()
 
-  list(APPEND arg_POST_INCLUDE_REGEXES "")
   list(APPEND arg_PRE_EXCLUDE_REGEXES "")
   list(APPEND arg_POST_EXCLUDE_REGEXES "")
+  if(CMAKE_BUILD_TYPE STREQUAL Debug)
+    list(APPEND arg_POST_INCLUDE_REGEXES ".*d.dll")
+  endif()
   if(CMAKE_HOST_SYSTEM_NAME STREQUAL "Windows")
     list(
       APPEND
