@@ -120,3 +120,8 @@ docs_type:
     Sphinx: sphinx
   help: 'Choose the type of documentation to generate:'
   type: str
+
+config_cdash:
+  default: false
+  help: 'Whether to create a CDash configuration:'
+  type: bool
