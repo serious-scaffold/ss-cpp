@@ -148,9 +148,8 @@ function(install_local_dependencies)
               ${arg_POST_EXCLUDE_REGEXES}
             POST_INCLUDE_REGEXES
               ${arg_POST_INCLUDE_REGEXES})
-          message(STATUS "_r_deps: ${_r_deps}")
-          message(STATUS "_u_deps: ${_u_deps}")
-          message(STATUS "_c_deps: ${_c_deps_FILENAMES}")
+
+          message(STATUS "Resolved dependencies: ${_r_deps}")
           foreach(_file ${_r_deps})
             file(
               INSTALL
@@ -158,21 +157,27 @@ function(install_local_dependencies)
               TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
           endforeach()
 
-          list(LENGTH _u_deps _u_length)
-          if("${_u_length}" GREATER 0)
-            message(WARNING "Unresolved dependencies detected:${_u_deps}")
+          if(_u_deps)
+            message(STATUS "Unresolved dependencies: ${_u_deps}")
+            list(LENGTH _u_deps _u_length)
+            if("${_u_length}" GREATER 0)
+              message(WARNING "Unresolved dependencies detected:${_u_deps}")
+            endif()
           endif()
 
-          foreach(_filename ${_c_deps_FILENAMES})
-            set(_c_file_list ${_c_deps_${_filename}})
-            message(STATUS "conflict ${_filename} list ${_c_file_list}")
-            foreach(_file ${_c_file_list})
-              file(
-                INSTALL
-                DESTINATION "${arg_DESTINATION}"
-                TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
+          if(_c_deps)
+            message(STATUS "Conflict dependencies: ${_c_deps_FILENAMES}")
+            foreach(_filename ${_c_deps_FILENAMES})
+              set(_c_file_list ${_c_deps_${_filename}})
+              message(STATUS "conflict ${_filename} list ${_c_file_list}")
+              foreach(_file ${_c_file_list})
+                file(
+                  INSTALL
+                  DESTINATION "${arg_DESTINATION}"
+                  TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
+              endforeach()
             endforeach()
-          endforeach()
+          endif()
       ]])
     endif()
   endforeach()
