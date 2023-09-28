@@ -121,58 +121,58 @@ function(install_local_dependencies)
       install(CODE "set(target \"$<TARGET_FILE:${target}>\")")
       install(
         CODE [[
-            set(library_target "")
-            set(executable_target "")
-            if(target_type STREQUAL "SHARED_LIBRARY")
+          set(library_target "")
+          set(executable_target "")
+          if(target_type STREQUAL "SHARED_LIBRARY")
             set(library_target ${target})
-            elseif(target_type STREQUAL "EXECUTABLE")
+          elseif(target_type STREQUAL "EXECUTABLE")
             set(executable_target ${target})
-            endif()
+          endif()
+          file(
+            GET_RUNTIME_DEPENDENCIES
+            EXECUTABLES
+              ${executable_target}
+            LIBRARIES
+              ${library_target}
+            RESOLVED_DEPENDENCIES_VAR
+              _r_deps
+            UNRESOLVED_DEPENDENCIES_VAR
+              _u_deps
+            CONFLICTING_DEPENDENCIES_PREFIX
+              _c_deps
+            DIRECTORIES
+              ${arg_DIRECTORIES}
+            PRE_EXCLUDE_REGEXES
+              ${arg_PRE_EXCLUDE_REGEXES}
+            POST_EXCLUDE_REGEXES
+              ${arg_POST_EXCLUDE_REGEXES}
+            POST_INCLUDE_REGEXES
+              ${arg_POST_INCLUDE_REGEXES})
+          message(STATUS "_r_deps: ${_r_deps}")
+          message(STATUS "_u_deps: ${_u_deps}")
+          message(STATUS "_c_deps: ${_c_deps_FILENAMES}")
+          foreach(_file ${_r_deps})
             file(
-                GET_RUNTIME_DEPENDENCIES
-                EXECUTABLES
-                ${executable_target}
-                LIBRARIES
-                ${library_target}
-                RESOLVED_DEPENDENCIES_VAR
-                _r_deps
-                UNRESOLVED_DEPENDENCIES_VAR
-                _u_deps
-                CONFLICTING_DEPENDENCIES_PREFIX
-                _c_deps
-                DIRECTORIES
-                ${arg_DIRECTORIES}
-                PRE_EXCLUDE_REGEXES
-                ${arg_PRE_EXCLUDE_REGEXES}
-                POST_EXCLUDE_REGEXES
-                ${arg_POST_EXCLUDE_REGEXES}
-                POST_INCLUDE_REGEXES
-                ${arg_POST_INCLUDE_REGEXES})
-            message(STATUS "_r_deps: ${_r_deps}")
-            message(STATUS "_u_deps: ${_u_deps}")
-            message(STATUS "_c_deps: ${_c_deps_FILENAMES}")
-            foreach(_file ${_r_deps})
-                file(
-                    INSTALL
-                    DESTINATION "${arg_DESTINATION}"
-                    TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
-            endforeach()
+              INSTALL
+              DESTINATION "${arg_DESTINATION}"
+              TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
+          endforeach()
 
-            list(LENGTH _u_deps _u_length)
-            if("${_u_length}" GREATER 0)
-                message(WARNING "Unresolved dependencies detected:${_u_deps}")
-            endif()
+          list(LENGTH _u_deps _u_length)
+          if("${_u_length}" GREATER 0)
+            message(WARNING "Unresolved dependencies detected:${_u_deps}")
+          endif()
 
-            foreach(_filename ${_c_deps_FILENAMES})
-                set(_c_file_list ${_c_deps_${_filename}})
-                message(STATUS "conflict ${_filename} list ${_c_file_list}")
-                foreach(_file ${_c_file_list})
-                    file(
-                        INSTALL
-                        DESTINATION "${arg_DESTINATION}"
-                        TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
-                endforeach()
+          foreach(_filename ${_c_deps_FILENAMES})
+            set(_c_file_list ${_c_deps_${_filename}})
+            message(STATUS "conflict ${_filename} list ${_c_file_list}")
+            foreach(_file ${_c_file_list})
+              file(
+                INSTALL
+                DESTINATION "${arg_DESTINATION}"
+                TYPE SHARED_LIBRARY FOLLOW_SYMLINK_CHAIN FILES "${_file}")
             endforeach()
+          endforeach()
       ]])
     endif()
   endforeach()
