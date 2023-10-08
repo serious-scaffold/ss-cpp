@@ -2,8 +2,13 @@ cmake_minimum_required(VERSION 3.20)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
 # Vcpkg build environment
-message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
-set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
+if(DEFINED ENV{VCPKG_ROOT})
+  message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
+  set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
+else()
+  message(
+    FATAL_ERROR "Missing VCPKG_ROOT, please check the existence of VCPKG_ROOT")
+endif()
 
 # set cmake tool chain
 set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
