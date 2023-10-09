@@ -82,7 +82,7 @@
 option(
   CODE_COVERAGE
   "Builds targets with code coverage instrumentation. (Requires GCC or Clang)"
-  OFF)
+  ON)
 
 # Programs
 find_program(LLVM_COV_PATH llvm-cov)
@@ -103,8 +103,8 @@ if(CODE_COVERAGE AND NOT CODE_COVERAGE_ADDED)
   set(CODE_COVERAGE_ADDED ON)
 
   # Enable ctest *Coverage, such as ctest -T Experimental[Coverage]
-  if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-     OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+  if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]] OR CMAKE_CXX_COMPILER_ID
+                                                      MATCHES [[(Apple)?Clang]])
     set(COVERAGE_COMMAND
         "${LLVM_COV_PATH}"
         CACHE STRING "LLVM coverage tool for gcov")
@@ -124,8 +124,8 @@ if(CODE_COVERAGE AND NOT CODE_COVERAGE_ADDED)
   file(MAKE_DIRECTORY ${CMAKE_COVERAGE_OUTPUT_DIRECTORY})
   message(STATUS "CMAKE_C_COMPILER_ID:${CMAKE_C_COMPILER_ID}")
   message(STATUS "CMAKE_CXX_COMPILER_ID:${CMAKE_CXX_COMPILER_ID}")
-  if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-     OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+  if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]] OR CMAKE_CXX_COMPILER_ID
+                                                      MATCHES [[(Apple)?Clang]])
     # Messages
     message(STATUS "Building with llvm Code Coverage Tools")
 
@@ -246,12 +246,11 @@ endif()
 # ~~~
 function(target_code_coverage TARGET_NAME)
   # Argument parsing
-  set(options AUTO ALL EXTERNAL PUBLIC INTERFACE PLAIN)
-  set(single_value_keywords COVERAGE_TARGET_NAME)
-  set(multi_value_keywords EXCLUDE OBJECTS ARGS)
-  cmake_parse_arguments(
-    target_code_coverage "${options}" "${single_value_keywords}"
-    "${multi_value_keywords}" ${ARGN})
+  set(_opts AUTO ALL EXTERNAL PUBLIC INTERFACE PLAIN)
+  set(_single_opts COVERAGE_TARGET_NAME)
+  set(_multi_opts EXCLUDE OBJECTS ARGS)
+  cmake_parse_arguments(target_code_coverage "${_opts}" "${_single_opts}"
+                        "${_multi_opts}" ${ARGN})
 
   # Set the visibility of target functions to PUBLIC, INTERFACE or default to
   # PRIVATE.
@@ -277,8 +276,8 @@ function(target_code_coverage TARGET_NAME)
   if(CODE_COVERAGE)
 
     # Add code coverage instrumentation to the target's linker command
-    if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-       OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+    if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]]
+       OR CMAKE_CXX_COMPILER_ID MATCHES [[(Apple)?Clang]])
       target_compile_options(${TARGET_NAME} ${TARGET_VISIBILITY} --coverage
                              -fprofile-instr-generate -fcoverage-mapping)
       target_link_options(
@@ -297,8 +296,8 @@ function(target_code_coverage TARGET_NAME)
 
     # Add shared library to processing for 'all' targets
     if(target_type STREQUAL "SHARED_LIBRARY" AND target_code_coverage_ALL)
-      if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-         OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+      if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]]
+         OR CMAKE_CXX_COMPILER_ID MATCHES [[(Apple)?Clang]])
         add_custom_target(
           ccov-run-${target_code_coverage_COVERAGE_TARGET_NAME}
           COMMAND
@@ -320,8 +319,8 @@ function(target_code_coverage TARGET_NAME)
 
     # For executables add targets to run and produce output
     if(target_type STREQUAL "EXECUTABLE")
-      if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-         OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+      if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]]
+         OR CMAKE_CXX_COMPILER_ID MATCHES [[(Apple)?Clang]])
 
         # If there are shared objects to also work with, generate the string to
         # add them here
@@ -528,8 +527,8 @@ endfunction()
 # use `target_code_coverage`.
 function(add_code_coverage)
   if(CODE_COVERAGE)
-    if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-       OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+    if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]]
+       OR CMAKE_CXX_COMPILER_ID MATCHES [[(Apple)?Clang]])
       add_compile_options(-fprofile-instr-generate -fcoverage-mapping)
       add_link_options(-fprofile-instr-generate -fcoverage-mapping)
     elseif(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES
@@ -549,17 +548,19 @@ endfunction()
 # use with coverage dashboards (e.g. codecov.io, coveralls).
 # ~~~
 # Optional:
+# HTML_OUTPUT_DIRECTORY - Copy HTML coverage to ${HTML_OUPTUT_DIRECTORY}. Original HTML output is ${CMAKE_BINARY_DIR}/ccov/all-merged.
 # EXCLUDE <PATTERNS> - Excludes files of the patterns provided from coverage. Note that GCC/lcov excludes by glob pattern, and clang/LLVM excludes via regex!
 # ~~~
 function(add_code_coverage_all_targets)
   # Argument parsing
-  set(multi_value_keywords EXCLUDE)
-  cmake_parse_arguments(add_code_coverage_all_targets "" ""
-                        "${multi_value_keywords}" ${ARGN})
+  set(_single_opts HTML_OUTPUT_DIRECTORY)
+  set(_multi_opts EXCLUDE)
+  cmake_parse_arguments(add_code_coverage_all_targets "" "${_single_opts}"
+                        "${_multi_opts}" ${ARGN})
 
   if(CODE_COVERAGE)
-    if(CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-       OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+    if(CMAKE_C_COMPILER_ID MATCHES [[(Apple)?Clang]]
+       OR CMAKE_CXX_COMPILER_ID MATCHES [[(Apple)?Clang]])
 
       # Merge the profile data for all of the run executables
       if(WIN32)
@@ -704,7 +705,19 @@ function(add_code_coverage_all_targets)
         COMMENT
           "Open ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/all-merged/index.html in your browser to view the coverage report."
       )
-    endif(NOT MSVC)
 
+      if(add_code_coverage_all_targets_HTML_OUTPUT_DIRECTORY)
+        add_custom_command(
+          TARGET ccov-all
+          POST_BUILD
+          COMMAND
+            ${CMAKE_COMMAND} -E copy_directory
+            ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/all-merged
+            ${add_code_coverage_all_targets_HTML_OUTPUT_DIRECTORY}
+          COMMENT
+            "Copy coverage html to output directory ${add_code_coverage_all_targets_HTML_OUTPUT_DIRECTORY} from ${CMAKE_COVERAGE_OUTPUT_DIRECTORY}/all-merged"
+        )
+      endif()
+    endif(NOT MSVC)
   endif()
 endfunction()

@@ -69,7 +69,14 @@ include(ConfigSanitizers)
 
 # Coverage
 include(CodeCoverage)
-add_code_coverage_all_targets(EXCLUDE ${CMAKE_BINARY_DIR}/* /usr/include/*)
+add_code_coverage_all_targets(
+  HTML_OUTPUT_DIRECTORY
+  ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage
+  EXCLUDE
+  ${VCPKG_INSTALLED_DIR}
+  ${CMAKE_BINARY_DIR}/*
+  /usr/include/*
+  tests/*)
 
 # Fetch deps
 include(ConfigFetchDeps)

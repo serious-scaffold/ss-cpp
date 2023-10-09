@@ -5,6 +5,7 @@
 Overview <self>
 cmake_workflow
 api
+coverage/index
 ```
 
 ```{include} ../README.md

@@ -1,4 +1,5 @@
-# Build the target by issuing: cmake --build . --target api_sphinx
+# Build the target by issuing: cmake --build . --target
+# ${CMAKE_PROJECT_NAME}_docs
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")
 
 include(ConfigDoxygen)
@@ -16,7 +17,7 @@ if(DOXYGEN_FOUND)
     COMMENT "gen doxygen style docs automatically")
 
   sphinx_add_docs(
-    api_sphinx
+    ${CMAKE_PROJECT_NAME}_docs
     BREATHE_PROJECTS
     api_doxygen
     BUILDER
@@ -25,5 +26,7 @@ if(DOXYGEN_FOUND)
     CONF_FILE
     ${PROJECT_SOURCE_DIR}/docs/conf.py
     SOURCE_DIRECTORY
-    docs)
+    docs
+    OUTPUT_DIRECTORY
+    ${CMAKE_PROJECT_NAME}_docs)
 endif()
