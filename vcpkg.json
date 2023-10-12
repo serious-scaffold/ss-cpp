@@ -1,9 +1,26 @@
 {
-    "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-    "name": "cpp-scaffold",
-    "version": "1.0.0",
-    "dependencies": [
-        "abseil",
-        "proxy"
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "cpp-scaffold",
+  "version": "1.0.0",
+  "builtin-baseline": "cc97b4536ae749ec0e4f643488b600b217540fb3",
+  "dependencies": [
+    "abseil",
+    "proxy",
+    "cmake-modules",
+    "cmake-cpm"
+  ],
+  "vcpkg-configuration": {
+    "registries": [
+      {
+        "kind": "git",
+        "baseline": "eff8ff63e01f3210af5c096c4b17c9a88832ebf1",
+        "repository": "https://github.com/msclock/cmake-registry",
+        "packages": [
+          "cmake-cpm",
+          "cmake-modules",
+          "vcpkg-cmake-module"
+        ]
+      }
     ]
+  }
 }

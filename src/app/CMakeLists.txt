@@ -9,4 +9,5 @@ install(
   TARGETS ${app}
   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
-install_local_dependencies(TARGETS ${app} DIRECTORIES ${my_dependency_paths})
+
+install_dependency(TARGETS ${app} DIRECTORIES ${RUNPATH_VCPKG_DPENDENCY_PATH})
