@@ -27,48 +27,43 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-message(STATUS "PROJECT_VRESION finally:${PROJECT_VERSION}")
-message(STATUS "CMAKE_PROJECT_VERSION_MAJOR: ${CMAKE_PROJECT_VERSION_MAJOR}")
-message(STATUS "CMAKE_PROJECT_VERSION_MINOR: ${CMAKE_PROJECT_VERSION_MINOR}")
-message(STATUS "CMAKE_PROJECT_VERSION_PATCH: ${CMAKE_PROJECT_VERSION_PATCH}")
-message(STATUS "CMAKE_PROJECT_VERSION_TWEAK: ${CMAKE_PROJECT_VERSION_TWEAK}")
-message(STATUS "CMAKE_PROJECT_VERSION finally:${CMAKE_PROJECT_VERSION}")
-
-message(STATUS "VCPKG_HOST_TRIPLET ${VCPKG_HOST_TRIPLET}")
-message(STATUS "VCPKG_INSTALLED_DIR ${VCPKG_INSTALLED_DIR}")
-message(STATUS "VCPKG_TARGET_TRIPLET ${VCPKG_TARGET_TRIPLET}")
-message(STATUS "VCPKG_LIBRARY_LINKAGE ${VCPKG_LIBRARY_LINKAGE}")
-message(STATUS "VCPKG_TARGET_IS_WINDOWS ${VCPKG_TARGET_IS_WINDOWS}")
-message(STATUS "VCPKG_TARGET_IS_MINGW ${VCPKG_TARGET_IS_MINGW}")
-
+# Source includes from vcpkg
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
-# CMake module tools import custom cmake modules
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+# Shared cmake modules from cmake registry, see https://github.com/msclock/cmake-registry.
+find_package(cmake-modules REQUIRED)
+include(cmake-modules/configure/Default)
+include(cmake-modules/configure/Common)
+include(cmake-modules/configure/CheckBuildDir)
+include(cmake-modules/configure/ConfigDoxygen)
+include(cmake-modules/configure/FindSphinx)
+include(cmake-modules/configure/UniqueOutputBinaryDir)
+include(cmake-modules/build/Default)
+include(cmake-modules/build/Ccache)
+include(cmake-modules/build/LinkOptimization)
+include(cmake-modules/build/Sanitizer)
+include(cmake-modules/build/Valgrind)
+include(cmake-modules/test/Default)
+include(cmake-modules/test/Coverage)
+include(cmake-modules/install/Common)
+include(cmake-modules/install/Default)
+include(cmake-modules/install/InstallDependency)
+include(cmake-modules/install/Runpath)
 
-include(CheckBuildDirectory)
-include(ConfigGNUInstallDirs)
-include(DefineDefaults)
-include(OSInstall)
-include(PreCommit)
-include(ConfigDebug)
-include(ConfigCcache)
-include(ConfigIPO)
-include(ConfigDocs)
+# Print some info
+show_project_version()
+show_vcpkg_configuration()
+show_installation()
+
+# Add _DEBUG macro
+add_debug_macro()
 
 # IPO for release
-if("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
+if(${CMAKE_BUILD_TYPE} MATCHES [[Release]])
   link_time_optimization()
 endif()
 
-# Valgrind
-include(ConfigValgrind)
-
-# Sanitizer
-include(ConfigSanitizers)
-
 # Coverage
-include(CodeCoverage)
 add_code_coverage_all_targets(
   HTML_OUTPUT_DIRECTORY
   ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage
@@ -78,29 +73,18 @@ add_code_coverage_all_targets(
   /usr/include/*
   tests/*)
 
-# Fetch deps
-include(ConfigFetchDeps)
+# CMake custom module
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-# Runpath setup
-include(Runpath)
+# Configure docs
+include(ConfigureDocs)
+
+# Fetch deps
+include(ConfigureCPMDeps)
 
 # Package dependencies using find_package
 find_package(proxy CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
-
-# dynamic path specify the 3rd party short deps path depends on os-platform
-set(dynamic_path $<IF:$<PLATFORM_ID:Windows>,bin,lib>)
-message(STATUS "dynamic libraries path search: ${dynamic_path}")
-set(my_dependency_paths
-    ${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<IF:$<CONFIG:Debug>,/deubg/${dynamic_path},/${dynamic_path}>
-)
-
-# show installation directories
-foreach(_p LIB BIN INCLUDE CMAKE)
-  file(TO_NATIVE_PATH ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_${_p}DIR} _path)
-  message(STATUS "Show installing ${_p} components to ${_path}")
-  unset(_path)
-endforeach()
 
 add_subdirectory(src)
 
