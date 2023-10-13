@@ -5,9 +5,8 @@
   "builtin-baseline": "cc97b4536ae749ec0e4f643488b600b217540fb3",
   "dependencies": [
     "abseil",
-    "proxy",
     "cmake-modules",
-    "cmake-cpm"
+    "proxy"
   ],
   "vcpkg-configuration": {
     "registries": [
@@ -16,7 +15,6 @@
         "baseline": "91b60d397c01049fa7a5dc6b65bb2da80c3bee51",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
-          "cmake-cpm",
           "cmake-modules",
           "vcpkg-cmake-module"
         ]

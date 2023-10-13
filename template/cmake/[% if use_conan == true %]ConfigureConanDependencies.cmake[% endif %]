@@ -1,0 +1,37 @@
+#[[
+Use conan to add dependencies to the project.
+
+conan is a CMake wrapper for conan C and C++ package manager.
+
+See https://github.com/conan-io/cmake-conan.
+
+Example:
+
+  conan_cmake_configure(REQUIRES fmt/6.1.2
+                        GENERATORS cmake_find_package)
+
+  conan_cmake_autodetect(settings)
+
+  conan_cmake_install(PATH_OR_REFERENCE .
+                      BUILD missing
+                      REMOTE conancenter
+                      SETTINGS ${settings})
+
+  find_package(fmt)
+
+  add_executable(main main.cpp)
+  target_link_libraries(main fmt::fmt)
+
+Note:
+  Use cmake-conan/conan will break up the project dependency management of vcpkg. Best practice
+  to use this when the project would not be built as a shared library to be referred by
+  other vcpkg projects.
+
+]]
+
+find_package(cmake-conan REQUIRED)
+include(cmake-conan/conan)
+
+message(STATUS "conan is configuring extra deps...")
+
+# Add extra deps here

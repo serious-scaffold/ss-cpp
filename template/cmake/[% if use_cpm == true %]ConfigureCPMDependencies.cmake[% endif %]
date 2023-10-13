@@ -1,4 +1,11 @@
 #[[
+Use CPM to add dependencies to the project.
+
+CPM is CMake's missing package manager. A small CMake script for setup-free,
+cross-platform, reproducible dependency management.
+
+See https://github.com/cpm-cmake/CPM.cmake.
+
 Example:
 
   # add executable
@@ -22,6 +29,6 @@ Note:
 find_package(cmake-cpm REQUIRED)
 include(cmake-cpm/CPM)
 
-message(STATUS "Fetching extra deps...")
+message(STATUS "CPM is configuring extra deps...")
 
 # Add extra deps here
