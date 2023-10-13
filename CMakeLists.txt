@@ -74,14 +74,9 @@ add_code_coverage_all_targets(
   /usr/include/*
   tests/*)
 
-# CMake custom module
+# Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-
-# Configure docs
 include(ConfigureDocs)
-
-# Fetch deps
-include(ConfigureCPMDeps)
 
 # Package dependencies using find_package
 find_package(proxy CONFIG REQUIRED)

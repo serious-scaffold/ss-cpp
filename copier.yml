@@ -130,7 +130,17 @@ docs_type:
   help: 'Choose the type of documentation to generate:'
   type: str
 
-config_cdash:
+use_cdash:
   default: false
   help: 'Whether to create a CDash configuration:'
+  type: bool
+
+use_cpm:
+  default: false
+  help: Whether to use CPM to manage C++ dependencies that will break up vcpkg dependency management.
+  type: bool
+
+use_conan:
+  default: false
+  help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
   type: bool
