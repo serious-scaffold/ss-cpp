@@ -25,7 +25,10 @@ project_name:
   type: str
 
 project_description:
-  default: A development-focused Cpp project template.
+  default: |
+    [%- if project_name == 'Cpp Scaffold' -%]
+      A development-focused Cpp project template.
+    [%- endif -%]
   help: 'Provide a brief description for the project:'
   type: str
 
@@ -49,12 +52,18 @@ copyright_year:
   type: str
 
 author_name:
-  default: msclock
+  default: |
+    [%- if project_name == 'Cpp Scaffold' -%]
+      msclock
+    [%- endif -%]
   help: 'Specify the name of the author:'
   type: str
 
 organization_name:
-  default: msclock
+  default: |
+    [%- if project_name == 'Cpp Scaffold' -%]
+      msclock
+    [%- endif -%]
   help: 'Provide the name of the organization associated with the project:'
   type: str
 
@@ -65,7 +74,7 @@ copyright_holder:
 
 author_email:
   default: |
-    [%- if author_name == 'msclock' and organization_name == 'msclock' -%]
+    [%- if project_name == 'Cpp Scaffold' -%]
       msclock@126.com
     [%- else -%]
       {{ author_name }}@{{ organization_name|lower|replace(" ", "-") }}.com
