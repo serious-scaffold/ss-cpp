@@ -17,6 +17,8 @@ if(BUILD_TESTING)
       ON
       CACHE BOOL "" FORCE)
 
+  set(INSTALL_GTEST OFF)
+
   FetchContent_MakeAvailable(googletest)
 
   include(GoogleTest)
