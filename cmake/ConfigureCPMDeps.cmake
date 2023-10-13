@@ -12,6 +12,11 @@ Example:
   # link dependencies
   target_link_libraries(main fmt::fmt nlohmann_json::nlohmann_json Catch2::Catch2WithMain)
 
+Note:
+  Use cmake-cpm/CPM will break up the project dependency management of vcpkg. Best practice
+  to use this when the project would not be built as a shared library to be referred by
+  other vcpkg projects.
+
 ]]
 
 find_package(cmake-cpm REQUIRED)
