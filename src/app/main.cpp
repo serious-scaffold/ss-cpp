@@ -1,8 +1,12 @@
 ﻿#include <iostream>
+#include "absl/log/globals.h"
+#include "absl/log/initialize.h"
 #include "api.hpp"
 #include "impl/impl.hpp"
 
 int main() {
+    absl::InitializeLog();
+    absl::SetStderrThreshold(absl::LogSeverity::kInfo);
     std::cout << "Hello, Remote World!"
               << "\n"
               << api::info::version_api() << '\n'

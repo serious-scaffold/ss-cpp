@@ -3,7 +3,7 @@ set(app ${CMAKE_PROJECT_NAME}_app)
 add_executable(${app} main.cpp)
 copy_sanitizer_runtime(${app})
 
-target_link_libraries(${app} PRIVATE api-shared)
+target_link_libraries(${app} PRIVATE api-shared absl::log_initialize)
 
 install(
   TARGETS ${app}
