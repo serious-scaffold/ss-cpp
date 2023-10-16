@@ -6,7 +6,6 @@ foreach(_file ${files})
   target_link_libraries(${file_basename} PRIVATE GTest::gtest_main api-shared)
   gtest_discover_tests(${file_basename})
   copy_sanitizer_runtime(${file_basename})
-  target_code_coverage(${file_basename} EXCLUDE AUTO ALL EXCLUDE tests/*)
 
   # add_test(NAME ${file_basename}_test COMMAND $<TARGET_FILE:${file_basename}>)
 endforeach()

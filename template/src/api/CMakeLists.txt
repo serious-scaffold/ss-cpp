@@ -1,5 +1,5 @@
-file(GLOB_RECURSE api_srcs "*.cpp")
-file(GLOB_RECURSE api_hdrs "*.hpp")
+file(GLOB_RECURSE api_srcs "src/*.cpp")
+file(GLOB_RECURSE api_hdrs "include/*.hpp")
 # Public Header
 file(GLOB_RECURSE public_headers ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
 
@@ -49,15 +49,12 @@ target_link_libraries(
 
 set_target_properties(
   api-shared
-  PROPERTIES
-    POSITION_INDEPENDENT_CODE 1
-    CXX_VISIBILITY_PRESET hidden
-    VISIBILITY_INLINES_HIDDEN 1
-    SOVERSION ${PROJECT_VERSION_MAJOR}
-    OUTPUT_NAME "api"
-    PUBLIC_HEADER
-    "${public_headers};${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/api_export.hpp"
-    MACOSX_RPATH ON)
+  PROPERTIES POSITION_INDEPENDENT_CODE 1
+             CXX_VISIBILITY_PRESET hidden
+             VISIBILITY_INLINES_HIDDEN 1
+             SOVERSION ${PROJECT_VERSION_MAJOR}
+             OUTPUT_NAME "api"
+             MACOSX_RPATH ON)
 
 # static library
 add_library(api-static STATIC "")
@@ -87,13 +84,9 @@ target_link_libraries(
 
 set_target_properties(
   api-static
-  PROPERTIES
-    POSITION_INDEPENDENT_CODE 1
-    ARCHIVE_OUTPUT_NAME "api_s"
-    RELEASE_POSTFIX "_s"
-    PUBLIC_HEADER
-    "${public_headers};${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/api_export.hpp"
-)
+  PROPERTIES POSITION_INDEPENDENT_CODE 1
+             ARCHIVE_OUTPUT_NAME "api_s"
+             RELEASE_POSTFIX "_s")
 
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
@@ -161,3 +154,9 @@ export(
   NAMESPACE api::)
 
 export(PACKAGE api)
+
+# Tests
+message(STATUS "BUILD_TESTING:${BUILD_TESTING}")
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()

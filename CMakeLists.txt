@@ -59,7 +59,7 @@ show_installation()
 # Add _DEBUG macro
 add_debug_macro()
 
-# IPO for release
+# LTO for release
 if(${CMAKE_BUILD_TYPE} MATCHES [[Release]])
   link_time_optimization()
 endif()
@@ -78,13 +78,12 @@ add_code_coverage_all_targets(
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureDocs)
 
+include(CTest)
+enable_testing()
+include(ConfigureGtest)
+
 # Package dependencies using find_package
 find_package(proxy CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
 
 add_subdirectory(src)
-
-# tests
-include(CTest)
-enable_testing()
-add_subdirectory(tests)
