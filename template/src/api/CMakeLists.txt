@@ -134,30 +134,30 @@ install(
 
 install(
   EXPORT api-targets
-  FILE apiTargets.cmake
+  FILE api-targets.cmake
   NAMESPACE api::
   DESTINATION share/${PROJECT_NAME}
   COMPONENT api_development)
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  ${CMAKE_CURRENT_BINARY_DIR}/apiConfigVersion.cmake
+  ${CMAKE_CURRENT_BINARY_DIR}/api-config-version.cmake
   VERSION ${PROJECT_VERSION}
   COMPATIBILITY SameMajorVersion)
 
 configure_package_config_file(
-  ${CMAKE_CURRENT_LIST_DIR}/apiConfig.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/apiConfig.cmake
+  ${CMAKE_CURRENT_LIST_DIR}/api-config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/api-config.cmake
   INSTALL_DESTINATION share/${PROJECT_NAME})
 
-install(FILES ${CMAKE_CURRENT_BINARY_DIR}/apiConfig.cmake
-              ${CMAKE_CURRENT_BINARY_DIR}/apiConfigVersion.cmake
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/api-config.cmake
+              ${CMAKE_CURRENT_BINARY_DIR}/api-config-version.cmake
         DESTINATION share/${PROJECT_NAME})
 
 # Export from build tree
 export(
   EXPORT api-targets
-  FILE ${CMAKE_CURRENT_BINARY_DIR}/apiTargets.cmake
+  FILE ${CMAKE_CURRENT_BINARY_DIR}/api-targets.cmake
   NAMESPACE api::)
 
 export(PACKAGE api)

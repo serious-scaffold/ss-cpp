@@ -48,5 +48,5 @@ include(CMakeFindDependencyMacro)
 find_dependency(Threads REQUIRED)
 find_dependency(proxy REQUIRED)
 
-include("${CMAKE_CURRENT_LIST_DIR}/apiTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/api-targets.cmake")
 check_required_components(api-shared api-static)
