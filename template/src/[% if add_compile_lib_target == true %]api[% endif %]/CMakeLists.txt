@@ -35,9 +35,10 @@ target_compile_definitions(
 
 target_include_directories(
   api-shared
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_compile_options(
   api-shared PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
@@ -45,16 +46,19 @@ target_compile_options(
 target_link_libraries(
   api-shared
   PRIVATE msft_proxy
-  PRIVATE absl::base absl::log)
+  PRIVATE absl::log)
 
 set_target_properties(
   api-shared
-  PROPERTIES POSITION_INDEPENDENT_CODE 1
-             CXX_VISIBILITY_PRESET hidden
-             VISIBILITY_INLINES_HIDDEN 1
-             SOVERSION ${PROJECT_VERSION_MAJOR}
-             OUTPUT_NAME "api"
-             MACOSX_RPATH ON)
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE 1
+    CXX_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN 1
+    SOVERSION ${PROJECT_VERSION_MAJOR}
+    PUBLIC_HEADER
+    "${public_headers};${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/api_export.hpp"
+    OUTPUT_NAME "api"
+    MACOSX_RPATH ON)
 
 # static library
 add_library(api-static STATIC "")
@@ -69,9 +73,10 @@ target_compile_definitions(
 
 target_include_directories(
   api-static
-  PUBLIC $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
-         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${CMAKE_INSTALL_INCLUDEDIR}>
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 target_compile_options(
   api-static PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
@@ -80,13 +85,16 @@ target_compile_options(
 target_link_libraries(
   api-static
   PRIVATE msft_proxy
-  PRIVATE absl::base absl::log)
+  PRIVATE absl::log)
 
 set_target_properties(
   api-static
-  PROPERTIES POSITION_INDEPENDENT_CODE 1
-             ARCHIVE_OUTPUT_NAME "api_s"
-             RELEASE_POSTFIX "_s")
+  PROPERTIES
+    POSITION_INDEPENDENT_CODE 1
+    PUBLIC_HEADER
+    "${public_headers};${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_INCLUDEDIR}/api_export.hpp"
+    ARCHIVE_OUTPUT_NAME "api_s"
+    RELEASE_POSTFIX "_s")
 
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
@@ -129,7 +137,7 @@ install(
   EXPORT api-targets
   FILE api-targets.cmake
   NAMESPACE api::
-  DESTINATION share/${PROJECT_NAME}
+  DESTINATION share/api
   COMPONENT api_development)
 
 include(CMakePackageConfigHelpers)
@@ -140,12 +148,11 @@ write_basic_package_version_file(
 
 configure_package_config_file(
   ${CMAKE_CURRENT_LIST_DIR}/api-config.cmake.in
-  ${CMAKE_CURRENT_BINARY_DIR}/api-config.cmake
-  INSTALL_DESTINATION share/${PROJECT_NAME})
+  ${CMAKE_CURRENT_BINARY_DIR}/api-config.cmake INSTALL_DESTINATION share/api)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/api-config.cmake
               ${CMAKE_CURRENT_BINARY_DIR}/api-config-version.cmake
-        DESTINATION share/${PROJECT_NAME})
+        DESTINATION share/api)
 
 # Export from build tree
 export(

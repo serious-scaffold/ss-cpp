@@ -1,0 +1,50 @@
+#[=======================================================================[.rst:
+header-config.cmake
+-------------------
+
+header cmake module.
+This module sets the following variables in your project:
+
+::
+
+   header_FOUND - true if header found on the system
+   header_VERSION - header version in format Major.Minor.Release
+
+
+Exported targets:
+
+::
+
+If header is found, this module defines the following :prop_tgt:`IMPORTED`
+targets. ::
+    header::header - the main header only library with header & defs attached.
+
+
+Suggested usage:
+
+::
+
+    find_package(header)
+    find_package(header CONFIG REQUIRED)
+
+
+The following variables can be set to guide the search for this package:
+
+::
+
+    header_DIR - CMake variable, set to directory containing this Config file
+    CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package
+    PATH - environment variable, set to bin directory of this package
+    CMAKE_DISABLE_FIND_PACKAGE_api - CMake variable, disables find_package(header)
+    perhaps to force internal build
+
+#]=======================================================================]
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+# third library dependency check
+find_dependency(absl:log REQUIRED)
+
+include("${CMAKE_CURRENT_LIST_DIR}/header-targets.cmake")
+check_required_components(header)

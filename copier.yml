@@ -144,3 +144,18 @@ use_conan:
   default: false
   help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
   type: bool
+
+add_executable_target:
+  default: true
+  help: Whether to add an executable target
+  type: bool
+
+add_header_only_target:
+  default: true
+  help: Whether to add a header-only target
+  type: bool
+
+add_compile_lib_target:
+  default: true
+  help: Whether to add a compile lib target
+  type: bool
