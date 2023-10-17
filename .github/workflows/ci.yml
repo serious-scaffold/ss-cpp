@@ -1,11 +1,20 @@
-name: lint
+name: CI
 
 on:
   workflow_dispatch:
+
   push:
+    branches:
+      - master
+
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
+
   pre-commit:
     runs-on: ubuntu-latest
     permissions:
