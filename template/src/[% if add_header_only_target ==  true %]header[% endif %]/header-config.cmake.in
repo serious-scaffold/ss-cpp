@@ -35,7 +35,7 @@ The following variables can be set to guide the search for this package:
     header_DIR - CMake variable, set to directory containing this Config file
     CMAKE_PREFIX_PATH - CMake variable, set to root directory of this package
     PATH - environment variable, set to bin directory of this package
-    CMAKE_DISABLE_FIND_PACKAGE_api - CMake variable, disables find_package(header)
+    CMAKE_DISABLE_FIND_PACKAGE_header - CMake variable, disables find_package(header)
     perhaps to force internal build
 
 #]=======================================================================]
