@@ -68,6 +68,7 @@ repos:
         args:
           - -L=lang
           - --check-filenames
+          - --write-changes
 
   # Check for common shell mistakes
   - repo: https://github.com/shellcheck-py/shellcheck-py
