@@ -1,3 +1,21 @@
+## [1.0.1](https://github.com/msclock/cpp-scaffold/compare/v1.0.0...v1.0.1) (2023-10-18)
+
+
+### Style
+
+* fix changelog typo ([93edf2c](https://github.com/msclock/cpp-scaffold/commit/93edf2c791343d8062c426ea5d3e031b95a691a8))
+
+
+### Performance
+
+* update cmake-vcpkg baseline ([af8e83a](https://github.com/msclock/cpp-scaffold/commit/af8e83a9a84cda787669d1b3261d9ac78a0dd8bf))
+* use cmake-modules install and include tools ([65fb8e7](https://github.com/msclock/cpp-scaffold/commit/65fb8e76f38e8a2ef9a5cba2b8f93b07dbe9edc2))
+
+
+### Chores
+
+* pre-commit write changes on codespell ([ad42e04](https://github.com/msclock/cpp-scaffold/commit/ad42e041bb76d194ef753660e756387c96389e58))
+
 ## 1.0.0 (2023-10-17)
 
 
