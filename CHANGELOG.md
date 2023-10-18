@@ -36,7 +36,7 @@
 * check vcpkg build env existence ([159d238](https://github.com/msclock/cpp-scaffold/commit/159d238071276f3df133d2c77acf5eee1806fbd6))
 * cmake install exclude test things ([90b3dda](https://github.com/msclock/cpp-scaffold/commit/90b3ddaa46cb42496ff1f4fbd32062b3e5eaec18))
 * cmake output about rpath ([6bb694f](https://github.com/msclock/cpp-scaffold/commit/6bb694fc34676cb8272da7d4e0cc17f6be38d012))
-* consitency test output name ([c774234](https://github.com/msclock/cpp-scaffold/commit/c7742349adf16590e90ac67935585060a368e9dd))
+* consistency test output name ([c774234](https://github.com/msclock/cpp-scaffold/commit/c7742349adf16590e90ac67935585060a368e9dd))
 * correct config annotation ([7658694](https://github.com/msclock/cpp-scaffold/commit/765869417533befd4cabd9e497eb7026b0fe96c0))
 * dev container ([0161274](https://github.com/msclock/cpp-scaffold/commit/0161274011b0dbb99e10dd7b2101ecff90614fb7))
 * improve readablity on OS dependencies resolving ([2d52c34](https://github.com/msclock/cpp-scaffold/commit/2d52c34ea19bf810f8d51138582fd6da77278003))
