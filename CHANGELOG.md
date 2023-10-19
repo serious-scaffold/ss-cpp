@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/msclock/cpp-scaffold/compare/v1.0.1...v1.0.2) (2023-10-19)
+
+
+### Performance
+
+* update cmake-registry baseline ([d3a8a8d](https://github.com/msclock/cpp-scaffold/commit/d3a8a8d5632cff0cc5a6ca8dbdb8a2c9cf5f2311))
+
 ## [1.0.1](https://github.com/msclock/cpp-scaffold/compare/v1.0.0...v1.0.1) (2023-10-18)
 
 
