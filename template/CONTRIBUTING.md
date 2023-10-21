@@ -97,7 +97,7 @@ git commit --fixup=SHA
 Once all the changes are approved, you can squash your commits:
 
 ```bash
-git rebase -i --autosquash main
+git rebase -i --autosquash master
 ```
 
 And force-push:

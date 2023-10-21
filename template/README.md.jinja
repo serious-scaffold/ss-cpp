@@ -3,13 +3,15 @@
 
 {{ project_description }}
 
+[% if project_name == 'Cpp Scaffold' -%]
 ## Features
 
 - Project setup and template update with [copier](https://github.com/copier-org/copier/).
 - Customizable container development environment(vscode dev container).
 - `Googletest` integration.
 - `Vcpkg` integration.
-- Standard dev source layout based on cmake and configuration cmake presets.
+- Standard development source layout based on cmake and configuration cmake presets.
+- Manage cmake modules using [cmake-registry](https://github.com/msclock/cmake-registry).
 - Lint tool `pre-commit` integration.
 - Sphinx integration as the sync docs tool.
 
@@ -36,6 +38,7 @@
    ```
 
 4. That's it! Feel free to focus on the coding within `src` folder.
+[%- endif %]
 
 ## 📜 License
 

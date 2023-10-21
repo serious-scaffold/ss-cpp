@@ -8,7 +8,8 @@ A development-focused Cpp project template.
 - Customizable container development environment(vscode dev container).
 - `Googletest` integration.
 - `Vcpkg` integration.
-- Standard dev source layout based on cmake and configuration cmake presets.
+- Standard development source layout based on cmake and configuration cmake presets.
+- Manage cmake modules using [cmake-registry](https://github.com/msclock/cmake-registry).
 - Lint tool `pre-commit` integration.
 - Sphinx integration as the sync docs tool.
 
