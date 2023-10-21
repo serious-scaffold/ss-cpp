@@ -95,6 +95,11 @@
     "xtr1common": "cpp",
     "xtree": "cpp",
     "xutility": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "*.tcc": "cpp",
+    "cwctype": "cpp",
+    "memory_resource": "cpp",
+    "numbers": "cpp",
+    "semaphore": "cpp"
   },
 }

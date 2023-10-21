@@ -4,3 +4,5 @@ add_subdirectory(compile)
 add_subdirectory(executable)
 # A header-only library
 add_subdirectory(header_only)
+# A jni app
+add_subdirectory(jni)
