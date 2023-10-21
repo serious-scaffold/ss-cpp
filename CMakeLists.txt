@@ -74,6 +74,8 @@ add_code_coverage_all_targets(
   /usr/include/*
   tests/*)
 
+create_uninstall_target()
+
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureDocs)

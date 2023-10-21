@@ -1,7 +1,6 @@
-file(GLOB_RECURSE app_hdrs "include/*.hpp")
 file(GLOB_RECURSE app_srcs "src/*.cpp")
 
-add_executable(app ${app_srcs} ${app_hdrs})
+add_executable(app ${app_srcs})
 copy_sanitizer_runtime(app)
 
 target_include_interface_directories(app ${CMAKE_CURRENT_SOURCE_DIR}/include)

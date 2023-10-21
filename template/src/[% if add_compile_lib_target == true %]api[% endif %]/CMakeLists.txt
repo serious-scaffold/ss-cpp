@@ -1,7 +1,5 @@
 file(GLOB_RECURSE api_srcs "src/*.cpp")
 file(GLOB_RECURSE api_hdrs "include/*.hpp")
-# Public Header
-file(GLOB_RECURSE public_headers ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp)
 
 # shared library
 add_library(api-shared SHARED "")
@@ -50,8 +48,6 @@ set_target_properties(
              CXX_VISIBILITY_PRESET hidden
              VISIBILITY_INLINES_HIDDEN 1
              SOVERSION ${PROJECT_VERSION_MAJOR}
-             PUBLIC_HEADER
-             "${public_headers};${CMAKE_BINARY_DIR}/include/api_export.hpp"
              OUTPUT_NAME "api"
              MACOSX_RPATH ON)
 
@@ -81,8 +77,6 @@ target_link_libraries(
 set_target_properties(
   api-static
   PROPERTIES POSITION_INDEPENDENT_CODE 1
-             PUBLIC_HEADER
-             "${public_headers};${CMAKE_BINARY_DIR}/include/api_export.hpp"
              ARCHIVE_OUTPUT_NAME "api_s"
              RELEASE_POSTFIX "_s")
 
@@ -103,6 +97,9 @@ install_target(
   TARGETS
   api-shared
   api-static
+  INCLUDES
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/
+  ${CMAKE_BINARY_DIR}/include/
   DEPENDENCIES
   msft_proxy
   absl::log)
