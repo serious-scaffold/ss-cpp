@@ -1,3 +1,17 @@
+## [1.0.3](https://github.com/msclock/cpp-scaffold/compare/v1.0.2...v1.0.3) (2023-10-22)
+
+
+### Performance
+
+* remove sanitizer configuration on CMakePresets.json ([fad7196](https://github.com/msclock/cpp-scaffold/commit/fad7196a2565a8f3300bc78a0212dd09dd23a411))
+* update baseline and install rules ([01c097f](https://github.com/msclock/cpp-scaffold/commit/01c097f35b2f6448cbb166c8613ea42d8a506ba9))
+* update cmake-registry baseline ([1f4268a](https://github.com/msclock/cpp-scaffold/commit/1f4268a7fd17b8c5701c19adbc0b8b210361b36a))
+
+
+### Docs
+
+* improve readability ([8ccbd28](https://github.com/msclock/cpp-scaffold/commit/8ccbd28db93ac97f0a651aa3b9784d1b6a1999e9))
+
 ## [1.0.2](https://github.com/msclock/cpp-scaffold/compare/v1.0.1...v1.0.2) (2023-10-19)
 
 
