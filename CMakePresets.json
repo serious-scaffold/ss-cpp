@@ -29,16 +29,14 @@
     {
       "name": "Debug",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Debug",
-        "USE_SANITIZER": false
+        "CMAKE_BUILD_TYPE": "Debug"
       },
       "hidden": true
     },
     {
       "name": "Release",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "USE_SANITIZER": false
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
       },
       "hidden": true
     },
@@ -189,42 +187,6 @@
         "Release",
         "GNUC"
       ]
-    },
-    {
-      "name": "x64-Debug-MSVC-asan",
-      "inherits": "x64-Debug-MSVC",
-      "description": "x64-Debug-MSVC with /fsanitize=address",
-      "cacheVariables": {
-        "USE_SANITIZER": "Address"
-      }
-    },
-    {
-      "name": "x64-Debug-GNUC-asan",
-      "inherits": "x64-Debug-GNUC",
-      "cacheVariables": {
-        "USE_SANITIZER": "Address"
-      }
-    },
-    {
-      "name": "x64-Debug-GNUC-tsan",
-      "inherits": "x64-Debug-GNUC",
-      "cacheVariables": {
-        "USE_SANITIZER": "Thread"
-      }
-    },
-    {
-      "name": "x64-Debug-GNUC-lsan",
-      "inherits": "x64-Debug-GNUC",
-      "cacheVariables": {
-        "USE_SANITIZER": "Leak"
-      }
-    },
-    {
-      "name": "x64-Debug-GNUC-ubsan",
-      "inherits": "x64-Debug-GNUC",
-      "cacheVariables": {
-        "USE_SANITIZER": "Undefined"
-      }
     }
   ],
   "testPresets": [
@@ -292,41 +254,6 @@
     {
       "name": "x64-Release-GNUC",
       "configurePreset": "x64-Release-GNUC",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-MSVC-asan",
-      "configurePreset": "x64-Debug-MSVC-asan",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-GNUC-asan",
-      "configurePreset": "x64-Debug-GNUC-asan",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-GNUC-tsan",
-      "configurePreset": "x64-Debug-GNUC-tsan",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-GNUC-lsan",
-      "configurePreset": "x64-Debug-GNUC-lsan",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-GNUC-ubsan",
-      "configurePreset": "x64-Debug-GNUC-ubsan",
       "inherits": [
         "base"
       ]
