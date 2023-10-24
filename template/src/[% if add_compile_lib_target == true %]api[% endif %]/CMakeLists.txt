@@ -47,7 +47,6 @@ set_target_properties(
   PROPERTIES POSITION_INDEPENDENT_CODE 1
              CXX_VISIBILITY_PRESET hidden
              VISIBILITY_INLINES_HIDDEN 1
-             SOVERSION ${PROJECT_VERSION_MAJOR}
              OUTPUT_NAME "api"
              MACOSX_RPATH ON)
 
