@@ -1,7 +1,16 @@
+[% from pathjoin("includes", "variable.jinja") import license_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import license_url with context -%]
+[% from pathjoin("includes", "variable.jinja") import pipeline_badge with context -%]
+[% from pathjoin("includes", "variable.jinja") import release_badge with context -%]
 # {{ project_name }}
 
 {{ project_description }}
+
+{{ pipeline_badge() }}
+{{ release_badge() }}
+{{ license_badge() }}
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![cpp Scaffold](https://img.shields.io/badge/cpp%20scaffold-c++-blue)](https://github.com/msclock/cpp-scaffold)
 
 [% if project_name == 'Cpp Scaffold' -%]
 ## Features
