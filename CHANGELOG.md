@@ -3,7 +3,7 @@
 
 ### Bug Fixes
 
-* add missing gerneral semantic-release configuration ([c9f88c4](https://github.com/msclock/cpp-scaffold/commit/c9f88c426789b6ba3fc2ef4096c15282a7b8aa14))
+* add missing general semantic-release configuration ([c9f88c4](https://github.com/msclock/cpp-scaffold/commit/c9f88c426789b6ba3fc2ef4096c15282a7b8aa14))
 
 
 ### Performance
