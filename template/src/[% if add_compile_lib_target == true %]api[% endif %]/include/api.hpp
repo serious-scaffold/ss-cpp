@@ -10,7 +10,7 @@ namespace info {
  * \return The distribution api version provided.
  * \note A string "dev" will be returned when no version configuration.
  */
-std::string api_EXPORT version_api() noexcept;
+std::string_view api_EXPORT version_api() noexcept;
 
 /**
  * \return A bool represents if debug when building.

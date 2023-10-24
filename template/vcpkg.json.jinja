@@ -12,13 +12,14 @@
     "cmake-cpm",
     [%- endif %]
     "cmake-modules",
-    "proxy"
+    "proxy",
+    "robotology-cmake-ycm"
   ],
   "vcpkg-configuration": {
     "registries": [
       {
         "kind": "git",
-        "baseline": "b8e1db52b9067b0087f4b5d9ce48f731b048d5dc",
+        "baseline": "f7569b842f3c1dc7a9e1d6a8eb033d47389f644e",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           [%- if use_conan == true %]
@@ -28,6 +29,7 @@
           "cmake-cpm",
           [%- endif %]
           "cmake-modules",
+          "robotology-cmake-ycm",
           "vcpkg-cmake-module"
         ]
       }

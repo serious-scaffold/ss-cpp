@@ -3,7 +3,8 @@ file(GLOB_RECURSE app_srcs "src/*.cpp")
 add_executable(app ${app_srcs})
 copy_sanitizer_runtime(app)
 
-target_include_interface_directories(app ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_interface_directories(app ${CMAKE_CURRENT_SOURCE_DIR}/include
+                                     ${CMAKE_BINARY_DIR}/git/include)
 
 target_link_libraries(app PRIVATE absl::log_initialize absl::log)
 

@@ -1,21 +1,15 @@
 #include "api.hpp"
 #include <absl/log/log.h>
+#include "git.h"
 #include "impl/impl.hpp"
 
 namespace api {
 namespace info {
-std::string version_api() noexcept {
-    // Using abseil logging library
-    LOG_IF(INFO, is_debug()) << "This is a debug distribution.";
-#ifdef PROJECT_VERSION
-    return MACRO_STRINGIFY(PROJECT_VERSION);
-#else
-    return "dev";
-#endif
+std::string_view version_api() noexcept {
+    return git::ProjectVersion();
 }
 
 bool api_EXPORT is_debug() noexcept {
-    LOG(INFO) << "This is a debug build.";
 #ifdef _DEBUG
     return true;
 #else

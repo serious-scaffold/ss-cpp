@@ -4,7 +4,7 @@
 
 TEST(info, version) {
     const auto version = api::info::version_api();
-    GTEST_ASSERT_EQ("0.0.0", version);
+    EXPECT_FALSE(version.empty());
 }
 
 TEST(info, distribution) {

@@ -1,10 +1,12 @@
 #pragma once
 
 #include "absl/log/log.h"
+#include "git.h"
 
 namespace header {
 namespace common {
 inline int some_fun() {
+    LOG(INFO) << git::ProjectVersion();
     return 0;
 }
 

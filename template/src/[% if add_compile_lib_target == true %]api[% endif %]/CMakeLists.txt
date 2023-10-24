@@ -26,13 +26,11 @@ generate_export_header(
 
 target_sources(api-shared PRIVATE ${api_srcs} ${api_hdrs})
 
-target_compile_definitions(
-  api-shared
-  PRIVATE PROJECT_VERSION=${PROJECT_VERSION}
-  INTERFACE $<INSTALL_INTERFACE:USING_api>)
+target_compile_definitions(api-shared INTERFACE $<INSTALL_INTERFACE:USING_api>)
 
-target_include_interface_directories(api-shared ${CMAKE_BINARY_DIR}/include
-                                     ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_interface_directories(
+  api-shared ${CMAKE_BINARY_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
   api-shared PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
@@ -47,6 +45,7 @@ set_target_properties(
   PROPERTIES POSITION_INDEPENDENT_CODE 1
              CXX_VISIBILITY_PRESET hidden
              VISIBILITY_INLINES_HIDDEN 1
+             SOVERSION ${CMAKE_PROJECT_VERSION_MAJOR}
              OUTPUT_NAME "api"
              MACOSX_RPATH ON)
 
@@ -57,12 +56,12 @@ target_sources(api-static PRIVATE ${api_srcs} ${api_hdrs})
 
 target_compile_definitions(
   api-static
-  PRIVATE PROJECT_VERSION=${PROJECT_VERSION}
   PUBLIC api_STATIC_DEFINE
   INTERFACE $<INSTALL_INTERFACE:USING_api>)
 
-target_include_interface_directories(api-static ${CMAKE_BINARY_DIR}/include
-                                     ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_interface_directories(
+  api-static ${CMAKE_BINARY_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
   api-static PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
@@ -96,9 +95,12 @@ install_target(
   TARGETS
   api-shared
   api-static
+  VERSION
+  ${CMAKE_PROJECT_VERSION}
   INCLUDES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_BINARY_DIR}/include/
+  ${CMAKE_BINARY_DIR}/git/include/
   DEPENDENCIES
   msft_proxy
   absl::log)
