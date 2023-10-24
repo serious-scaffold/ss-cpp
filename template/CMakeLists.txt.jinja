@@ -1,3 +1,5 @@
+[%- from pathjoin("includes", "variable.jinja") import repo_url with context -%]
+
 cmake_minimum_required(VERSION 3.20)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
@@ -21,7 +23,8 @@ set(VCPKG_VERBOSE
 project(
   {{ repo_name }}
   LANGUAGES CXX C
-  VERSION 0.0.0)
+  HOMEPAGE_URL "https://{{ repo_url() }}"
+  DESCRIPTION "{{ project_description }}")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

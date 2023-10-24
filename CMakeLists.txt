@@ -21,7 +21,8 @@ set(VCPKG_VERBOSE
 project(
   cpp-scaffold
   LANGUAGES CXX C
-  VERSION 0.0.0)
+  HOMEPAGE_URL "https://github.com/msclock/cpp-scaffold"
+  DESCRIPTION "A development-focused Cpp project template.")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
