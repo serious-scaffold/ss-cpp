@@ -1,0 +1,12 @@
+[%- if add_compile_lib_target == true -%]
+# A compile lib
+add_subdirectory(api)
+[%- endif %]
+[%- if add_executable_target == true %]
+# A header-only lib
+add_subdirectory(header)
+[%- endif %]
+[%- if add_header_only_target == true %]
+# A exe app
+add_subdirectory(app)
+[%- endif %]
