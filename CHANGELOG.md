@@ -1,3 +1,18 @@
+## [1.0.4](https://github.com/msclock/cpp-scaffold/compare/v1.0.3...v1.0.4) (2023-10-24)
+
+
+### Bug Fixes
+
+* add missing gerneral semantic-release configuration ([c9f88c4](https://github.com/msclock/cpp-scaffold/commit/c9f88c426789b6ba3fc2ef4096c15282a7b8aa14))
+
+
+### Performance
+
+* add more project meta configuration ([640cb12](https://github.com/msclock/cpp-scaffold/commit/640cb12727178439a9c4cd00d095952bd919d092))
+* fix and add repository badges ([4e67e32](https://github.com/msclock/cpp-scaffold/commit/4e67e32f5cdba7d5dcbdfa4c3cf288a7a942275f))
+* remove SOVERSION property on api lib ([09b3bf7](https://github.com/msclock/cpp-scaffold/commit/09b3bf7ffa22290cbd56cba2be4065dcffdfd7c3))
+* update cmake-registry baseline ([510a03c](https://github.com/msclock/cpp-scaffold/commit/510a03c5a4b8aa45ac0f205aed6fdc62b0806b03))
+
 ## [1.0.3](https://github.com/msclock/cpp-scaffold/compare/v1.0.2...v1.0.3) (2023-10-22)
 
 
