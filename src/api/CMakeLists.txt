@@ -101,6 +101,8 @@ install_target(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_BINARY_DIR}/include/
   ${CMAKE_BINARY_DIR}/git/include/
+  LICENSE_FILE_LIST
+  ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES
   msft_proxy
   absl::log)
