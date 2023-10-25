@@ -1,3 +1,15 @@
+## [1.1.1](https://github.com/msclock/cpp-scaffold/compare/v1.1.0...v1.1.1) (2023-10-25)
+
+
+### Performance
+
+* configure to install license to package and bin dir ([ce0096c](https://github.com/msclock/cpp-scaffold/commit/ce0096c940e09bbeb792284765c8450f0a1056fe))
+
+
+### Chores
+
+* update cmake-reigstry baseline ([de1160c](https://github.com/msclock/cpp-scaffold/commit/de1160cf77dae99b6e6c29913360a40307da71ed))
+
 ## [1.1.0](https://github.com/msclock/cpp-scaffold/compare/v1.0.4...v1.1.0) (2023-10-25)
 
 
