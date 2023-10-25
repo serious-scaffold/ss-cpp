@@ -15,6 +15,8 @@ install_target(
   INCLUDES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_BINARY_DIR}/git/include/
+  LICENSE_FILE_LIST
+  ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES
   "absl:log")
 
