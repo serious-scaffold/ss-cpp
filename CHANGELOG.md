@@ -1,3 +1,20 @@
+## [1.1.0](https://github.com/msclock/cpp-scaffold/compare/v1.0.4...v1.1.0) (2023-10-25)
+
+
+### Features
+
+* add version management ([971bf7f](https://github.com/msclock/cpp-scaffold/commit/971bf7f0e13d429b4b65a12b740fec34e9b8a61e))
+
+
+### Bug Fixes
+
+* configure cmake targets on copier ([589a6e9](https://github.com/msclock/cpp-scaffold/commit/589a6e99155a916d0044794055e23a03baf1e86e))
+
+
+### Docs
+
+* fix changelog typo ([443358b](https://github.com/msclock/cpp-scaffold/commit/443358b87b3620c31cdd6e4376f6c5061b7642e9))
+
 ## [1.0.4](https://github.com/msclock/cpp-scaffold/compare/v1.0.3...v1.0.4) (2023-10-24)
 
 
