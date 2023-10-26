@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/msclock/cpp-scaffold/compare/v1.1.1...v1.1.2) (2023-10-26)
+
+
+### Performance
+
+* rename target and relative configuration ([2869cde](https://github.com/msclock/cpp-scaffold/commit/2869cde01f4be028eb053fb41d4fcffaa5ccfc3a)), closes [#22](https://github.com/msclock/cpp-scaffold/issues/22)
+
 ## [1.1.1](https://github.com/msclock/cpp-scaffold/compare/v1.1.0...v1.1.1) (2023-10-25)
 
 
