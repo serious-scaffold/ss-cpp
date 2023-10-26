@@ -53,7 +53,7 @@ primary_domain = 'cpp'
 # Tell sphinx what the pygments highlight language should be.
 highlight_language = 'cpp'
 
-cpp_id_attributes=["api_EXPORT"]
+cpp_id_attributes=["compile_EXPORT"]
 
 # -- Options for HTML output -------------------------------------------------
 
