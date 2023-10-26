@@ -1,6 +1,6 @@
-# A compile lib
-add_subdirectory(api)
-# A header-only lib
-add_subdirectory(header)
-# A exe app
-add_subdirectory(app)
+# A compile library
+add_subdirectory(compile)
+# A header-only library
+add_subdirectory(header_only)
+# A executable
+add_subdirectory(executable)

@@ -52,11 +52,6 @@ include(cmake-modules/install/Default)
 include(cmake-modules/install/InstallDependency)
 include(cmake-modules/install/Runpath)
 
-# Print some info
-show_project_version()
-show_vcpkg_configuration()
-show_installation()
-
 # Add _DEBUG macro
 add_debug_macro()
 
@@ -91,3 +86,8 @@ find_package(proxy CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
 
 add_subdirectory(src)
+
+# Print project final information
+show_project_version()
+show_vcpkg_configuration()
+show_installation()
