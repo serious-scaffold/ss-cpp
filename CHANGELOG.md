@@ -1,3 +1,20 @@
+## [1.1.4](https://github.com/msclock/cpp-scaffold/compare/v1.1.3...v1.1.4) (2023-10-26)
+
+
+### Bug Fixes
+
+* template cmake target wrong exchange ([a121a60](https://github.com/msclock/cpp-scaffold/commit/a121a609d2c68913bfa2fb34e4f707e031ab6058))
+
+
+### Performance
+
+* add relative targets docs generation ([c917d8c](https://github.com/msclock/cpp-scaffold/commit/c917d8c8e909e414ca6da76ce047b04b4e5a763a))
+
+
+### Chores
+
+* update cmake-registry baseline ([826fef7](https://github.com/msclock/cpp-scaffold/commit/826fef75d03a91b941da2970fc5aed74a7fc9a53))
+
 ## [1.1.3](https://github.com/msclock/cpp-scaffold/compare/v1.1.2...v1.1.3) (2023-10-26)
 
 
