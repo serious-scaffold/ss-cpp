@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/msclock/cpp-scaffold/compare/v1.1.2...v1.1.3) (2023-10-26)
+
+
+### Bug Fixes
+
+* docs build with GIT_EXTERN_C_BEGIN error ([1eaeb21](https://github.com/msclock/cpp-scaffold/commit/1eaeb21c9bd134baa0b3b6beb852a4606191f340)), closes [#23](https://github.com/msclock/cpp-scaffold/issues/23)
+
 ## [1.1.2](https://github.com/msclock/cpp-scaffold/compare/v1.1.1...v1.1.2) (2023-10-26)
 
 
