@@ -4,6 +4,7 @@
 :hidden:
 Overview <self>
 cmake_workflow
+changelog
 api
 coverage/index
 ```
