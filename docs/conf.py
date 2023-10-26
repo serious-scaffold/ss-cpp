@@ -17,12 +17,12 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Cpp Scaffold'
-copyright = '2022-2023 msclock'
-author = 'msclock'
+project = "Cpp Scaffold"
+copyright = "2022-2023 msclock"
+author = "msclock"
 
 # The full version, including alpha/beta/rc tags
-release = '1.0.0'
+release = "1.0.0"
 
 # -- General configuration ---------------------------------------------------
 
@@ -31,29 +31,32 @@ release = '1.0.0'
 # ones.
 extensions = [
     # there may be others here already, e.g. 'sphinx.ext.mathjax'
-    'myst_parser',
-    'breathe',
-    'sphinx_copybutton',
+    "myst_parser",
+    "breathe",
+    "sphinx_copybutton",
 ]
 source_suffix = {
     ".rst": "restructuredtext",
     ".md": "markdown",
 }
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # Tell sphinx what the primary language being documented is.
-primary_domain = 'cpp'
+primary_domain = "cpp"
 
 # Tell sphinx what the pygments highlight language should be.
-highlight_language = 'cpp'
+highlight_language = "cpp"
 
-cpp_id_attributes=["compile_EXPORT"]
+cpp_id_attributes = [
+    "compile_EXPORT",
+    "GIT_EXTERN_C_BEGIN",
+]
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -69,4 +72,4 @@ html_theme = "furo"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]
