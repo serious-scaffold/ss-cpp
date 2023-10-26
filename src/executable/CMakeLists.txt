@@ -3,6 +3,7 @@ set(target_name executable)
 file(GLOB_RECURSE _srcs "src/*.cpp")
 
 add_executable(${target_name} ${_srcs})
+target_code_coverage(${target_name} ALL)
 copy_sanitizer_runtime(${target_name})
 
 target_include_interface_directories(
