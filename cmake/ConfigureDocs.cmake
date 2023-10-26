@@ -11,11 +11,16 @@ if(DOXYGEN_FOUND)
 
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
+  # cmake-format:off
   doxygen_add_docs(
-    ${CMAKE_PROJECT_NAME}_doxygen "${CMAKE_BINARY_DIR}/git/include"
+    ${CMAKE_PROJECT_NAME}_doxygen
+    "${CMAKE_BINARY_DIR}/git/include"
     "${CMAKE_BINARY_DIR}/compile/include"
     "${PROJECT_SOURCE_DIR}/src/compile/include"
+    "${PROJECT_SOURCE_DIR}/src/executable/include"
+    "${PROJECT_SOURCE_DIR}/src/header_only/include"
     COMMENT "gen doxygen style docs automatically")
+  # cmake-format: on
 
   sphinx_add_docs(
     ${CMAKE_PROJECT_NAME}_docs
