@@ -3,10 +3,10 @@
 add_subdirectory(compile)
 [%- endif %]
 [%- if add_executable_target == true %]
-# A header-only library
-add_subdirectory(header_only)
-[%- endif %]
-[%- if add_header_only_target == true %]
 # A executable
 add_subdirectory(executable)
+[%- endif %]
+[%- if add_header_only_target == true %]
+# A header-only library
+add_subdirectory(header_only)
 [%- endif %]
