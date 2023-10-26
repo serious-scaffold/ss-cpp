@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 #include "compile.hpp"
-#include "impl/impl.hpp"
 
 TEST(info, version) {
     const auto version = compile::info::version_compile();

@@ -5,7 +5,7 @@ file(GLOB_RECURSE _hdrs "include/*.hpp")
 
 # shared library
 add_library(${target_name}-shared SHARED "")
-target_code_coverage(${target_name}-shared AUTO ALL EXCLUDE tests/*)
+target_code_coverage(${target_name}-shared ALL)
 
 include(GenerateExportHeader)
 generate_export_header(
@@ -55,6 +55,7 @@ set_target_properties(
 
 # static library
 add_library(${target_name}-static STATIC "")
+target_code_coverage(${target_name}-static ALL)
 
 target_sources(${target_name}-static PRIVATE ${_srcs} ${_hdrs})
 

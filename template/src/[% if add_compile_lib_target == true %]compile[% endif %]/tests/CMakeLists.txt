@@ -5,6 +5,7 @@ foreach(_file ${files})
   add_executable(${file_basename} ${_file})
   target_link_libraries(${file_basename} PRIVATE GTest::gtest_main
                                                  compile-shared)
+  target_code_coverage(${file_basename} ALL)
   gtest_discover_tests(${file_basename})
   copy_sanitizer_runtime(${file_basename})
 

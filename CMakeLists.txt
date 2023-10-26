@@ -62,13 +62,8 @@ endif()
 
 # Coverage
 add_code_coverage_all_targets(
-  HTML_OUTPUT_DIRECTORY
-  ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage
-  EXCLUDE
-  ${VCPKG_INSTALLED_DIR}
-  ${CMAKE_BINARY_DIR}/*
-  /usr/include/*
-  tests/*)
+  EXCLUDE ${VCPKG_INSTALLED_DIR}/* ${CMAKE_BINARY_DIR}/* /usr/*
+  HTML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage)
 
 create_uninstall_target()
 
