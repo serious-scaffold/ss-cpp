@@ -1,5 +1,8 @@
 set(target_name compile)
 
+# requirement for compile
+find_package(proxy CONFIG REQUIRED)
+
 file(GLOB_RECURSE _srcs "src/*.cpp")
 file(GLOB_RECURSE _hdrs "include/*.hpp")
 

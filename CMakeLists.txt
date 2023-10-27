@@ -77,7 +77,6 @@ enable_testing()
 include(ConfigureGtest)
 
 # Package dependencies using find_package
-find_package(proxy CONFIG REQUIRED)
 find_package(absl CONFIG REQUIRED)
 
 add_subdirectory(src)
