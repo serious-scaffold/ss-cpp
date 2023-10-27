@@ -1,3 +1,26 @@
+## [1.1.5](https://github.com/msclock/cpp-scaffold/compare/v1.1.4...v1.1.5) (2023-10-27)
+
+
+### Bug Fixes
+
+* coverage missing ([9e42fc1](https://github.com/msclock/cpp-scaffold/commit/9e42fc1399820cf1a169068fa600c9581bd7b8af)), closes [#26](https://github.com/msclock/cpp-scaffold/issues/26)
+
+
+### Performance
+
+* **docs:** attach CHANGELOG.md to sphinx docs ([88cf600](https://github.com/msclock/cpp-scaffold/commit/88cf600deb70dde281998f70aee7e37f04c4cf7b)), closes [#25](https://github.com/msclock/cpp-scaffold/issues/25)
+* **docs:** remove release version ([95f59ba](https://github.com/msclock/cpp-scaffold/commit/95f59ba1139b927853dbff3ce7d399b6859acbbf))
+
+
+### Chores
+
+* update cmake-registry baseline ([4f45aa8](https://github.com/msclock/cpp-scaffold/commit/4f45aa80ac4fbd6ba8d21189d3f5c8c61a143631))
+
+
+### CI
+
+* setup-python with 3.11 ([0e98063](https://github.com/msclock/cpp-scaffold/commit/0e980633c79df453c37de611013a01198b2b9ca6))
+
 ## [1.1.4](https://github.com/msclock/cpp-scaffold/compare/v1.1.3...v1.1.4) (2023-10-26)
 
 
