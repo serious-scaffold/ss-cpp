@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/msclock/cpp-scaffold/compare/v1.1.6...v1.2.0) (2023-10-28)
+
+
+### Features
+
+* add jni option ([c27e7e5](https://github.com/msclock/cpp-scaffold/commit/c27e7e5e4ac2f376747a328f4033d1836bacd6e7)), closes [#16](https://github.com/msclock/cpp-scaffold/issues/16)
+
 ## [1.1.6](https://github.com/msclock/cpp-scaffold/compare/v1.1.5...v1.1.6) (2023-10-27)
 
 
