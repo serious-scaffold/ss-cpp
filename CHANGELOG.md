@@ -1,3 +1,18 @@
+## [1.2.2](https://github.com/msclock/cpp-scaffold/compare/v1.2.1...v1.2.2) (2023-10-28)
+
+
+### Bug Fixes
+
+* fail to disable cmake-format ([c78f784](https://github.com/msclock/cpp-scaffold/commit/c78f784148fe99e02e1050c4c9a759cf734d86ee))
+
+
+### Performance
+
+* add placeholder in README.md ([f705281](https://github.com/msclock/cpp-scaffold/commit/f705281729e8af856b5841be56cff9aae015dac9))
+* conform to added targets with related dependencies in vcpkg.json ([86ceab7](https://github.com/msclock/cpp-scaffold/commit/86ceab7688dcde1e4642a5e370f2793281fe09ee))
+* rename add_compile_lib_target without ([46d0f60](https://github.com/msclock/cpp-scaffold/commit/46d0f608b22703784c68628fbf9c03d415bcc188))
+* use repo_name instead of project_name ([f9e1da1](https://github.com/msclock/cpp-scaffold/commit/f9e1da154f8ca7ec2ab88a2649586991ca1806c0))
+
 ## [1.2.1](https://github.com/msclock/cpp-scaffold/compare/v1.2.0...v1.2.1) (2023-10-28)
 
 
