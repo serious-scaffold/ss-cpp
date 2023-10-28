@@ -11,7 +11,7 @@ add_custom_command(
           ${CMAKE_CURRENT_BINARY_DIR}/class .
   DEPENDS ${java_files}
   VERBATIM)
-add_jar(test_jar SOURCE ${CMAKE_CURRENT_SOURCE_DIR}/java/MyTest.java
+add_jar(test_jar SOURCE ${java_files}
         INCLUDE_JARS ${CMAKE_CURRENT_BINARY_DIR}/build.jar)
 add_custom_command(
   TARGET test_jar
