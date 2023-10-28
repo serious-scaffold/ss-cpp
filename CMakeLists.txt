@@ -60,11 +60,6 @@ if(${CMAKE_BUILD_TYPE} MATCHES [[Release]])
   link_time_optimization()
 endif()
 
-# Coverage
-add_code_coverage_all_targets(
-  EXCLUDE ${VCPKG_INSTALLED_DIR}/* ${CMAKE_BINARY_DIR}/* /usr/*
-  HTML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage)
-
 create_uninstall_target()
 
 # Project custom modules
@@ -75,6 +70,8 @@ include(ConfigureDocs)
 include(CTest)
 enable_testing()
 include(ConfigureGtest)
+include(ConfigureDocs)
+include(ConfigureCoverage)
 
 # Package dependencies using find_package
 find_package(absl CONFIG REQUIRED)

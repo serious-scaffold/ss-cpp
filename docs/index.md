@@ -6,7 +6,7 @@ Overview <self>
 cmake_workflow
 changelog
 api
-coverage/index
+coverage
 ```
 
 ```{include} ../README.md
