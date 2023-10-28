@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/msclock/cpp-scaffold/compare/v1.2.2...v1.2.3) (2023-10-28)
+
+
+### Performance
+
+* embed coverage in sphinx intead of repalcing ([dd8f3cd](https://github.com/msclock/cpp-scaffold/commit/dd8f3cdb60803821e409670b9dc0b05b5c516040))
+* organize cmake gtest configuration ([a774ba7](https://github.com/msclock/cpp-scaffold/commit/a774ba735017724cae9c007853089cf66789e40c))
+
 ## [1.2.2](https://github.com/msclock/cpp-scaffold/compare/v1.2.1...v1.2.2) (2023-10-28)
 
 
