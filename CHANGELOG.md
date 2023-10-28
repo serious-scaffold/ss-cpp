@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/msclock/cpp-scaffold/compare/v1.2.0...v1.2.1) (2023-10-28)
+
+
+### Performance
+
+* more generic build of java jar ([282004e](https://github.com/msclock/cpp-scaffold/commit/282004eee4fd4f10e810aff7d68d9b92c909862a))
+
 ## [1.2.0](https://github.com/msclock/cpp-scaffold/compare/v1.1.6...v1.2.0) (2023-10-28)
 
 
