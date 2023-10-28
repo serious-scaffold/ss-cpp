@@ -67,6 +67,7 @@ create_uninstall_target()
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
+include(ConfigureGtest)
 include(ConfigureDocs)
 include(ConfigureCoverage)
 [%- if use_cpm == true %]
@@ -75,10 +76,6 @@ include(ConfigureCPMDependencies)
 [%- if use_cpm == true %]
 include(ConfigureConanDependencies)
 [%- endif %]
-
-include(CTest)
-enable_testing()
-include(ConfigureGtest)
 
 # Package dependencies using find_package
 find_package(absl CONFIG REQUIRED)

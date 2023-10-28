@@ -65,10 +65,6 @@ create_uninstall_target()
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
-include(ConfigureDocs)
-
-include(CTest)
-enable_testing()
 include(ConfigureGtest)
 include(ConfigureDocs)
 include(ConfigureCoverage)

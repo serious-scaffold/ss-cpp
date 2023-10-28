@@ -1,5 +1,11 @@
-# we will use the network to fetch Google Test sources make it possible to
-# disable unit tests when not on network tests
+include_guard(GLOBAL)
+
+# Enable CTest in CMake
+include(CTest)
+enable_testing()
+
+# Use the network to fetch Google Test sources make it possible to disable unit
+# tests when not on network tests
 message(STATUS "Enable testing: ${BUILD_TESTING}")
 if(BUILD_TESTING)
   # fetch googletest since cmake > 3.11
