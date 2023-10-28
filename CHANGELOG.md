@@ -1,3 +1,15 @@
+## [1.2.4](https://github.com/msclock/cpp-scaffold/compare/v1.2.3...v1.2.4) (2023-10-28)
+
+
+### Performance
+
+* recover to upload .copier-answers.yml ([34af8e3](https://github.com/msclock/cpp-scaffold/commit/34af8e3efa41e9a527c3b108cfaa5863005fa4a2))
+
+
+### Docs
+
+* fix typo in CHANGELOG.md ([bde31f3](https://github.com/msclock/cpp-scaffold/commit/bde31f3c856b8a7722cce0011170bee28c87dbcf))
+
 ## [1.2.3](https://github.com/msclock/cpp-scaffold/compare/v1.2.2...v1.2.3) (2023-10-28)
 
 
