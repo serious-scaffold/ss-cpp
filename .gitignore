@@ -338,6 +338,3 @@ ASALocalRun/
 # Python lint or env cache
 .nox
 .mypy_cache
-
-# copier
-.copier-answers.yml

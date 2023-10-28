@@ -26,7 +26,7 @@ As usual:
 
 - create a new branch: `git switch -c feature-or-bugfix-name`
 - edit the code and/or the documentation
-- run `copier copy -l . .` to generate the current cpp-scaffold.
+- run `copier copy --vcs-ref=HEAD -l . .` to generate the current cpp-scaffold.
 - run `pre-commit run -a` to check if any errors can be fixed.
 - if everything is fine, your changes are ready to commit.
 
