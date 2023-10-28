@@ -11,7 +11,7 @@ if(DOXYGEN_FOUND)
 
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
-  # cmake-format:off
+  # cmake-format: off
   doxygen_add_docs(
     ${CMAKE_PROJECT_NAME}_doxygen
     "${CMAKE_BINARY_DIR}/git/include"
