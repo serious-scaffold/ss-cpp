@@ -7,12 +7,12 @@
 [%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
     "abseil",
 [%- endif %]
-    [%- if use_conan == true %]
+[%- if use_conan == true %]
     "cmake-conan",
-    [%- endif %]
-    [%- if use_cpm == true %]
+[%- endif %]
+[%- if use_cpm == true %]
     "cmake-cpm",
-    [%- endif %]
+[%- endif %]
     "cmake-modules",
 [%- if add_compile_target == true %]
     "proxy",
