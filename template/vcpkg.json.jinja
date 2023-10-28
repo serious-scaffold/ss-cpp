@@ -4,7 +4,9 @@
   "description": "{{ project_description }}",
   "builtin-baseline": "cc97b4536ae749ec0e4f643488b600b217540fb3",
   "dependencies": [
+[%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
     "abseil",
+[%- endif %]
     [%- if use_conan == true %]
     "cmake-conan",
     [%- endif %]
@@ -12,7 +14,9 @@
     "cmake-cpm",
     [%- endif %]
     "cmake-modules",
+[%- if add_compile_target == true %]
     "proxy",
+[%- endif %]
     "robotology-cmake-ycm"
   ],
   "vcpkg-configuration": {
@@ -22,12 +26,12 @@
         "baseline": "13e8a55272286b7334670d265912cc041fe25bb9",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
-          [%- if use_conan == true %]
+[%- if use_conan == true %]
           "cmake-conan",
-          [%- endif %]
-          [%- if use_cpm == true %]
+[%- endif %]
+[%- if use_cpm == true %]
           "cmake-cpm",
-          [%- endif %]
+[%- endif %]
           "cmake-modules",
           "robotology-cmake-ycm",
           "vcpkg-cmake-module"

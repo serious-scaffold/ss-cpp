@@ -155,7 +155,7 @@ add_header_only_target:
   help: Whether to add a header-only target
   type: bool
 
-add_compile_lib_target:
+add_compile_target:
   default: true
   help: Whether to add a compile lib target
   type: bool
