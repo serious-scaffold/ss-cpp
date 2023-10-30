@@ -1,3 +1,11 @@
+## [1.2.6](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.5...v1.2.6) (2023-10-30)
+
+
+### Bug Fixes
+
+* document transition error ([70c32e8](https://github.com/serious-scaffold/cpp-scaffold/commit/70c32e84ace96779afc821e17b2758e5c7bdadb2))
+* install dependency absl::log ([412ee11](https://github.com/serious-scaffold/cpp-scaffold/commit/412ee111af35bb9d5d5ad8dd4da5a2c19d63a82b))
+
 ## [1.2.5](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.4...v1.2.5) (2023-10-30)
 
 
