@@ -21,7 +21,7 @@ install_target(
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES
-  "absl:log")
+  absl::log)
 
 # Test
 if(BUILD_TESTING)
