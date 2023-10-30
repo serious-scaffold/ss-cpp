@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.4...v1.2.5) (2023-10-30)
+
+
+### Performance
+
+* organize executable example ([461bc21](https://github.com/serious-scaffold/cpp-scaffold/commit/461bc21811368e850963b158182b134f4db63386)), closes [#31](https://github.com/serious-scaffold/cpp-scaffold/issues/31)
+
 ## [1.2.4](https://github.com/msclock/cpp-scaffold/compare/v1.2.3...v1.2.4) (2023-10-28)
 
 
