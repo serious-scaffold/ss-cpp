@@ -6,3 +6,5 @@ add_subdirectory(executable)
 add_subdirectory(header_only)
 # A jni app
 add_subdirectory(jni)
+# An authentication example
+add_subdirectory(authentication)

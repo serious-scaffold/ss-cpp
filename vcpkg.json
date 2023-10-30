@@ -6,6 +6,8 @@
   "dependencies": [
     "abseil",
     "cmake-modules",
+    "infoware",
+    "libsodium",
     "proxy",
     "robotology-cmake-ycm"
   ],
