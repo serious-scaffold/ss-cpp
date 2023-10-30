@@ -1,3 +1,17 @@
+# The private target will not be installed and only act as requirements for main
+# and tests internally
+set(target_name_private executable_private)
+
+add_library(${target_name_private} INTERFACE)
+
+target_include_interface_directories(
+  ${target_name_private} ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_BINARY_DIR}/git/include)
+
+target_link_libraries(${target_name_private} INTERFACE absl::log)
+
+# The main target only contains main logits. Here it is recommended to put the
+# parts that need to be verified and tested in the target target_name_private
 set(target_name executable)
 
 file(GLOB_RECURSE _srcs "src/*.cpp")
@@ -6,11 +20,8 @@ add_executable(${target_name} ${_srcs})
 target_code_coverage(${target_name} ALL)
 copy_sanitizer_runtime(${target_name})
 
-target_include_interface_directories(
-  ${target_name} ${CMAKE_CURRENT_SOURCE_DIR}/include
-  ${CMAKE_BINARY_DIR}/git/include)
-
-target_link_libraries(${target_name} PRIVATE absl::log_initialize absl::log)
+target_link_libraries(${target_name} PRIVATE absl::log_initialize absl::log
+                                             ${target_name_private})
 
 install(
   TARGETS ${target_name}
@@ -22,3 +33,8 @@ install_copyright(FILE_LIST ${CMAKE_SOURCE_DIR}/LICENSE DESTINATION
 
 install_dependency(TARGETS ${target_name} DIRECTORIES
                    ${RUNPATH_VCPKG_DPENDENCY_PATH})
+
+# Test
+if(BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
