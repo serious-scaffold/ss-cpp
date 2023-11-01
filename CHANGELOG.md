@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.6...v1.2.7) (2023-11-01)
+
+
+### Bug Fixes
+
+* add a pre-dependency for ccov-all ([d960035](https://github.com/serious-scaffold/cpp-scaffold/commit/d9600356fabf7a203a1d6566381e35c7d61f30ea)), closes [#38](https://github.com/serious-scaffold/cpp-scaffold/issues/38)
+
 ## [1.2.6](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.5...v1.2.6) (2023-10-30)
 
 
