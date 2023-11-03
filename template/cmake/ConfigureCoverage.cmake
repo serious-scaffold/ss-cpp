@@ -9,6 +9,6 @@ add_code_coverage_all_targets(
   HTML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}_docs/coverage)
 # cmake-format: on
 
-if(${CMAKE_PROJECT_NAME}_docs)
+if(TARGET ${CMAKE_PROJECT_NAME}_docs)
   add_dependencies(ccov-all ${CMAKE_PROJECT_NAME}_docs)
 endif()
