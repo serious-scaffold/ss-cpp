@@ -10,7 +10,7 @@ add_subdirectory(executable)
 # A header-only library
 add_subdirectory(header_only)
 [%- endif %]
-[%- if add_header_only_target == true %]
-# A jni app
+[%- if add_jni_target == true %]
+# A jni target
 add_subdirectory(jni)
 [%- endif %]
