@@ -338,3 +338,6 @@ ASALocalRun/
 # Python lint or env cache
 .nox
 .mypy_cache
+
+# Ignore things from copier
+.copier-answers.yml
