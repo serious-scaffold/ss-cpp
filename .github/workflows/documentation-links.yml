@@ -1,0 +1,24 @@
+# https://github.com/readthedocs/actions/tree/main/preview
+
+name: readthedocs/actions
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+permissions:
+  pull-requests: write
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+
+  preview-rtd:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: readthedocs/actions/preview@v1
+        with:
+          project-slug: ${{ github.repository }}
