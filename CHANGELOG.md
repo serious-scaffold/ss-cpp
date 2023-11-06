@@ -1,3 +1,21 @@
+## [1.2.8](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.7...v1.2.8) (2023-11-06)
+
+
+### Bug Fixes
+
+* error on the lack of sphinx tools ([88027bf](https://github.com/serious-scaffold/cpp-scaffold/commit/88027bf817a74503d158ef38d274911ae169fd45))
+* jni target are always added ([e1ae2d0](https://github.com/serious-scaffold/cpp-scaffold/commit/e1ae2d03357dc8acdae90be1c2d2477954769658))
+
+
+### Performance
+
+* attach coverage generation result to docs ([f984dda](https://github.com/serious-scaffold/cpp-scaffold/commit/f984ddafffddb819235dbdd51a66cc66f6dae55c))
+
+
+### Chores
+
+* remove answers from copier ([cade11a](https://github.com/serious-scaffold/cpp-scaffold/commit/cade11a860d147ecd6bf1eb3159940e43075f978))
+
 ## [1.2.7](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.6...v1.2.7) (2023-11-01)
 
 
