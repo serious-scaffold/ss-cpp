@@ -19,9 +19,9 @@ set(VCPKG_VERBOSE
 
 # Project settings
 project(
-  cpp-scaffold
+  ss-cpp
   LANGUAGES CXX C
-  HOMEPAGE_URL "https://github.com/msclock/cpp-scaffold"
+  HOMEPAGE_URL "https://github.com/serious-scaffold/ss-cpp"
   DESCRIPTION "A development-focused Cpp project template.")
 
 set(CMAKE_CXX_STANDARD 20)

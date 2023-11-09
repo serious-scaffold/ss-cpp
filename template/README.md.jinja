@@ -10,9 +10,9 @@
 {{ release_badge() }}
 {{ license_badge() }}
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
-[![cpp Scaffold](https://img.shields.io/badge/cpp%20scaffold-c++-blue)](https://github.com/msclock/cpp-scaffold)
+[![SS Cpp](https://img.shields.io/badge/Serious%20Scaffold-c++-blue)](https://github.com/serious-scaffold/ss-cpp)
 
-[% if repo_name == 'cpp-scaffold' -%]
+[% if repo_name == 'ss-cpp' -%]
 ## Features
 
 - Project setup and template update with [copier](https://github.com/copier-org/copier/).
@@ -29,7 +29,7 @@
 1. Generate the project.
 
    ```bash
-   copier copy gh:msclock/cpp-scaffold /path/to/project
+   copier copy gh:{{ repo_namespace }}/ss-cpp /path/to/project
    ```
 
 2. Navigate to the project directory and initialize a git repository.
