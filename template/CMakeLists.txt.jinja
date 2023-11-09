@@ -3,21 +3,8 @@
 cmake_minimum_required(VERSION 3.20)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
-# Vcpkg build environment
-if(DEFINED ENV{VCPKG_ROOT})
-  message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
-  set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
-else()
-  message(
-    FATAL_ERROR "Missing VCPKG_ROOT, please check the existence of VCPKG_ROOT")
-endif()
-
-# set cmake tool chain
-set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
-
-set(VCPKG_VERBOSE
-    ON
-    CACHE BOOL "Vcpkg VCPKG_VERBOSE")
+# Configure Vcpkg
+include(${CMAKE_CURRENT_LIST_DIR}/cmake/Vcpkg.cmake)
 
 # Project settings
 project(
@@ -63,9 +50,10 @@ if(${CMAKE_BUILD_TYPE} MATCHES [[Release]])
   link_time_optimization()
 endif()
 
+# Create an uninstall target
 create_uninstall_target()
 
-# Project custom modules
+# Append customized module path
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
 include(ConfigureDocs)
