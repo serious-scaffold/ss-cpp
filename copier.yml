@@ -164,3 +164,8 @@ add_jni_target:
   default: false
   help: Whether to add a jni target based on Java invocation API
   type: bool
+
+add_custom_triplets:
+  default: false
+  help: Whether to add custom triplets for vcpkg
+  type: bool
