@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A development-focused Cpp project template.",
-  "builtin-baseline": "cc97b4536ae749ec0e4f643488b600b217540fb3",
+  "builtin-baseline": "fe1e9f508ee13ed3d0a7d318beac7efe1ec4f9d7",
   "dependencies": [
     "abseil",
     "cmake-modules",
@@ -13,7 +13,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "13e8a55272286b7334670d265912cc041fe25bb9",
+        "baseline": "86fc9ec4a39a083e5dcb61581fcfd335e352d12b",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",
