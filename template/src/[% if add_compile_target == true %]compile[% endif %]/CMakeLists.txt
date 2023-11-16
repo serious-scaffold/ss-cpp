@@ -18,7 +18,7 @@ generate_export_header(
   EXPORT_MACRO_NAME
   "${target_name}_EXPORT"
   EXPORT_FILE_NAME
-  "${CMAKE_BINARY_DIR}/${target_name}/include/${target_name}_export.hpp"
+  "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}/${target_name}_export.hpp"
   DEPRECATED_MACRO_NAME
   "${target_name}_DEPRECATED"
   NO_EXPORT_MACRO_NAME
@@ -35,7 +35,7 @@ target_compile_definitions(${target_name}-shared
                            INTERFACE $<INSTALL_INTERFACE:USING_${target_name}>)
 
 target_include_interface_directories(
-  ${target_name}-shared ${CMAKE_BINARY_DIR}/${target_name}/include
+  ${target_name}-shared ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
   ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
@@ -68,7 +68,7 @@ target_compile_definitions(
   INTERFACE $<INSTALL_INTERFACE:USING_${target_name}>)
 
 target_include_interface_directories(
-  ${target_name}-static ${CMAKE_BINARY_DIR}/${target_name}/include
+  ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
   ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
@@ -108,7 +108,7 @@ install_target(
   ${CMAKE_PROJECT_VERSION}
   INCLUDES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
-  ${CMAKE_BINARY_DIR}/${target_name}/include/
+  ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}/
   ${CMAKE_BINARY_DIR}/git/include/
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
