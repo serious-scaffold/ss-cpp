@@ -1,3 +1,15 @@
+## [1.2.10](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.9...v1.2.10) (2023-11-18)
+
+
+### Performance
+
+* executable install depends rules ([1317a5c](https://github.com/serious-scaffold/ss-cpp/commit/1317a5c2b6675bec80032a6fbdaf1b3035378fc5))
+
+
+### Chores
+
+* update baseline ([f349824](https://github.com/serious-scaffold/ss-cpp/commit/f349824045bc4de2c3fdeee87b522be02d7e216a))
+
 ## [1.2.9](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.8...v1.2.9) (2023-11-18)
 
 
