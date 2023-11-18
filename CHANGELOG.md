@@ -1,3 +1,16 @@
+## [1.2.9](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.8...v1.2.9) (2023-11-18)
+
+
+### Performance
+
+* put export include to target build directories ([26f4e8a](https://github.com/serious-scaffold/ss-cpp/commit/26f4e8abf0a453e6ffc0995554f2adfcd74e6484)), closes [#49](https://github.com/serious-scaffold/ss-cpp/issues/49)
+
+
+### Chores
+
+* rename repository to ss-cpp ([acc1b5a](https://github.com/serious-scaffold/ss-cpp/commit/acc1b5a0b93eae05c5d5f0bccba85b652ca47075))
+* update baseline in vcpkg.json ([5b57a7c](https://github.com/serious-scaffold/ss-cpp/commit/5b57a7c00ee0ba5daefba0d8abaae3a960d26970))
+
 ## [1.2.8](https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.7...v1.2.8) (2023-11-06)
 
 
