@@ -23,16 +23,10 @@ copy_sanitizer_runtime(${target_name})
 target_link_libraries(${target_name} PRIVATE absl::log_initialize absl::log
                                              ${target_name_private})
 
-install(
-  TARGETS ${target_name}
-  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS ${target_name}
+        RUNTIME DESTINATION $<$<CONFIG:Debug>:debug/>${CMAKE_INSTALL_BINDIR})
 
-install_copyright(FILE_LIST ${CMAKE_SOURCE_DIR}/LICENSE DESTINATION
-                  ${CMAKE_INSTALL_BINDIR})
-
-install_dependency(TARGETS ${target_name} DIRECTORIES
-                   ${RUNPATH_VCPKG_DPENDENCY_PATH})
+install_dependency(TARGETS ${target_name})
 
 # Test
 if(BUILD_TESTING)
