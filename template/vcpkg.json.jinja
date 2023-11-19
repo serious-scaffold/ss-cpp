@@ -5,19 +5,37 @@
   "builtin-baseline": "fe1e9f508ee13ed3d0a7d318beac7efe1ec4f9d7",
   "dependencies": [
 [%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
-    "abseil",
+    {
+      "name": "abseil",
+      "version>=": "20230802.1"
+    },
 [%- endif %]
 [%- if use_conan == true %]
-    "cmake-conan",
+    {
+      "name": "cmake-conan",
+      "version>=": "0.18.1"
+    },
 [%- endif %]
 [%- if use_cpm == true %]
-    "cmake-cpm",
+    {
+      "name": "cmake-cpm",
+      "version>=": "0.38.6#2"
+    },
 [%- endif %]
-    "cmake-modules",
+    {
+      "name": "cmake-modules",
+      "version>=": "1.3.0"
+    },
 [%- if add_compile_target == true %]
-    "proxy",
+    {
+      "name": "proxy",
+      "version>=": "1.1.1"
+    },
 [%- endif %]
-    "robotology-cmake-ycm"
+    {
+      "name": "robotology-cmake-ycm",
+      "version>=": "0.15.3"
+    }
   ],
   "vcpkg-configuration": {
     "registries": [

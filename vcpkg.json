@@ -4,10 +4,22 @@
   "description": "A development-focused Cpp project template.",
   "builtin-baseline": "fe1e9f508ee13ed3d0a7d318beac7efe1ec4f9d7",
   "dependencies": [
-    "abseil",
-    "cmake-modules",
-    "proxy",
-    "robotology-cmake-ycm"
+    {
+      "name": "abseil",
+      "version>=": "20230802.1"
+    },
+    {
+      "name": "cmake-modules",
+      "version>=": "1.3.0"
+    },
+    {
+      "name": "proxy",
+      "version>=": "1.1.1"
+    },
+    {
+      "name": "robotology-cmake-ycm",
+      "version>=": "0.15.3"
+    }
   ],
   "vcpkg-configuration": {
     "registries": [
