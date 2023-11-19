@@ -1,4 +1,4 @@
-# SS Cpp
+# Serious Scaffold Cpp
 
 A development-focused Cpp project template.
 

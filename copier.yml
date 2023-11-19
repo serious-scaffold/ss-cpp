@@ -20,13 +20,13 @@ _message_after_update: |
   you're done.
 
 project_name:
-  default: SS Cpp
+  default: Serious Scaffold Cpp
   help: 'Enter the name of the project in CamelCase format:'
   type: str
 
 project_description:
   default: |
-    [%- if project_name == 'SS Cpp' -%]
+    [%- if project_name == 'Serious Scaffold Cpp' -%]
       A development-focused Cpp project template.
     [%- endif -%]
   help: 'Provide a brief description for the project:'
@@ -53,7 +53,7 @@ copyright_year:
 
 author_name:
   default: |
-    [%- if project_name == 'SS Cpp' -%]
+    [%- if project_name == 'Serious Scaffold Cpp' -%]
       msclock
     [%- endif -%]
   help: 'Specify the name of the author:'
@@ -61,7 +61,7 @@ author_name:
 
 organization_name:
   default: |
-    [%- if project_name == 'SS Cpp' -%]
+    [%- if project_name == 'Serious Scaffold Cpp' -%]
       Serious Scaffold
     [%- endif -%]
   help: 'Provide the name of the organization associated with the project:'
@@ -74,7 +74,7 @@ copyright_holder:
 
 author_email:
   default: |
-    [%- if project_name == 'SS Cpp' -%]
+    [%- if project_name == 'Serious Scaffold Cpp' -%]
       msclock@126.com
     [%- else -%]
       {{ author_name }}@{{ organization_name|lower|replace(" ", "-") }}.com
@@ -114,7 +114,12 @@ repo_namespace:
   type: str
 
 repo_name:
-  default: '{{ project_name|lower|replace(" ", "-") }}'
+  default: |-
+    [% if project_name == 'Serious Scaffold Cpp' -%]
+      ss-cpp
+    [%- else -%]
+      {{ project_name|lower|replace(" ", "-") }}
+    [%- endif %]
   help: 'Provide a name for the repository:'
   type: str
 
