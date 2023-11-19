@@ -1,3 +1,16 @@
+## [1.2.11](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.10...v1.2.11) (2023-11-19)
+
+
+### Performance
+
+* explictly declare dependency version ([73ebaeb](https://github.com/serious-scaffold/ss-cpp/commit/73ebaeb13bfde775813bd7f58694eda75cb030b0)), closes [#51](https://github.com/serious-scaffold/ss-cpp/issues/51)
+* use the GoogleTest module from cmake_modules ([65fa5e2](https://github.com/serious-scaffold/ss-cpp/commit/65fa5e21efe2f8dd958b21bb0d5c29a0818525f4)), closes [#52](https://github.com/serious-scaffold/ss-cpp/issues/52)
+
+
+### Chores
+
+* update baseline ([fdfc19b](https://github.com/serious-scaffold/ss-cpp/commit/fdfc19b39ee7ba991d44822a325b9c9abb098531))
+
 ## [1.2.10](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.9...v1.2.10) (2023-11-18)
 
 
