@@ -1,4 +1,4 @@
-# Welcome to SS Cpp's documentation
+# Welcome to Serious Scaffold Cpp's documentation
 
 ```{toctree}
 :hidden:

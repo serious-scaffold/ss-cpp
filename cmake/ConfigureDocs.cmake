@@ -1,5 +1,5 @@
 # Build the target by issuing: cmake --build . --target
-# ${CMAKE_PROJECT_NAME}_docs
+# ${CMAKE_PROJECT_NAME}-docs
 
 include(cmake-modules/configure/ConfigDoxygen)
 configdoxygen()
@@ -31,7 +31,7 @@ if(DOXYGEN_FOUND)
     unset(Sphinx_FIND_COMPONENTS)
 
     sphinx_add_docs(
-      ${CMAKE_PROJECT_NAME}_docs
+      ${CMAKE_PROJECT_NAME}-docs
       BREATHE_PROJECTS
       ${doxygen_docs}
       BUILDER
