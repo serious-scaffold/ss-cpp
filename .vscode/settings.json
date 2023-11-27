@@ -1,5 +1,6 @@
 {
   "cmake.useCMakePresets": "always",
+  "cmake.options.statusBarVisibility": "visible",
   "files.exclude": {
     "**/.clangd/**": true
   },
@@ -97,5 +98,5 @@
     "memory_resource": "cpp",
     "numbers": "cpp",
     "semaphore": "cpp"
-  },
+  }
 }

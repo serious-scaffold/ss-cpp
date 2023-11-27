@@ -4,6 +4,8 @@
 :hidden:
 Overview <self>
 cmake_workflow
+development
+contributing
 changelog
 api
 coverage
