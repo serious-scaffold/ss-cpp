@@ -1,8 +1,8 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
-// https://github.com/microsoft/vscode-dev-containers/tree/v0.195.0/containers/cpp
+// https://github.com/devcontainers/images/tree/main/src/base-ubuntu
 {
   "name": "{{ repo_name }}",
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
   "capAdd": [
     // Enable ptrace-based debugging for C++
     "SYS_PTRACE"
@@ -18,7 +18,6 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {},
     "ghcr.io/devcontainers/features/python:1": {},
-    "ghcr.io/dhoeric/features/act:1": {},
     "ghcr.io/msclock/features/vcpkg:1": {},
     "ghcr.io/devcontainers/features/common-utils:2": {
       "username": "vscode"

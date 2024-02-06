@@ -2,46 +2,62 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "{{ repo_name }}",
   "description": "{{ project_description }}",
-  "builtin-baseline": "fe1e9f508ee13ed3d0a7d318beac7efe1ec4f9d7",
+  "builtin-baseline": "80403036a665cb8fcc1a1b3e17593d20b03b2489",
   "dependencies": [
+[%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
+    "abseil",
+[%- endif %]
+[%- if add_compile_target == true %]
+    "proxy",
+[%- endif %]
+[%- if use_conan == true %]
+    "cmake-conan",
+[%- endif %]
+[%- if use_cpm == true %]
+    "cmake-cpm",
+[%- endif %]
+    "cmake-modules",
+    "robotology-cmake-ycm"
+  ],
+  "overrides": [
 [%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
     {
       "name": "abseil",
-      "version>=": "20230802.1"
+      "version": "20230802.1"
+    },
+[%- endif %]
+[%- if add_compile_target == true %]
+    {
+      "name": "proxy",
+      "version": "1.1.1"
     },
 [%- endif %]
 [%- if use_conan == true %]
     {
       "name": "cmake-conan",
-      "version>=": "0.18.1"
+      "version": "0.18.1"
     },
 [%- endif %]
 [%- if use_cpm == true %]
     {
       "name": "cmake-cpm",
-      "version>=": "0.38.6#2"
+      "version": "0.38.6#2"
     },
 [%- endif %]
     {
       "name": "cmake-modules",
-      "version>=": "1.3.0"
+      "version": "1.3.0"
     },
-[%- if add_compile_target == true %]
-    {
-      "name": "proxy",
-      "version>=": "1.1.1"
-    },
-[%- endif %]
     {
       "name": "robotology-cmake-ycm",
-      "version>=": "0.15.3"
+      "version": "0.15.3"
     }
   ],
   "vcpkg-configuration": {
     "registries": [
       {
         "kind": "git",
-        "baseline": "fd59f49af83f752d715a1c3d75fa06c658c40eb7",
+        "baseline": "b58077c46126bee7c5cd54c26a4b974055c21d2b",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
 [%- if use_conan == true %]
