@@ -12,27 +12,11 @@ target_code_coverage(${target_name}-shared ALL)
 
 include(GenerateExportHeader)
 generate_export_header(
-  ${target_name}-shared
-  BASE_NAME
-  "${target_name}"
-  EXPORT_MACRO_NAME
-  "${target_name}_EXPORT"
-  EXPORT_FILE_NAME
+  ${target_name}-shared BASE_NAME "${target_name}" EXPORT_FILE_NAME
   "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}/${target_name}_export.hpp"
-  DEPRECATED_MACRO_NAME
-  "${target_name}_DEPRECATED"
-  NO_EXPORT_MACRO_NAME
-  "${target_name}_NO_EXPORT"
-  STATIC_DEFINE
-  "${target_name}_STATIC_DEFINE"
-  NO_DEPRECATED_MACRO_NAME
-  "${target_name}_NO_DEPRECATED"
-  DEFINE_NO_DEPRECATED)
+)
 
 target_sources(${target_name}-shared PRIVATE ${_srcs} ${_hdrs})
-
-target_compile_definitions(${target_name}-shared
-                           INTERFACE $<INSTALL_INTERFACE:USING_${target_name}>)
 
 target_include_interface_directories(
   ${target_name}-shared ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
@@ -62,10 +46,8 @@ target_code_coverage(${target_name}-static ALL)
 
 target_sources(${target_name}-static PRIVATE ${_srcs} ${_hdrs})
 
-target_compile_definitions(
-  ${target_name}-static
-  PUBLIC ${target_name}_STATIC_DEFINE
-  INTERFACE $<INSTALL_INTERFACE:USING_${target_name}>)
+target_compile_definitions(${target_name}-static
+                           INTERFACE ${target_name}_STATIC_DEFINE)
 
 target_include_interface_directories(
   ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
@@ -81,11 +63,8 @@ target_link_libraries(
   PRIVATE msft_proxy
   PRIVATE absl::log)
 
-set_target_properties(
-  ${target_name}-static
-  PROPERTIES POSITION_INDEPENDENT_CODE 1
-             ARCHIVE_OUTPUT_NAME "${target_name}_s"
-             RELEASE_POSTFIX "_s")
+set_target_properties(${target_name}-static PROPERTIES ARCHIVE_OUTPUT_NAME
+                                                       "${target_name}")
 
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
@@ -116,8 +95,11 @@ install_target(
   msft_proxy
   absl::log)
 
+install_dependency(TARGETS ${target_name}-shared ${target_name}-static)
+
 # Tests
 message(STATUS "BUILD_TESTING:${BUILD_TESTING}")
+
 if(BUILD_TESTING)
   add_subdirectory(tests)
 endif()

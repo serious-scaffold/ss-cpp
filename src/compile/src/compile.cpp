@@ -1,4 +1,5 @@
 #include "compile.hpp"
+
 #include <absl/log/log.h>
 #include "git.h"
 #include "impl/impl.hpp"
@@ -9,7 +10,7 @@ std::string_view version_compile() noexcept {
     return git::ProjectVersion();
 }
 
-bool compile_EXPORT is_debug() noexcept {
+bool is_debug() noexcept {
 #ifdef _DEBUG
     return true;
 #else
