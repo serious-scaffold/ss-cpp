@@ -16,7 +16,7 @@ install_target(
   TARGETS
   ${target_name}
   INCLUDES
-  ${CMAKE_CURRENT_SOURCE_DIR}/include/
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/${target_name}/
   ${CMAKE_BINARY_DIR}/git/include/
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
