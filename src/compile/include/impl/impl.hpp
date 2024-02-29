@@ -15,7 +15,7 @@ namespace geo {
 // https://devblogs.microsoft.com/cppblog/proxy-runtime-polymorphism-made-easier-than-ever/
 
 // Abstraction Draw interface for polymorphic call
-struct compile_EXPORT Draw : pro::dispatch<void(std::ostream&)> {
+struct COMPILE_EXPORT Draw : pro::dispatch<void(std::ostream&)> {
 public:
     template <class T>
     void operator()(const T& self, std::ostream& out) {
@@ -24,7 +24,7 @@ public:
 };
 
 // Abstraction Area interface for polymorphic call
-struct compile_EXPORT Area : pro::dispatch<double()> {
+struct COMPILE_EXPORT Area : pro::dispatch<double()> {
 public:
     template <class T>
     double operator()(const T& self) {
@@ -33,13 +33,13 @@ public:
 };
 
 // Interface facade for Draw, Area
-struct compile_EXPORT DrawableFacade : pro::facade<Draw, Area> {};
+struct COMPILE_EXPORT DrawableFacade : pro::facade<Draw, Area> {};
 
 // Client API - Consumer
-std::string compile_EXPORT PrintDrawableToString(const pro::proxy<DrawableFacade>& p);
+std::string COMPILE_EXPORT PrintDrawableToString(const pro::proxy<DrawableFacade>& p);
 
 // Client API - Producer
-pro::proxy<DrawableFacade> compile_EXPORT CreateRectangleAsDrawable(int width, int height);
+pro::proxy<DrawableFacade> COMPILE_EXPORT CreateRectangleAsDrawable(int width, int height);
 
 }; // namespace geo
 }; // namespace compile
