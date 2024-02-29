@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "header_only.hpp"
+#include "header_only/header_only.hpp"
 
 TEST(common, some_fun) {
     const auto fun_ret = header_only::common::some_fun();
