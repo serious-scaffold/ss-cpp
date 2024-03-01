@@ -1,8 +1,8 @@
 {
-  "version": 3,
+  "version": 6,
   "configurePresets": [
     {
-      "name": "base",
+      "name": "default",
       "displayName": "Basic Config",
       "description": "Basic build using Ninja generator",
       "generator": "Ninja",
@@ -112,7 +112,7 @@
       "name": "x64-Debug-MSVC",
       "description": "MSVC for x64 (Debug)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Debug",
         "MSVC"
@@ -122,7 +122,7 @@
       "name": "x64-Release-MSVC",
       "description": "MSVC for x64 (Release)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Release",
         "MSVC"
@@ -132,7 +132,7 @@
       "name": "x64-Debug-Clang",
       "description": "Clang/LLVM for x64 (Debug)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Debug",
         "Clang"
@@ -142,7 +142,7 @@
       "name": "x64-Release-Clang",
       "description": "Clang/LLVM for x64 (Release)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Release",
         "Clang"
@@ -152,7 +152,7 @@
       "name": "x64-Debug-ClangCL",
       "description": "Clang/LLVM for x64 (Debug)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Debug",
         "ClangCL"
@@ -162,7 +162,7 @@
       "name": "x64-Release-ClangCL",
       "description": "ClangCL/LLVM for x64 (Release)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Release",
         "ClangCL"
@@ -172,7 +172,7 @@
       "name": "x64-Debug-GNUC",
       "description": "GNUC for x64 (Debug)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Debug",
         "GNUC"
@@ -182,81 +182,32 @@
       "name": "x64-Release-GNUC",
       "description": "GNUC for x64 (Release)",
       "inherits": [
-        "base",
+        "default",
         "x64",
         "Release",
         "GNUC"
       ]
     }
   ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    }
+  ],
   "testPresets": [
     {
-      "name": "base",
+      "name": "default",
+      "configurePreset": "default",
       "output": {
         "outputOnFailure": true
       },
-      "hidden": true,
       "execution": {
         "noTestsAction": "error",
+        "stopOnFailure": true,
         "timeout": 180,
         "jobs": 8
       }
-    },
-    {
-      "name": "x64-Debug-MSVC",
-      "configurePreset": "x64-Debug-MSVC",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Release-MSVC",
-      "configurePreset": "x64-Release-MSVC",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-Clang",
-      "configurePreset": "x64-Debug-Clang",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Release-Clang",
-      "configurePreset": "x64-Release-Clang",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-ClangCL",
-      "configurePreset": "x64-Debug-ClangCL",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Release-ClangCL",
-      "configurePreset": "x64-Release-ClangCL",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Debug-GNUC",
-      "configurePreset": "x64-Debug-GNUC",
-      "inherits": [
-        "base"
-      ]
-    },
-    {
-      "name": "x64-Release-GNUC",
-      "configurePreset": "x64-Release-GNUC",
-      "inherits": [
-        "base"
-      ]
     }
   ]
 }
