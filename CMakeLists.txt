@@ -11,7 +11,9 @@ else()
 endif()
 
 # set cmake tool chain
-set(CMAKE_TOOLCHAIN_FILE ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake)
+file(TO_CMAKE_PATH ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
+     vcpkg_toolchain_file)
+set(CMAKE_TOOLCHAIN_FILE ${vcpkg_toolchain_file})
 
 set(VCPKG_VERBOSE
     ON
