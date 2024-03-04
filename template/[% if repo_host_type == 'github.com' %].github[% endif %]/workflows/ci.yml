@@ -42,12 +42,65 @@ jobs:
         with:
           commit_message: 'ci: auto fixes from pre-commit'
 
+  consistency:
+    if: ${{ !cancelled() && ! failure() }}
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Install copier for template rendering using pipx
+        run: pipx install copier
+
+      - name: Generate the project with the default value
+        run: |
+          find . -maxdepth 1 ! -name '.' \
+            ! -name 'template' \
+            ! -name 'includes' \
+            ! -name '.git' \
+            ! -name 'copier.yml' \
+            ! -name 'CHANGELOG.md' \
+            -exec rm -r {} +
+          copier copy -r HEAD -f . .
+          rm .copier-answers.yml
+
+      - name: Test for consistency
+        run: |
+          echo "List inconsistent files:"
+          git status --porcelain
+          git diff --exit-code || ( \
+            echo "# :warning: Inconsistent files found" >> $GITHUB_STEP_SUMMARY && \
+            echo "The following files are inconsistent with the template:" >> $GITHUB_STEP_SUMMARY && \
+            git status --porcelain | while read file; do echo "- $file"; done >> $GITHUB_STEP_SUMMARY && \
+            echo "" >> $GITHUB_STEP_SUMMARY && \
+            echo "Please run 'copier copy -r HEAD -f . .' to fix them." >>$GITHUB_STEP_SUMMARY && \
+            exit 1 \
+          )
+
+  pass:
+    if: always()
+    needs: [pre-commit, consistency]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
+
   release:
     name: release
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    needs: [pre-commit]
+    needs: [pass]
 
     steps:
       - name: Checkout

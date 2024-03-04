@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = "SS Cpp"
-copyright = "2022-2023 Serious Scaffold"
+copyright = "2022-2024 Serious Scaffold"
 author = "msclock"
 
 # -- General configuration ---------------------------------------------------
