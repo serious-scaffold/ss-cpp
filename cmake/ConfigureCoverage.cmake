@@ -6,9 +6,5 @@ add_code_coverage_all_targets(
   ${VCPKG_INSTALLED_DIR}/*
   ${CMAKE_BINARY_DIR}/*
   /usr/*
-  HTML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_PROJECT_NAME}-docs/coverage)
+  HTML_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs/_build/coverage)
 # cmake-format: on
-
-if(TARGET ${CMAKE_PROJECT_NAME}-docs)
-  add_dependencies(ccov-all ${CMAKE_PROJECT_NAME}-docs)
-endif()

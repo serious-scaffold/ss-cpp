@@ -6,29 +6,34 @@ configdoxygen()
 
 if(DOXYGEN_FOUND)
 
-  # Generate docs needs XML OUTPUT with sphinx
+  # Generate XML OUTPUT for breathe
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
+  set(DOXYGEN_QUIET NO)
+  set(DOXYGEN_REFERENCED_BY_RELATION YES)
+  set(DOXYGEN_REFERENCES_LINK_SOURCE YES)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
+  set(doxygen_docs ${CMAKE_PROJECT_NAME}_doxygen)
   # cmake-format: off
   doxygen_add_docs(
-    ${CMAKE_PROJECT_NAME}-doxygen
+    ${doxygen_docs}
     "${CMAKE_BINARY_DIR}/git/include"
     "${CMAKE_BINARY_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/executable/include"
-    "${PROJECT_SOURCE_DIR}/src/header_only/include"
-    COMMENT "gen doxygen style docs automatically")
+    "${PROJECT_SOURCE_DIR}/src/header_only/include")
   # cmake-format: on
 
-  if(TARGET ${CMAKE_PROJECT_NAME}-doxygen)
-    list(APPEND CMAKE_MODULE_PATH "${cmake-modules_MODULE_PATH}/configure")
-    find_package(Sphinx REQUIRED breathe)
+  if(TARGET ${doxygen_docs})
+    set(Sphinx_FIND_COMPONENTS breathe)
+    include(cmake-modules/configure/FindSphinx)
+    unset(Sphinx_FIND_COMPONENTS)
 
     sphinx_add_docs(
       ${CMAKE_PROJECT_NAME}-docs
       BREATHE_PROJECTS
-      ${CMAKE_PROJECT_NAME}-doxygen
+      ${doxygen_docs}
       BUILDER
       html
       BREATH_DEBUG
@@ -38,6 +43,6 @@ if(DOXYGEN_FOUND)
       SOURCE_DIRECTORY
       docs
       OUTPUT_DIRECTORY
-      ${CMAKE_PROJECT_NAME}-docs)
+      ${CMAKE_SOURCE_DIR}/docs/_build/html)
   endif()
 endif()

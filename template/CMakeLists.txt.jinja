@@ -40,8 +40,6 @@ find_package(cmake-modules REQUIRED)
 include(cmake-modules/configure/Default)
 include(cmake-modules/configure/Common)
 include(cmake-modules/configure/CheckBuildDir)
-include(cmake-modules/configure/ConfigDoxygen)
-include(cmake-modules/configure/FindSphinx)
 include(cmake-modules/configure/UniqueOutputBinaryDir)
 include(cmake-modules/build/Default)
 include(cmake-modules/build/Ccache)
@@ -58,11 +56,6 @@ include(cmake-modules/install/Runpath)
 
 # Add _DEBUG macro
 add_debug_macro()
-
-# LTO for release
-if(${CMAKE_BUILD_TYPE} MATCHES [[Release]])
-  link_time_optimization()
-endif()
 
 create_uninstall_target()
 

@@ -13,13 +13,12 @@ target_code_coverage(${target_name}-shared ALL)
 include(GenerateExportHeader)
 generate_export_header(
   ${target_name}-shared BASE_NAME "${target_name}" EXPORT_FILE_NAME
-  "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}/${target_name}_export.hpp"
-)
+  "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}_export.hpp")
 
 target_sources(${target_name}-shared PRIVATE ${_srcs} ${_hdrs})
 
 target_include_interface_directories(
-  ${target_name}-shared ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
+  ${target_name}-shared ${CMAKE_CURRENT_BINARY_DIR}/include
   ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
@@ -50,7 +49,7 @@ target_compile_definitions(${target_name}-static
                            INTERFACE ${target_name}_STATIC_DEFINE)
 
 target_include_interface_directories(
-  ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}
+  ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include
   ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
 
 target_compile_options(
@@ -87,7 +86,7 @@ install_target(
   ${CMAKE_PROJECT_VERSION}
   INCLUDES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
-  ${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}/
+  ${CMAKE_CURRENT_BINARY_DIR}/include/
   ${CMAKE_BINARY_DIR}/git/include/
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE

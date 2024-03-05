@@ -27,10 +27,13 @@ author = "msclock"
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    # there may be others here already, e.g. 'sphinx.ext.mathjax'
-    "myst_parser",
     "breathe",
+    "myst_parser",
     "sphinx_copybutton",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
+    "sphinxcontrib.moderncmakedomain",
 ]
 source_suffix = {
     ".rst": "restructuredtext",
@@ -51,7 +54,7 @@ primary_domain = "cpp"
 highlight_language = "cpp"
 
 cpp_id_attributes = [
-    "compile_EXPORT",
+    "COMPILE_EXPORT",
     "GIT_EXTERN_C_BEGIN",
 ]
 
