@@ -2,17 +2,35 @@
 
 ```{toctree}
 :hidden:
+```
+
+<!-- Extract content from start line 1 of README.md -->
+
+```{include} ../README.md
+:start-line: 1
+```
+
+## Content
+
+```{toctree}
+:maxdepth: 2
+:titlesonly:
+:caption: Guide
+:glob:
+
 Overview <self>
 [% if repo_name == 'ss-cpp' -%]
 cmake_workflow
 [% endif -%]
-changelog
-api
-coverage
 ```
 
-```{include} ../README.md
-:start-line: 1
+```{toctree}
+:maxdepth: 1
+:titlesonly:
+:caption: References
+
+api
+changelog
 ```
 
 ## 🔖 Indices and tables
