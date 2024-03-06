@@ -1,0 +1,53 @@
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency:
+  group: preview-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pages-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc
+          cmake: true
+          ninja: true
+          vcpkg: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+          python: true
+
+      - name: Install docs dependencies
+        run: |
+          pip install -r docs/requirements.txt
+
+      - name: Configure
+        env:
+          VCPKG_ROOT: /home/runner/vcpkg
+        run: cmake -S . --preset=x64-Debug-GNUC -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+
+      - name: Build Docs
+        run: cmake --build out/build/x64-Debug-GNUC --target ss-cpp-docs
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./docs/_build/html

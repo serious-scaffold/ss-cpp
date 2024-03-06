@@ -6,6 +6,9 @@ on:
   push:
     branches:
       - master
+      - beta
+      - alpha
+      - +([0-9])?(.{+([0-9]),x}).x
 
   pull_request:
 
@@ -17,35 +20,22 @@ jobs:
 
   pre-commit:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          # Avoid checking out the repository in a detached state.
-          ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
-      - name: Set up python
-        uses: actions/setup-python@v3
+      - uses: actions/setup-python@v4
         with:
           python-version: 3.11
 
-      - name: Run pre-commit on codebase
-        uses: pre-commit/action@v3.0.0
-
-      - name: Auto commit action
-        uses: stefanzweifel/git-auto-commit-action@v4
-        if: failure()
+      - uses: pre-commit/action@v3.0.1
         with:
-          commit_message: 'ci: auto fixes from pre-commit'
+          extra_args: --hook-stage manual --all-files
 
   consistency:
     if: ${{ !cancelled() && ! failure() }}
     runs-on: ubuntu-22.04
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -101,7 +91,6 @@ jobs:
     permissions:
       contents: write
     needs: [pass]
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -109,7 +98,7 @@ jobs:
           ref: ${{ github.head_ref }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
 
