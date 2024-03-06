@@ -14,7 +14,7 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_REFERENCES_LINK_SOURCE YES)
   set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-  set(doxygen_docs ${CMAKE_PROJECT_NAME}_doxygen)
+  set(doxygen_docs ${CMAKE_PROJECT_NAME}-doxygen)
   # cmake-format: off
   doxygen_add_docs(
     ${doxygen_docs}
