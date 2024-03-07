@@ -19,7 +19,8 @@
 :glob:
 
 Overview <self>
-cmake_workflow
+development/index
+contributing
 ```
 
 ```{toctree}
@@ -27,8 +28,8 @@ cmake_workflow
 :titlesonly:
 :caption: References
 
-api
 changelog
+api
 ```
 
 ## 🔖 Indices and tables

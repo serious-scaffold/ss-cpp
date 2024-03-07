@@ -8,7 +8,7 @@ A development-focused Cpp project template.
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![SS Cpp](https://img.shields.io/badge/Serious%20Scaffold-c++-blue)](https://github.com/serious-scaffold/ss-cpp)
 
-## Features
+## 🛠️ Features
 
 - Project setup and template update with [copier](https://github.com/copier-org/copier/).
 - Customizable container development environment(vscode dev container).
