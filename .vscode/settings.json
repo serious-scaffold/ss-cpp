@@ -1,13 +1,10 @@
 {
   "cmake.useCMakePresets": "always",
+  "cmake.options.statusBarVisibility": "visible",
   "files.exclude": {
     "**/.clangd/**": true
   },
   "files.watcherExclude": {
-    "**/vcpkg/**": true,
-    "**/build/**": true,
-    "**/.build/**": true,
-    "**/out/**": true,
     "**/.clangd/**": true
   },
   "files.associations": {
@@ -101,5 +98,5 @@
     "memory_resource": "cpp",
     "numbers": "cpp",
     "semaphore": "cpp"
-  },
+  }
 }

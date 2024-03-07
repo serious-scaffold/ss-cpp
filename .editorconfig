@@ -10,7 +10,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{yml,yaml,json,toml,jinja,css,cmake}]
+[*.{yml,yaml,json,toml,jinja,css,cmake,js}]
 indent_size = 2
 
 [CMakeLists.txt]

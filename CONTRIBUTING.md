@@ -36,7 +36,7 @@ Commit messages must follow our convention based on the
 [Angular style](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
 or the [Karma convention](https://karma-runner.github.io/4.0/dev/git-commit-msg.html):
 
-```txt
+```tex
 <type>[(scope)]: Subject
 
 [Body]
@@ -65,7 +65,7 @@ If you write a body, please add trailers at the end
 (for example issues and PR references, or co-authors),
 without relying on GitHub's flavored Markdown:
 
-```txt
+```tex
 Body.
 
 Issue #10: https://github.com/namespace/project/issues/10

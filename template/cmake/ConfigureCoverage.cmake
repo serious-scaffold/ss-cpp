@@ -1,5 +1,7 @@
 include_guard(GLOBAL)
 
+include(cmake-modules/test/Coverage)
+
 # cmake-format: off
 add_code_coverage_all_targets(
   EXCLUDE
