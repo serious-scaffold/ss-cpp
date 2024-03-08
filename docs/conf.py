@@ -33,7 +33,6 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
-    "sphinxcontrib.moderncmakedomain",
 ]
 source_suffix = {
     ".rst": "restructuredtext",
