@@ -1,12 +1,12 @@
 include_guard(GLOBAL)
 
-include(cmake-modules/test/Coverage)
-
 # cmake-format: off
+include(cmake-modules/test/Coverage)
 add_code_coverage_all_targets(
-  EXCLUDE
-  ${VCPKG_INSTALLED_DIR}/*
-  ${CMAKE_BINARY_DIR}/*
-  /usr/*
-  HTML_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs/_build/coverage)
+  EXCLUDE_DIRS
+  "${VCPKG_INSTALLED_DIR}"
+  "${CMAKE_BINARY_DIR}"
+  "/usr"
+  INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/src")
+
 # cmake-format: on
