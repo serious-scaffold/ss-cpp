@@ -15,7 +15,6 @@ if(DOXYGEN_FOUND)
   set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
   set(doxygen_docs ${CMAKE_PROJECT_NAME}-doxygen)
-  # cmake-format: off
   doxygen_add_docs(
     ${doxygen_docs}
     "${CMAKE_BINARY_DIR}/git/include"
@@ -23,7 +22,6 @@ if(DOXYGEN_FOUND)
     "${PROJECT_SOURCE_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/executable/include"
     "${PROJECT_SOURCE_DIR}/src/header_only/include")
-  # cmake-format: on
 
   if(TARGET ${doxygen_docs})
     set(Sphinx_FIND_COMPONENTS breathe)
@@ -45,4 +43,5 @@ if(DOXYGEN_FOUND)
       OUTPUT_DIRECTORY
       ${CMAKE_SOURCE_DIR}/docs/_build/html)
   endif()
+
 endif()
