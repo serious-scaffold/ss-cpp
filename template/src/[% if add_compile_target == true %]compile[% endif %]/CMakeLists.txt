@@ -62,9 +62,6 @@ target_link_libraries(
   PRIVATE msft_proxy
   PRIVATE absl::log)
 
-set_target_properties(${target_name}-static PROPERTIES ARCHIVE_OUTPUT_NAME
-                                                       "${target_name}")
-
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
 source_group("${target_name}" FILES "${target_name}.hpp;${target_name}.cpp")
