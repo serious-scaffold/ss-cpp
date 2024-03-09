@@ -1,6 +1,5 @@
 include_guard(GLOBAL)
 
-# cmake-format: off
 include(cmake-modules/test/Coverage)
 add_code_coverage_all_targets(
   EXCLUDE_DIRS
@@ -8,5 +7,3 @@ add_code_coverage_all_targets(
   "${CMAKE_BINARY_DIR}"
   "/usr"
   INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/src")
-
-# cmake-format: on

@@ -36,7 +36,6 @@ set_target_properties(
              CXX_VISIBILITY_PRESET hidden
              VISIBILITY_INLINES_HIDDEN 1
              SOVERSION ${CMAKE_PROJECT_VERSION_MAJOR}
-             OUTPUT_NAME "${target_name}"
              MACOSX_RPATH ON)
 
 # static library
@@ -45,8 +44,10 @@ target_code_coverage(${target_name}-static ALL)
 
 target_sources(${target_name}-static PRIVATE ${_srcs} ${_hdrs})
 
+set(static_define ${target_name}_STATIC_DEFINE)
+string(TOUPPER ${static_define} static_define)
 target_compile_definitions(${target_name}-static
-                           INTERFACE ${target_name}_STATIC_DEFINE)
+                           PUBLIC ${static_define})
 
 target_include_interface_directories(
   ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include

@@ -1,0 +1,18 @@
+{
+  "version": 6,
+  "include": [
+    "../arch/x64.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-windows",
+      "hidden": true,
+      "inherits": [
+        "x64"
+      ],
+      "cacheVariables": {
+        "VCPKG_TARGET_TRIPLET": "x64-windows"
+      }
+    }
+  ]
+}

@@ -28,6 +28,12 @@
     }
   ],
   "vcpkg-configuration": {
+    "overlay-ports": [
+      "cmake/vcpkg/ports"
+    ],
+    "overlay-triplets": [
+      "cmake/vcpkg/triplets"
+    ],
     "registries": [
       {
         "kind": "git",
