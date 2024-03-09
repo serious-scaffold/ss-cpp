@@ -1,3 +1,11 @@
+#[[
+This file configures the version of the project based on the git commit.
+
+It creates a header file ${CMAKE_BINARY_DIR}/git/include with the version
+information, which can be included in the project.
+
+]]
+
 include_guard(GLOBAL)
 include(cmake-modules/configure/GitTools)
 

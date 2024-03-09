@@ -1,7 +1,7 @@
 set(target_name compile)
 
 # requirement for compile
-find_package(proxy CONFIG REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 file(GLOB_RECURSE _srcs "src/*.cpp")
 file(GLOB_RECURSE _hdrs "include/*.hpp")
@@ -25,10 +25,7 @@ target_compile_options(
   ${target_name}-shared
   PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
-target_link_libraries(
-  ${target_name}-shared
-  PRIVATE msft_proxy
-  PRIVATE absl::log)
+target_link_libraries(${target_name}-shared PRIVATE spdlog::spdlog)
 
 set_target_properties(
   ${target_name}-shared
@@ -46,8 +43,7 @@ target_sources(${target_name}-static PRIVATE ${_srcs} ${_hdrs})
 
 set(static_define ${target_name}_STATIC_DEFINE)
 string(TOUPPER ${static_define} static_define)
-target_compile_definitions(${target_name}-static
-                           PUBLIC ${static_define})
+target_compile_definitions(${target_name}-static PUBLIC ${static_define})
 
 target_include_interface_directories(
   ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include
@@ -57,11 +53,7 @@ target_compile_options(
   ${target_name}-static
   PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
-# Static dependencies, such as absl, do no need to export when installing
-target_link_libraries(
-  ${target_name}-static
-  PRIVATE msft_proxy
-  PRIVATE absl::log)
+target_link_libraries(${target_name}-static PRIVATE spdlog::spdlog)
 
 # msvc layout in solution
 source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
@@ -89,8 +81,7 @@ install_target(
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES
-  msft_proxy
-  absl::log)
+  spdlog::spdlog)
 
 install_dependency(TARGETS ${target_name}-shared ${target_name}-static)
 

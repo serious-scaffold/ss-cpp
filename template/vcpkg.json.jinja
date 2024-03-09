@@ -2,13 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "{{ repo_name }}",
   "description": "{{ project_description }}",
-  "builtin-baseline": "710677da49b03885c65c8b5ca43072d4b1acde75",
+  "builtin-baseline": "0719a71389654b88d827501d88e37e58ea8cbd70",
   "dependencies": [
 [%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
-    "abseil",
-[%- endif %]
-[%- if add_compile_target == true %]
-    "proxy",
+    "spdlog",
 [%- endif %]
 [%- if use_conan == true %]
     "cmake-conan",
@@ -22,14 +19,8 @@
   "overrides": [
 [%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
     {
-      "name": "abseil",
-      "version": "20230802.1"
-    },
-[%- endif %]
-[%- if add_compile_target == true %]
-    {
-      "name": "proxy",
-      "version": "1.1.1"
+      "name": "spdlog",
+      "version": "1.13.0"
     },
 [%- endif %]
 [%- if use_conan == true %]
@@ -46,7 +37,7 @@
 [%- endif %]
     {
       "name": "cmake-modules",
-      "version": "1.3.11"
+      "version": "1.3.15"
     },
     {
       "name": "robotology-cmake-ycm",
@@ -57,7 +48,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "c7d87c82d5cdc491063aaf92665f74d30abab481",
+        "baseline": "7bb7d6b2b5d4ca7d532596d98fd5ff73d6bd4ae0",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
 [%- if use_conan == true %]
@@ -71,6 +62,12 @@
           "vcpkg-cmake-module"
         ]
       }
+    ],
+    "overlay-ports": [
+      "cmake/vcpkg/ports"
+    ],
+    "overlay-triplets": [
+      "cmake/vcpkg/triplets"
     ]
   }
 }
