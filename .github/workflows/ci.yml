@@ -74,9 +74,70 @@ jobs:
             exit 1 \
           )
 
+  checks:
+    runs-on: ${{ matrix.presets.os.name }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        presets:
+          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc, type: gcc}}
+          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: clang}}
+          - {os: {name: macos-latest, type: osx}, compiler: {name: gcc, type: gcc}}
+          - {os: {name: macos-latest, type: osx}, compiler: {name: llvm, type: clang}}
+          - {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+        arch:
+          - {name: x64, type: x64}
+        vcpkg:
+          - true
+          - false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.presets.compiler.name }}
+          vcvarsall: ${{ contains(matrix.presets.os.type, 'windows' )}}
+          cmake: true
+          ninja: true
+          vcpkg: ${{ matrix.vcpkg }}
+          ccache: true
+          doxygen: true
+          graphviz: true
+          python: true
+          gcovr: true
+          opencppcoverage: true
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r docs/requirements.txt
+
+      - name: Configure CMake
+        run: |
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON
+
+      - name: Coverage
+        run: |
+          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage/coverage.xml
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}-coverage
+
   pass:
     if: always()
-    needs: [pre-commit, consistency]
+    needs: [pre-commit, consistency, checks]
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
