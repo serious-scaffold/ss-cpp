@@ -1,11 +1,14 @@
-# Build the target by issuing: cmake --build . --target
-# ${CMAKE_PROJECT_NAME}-docs
+#[[
+This file creates targets to generate documentation:
+
+   - Doxygen: ${CMAKE_PROJECT_NAME}-doxygen
+   - Sphinx: ${CMAKE_PROJECT_NAME}-docs
+]]
 
 include(cmake-modules/configure/ConfigDoxygen)
 configdoxygen()
 
 if(DOXYGEN_FOUND)
-
   # Generate XML OUTPUT for breathe
   set(DOXYGEN_GENERATE_HTML NO)
   set(DOXYGEN_GENERATE_XML YES)
@@ -43,5 +46,4 @@ if(DOXYGEN_FOUND)
       OUTPUT_DIRECTORY
       ${CMAKE_SOURCE_DIR}/docs/_build/html)
   endif()
-
 endif()

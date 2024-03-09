@@ -1,12 +1,14 @@
 set(target_name header_only)
 
+find_package(spdlog CONFIG REQUIRED)
+
 add_library(${target_name} INTERFACE)
 
 target_include_interface_directories(
   ${target_name} ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_BINARY_DIR}/git/include)
 
-target_link_libraries(${target_name} INTERFACE absl::log)
+target_link_libraries(${target_name} INTERFACE spdlog::spdlog)
 
 install_target(
   NAME
@@ -21,7 +23,7 @@ install_target(
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES
-  absl::log)
+  spdlog::spdlog)
 
 # Test
 if(BUILD_TESTING)

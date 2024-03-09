@@ -164,8 +164,3 @@ add_compile_target:
   default: true
   help: Whether to add a compile lib target
   type: bool
-
-add_jni_target:
-  default: false
-  help: Whether to add a jni target based on Java invocation API
-  type: bool

@@ -7,6 +7,4 @@ foreach(_file ${files})
   target_code_coverage(${file_basename} ALL)
   gtest_discover_tests(${file_basename})
   copy_sanitizer_runtime(${file_basename})
-
-  # add_test(NAME ${file_basename}_test COMMAND $<TARGET_FILE:${file_basename}>)
 endforeach()

@@ -74,9 +74,105 @@ jobs:
             exit 1 \
           )
 
+  checks:
+    runs-on: ${{ matrix.presets.os.name }}
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        presets:
+          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: llvm}}
+          - {os: {name: ubuntu-latest, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: macos-latest, type: osx}, compiler: {name: applellvm, type: llvm}}
+          - {os: {name: macos-latest, type: osx}, compiler: {name: llvm, type: llvm}}
+          # setup-cpp doesn't support mingw on macOS yet
+          # - {os: {name: macos-latest, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+          - {os: {name: windows-latest, type: windows}, compiler: {name: llvm, type: llvm}}
+          - {os: {name: windows-latest, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw-gcc}}
+        arch:
+          - {name: x64, type: x64}
+        vcpkg:
+          - true
+          - false
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/vcpkg
+            ./build/vcpkg_installed
+            ~/.cache/pip
+            ${{ env.HOME }}/.cache/vcpkg/archives
+            ${{ env.XDG_CACHE_HOME }}/vcpkg/archives
+            ${{ env.LOCALAPPDATA }}\vcpkg\archives
+            ${{ env.APPDATA }}\vcpkg\archives
+          key: |
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.name }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-${{ hashFiles('./vcpkg.json') }}
+          restore-keys: |
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.name }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-${{ hashFiles('./vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.presets.compiler.name }}
+          vcvarsall: ${{ contains(matrix.presets.os.type, 'windows' )}}
+          cmake: true
+          ninja: true
+          vcpkg: ${{ matrix.vcpkg }}
+          ccache: true
+          python: true
+          opencppcoverage: true
+
+      - name: Gcc Lcov
+        if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
+        run: |
+          sudo apt-get update
+          sudo apt-get install lcov
+
+      - name: Gcovr
+        if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'mingw')
+        run: |
+          pip install gcovr
+
+      - name: Target Windows on Linux (Mingw-w64)
+        if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'linux')
+        run: |
+          sudo apt-get update && sudo apt-get install mingw-w64 wine wine64 powershell
+          sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
+          sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
+          wine64 true || true
+          echo "wait 10s for wine registry to be created" && sleep 10
+          sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
+
+
+      - name: Configure CMake
+        run: |
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON -DCMAKE_VERBOSE_MAKEFILE=TRUE
+
+      - name: Coverage
+        run: |
+          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4.1.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage/coverage.xml
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}-coverage
+
   pass:
     if: always()
-    needs: [pre-commit, consistency]
+    needs: [pre-commit, consistency, checks]
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:

@@ -1,0 +1,53 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/darwin.json",
+    "compilers/llvm.json",
+    "triplets/x64-osx.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-osx-llvm",
+      "inherits": [
+        "base",
+        "darwin",
+        "llvm",
+        "x64-osx"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-osx-llvm",
+      "inherits": "base",
+      "configurePreset": "x64-osx-llvm"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-osx-llvm",
+      "inherits": "base",
+      "configurePreset": "x64-osx-llvm"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-osx-llvm",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-osx-llvm"
+        },
+        {
+          "type": "build",
+          "name": "x64-osx-llvm"
+        },
+        {
+          "type": "test",
+          "name": "x64-osx-llvm"
+        }
+      ]
+    }
+  ]
+}

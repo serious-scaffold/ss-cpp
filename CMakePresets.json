@@ -6,10 +6,14 @@
     "patch": 0
   },
   "include": [
-    "cmake/presets/x64-windows-msvc.json",
-    "cmake/presets/x64-linux-clang.json",
+    "cmake/presets/x64-linux-llvm.json",
     "cmake/presets/x64-linux-gcc.json",
-    "cmake/presets/x64-osx-clang.json",
-    "cmake/presets/x64-osx-gcc.json"
+    "cmake/presets/x64-mingw-dynamic-windows-mingw-gcc.json",
+    "cmake/presets/x64-mingw-dynamic-darwin-mingw.json",
+    "cmake/presets/x64-mingw-dynamic-linux-mingw.json",
+    "cmake/presets/x64-osx-gcc.json",
+    "cmake/presets/x64-osx-llvm.json",
+    "cmake/presets/x64-windows-llvm.json",
+    "cmake/presets/x64-windows-msvc.json"
   ]
 }

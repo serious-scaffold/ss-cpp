@@ -29,7 +29,6 @@ jobs:
           compiler: gcc
           cmake: true
           ninja: true
-          vcpkg: true
           ccache: true
           doxygen: true
           graphviz: true
@@ -40,12 +39,10 @@ jobs:
           pip install -r docs/requirements.txt
 
       - name: Configure
-        env:
-          VCPKG_ROOT: /home/runner/vcpkg
-        run: cmake -S . --preset=x64-Debug-GNUC -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
 
       - name: Build Docs
-        run: cmake --build out/build/x64-Debug-GNUC --target {{ repo_name }}-docs
+        run: cmake --build out/build/x64-linux-gcc --target {{ repo_name }}-docs
 
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1

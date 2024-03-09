@@ -1,8 +1,6 @@
 #include "compile.hpp"
 
-#include <absl/log/log.h>
 #include "git.h"
-#include "impl/impl.hpp"
 
 namespace compile {
 namespace info {

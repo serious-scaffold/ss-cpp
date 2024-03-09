@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.25)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
 # Project settings
@@ -28,8 +28,8 @@ include(cmake-modules/test/Default)
 include(cmake-modules/test/GoogleTest)
 include(cmake-modules/test/Sanitizer)
 include(cmake-modules/test/Valgrind)
-include(cmake-modules/install/Common)
 include(cmake-modules/install/Default)
+include(cmake-modules/install/Common)
 include(cmake-modules/install/InstallDependency)
 include(cmake-modules/install/Runpath)
 
@@ -43,9 +43,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
 include(ConfigureDocs)
 include(ConfigureCoverage)
-
-# Package dependencies using find_package
-find_package(absl CONFIG REQUIRED)
 
 add_subdirectory(src)
 
