@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="CMake Workflow" href="cmake_workflow.html" /><link rel="prev" title="Welcome to Serious Scaffold Cpp’s documentation" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contributing" href="../contributing.html" /><link rel="prev" title="CMake Workflow" href="cmake_workflow.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Development - Serious Scaffold Cpp documentation</title>
+        <title>SS-CPP Build Congfiguration - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -135,7 +135,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -158,9 +158,9 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Development</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Development</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="cmake_workflow.html">CMake Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="build_configuration.html">SS-CPP Build Congfiguration</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">SS-CPP Build Congfiguration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -197,20 +197,24 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="development">
-<h1>Development<a class="headerlink" href="#development" title="Permalink to this heading">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="cmake_workflow.html">CMake Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="build_configuration.html">SS-CPP Build Congfiguration</a></li>
+          <section id="ss-cpp-build-congfiguration">
+<h1>SS-CPP Build Congfiguration<a class="headerlink" href="#ss-cpp-build-congfiguration" title="Permalink to this heading">#</a></h1>
+<section id="triplets-architecture-target-compiling-os-toolchain-distribution">
+<h2>Triplets = {Architecture}-{Target-Compiling-OS/Toolchain}-{Distribution}<a class="headerlink" href="#triplets-architecture-target-compiling-os-toolchain-distribution" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Architecture: x86, x64, arm, arm64, ppc64le, s390x, wasm32, etc.</p></li>
+<li><p>Target-Compiling-OS/Toolchain: windows, linux, macos, freebsd, android, ios, mingw, etc.</p></li>
+<li><p>Distribution: dynamic, static, release, etc.</p></li>
+<li><p>Compiler(Optional): MSVC, GCC, Clang, MinGW</p></li>
 </ul>
-</div>
+<p>More about triplets, see: <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/triplets">https://learn.microsoft.com/en-us/vcpkg/users/triplets</a></p>
+</section>
 </section>
 
         </article>
@@ -218,23 +222,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="cmake_workflow.html">
+          <a class="next-page" href="../contributing.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">CMake Workflow</div>
+                <div class="title">Contributing</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="cmake_workflow.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">CMake Workflow</div>
                 
               </div>
             </a>
@@ -256,8 +260,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">SS-CPP Build Congfiguration</a><ul>
+<li><a class="reference internal" href="#triplets-architecture-target-compiling-os-toolchain-distribution">Triplets = {Architecture}-{Target-Compiling-OS/Toolchain}-{Distribution}</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
