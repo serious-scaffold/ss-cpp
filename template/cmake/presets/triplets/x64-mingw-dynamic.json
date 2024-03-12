@@ -12,8 +12,7 @@
       ],
       "cacheVariables": {
         "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
-        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic",
-        "VCPKG_CHAINLOAD_TOOLCHAIN_FILE": "${sourceDir}/cmake/vcpkg/scripts/toolchains/mingw.cmake"
+        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic"
       }
     }
   ]

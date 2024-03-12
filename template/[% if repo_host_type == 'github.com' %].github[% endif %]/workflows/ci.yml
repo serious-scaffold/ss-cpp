@@ -87,13 +87,16 @@ jobs:
           - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
           - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: llvm}}
           - {os: {name: ubuntu-latest, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: ubuntu-latest, type: mingw-static-linux}, compiler: {name: mingw, type: mingw}}
           - {os: {name: macos-latest, type: osx}, compiler: {name: applellvm, type: llvm}}
           - {os: {name: macos-latest, type: osx}, compiler: {name: llvm, type: llvm}}
           # setup-cpp doesn't support mingw on macOS yet
           # - {os: {name: macos-latest, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
+          # - {os: {name: macos-latest, type: mingw-static-darwin}, compiler: {name: mingw, type: mingw}}
           - {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
           - {os: {name: windows-latest, type: windows}, compiler: {name: llvm, type: llvm}}
-          - {os: {name: windows-latest, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw-gcc}}
+          - {os: {name: windows-latest, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: windows-latest, type: mingw-static-windows}, compiler: {name: mingw, type: mingw}}
         arch:
           - {name: x64, type: x64}
         vcpkg:
