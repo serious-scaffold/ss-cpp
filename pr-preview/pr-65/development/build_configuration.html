@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contributing" href="../contributing.html" /><link rel="prev" title="CMake Workflow" href="cmake_workflow.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contributing" href="../contributing.html" /><link rel="prev" title="Development" href="index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>SS-CPP Build Congfiguration - Serious Scaffold Cpp documentation</title>
+        <title>Build Congfiguration - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -159,8 +159,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
 <li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Development</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="cmake_workflow.html">CMake Workflow</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">SS-CPP Build Congfiguration</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Build Congfiguration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
@@ -203,10 +202,12 @@
           </label>
         </div>
         <article role="main">
-          <section id="ss-cpp-build-congfiguration">
-<h1>SS-CPP Build Congfiguration<a class="headerlink" href="#ss-cpp-build-congfiguration" title="Permalink to this heading">#</a></h1>
-<section id="triplets-architecture-target-compiling-os-toolchain-distribution">
-<h2>Triplets = {Architecture}-{Target-Compiling-OS/Toolchain}-{Distribution}<a class="headerlink" href="#triplets-architecture-target-compiling-os-toolchain-distribution" title="Permalink to this heading">#</a></h2>
+          <section id="build-congfiguration">
+<h1>Build Congfiguration<a class="headerlink" href="#build-congfiguration" title="Permalink to this heading">#</a></h1>
+<p>Based on vcpkg and CMake, we can seamlessly creat, build, and test our projects on different platforms and configurations. Here are some tips and tricks to make things easier.</p>
+<section id="triplet-presets">
+<h2>Triplet Presets<a class="headerlink" href="#triplet-presets" title="Permalink to this heading">#</a></h2>
+<p>The triplet presets are used to specify the target platform and build configuration for the project.It consists of three parts: architecture, target-compiling-os/toolchain, and distribution.</p>
 <ul class="simple">
 <li><p>Architecture: x86, x64, arm, arm64, ppc64le, s390x, wasm32, etc.</p></li>
 <li><p>Target-Compiling-OS/Toolchain: windows, linux, macos, freebsd, android, ios, mingw, etc.</p></li>
@@ -214,6 +215,46 @@
 <li><p>Compiler(Optional): MSVC, GCC, Clang, MinGW</p></li>
 </ul>
 <p>More about triplets, see: <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/triplets">https://learn.microsoft.com/en-us/vcpkg/users/triplets</a></p>
+</section>
+<section id="building-with-presets">
+<h2>Building with Presets<a class="headerlink" href="#building-with-presets" title="Permalink to this heading">#</a></h2>
+<p>To build the project with presets refer to <a class="reference external" href="https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html">https://cmake.org/cmake/help/latest/manual/cmake-presets.7.html</a>, you can use the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>--list-presets<span class="w">         </span><span class="c1"># list all configure presets</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span class="w">      </span><span class="c1"># configure using desired configure preset</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>--list-presets<span class="w">      </span><span class="c1"># list all build presets</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span class="w">   </span><span class="c1"># build the desired build preset</span>
+ctest<span class="w"> </span>--list-presets<span class="w">              </span><span class="c1"># list all test presets</span>
+ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span class="w">           </span><span class="c1"># test the desired test preset</span>
+</pre></div>
+</div>
+</section>
+<section id="building-without-presets-not-recommended">
+<h2>Building without presets(Not Recommended)<a class="headerlink" href="#building-without-presets-not-recommended" title="Permalink to this heading">#</a></h2>
+<p>If you don’t want to use presets, you can still build the project by specifying the target platform and build configuration. It’s not recommended as it’s more complex and error-prone because you need to specify the correct triplet and toolchain for each platform and configuration.</p>
+<p>But it is documented here for reference to reveal the underlying mechanism. Here are some necessary variables to configure the project:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_TOOLCHAIN_FILE(Required)</span></code>: specify the path to the project’s toolchain file(cmake/vcpkg/vcpkg.toolchain.cmake). It contains steps to set the correct triplet and initialize the vcpkg environment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE(Required)</span></code>: specify the build configuration, such as “Debug”, “Release”, “RelWithDebInfo”, “MinSizeRel”, etc.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_GENERATOR(Required)</span></code>: specify the generator for the build system, such as “Ninja”, “Unix Makefiles”, “Visual Studio 16 2019”, etc. And it’s recommended to use Ninja for cross-platform builds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_ROOT(Optional)</span></code>: specify the path to the toolchain file for the target platform. Normally it’s in the vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_TARGET_TRIPLET(Required)</span></code>: specify the target triplet.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_HOST_TRIPLET(Optional)</span></code>: specify the host triplet and it can be detected automatically by vcpkg.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_OVERLAY_TRIPLETS(Optional)</span></code>: specify the path to the overlay triplets directory.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_OVERLAY_PORTS(Optional)</span></code>: specify the path to the overlay ports directory.</p></li>
+</ul>
+<p>Here’s an example of building the project with the specified variables:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure</span>
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>cmake/vcpkg/vcpkg.toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DVCPKG_TARGET_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span>-DVCPKG_HOST_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span>-DVCPKG_OVERLAY_TRIPLETS<span class="o">=</span>cmake/vcpkg/triplets<span class="w"> </span>-DVCPKG_OVERLAY_PORTS<span class="o">=</span>cmake/vcpkg/ports
+<span class="c1"># Build</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Debug
+<span class="c1"># Testing</span>
+<span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ctest<span class="w"> </span>-C<span class="w"> </span>Debug<span class="w"> </span>-T<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--output-on-failure
+<span class="c1"># Memcheck</span>
+<span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ctest<span class="w"> </span>-C<span class="w"> </span>Debug<span class="w"> </span>-T<span class="w"> </span>memcheck
+<span class="c1"># Install</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Debug<span class="w"> </span>--target<span class="w"> </span>install
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -231,14 +272,14 @@
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="cmake_workflow.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">CMake Workflow</div>
+                <div class="title">Development</div>
                 
               </div>
             </a>
@@ -272,8 +313,10 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">SS-CPP Build Congfiguration</a><ul>
-<li><a class="reference internal" href="#triplets-architecture-target-compiling-os-toolchain-distribution">Triplets = {Architecture}-{Target-Compiling-OS/Toolchain}-{Distribution}</a></li>
+<li><a class="reference internal" href="#">Build Congfiguration</a><ul>
+<li><a class="reference internal" href="#triplet-presets">Triplet Presets</a></li>
+<li><a class="reference internal" href="#building-with-presets">Building with Presets</a></li>
+<li><a class="reference internal" href="#building-without-presets-not-recommended">Building without presets(Not Recommended)</a></li>
 </ul>
 </li>
 </ul>
