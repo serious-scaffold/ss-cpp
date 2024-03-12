@@ -3,6 +3,5 @@
 ```{toctree}
 :maxdepth: 1
 
-cmake_workflow
 build_configuration
 ```
