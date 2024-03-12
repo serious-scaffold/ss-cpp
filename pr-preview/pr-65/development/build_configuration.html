@@ -204,15 +204,15 @@
         <article role="main">
           <section id="build-congfiguration">
 <h1>Build Congfiguration<a class="headerlink" href="#build-congfiguration" title="Permalink to this heading">#</a></h1>
-<p>Based on vcpkg and CMake, we can seamlessly creat, build, and test our projects on different platforms and configurations. Here are some tips and tricks to make things easier.</p>
+<p>Based on vcpkg and CMake, we can seamlessly create, build, and test our projects on different platforms and configurations. Here are some tips and tricks to make things easier.</p>
 <section id="triplet-presets">
 <h2>Triplet Presets<a class="headerlink" href="#triplet-presets" title="Permalink to this heading">#</a></h2>
-<p>The triplet presets are used to specify the target platform and build configuration for the project.It consists of three parts: architecture, target-compiling-os/toolchain, and distribution.</p>
+<p>The triplet presets are used to specify the target platform and build configuration for the project.It consists of three parts: Architecture, Target-Compiling-Os/Toolchain, Distribution and Compiler.</p>
 <ul class="simple">
 <li><p>Architecture: x86, x64, arm, arm64, ppc64le, s390x, wasm32, etc.</p></li>
 <li><p>Target-Compiling-OS/Toolchain: windows, linux, macos, freebsd, android, ios, mingw, etc.</p></li>
 <li><p>Distribution: dynamic, static, release, etc.</p></li>
-<li><p>Compiler(Optional): MSVC, GCC, Clang, MinGW</p></li>
+<li><p>Compiler: MSVC, GCC, Clang, MinGW.</p></li>
 </ul>
 <p>More about triplets, see: <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/triplets">https://learn.microsoft.com/en-us/vcpkg/users/triplets</a></p>
 </section>
@@ -230,10 +230,10 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 </section>
 <section id="building-without-presets-not-recommended">
 <h2>Building without presets(Not Recommended)<a class="headerlink" href="#building-without-presets-not-recommended" title="Permalink to this heading">#</a></h2>
-<p>If you don’t want to use presets, you can still build the project by specifying the target platform and build configuration. It’s not recommended as it’s more complex and error-prone because you need to specify the correct triplet and toolchain for each platform and configuration.</p>
+<p>You can also build the project without using presets. It’s not recommended as it’s more complex and error-prone because you need to specify the correct triplet and toolchain for each platform and configuration.</p>
 <p>But it is documented here for reference to reveal the underlying mechanism. Here are some necessary variables to configure the project:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_TOOLCHAIN_FILE(Required)</span></code>: specify the path to the project’s toolchain file(cmake/vcpkg/vcpkg.toolchain.cmake). It contains steps to set the correct triplet and initialize the vcpkg environment.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_TOOLCHAIN_FILE(Required)</span></code>: specify the path to the project’s toolchain file(cmake/vcpkg/vcpkg.toolchain.cmake). It contains steps to set the correct triplet and initialize the vcpkg environment. More importantly, it also loads triplet variables and chainload toolchain according to <code class="docutils literal notranslate"><span class="pre">VCPKG_TARGET_TRIPLET</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE(Required)</span></code>: specify the build configuration, such as “Debug”, “Release”, “RelWithDebInfo”, “MinSizeRel”, etc.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_GENERATOR(Required)</span></code>: specify the generator for the build system, such as “Ninja”, “Unix Makefiles”, “Visual Studio 16 2019”, etc. And it’s recommended to use Ninja for cross-platform builds.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_ROOT(Optional)</span></code>: specify the path to the toolchain file for the target platform. Normally it’s in the vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.</p></li>
@@ -244,7 +244,14 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 </ul>
 <p>Here’s an example of building the project with the specified variables:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Configure</span>
-cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>cmake/vcpkg/vcpkg.toolchain.cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span>-G<span class="w"> </span>Ninja<span class="w"> </span>-DVCPKG_TARGET_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span>-DVCPKG_HOST_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span>-DVCPKG_OVERLAY_TRIPLETS<span class="o">=</span>cmake/vcpkg/triplets<span class="w"> </span>-DVCPKG_OVERLAY_PORTS<span class="o">=</span>cmake/vcpkg/ports
+cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>cmake/vcpkg/vcpkg.toolchain.cmake<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-G<span class="w"> </span>Ninja<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DVCPKG_TARGET_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DVCPKG_HOST_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DVCPKG_OVERLAY_TRIPLETS<span class="o">=</span>cmake/vcpkg/triplets<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DVCPKG_OVERLAY_PORTS<span class="o">=</span>cmake/vcpkg/ports
 <span class="c1"># Build</span>
 cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Debug
 <span class="c1"># Testing</span>
