@@ -5,14 +5,14 @@
   ],
   "configurePresets": [
     {
-      "name": "x64-mingw-dynamic",
+      "name": "x64-mingw-static",
       "hidden": true,
       "inherits": [
         "x64"
       ],
       "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
-        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic"
+        "VCPKG_TARGET_TRIPLET": "x64-mingw-static",
+        "VCPKG_HOST_TRIPLET": "x64-mingw-static"
       }
     }
   ]

@@ -14,4 +14,6 @@ set(__vcpkg_bootstrap_list_dir "${CMAKE_CURRENT_LIST_DIR}")
 
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_skip_install_on_reconfigure.cmake)
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_bootstrap.cmake)
+include(${__vcpkg_bootstrap_list_dir}/vcpkg_chainload_toolchain.cmake)
+include(${__vcpkg_bootstrap_list_dir}/vcpkg_load_triplet.cmake)
 include(${__vcpkg_bootstrap_list_dir}/vcpkg_configure.cmake)

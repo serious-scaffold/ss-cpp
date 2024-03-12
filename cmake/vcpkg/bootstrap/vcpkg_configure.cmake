@@ -5,7 +5,9 @@ SPDX-FileCopyrightText: Copyright 2024 msclock
 ]]
 
 # bootstrap and configure vcpkg
-function(vcpkg_configure)
+macro(vcpkg_configure)
   _vcpkg_bootstrap(${ARGN})
   _vcpkg_skip_install_on_reconfigure()
-endfunction()
+  _vcpkg_load_triplet()
+  _vcpkg_chainload_toolchain()
+endmacro()
