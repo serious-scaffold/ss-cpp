@@ -1,9 +1,5 @@
 # Welcome to {{ project_name }}'s documentation
 
-```{toctree}
-:hidden:
-```
-
 <!-- Extract content from start line 1 of README.md -->
 
 ```{include} ../README.md
@@ -19,8 +15,11 @@
 :glob:
 
 Overview <self>
+Tutorials <tutorials/index>
+Topics <topics/index>
+Principles <principles/index>
 [% if repo_name == 'ss-cpp' -%]
-cmake_workflow
+contributing
 [% endif -%]
 ```
 
@@ -29,8 +28,8 @@ cmake_workflow
 :titlesonly:
 :caption: References
 
-api
 changelog
+api
 ```
 
 ## 🔖 Indices and tables

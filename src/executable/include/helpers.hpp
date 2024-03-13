@@ -1,12 +1,11 @@
 #pragma once
 
-#include "absl/log/log.h"
+#include <spdlog/spdlog.h>
 
 namespace executable {
 namespace helpers {
 inline int some_fun() {
-    LOG(INFO) << "Hello "
-              << "helpers!";
+    spdlog::info("Hello helpers!");
     return 0;
 }
 } // namespace helpers

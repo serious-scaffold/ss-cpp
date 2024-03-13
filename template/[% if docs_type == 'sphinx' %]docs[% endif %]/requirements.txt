@@ -3,4 +3,4 @@ furo==2024.1.29
 sphinx==7.1.2
 sphinx-copybutton==0.5.2
 myst-parser==2.0.0
-sphinxcontrib-moderncmakedomain==3.27.0
+sphinx_inline_tabs

@@ -1,0 +1,53 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/linux.json",
+    "compilers/gcc.json",
+    "triplets/x64-linux.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-linux-gcc",
+      "inherits": [
+        "base",
+        "linux",
+        "gcc",
+        "x64-linux"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-linux-gcc",
+      "inherits": "base",
+      "configurePreset": "x64-linux-gcc"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-linux-gcc",
+      "inherits": "base",
+      "configurePreset": "x64-linux-gcc"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-linux-gcc",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-linux-gcc"
+        },
+        {
+          "type": "build",
+          "name": "x64-linux-gcc"
+        },
+        {
+          "type": "test",
+          "name": "x64-linux-gcc"
+        }
+      ]
+    }
+  ]
+}

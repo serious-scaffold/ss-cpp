@@ -1,23 +1,5 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.25)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
-
-# Vcpkg build environment
-if(DEFINED ENV{VCPKG_ROOT})
-  message(STATUS "VCPKG_ROOT:$ENV{VCPKG_ROOT}")
-  set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
-else()
-  message(
-    FATAL_ERROR "Missing VCPKG_ROOT, please check the existence of VCPKG_ROOT")
-endif()
-
-# set cmake tool chain
-file(TO_CMAKE_PATH ${VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake
-     vcpkg_toolchain_file)
-set(CMAKE_TOOLCHAIN_FILE ${vcpkg_toolchain_file})
-
-set(VCPKG_VERBOSE
-    ON
-    CACHE BOOL "Vcpkg VCPKG_VERBOSE")
 
 # Project settings
 project(
@@ -44,11 +26,10 @@ include(cmake-modules/build/Ccache)
 include(cmake-modules/build/LinkOptimization)
 include(cmake-modules/test/Default)
 include(cmake-modules/test/GoogleTest)
-include(cmake-modules/test/Coverage)
 include(cmake-modules/test/Sanitizer)
 include(cmake-modules/test/Valgrind)
-include(cmake-modules/install/Common)
 include(cmake-modules/install/Default)
+include(cmake-modules/install/Common)
 include(cmake-modules/install/InstallDependency)
 include(cmake-modules/install/Runpath)
 
@@ -62,9 +43,6 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
 include(ConfigureDocs)
 include(ConfigureCoverage)
-
-# Package dependencies using find_package
-find_package(absl CONFIG REQUIRED)
 
 add_subdirectory(src)
 

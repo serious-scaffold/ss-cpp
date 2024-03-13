@@ -1,9 +1,5 @@
 # Welcome to Serious Scaffold Cpp's documentation
 
-```{toctree}
-:hidden:
-```
-
 <!-- Extract content from start line 1 of README.md -->
 
 ```{include} ../README.md
@@ -19,7 +15,10 @@
 :glob:
 
 Overview <self>
-cmake_workflow
+Tutorials <tutorials/index>
+Topics <topics/index>
+Principles <principles/index>
+contributing
 ```
 
 ```{toctree}
@@ -27,8 +26,8 @@ cmake_workflow
 :titlesonly:
 :caption: References
 
-api
 changelog
+api
 ```
 
 ## 🔖 Indices and tables

@@ -1,0 +1,57 @@
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency:
+  group: preview-{{ '${{ github.workflow }}-${{ github.ref }}' }}
+  cancel-in-progress: true
+
+jobs:
+  pages-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/vcpkg
+          key: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc
+          cmake: true
+          ninja: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+          python: true
+
+      - name: Install docs dependencies
+        run: |
+          pip install -r docs/requirements.txt
+
+      - name: Configure
+        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+
+      - name: Build Docs
+        run: cmake --build out/build/x64-linux-gcc --target {{ repo_name }}-docs
+
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: ./docs/_build/html

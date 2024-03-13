@@ -1,0 +1,53 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/linux.json",
+    "compilers/llvm.json",
+    "triplets/x64-linux.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-linux-llvm",
+      "inherits": [
+        "base",
+        "linux",
+        "llvm",
+        "x64-linux"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-linux-llvm",
+      "inherits": "base",
+      "configurePreset": "x64-linux-llvm"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-linux-llvm",
+      "inherits": "base",
+      "configurePreset": "x64-linux-llvm"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-linux-llvm",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-linux-llvm"
+        },
+        {
+          "type": "build",
+          "name": "x64-linux-llvm"
+        },
+        {
+          "type": "test",
+          "name": "x64-linux-llvm"
+        }
+      ]
+    }
+  ]
+}

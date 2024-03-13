@@ -1,0 +1,56 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/windows.json",
+    "compilers/mingw.json",
+    "triplets/x64-mingw-dynamic.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-mingw-dynamic-windows-mingw",
+      "inherits": [
+        "base",
+        "windows",
+        "mingw",
+        "x64-mingw-dynamic"
+      ],
+      "cacheVariables": {
+        "USE_SANITIZER": "FALSE"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-mingw-dynamic-windows-mingw",
+      "inherits": "base",
+      "configurePreset": "x64-mingw-dynamic-windows-mingw"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-mingw-dynamic-windows-mingw",
+      "inherits": "base",
+      "configurePreset": "x64-mingw-dynamic-windows-mingw"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-mingw-dynamic-windows-mingw",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-mingw-dynamic-windows-mingw"
+        },
+        {
+          "type": "build",
+          "name": "x64-mingw-dynamic-windows-mingw"
+        },
+        {
+          "type": "test",
+          "name": "x64-mingw-dynamic-windows-mingw"
+        }
+      ]
+    }
+  ]
+}

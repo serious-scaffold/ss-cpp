@@ -2,25 +2,20 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A development-focused Cpp project template.",
-  "builtin-baseline": "710677da49b03885c65c8b5ca43072d4b1acde75",
+  "builtin-baseline": "0719a71389654b88d827501d88e37e58ea8cbd70",
   "dependencies": [
-    "abseil",
-    "proxy",
+    "spdlog",
     "cmake-modules",
     "robotology-cmake-ycm"
   ],
   "overrides": [
     {
-      "name": "abseil",
-      "version": "20230802.1"
-    },
-    {
-      "name": "proxy",
-      "version": "1.1.1"
+      "name": "spdlog",
+      "version": "1.13.0"
     },
     {
       "name": "cmake-modules",
-      "version": "1.3.6"
+      "version": "1.3.15"
     },
     {
       "name": "robotology-cmake-ycm",
@@ -31,7 +26,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "8166fd34bde37098afa04b82b0ec7f2a2f467fe3",
+        "baseline": "7bb7d6b2b5d4ca7d532596d98fd5ff73d6bd4ae0",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",
@@ -39,6 +34,12 @@
           "vcpkg-cmake-module"
         ]
       }
+    ],
+    "overlay-ports": [
+      "cmake/vcpkg/ports"
+    ],
+    "overlay-triplets": [
+      "cmake/vcpkg/triplets"
     ]
   }
 }

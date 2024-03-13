@@ -1,0 +1,56 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "os/linux.json",
+    "compilers/mingw.json",
+    "triplets/x64-mingw-static.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "x64-mingw-static-linux-mingw",
+      "inherits": [
+        "base",
+        "linux",
+        "mingw",
+        "x64-mingw-static"
+      ],
+      "cacheVariables": {
+        "USE_SANITIZER": "FALSE"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "x64-mingw-static-linux-mingw",
+      "inherits": "base",
+      "configurePreset": "x64-mingw-static-linux-mingw"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "x64-mingw-static-linux-mingw",
+      "inherits": "base",
+      "configurePreset": "x64-mingw-static-linux-mingw"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "x64-mingw-static-linux-mingw",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "x64-mingw-static-linux-mingw"
+        },
+        {
+          "type": "build",
+          "name": "x64-mingw-static-linux-mingw"
+        },
+        {
+          "type": "test",
+          "name": "x64-mingw-static-linux-mingw"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "mingw",
+      "hidden": true
+    }
+  ]
+}
