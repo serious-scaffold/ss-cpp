@@ -24,6 +24,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/vcpkg
+          key: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
+          restore-keys: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
+
       - uses: aminya/setup-cpp@v1
         with:
           compiler: gcc
