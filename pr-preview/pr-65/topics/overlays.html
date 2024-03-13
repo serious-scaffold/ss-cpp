@@ -3,13 +3,14 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Build Congfiguration" href="build_configuration.html" /><link rel="prev" title="Welcome to Serious Scaffold Cpp’s documentation" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Triplet Presets" href="triplet_presets.html" /><link rel="prev" title="Topics" href="index.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Development - Serious Scaffold Cpp documentation</title>
+        <title>Overlays - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
     
     
@@ -135,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -158,10 +159,20 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Development</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Development</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="build_configuration.html">Build Congfiguration</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/project_management.html">Project Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/development_environment.html">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dependencies.html">Dependencies</a></li>
 </ul>
 </li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
@@ -196,21 +207,43 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="development">
-<h1>Development<a class="headerlink" href="#development" title="Permalink to this heading">#</a></h1>
-<p>This sections covers the development process of the project.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">For Developers</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="build_configuration.html">Build Congfiguration</a></li>
+          <section id="overlays">
+<h1>Overlays<a class="headerlink" href="#overlays" title="Permalink to this heading">#</a></h1>
+<p>Overlays enable the vcpkg overlay feature, which allows user to customize the build triplets and ports of vcpkg.</p>
+<section id="overlay-of-a-custom-triplet">
+<h2>Overlay of a custom triplet<a class="headerlink" href="#overlay-of-a-custom-triplet" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>According to <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/examples/overlay-triplets-linux-dynamic">the official documentation</a>, to add a custom <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/concepts/triplets">triplet</a>, create a new directory and copy the <code class="docutils literal notranslate"><span class="pre">triplets</span></code> directory from the vcpkg installation directory to the new directory. Then, create a <code class="docutils literal notranslate"><span class="pre">triplet</span></code> file in the new directory and modify the <code class="docutils literal notranslate"><span class="pre">CMAKE_SYSTEM_NAME</span></code> and <code class="docutils literal notranslate"><span class="pre">VCPKG_TARGET_ARCHITECTURE</span></code> variables to match your custom triplet. Finally, add the new directory to the <code class="docutils literal notranslate"><span class="pre">overlay-triplets</span></code> list in the <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> file.</p>
+</div></blockquote>
+<p>The scaffold designed for this purpose, we create a new directory <code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/triplets</span></code> in the root of our scaffold which has been registered as an overaly-triplets in <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code>. Inside this directory, what we need to do is create a new triplet file according to the triplet naming convention <code class="docutils literal notranslate"><span class="pre">CPU-OS/compiler-runtime.cmake</span></code>(Triplet is a standard term used in cross-compiling as a way to completely capture the target environment in a single, convenient name) for example, <code class="docutils literal notranslate"><span class="pre">x64-linux-dynamic.cmake</span></code> or <code class="docutils literal notranslate"><span class="pre">arm64-windows-static.cmake</span></code>. Or we can copy an existing triplet file from the vcpkg root directory and modify it according to our needs.</p>
+<p>References:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/examples/overlay-triplets-linux-dynamic">https://learn.microsoft.com/en-us/vcpkg/users/examples/overlay-triplets-linux-dynamic</a></p></li>
+<li><p><a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/triplets#per-port-customization">Why overlay triplets? Per port customization</a></p></li>
 </ul>
-</div>
+</section>
+<section id="overlay-of-a-custom-port">
+<h2>Overlay of a custom port<a class="headerlink" href="#overlay-of-a-custom-port" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>A port based on vcpkg is a set of files that can be used to build a library or an executable.</p>
+</div></blockquote>
+<p>There are two ways to add a custom port to vcpkg:</p>
+<ul class="simple">
+<li><p>Create a vcpkg registry repository and add the port to it. The repository can be added to the <code class="docutils literal notranslate"><span class="pre">registries</span></code> list in the <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> file. That’s the way the cmake-registry registry in the scaffold is implemented.</p></li>
+<li><p>Add a port to the <code class="docutils literal notranslate"><span class="pre">overlay-ports</span></code> directory of the project which can be used to register the port in the <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> file. Actually, this is doing the same thing as the overlay triplets and the way in which the <code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/ports</span></code> directory in the scaffold also is implemented. See also the vcpkg official documentation on <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/concepts/overlay-ports">overlay-ports</a>.</p></li>
+</ul>
+<p>References:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/concepts/overlay-ports">https://learn.microsoft.com/en-us/vcpkg/concepts/overlay-ports</a></p></li>
+<li><p><a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/consume/install-locally-modified-package">Why overlay ports? Install locally modified package</a></p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -218,23 +251,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="build_configuration.html">
+          <a class="next-page" href="triplet_presets.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Build Congfiguration</div>
+                <div class="title">Triplet Presets</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Topics</div>
                 
               </div>
             </a>
@@ -256,8 +289,28 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Overlays</a><ul>
+<li><a class="reference internal" href="#overlay-of-a-custom-triplet">Overlay of a custom triplet</a></li>
+<li><a class="reference internal" href="#overlay-of-a-custom-port">Overlay of a custom port</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -268,5 +321,6 @@
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
     </body>
 </html>
