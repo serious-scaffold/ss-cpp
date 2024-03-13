@@ -15,7 +15,9 @@
 :glob:
 
 Overview <self>
-development/index
+Tutorials <tutorials/index>
+Topics <topics/index>
+Principles <principles/index>
 contributing
 ```
 
