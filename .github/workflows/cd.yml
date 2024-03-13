@@ -1,0 +1,63 @@
+name: CD
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_COLOR: 3
+
+jobs:
+  pages:
+    name: Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    if: ${{ github.ref_name == github.event.repository.default_branch || (github.event_name == 'release' && github.event.action == 'published') }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/vcpkg
+          key: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
+          restore-keys: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc
+          cmake: true
+          ninja: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+          python: true
+
+      - name: Install docs dependencies
+        run: |
+          pip install -r docs/requirements.txt
+
+      - name: Configure
+        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+
+      - name: Build Docs
+        run: cmake --build out/build/x64-linux-gcc --target ss-cpp-docs
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/_build/html
