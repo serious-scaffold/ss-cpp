@@ -33,6 +33,7 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
+    "sphinx_inline_tabs",
 ]
 source_suffix = {
     ".rst": "restructuredtext",
@@ -55,6 +56,13 @@ highlight_language = "cpp"
 cpp_id_attributes = [
     "COMPILE_EXPORT",
     "GIT_EXTERN_C_BEGIN",
+]
+
+# -- Extension configuration -------------------------------------------------
+myst_enable_extensions = [
+    "colon_fence",
+    "substitution",
+    "deflist",
 ]
 
 # -- Options for HTML output -------------------------------------------------
