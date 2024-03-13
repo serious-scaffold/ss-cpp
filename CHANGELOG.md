@@ -1,3 +1,44 @@
+## [1.3.0](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.11...v1.3.0) (2024-03-13)
+
+
+### Features
+
+* coverage support and improve documentation ([#66](https://github.com/serious-scaffold/ss-cpp/issues/66)) ([c2b0bf8](https://github.com/serious-scaffold/ss-cpp/commit/c2b0bf86f5e36ac7bda0ac1f86a002ec2bd62694))
+
+
+### Refactor
+
+* refine cmake comments ([c6a3536](https://github.com/serious-scaffold/ss-cpp/commit/c6a3536401770db2c9565fdedee137943337093b))
+
+
+### Chores
+
+* indent 2 for js ([84efe48](https://github.com/serious-scaffold/ss-cpp/commit/84efe4866403b506ad57213c5167bae1d656adde))
+* loose some folders watched ([33702c6](https://github.com/serious-scaffold/ss-cpp/commit/33702c627ef66c4531145eb923746d855ce5a052))
+* optimize annotated tags creation of automatic release ([4982871](https://github.com/serious-scaffold/ss-cpp/commit/49828719414de194e69cefae77b6ba9561d2a3d7))
+* optimize project configuration ([#58](https://github.com/serious-scaffold/ss-cpp/issues/58)) ([03afcf8](https://github.com/serious-scaffold/ss-cpp/commit/03afcf87a2b353142e75bc6668b49318216d1aed))
+* rename docs related cmake targets to use dash naming convention ([95ace5e](https://github.com/serious-scaffold/ss-cpp/commit/95ace5e96566823302b5303a532b8b10c29b83db))
+
+
+### Build
+
+* optimize cmake tool file load ([#61](https://github.com/serious-scaffold/ss-cpp/issues/61)) ([f44a4b2](https://github.com/serious-scaffold/ss-cpp/commit/f44a4b2aa51a8a16dd34f3d46566b3bb8f94465a))
+* optimze build ([#60](https://github.com/serious-scaffold/ss-cpp/issues/60)) ([b99bd6b](https://github.com/serious-scaffold/ss-cpp/commit/b99bd6b83d16d4a7a816db4cb825a925247b0855))
+* simplify CMakePresets.json ([#62](https://github.com/serious-scaffold/ss-cpp/issues/62)) ([2172148](https://github.com/serious-scaffold/ss-cpp/commit/2172148cf30da79bb8e4e707133684c87c64c9d7))
+
+
+### CI
+
+* add consistency checker ([#63](https://github.com/serious-scaffold/ss-cpp/issues/63)) ([ca93006](https://github.com/serious-scaffold/ss-cpp/commit/ca9300668122c791aef971355b55375646cfca46))
+
+
+### Docs
+
+* add full name in README ([c5192b6](https://github.com/serious-scaffold/ss-cpp/commit/c5192b6d9ce53cb417e8d749552c565aa2dc14e0))
+* fix typo in CHANGELOG.md ([76326f4](https://github.com/serious-scaffold/ss-cpp/commit/76326f4c1a64dcc33e4cdd28d2e1bef05b9ebe00))
+* simplify docs build ([#64](https://github.com/serious-scaffold/ss-cpp/issues/64)) ([ed57817](https://github.com/serious-scaffold/ss-cpp/commit/ed578175f00e0d237a6f6ad0e4768dc4fe6f0fd8))
+* temp WIP ([ec84dd5](https://github.com/serious-scaffold/ss-cpp/commit/ec84dd5641daa546e5be0f0d0c55df7de36037a3))
+
 ## [1.2.11](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.10...v1.2.11) (2023-11-19)
 
 
