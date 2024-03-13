@@ -11,7 +11,7 @@ on:
       - published
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: {{ '${{ github.workflow }}-${{ github.ref }}' }}
   cancel-in-progress: true
 
 env:
@@ -21,20 +21,20 @@ jobs:
   pages:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
-    if: ${{ github.ref_name == github.event.repository.default_branch || (github.event_name == 'release' && github.event.action == 'published') }}
+    if: {{ '${{ github.ref_name == github.event.repository.default_branch || (github.event_name == \'release\' && github.event.action == \'published\') }}' }}
 
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: {{ '${{ secrets.GITHUB_TOKEN }}' }}
 
       - name: Cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/vcpkg
-          key: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
-          restore-keys: x64-linux-gcc-${{ hashFiles('./vcpkg.json') }}
+          key: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
@@ -59,5 +59,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: {{ '${{ secrets.GITHUB_TOKEN }}' }}
           publish_dir: ./docs/_build/html
