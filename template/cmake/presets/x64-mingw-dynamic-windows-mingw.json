@@ -14,10 +14,8 @@
         "windows",
         "mingw",
         "x64-mingw-dynamic"
-      ],
-      "cacheVariables": {
-        "USE_SANITIZER": "FALSE"
-      }
+      ]
+
     }
   ],
   "buildPresets": [

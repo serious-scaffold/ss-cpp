@@ -128,15 +128,15 @@ jobs:
           vcpkg: ${{ matrix.vcpkg }}
           ccache: true
           python: true
-          opencppcoverage: true
+          opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
-      - name: Gcc Lcov
+      - name: Lcov for coverage
         if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
         run: |
           sudo apt-get update
           sudo apt-get install lcov
 
-      - name: Gcovr
+      - name: Gcovr for coverage
         if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'mingw')
         run: |
           pip install gcovr
@@ -154,7 +154,11 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON -DCMAKE_VERBOSE_MAKEFILE=TRUE
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }}
+
+      - name: Build
+        run: |
+          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
 
       - name: Coverage
         run: |

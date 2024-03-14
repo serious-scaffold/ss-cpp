@@ -16,7 +16,7 @@
         "x64-windows"
       ],
       "cacheVariables": {
-        "USE_SANITIZER": "FALSE"
+        "USE_SANITIZER": "OFF"
       }
     }
   ],
