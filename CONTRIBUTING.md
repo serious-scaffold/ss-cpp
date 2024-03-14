@@ -9,15 +9,6 @@ Nothing easier!
 
 Fork and clone the repository, then:
 
-```bash
-# Optional virtualenv, depends on your develop environment
-pipx install virtualenv pre-commit
-virtualenv .venv
-source .venv/bin/activate
-
-pip install copier
-```
-
 You now have the dependencies installed.
 
 ## Development
