@@ -23,7 +23,7 @@
 ### Build
 
 * optimize cmake tool file load ([#61](https://github.com/serious-scaffold/ss-cpp/issues/61)) ([f44a4b2](https://github.com/serious-scaffold/ss-cpp/commit/f44a4b2aa51a8a16dd34f3d46566b3bb8f94465a))
-* optimze build ([#60](https://github.com/serious-scaffold/ss-cpp/issues/60)) ([b99bd6b](https://github.com/serious-scaffold/ss-cpp/commit/b99bd6b83d16d4a7a816db4cb825a925247b0855))
+* optimize build ([#60](https://github.com/serious-scaffold/ss-cpp/issues/60)) ([b99bd6b](https://github.com/serious-scaffold/ss-cpp/commit/b99bd6b83d16d4a7a816db4cb825a925247b0855))
 * simplify CMakePresets.json ([#62](https://github.com/serious-scaffold/ss-cpp/issues/62)) ([2172148](https://github.com/serious-scaffold/ss-cpp/commit/2172148cf30da79bb8e4e707133684c87c64c9d7))
 
 
