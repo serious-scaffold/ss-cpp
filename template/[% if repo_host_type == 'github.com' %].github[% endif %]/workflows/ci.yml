@@ -76,6 +76,7 @@ jobs:
 
   checks:
     runs-on: ${{ matrix.presets.os.name }}
+    timeout-minutes: 15
     permissions:
       actions: read
       contents: read
