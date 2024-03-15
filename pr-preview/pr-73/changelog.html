@@ -1,0 +1,983 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="ss-cpp API" href="api.html" /><link rel="prev" title="Contributing" href="contributing.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Changelog - Serious Scaffold Cpp documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Serious Scaffold Cpp  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">Serious Scaffold Cpp  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/project_management.html">Project Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/development_environment.html">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/dependencies.html">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="topics/overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topics/triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topics/security.html">Security</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="principles/index.html">Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">ss-cpp API</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/compare/v1.2.11...v1.3.0">1.3.0</a> (2024-03-13)<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>coverage support and improve documentation (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/66">#66</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/c2b0bf86f5e36ac7bda0ac1f86a002ec2bd62694">c2b0bf8</a>)</p></li>
+</ul>
+</section>
+<section id="refactor">
+<h3>Refactor<a class="headerlink" href="#refactor" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>refine cmake comments (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/c6a3536401770db2c9565fdedee137943337093b">c6a3536</a>)</p></li>
+</ul>
+</section>
+<section id="chores">
+<h3>Chores<a class="headerlink" href="#chores" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>indent 2 for js (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/84efe4866403b506ad57213c5167bae1d656adde">84efe48</a>)</p></li>
+<li><p>loose some folders watched (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/33702c627ef66c4531145eb923746d855ce5a052">33702c6</a>)</p></li>
+<li><p>optimize annotated tags creation of automatic release (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/49828719414de194e69cefae77b6ba9561d2a3d7">4982871</a>)</p></li>
+<li><p>optimize project configuration (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/58">#58</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/03afcf87a2b353142e75bc6668b49318216d1aed">03afcf8</a>)</p></li>
+<li><p>rename docs related cmake targets to use dash naming convention (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/95ace5e96566823302b5303a532b8b10c29b83db">95ace5e</a>)</p></li>
+</ul>
+</section>
+<section id="build">
+<h3>Build<a class="headerlink" href="#build" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>optimize cmake tool file load (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/61">#61</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/f44a4b2aa51a8a16dd34f3d46566b3bb8f94465a">f44a4b2</a>)</p></li>
+<li><p>optimize build (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/60">#60</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/b99bd6b83d16d4a7a816db4cb825a925247b0855">b99bd6b</a>)</p></li>
+<li><p>simplify CMakePresets.json (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/62">#62</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/2172148cf30da79bb8e4e707133684c87c64c9d7">2172148</a>)</p></li>
+</ul>
+</section>
+<section id="ci">
+<h3>CI<a class="headerlink" href="#ci" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add consistency checker (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/63">#63</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/ca9300668122c791aef971355b55375646cfca46">ca93006</a>)</p></li>
+</ul>
+</section>
+<section id="docs">
+<h3>Docs<a class="headerlink" href="#docs" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add full name in README (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/c5192b6d9ce53cb417e8d749552c565aa2dc14e0">c5192b6</a>)</p></li>
+<li><p>fix typo in CHANGELOG.md (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/76326f4c1a64dcc33e4cdd28d2e1bef05b9ebe00">76326f4</a>)</p></li>
+<li><p>simplify docs build (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/64">#64</a>) (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/ed578175f00e0d237a6f6ad0e4768dc4fe6f0fd8">ed57817</a>)</p></li>
+<li><p>temp WIP (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/ec84dd5641daa546e5be0f0d0c55df7de36037a3">ec84dd5</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/compare/v1.2.10...v1.2.11">1.2.11</a> (2023-11-19)<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="performance">
+<h3>Performance<a class="headerlink" href="#performance" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>explicitly declare dependency version (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/73ebaeb13bfde775813bd7f58694eda75cb030b0">73ebaeb</a>), closes <a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/51">#51</a></p></li>
+<li><p>use the GoogleTest module from cmake_modules (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/65fa5e21efe2f8dd958b21bb0d5c29a0818525f4">65fa5e2</a>), closes <a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/52">#52</a></p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>Chores<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update baseline (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/fdfc19b39ee7ba991d44822a325b9c9abb098531">fdfc19b</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/compare/v1.2.9...v1.2.10">1.2.10</a> (2023-11-18)<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h3>Performance<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>executable install depends rules (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/1317a5c2b6675bec80032a6fbdaf1b3035378fc5">1317a5c</a>)</p></li>
+</ul>
+</section>
+<section id="id6">
+<h3>Chores<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update baseline (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/f349824045bc4de2c3fdeee87b522be02d7e216a">f349824</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id7">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/compare/v1.2.8...v1.2.9">1.2.9</a> (2023-11-18)<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id8">
+<h3>Performance<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>put export include to target build directories (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/26f4e8abf0a453e6ffc0995554f2adfcd74e6484">26f4e8a</a>), closes <a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/issues/49">#49</a></p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>Chores<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>rename repository to ss-cpp (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/acc1b5a0b93eae05c5d5f0bccba85b652ca47075">acc1b5a</a>)</p></li>
+<li><p>update baseline in vcpkg.json (<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/commit/5b57a7c00ee0ba5daefba0d8abaae3a960d26970">5b57a7c</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id10">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.7...v1.2.8">1.2.8</a> (2023-11-06)<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<section id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>error on the lack of sphinx tools (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/88027bf817a74503d158ef38d274911ae169fd45">88027bf</a>)</p></li>
+<li><p>jni target are always added (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/e1ae2d03357dc8acdae90be1c2d2477954769658">e1ae2d0</a>)</p></li>
+</ul>
+</section>
+<section id="id11">
+<h3>Performance<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>attach coverage generation result to docs (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/f984ddafffddb819235dbdd51a66cc66f6dae55c">f984dda</a>)</p></li>
+</ul>
+</section>
+<section id="id12">
+<h3>Chores<a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>remove answers from copier (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/cade11a860d147ecd6bf1eb3159940e43075f978">cade11a</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id13">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.6...v1.2.7">1.2.7</a> (2023-11-01)<a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h2>
+<section id="id14">
+<h3>Bug Fixes<a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add a pre-dependency for ccov-all (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/d9600356fabf7a203a1d6566381e35c7d61f30ea">d960035</a>), closes <a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/issues/38">#38</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.5...v1.2.6">1.2.6</a> (2023-10-30)<a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<section id="id16">
+<h3>Bug Fixes<a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>document transition error (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/70c32e84ace96779afc821e17b2758e5c7bdadb2">70c32e8</a>)</p></li>
+<li><p>install dependency absl::log (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/412ee111af35bb9d5d5ad8dd4da5a2c19d63a82b">412ee11</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id17">
+<h2><a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/compare/v1.2.4...v1.2.5">1.2.5</a> (2023-10-30)<a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h2>
+<section id="id18">
+<h3>Performance<a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>organize executable example (<a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/commit/461bc21811368e850963b158182b134f4db63386">461bc21</a>), closes <a class="reference external" href="https://github.com/serious-scaffold/cpp-scaffold/issues/31">#31</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id19">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.2.3...v1.2.4">1.2.4</a> (2023-10-28)<a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h2>
+<section id="id20">
+<h3>Performance<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>recover to upload .copier-answers.yml (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/34af8e3efa41e9a527c3b108cfaa5863005fa4a2">34af8e3</a>)</p></li>
+</ul>
+</section>
+<section id="id21">
+<h3>Docs<a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix typo in CHANGELOG.md (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/bde31f3c856b8a7722cce0011170bee28c87dbcf">bde31f3</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id22">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.2.2...v1.2.3">1.2.3</a> (2023-10-28)<a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h2>
+<section id="id23">
+<h3>Performance<a class="headerlink" href="#id23" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>embed coverage in sphinx instead of repalcing (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/dd8f3cdb60803821e409670b9dc0b05b5c516040">dd8f3cd</a>)</p></li>
+<li><p>organize cmake gtest configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/a774ba735017724cae9c007853089cf66789e40c">a774ba7</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id24">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.2.1...v1.2.2">1.2.2</a> (2023-10-28)<a class="headerlink" href="#id24" title="Permalink to this heading">#</a></h2>
+<section id="id25">
+<h3>Bug Fixes<a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fail to disable cmake-format (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c78f784148fe99e02e1050c4c9a759cf734d86ee">c78f784</a>)</p></li>
+</ul>
+</section>
+<section id="id26">
+<h3>Performance<a class="headerlink" href="#id26" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add placeholder in README.md (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f705281729e8af856b5841be56cff9aae015dac9">f705281</a>)</p></li>
+<li><p>conform to added targets with related dependencies in vcpkg.json (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/86ceab7688dcde1e4642a5e370f2793281fe09ee">86ceab7</a>)</p></li>
+<li><p>rename add_compile_lib_target without (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/46d0f608b22703784c68628fbf9c03d415bcc188">46d0f60</a>)</p></li>
+<li><p>use repo_name instead of project_name (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f9e1da154f8ca7ec2ab88a2649586991ca1806c0">f9e1da1</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id27">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.2.0...v1.2.1">1.2.1</a> (2023-10-28)<a class="headerlink" href="#id27" title="Permalink to this heading">#</a></h2>
+<section id="id28">
+<h3>Performance<a class="headerlink" href="#id28" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>more generic build of java jar (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/282004eee4fd4f10e810aff7d68d9b92c909862a">282004e</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id29">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.6...v1.2.0">1.2.0</a> (2023-10-28)<a class="headerlink" href="#id29" title="Permalink to this heading">#</a></h2>
+<section id="id30">
+<h3>Features<a class="headerlink" href="#id30" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add jni option (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c27e7e5e4ac2f376747a328f4033d1836bacd6e7">c27e7e5</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/16">#16</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id31">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.5...v1.1.6">1.1.6</a> (2023-10-27)<a class="headerlink" href="#id31" title="Permalink to this heading">#</a></h2>
+<section id="id32">
+<h3>Performance<a class="headerlink" href="#id32" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>move proxy requirement to compile target (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b67c6aa11b7da7ac679f81106bb926d5bc37e377">b67c6aa</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id33">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.4...v1.1.5">1.1.5</a> (2023-10-27)<a class="headerlink" href="#id33" title="Permalink to this heading">#</a></h2>
+<section id="id34">
+<h3>Bug Fixes<a class="headerlink" href="#id34" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>coverage missing (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9e42fc1399820cf1a169068fa600c9581bd7b8af">9e42fc1</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/26">#26</a></p></li>
+</ul>
+</section>
+<section id="id35">
+<h3>Performance<a class="headerlink" href="#id35" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>docs:</strong> attach CHANGELOG.md to sphinx docs (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/88cf600deb70dde281998f70aee7e37f04c4cf7b">88cf600</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/25">#25</a></p></li>
+<li><p><strong>docs:</strong> remove release version (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/95f59ba1139b927853dbff3ce7d399b6859acbbf">95f59ba</a>)</p></li>
+</ul>
+</section>
+<section id="id36">
+<h3>Chores<a class="headerlink" href="#id36" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update cmake-registry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4f45aa80ac4fbd6ba8d21189d3f5c8c61a143631">4f45aa8</a>)</p></li>
+</ul>
+</section>
+<section id="id37">
+<h3>CI<a class="headerlink" href="#id37" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>setup-python with 3.11 (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0e980633c79df453c37de611013a01198b2b9ca6">0e98063</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id38">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.3...v1.1.4">1.1.4</a> (2023-10-26)<a class="headerlink" href="#id38" title="Permalink to this heading">#</a></h2>
+<section id="id39">
+<h3>Bug Fixes<a class="headerlink" href="#id39" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>template cmake target wrong exchange (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/a121a609d2c68913bfa2fb34e4f707e031ab6058">a121a60</a>)</p></li>
+</ul>
+</section>
+<section id="id40">
+<h3>Performance<a class="headerlink" href="#id40" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add relative targets docs generation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c917d8c8e909e414ca6da76ce047b04b4e5a763a">c917d8c</a>)</p></li>
+</ul>
+</section>
+<section id="id41">
+<h3>Chores<a class="headerlink" href="#id41" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update cmake-registry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/826fef75d03a91b941da2970fc5aed74a7fc9a53">826fef7</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id42">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.2...v1.1.3">1.1.3</a> (2023-10-26)<a class="headerlink" href="#id42" title="Permalink to this heading">#</a></h2>
+<section id="id43">
+<h3>Bug Fixes<a class="headerlink" href="#id43" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>docs build with GIT_EXTERN_C_BEGIN error (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/1eaeb21c9bd134baa0b3b6beb852a4606191f340">1eaeb21</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/23">#23</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id44">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.1...v1.1.2">1.1.2</a> (2023-10-26)<a class="headerlink" href="#id44" title="Permalink to this heading">#</a></h2>
+<section id="id45">
+<h3>Performance<a class="headerlink" href="#id45" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>rename target and relative configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/2869cde01f4be028eb053fb41d4fcffaa5ccfc3a">2869cde</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/22">#22</a></p></li>
+</ul>
+</section>
+</section>
+<section id="id46">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.1.0...v1.1.1">1.1.1</a> (2023-10-25)<a class="headerlink" href="#id46" title="Permalink to this heading">#</a></h2>
+<section id="id47">
+<h3>Performance<a class="headerlink" href="#id47" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>configure to install license to package and bin dir (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ce0096c940e09bbeb792284765c8450f0a1056fe">ce0096c</a>)</p></li>
+</ul>
+</section>
+<section id="id48">
+<h3>Chores<a class="headerlink" href="#id48" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update cmake-reigstry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/de1160cf77dae99b6e6c29913360a40307da71ed">de1160c</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id49">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.0.4...v1.1.0">1.1.0</a> (2023-10-25)<a class="headerlink" href="#id49" title="Permalink to this heading">#</a></h2>
+<section id="id50">
+<h3>Features<a class="headerlink" href="#id50" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add version management (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/971bf7f0e13d429b4b65a12b740fec34e9b8a61e">971bf7f</a>)</p></li>
+</ul>
+</section>
+<section id="id51">
+<h3>Bug Fixes<a class="headerlink" href="#id51" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>configure cmake targets on copier (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/589a6e99155a916d0044794055e23a03baf1e86e">589a6e9</a>)</p></li>
+</ul>
+</section>
+<section id="id52">
+<h3>Docs<a class="headerlink" href="#id52" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix changelog typo (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/443358b87b3620c31cdd6e4376f6c5061b7642e9">443358b</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id53">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.0.3...v1.0.4">1.0.4</a> (2023-10-24)<a class="headerlink" href="#id53" title="Permalink to this heading">#</a></h2>
+<section id="id54">
+<h3>Bug Fixes<a class="headerlink" href="#id54" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add missing general semantic-release configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c9f88c426789b6ba3fc2ef4096c15282a7b8aa14">c9f88c4</a>)</p></li>
+</ul>
+</section>
+<section id="id55">
+<h3>Performance<a class="headerlink" href="#id55" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add more project meta configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/640cb12727178439a9c4cd00d095952bd919d092">640cb12</a>)</p></li>
+<li><p>fix and add repository badges (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4e67e32f5cdba7d5dcbdfa4c3cf288a7a942275f">4e67e32</a>)</p></li>
+<li><p>remove SOVERSION property on api lib (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/09b3bf7ffa22290cbd56cba2be4065dcffdfd7c3">09b3bf7</a>)</p></li>
+<li><p>update cmake-registry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/510a03c5a4b8aa45ac0f205aed6fdc62b0806b03">510a03c</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id56">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.0.2...v1.0.3">1.0.3</a> (2023-10-22)<a class="headerlink" href="#id56" title="Permalink to this heading">#</a></h2>
+<section id="id57">
+<h3>Performance<a class="headerlink" href="#id57" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>remove sanitizer configuration on CMakePresets.json (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/fad7196a2565a8f3300bc78a0212dd09dd23a411">fad7196</a>)</p></li>
+<li><p>update baseline and install rules (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/01c097f35b2f6448cbb166c8613ea42d8a506ba9">01c097f</a>)</p></li>
+<li><p>update cmake-registry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/1f4268a7fd17b8c5701c19adbc0b8b210361b36a">1f4268a</a>)</p></li>
+</ul>
+</section>
+<section id="id58">
+<h3>Docs<a class="headerlink" href="#id58" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>improve readability (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/8ccbd28db93ac97f0a651aa3b9784d1b6a1999e9">8ccbd28</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id59">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.0.1...v1.0.2">1.0.2</a> (2023-10-19)<a class="headerlink" href="#id59" title="Permalink to this heading">#</a></h2>
+<section id="id60">
+<h3>Performance<a class="headerlink" href="#id60" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update cmake-registry baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/d3a8a8d5632cff0cc5a6ca8dbdb8a2c9cf5f2311">d3a8a8d</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id61">
+<h2><a class="reference external" href="https://github.com/msclock/cpp-scaffold/compare/v1.0.0...v1.0.1">1.0.1</a> (2023-10-18)<a class="headerlink" href="#id61" title="Permalink to this heading">#</a></h2>
+<section id="style">
+<h3>Style<a class="headerlink" href="#style" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>fix changelog typo (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/93edf2c791343d8062c426ea5d3e031b95a691a8">93edf2c</a>)</p></li>
+</ul>
+</section>
+<section id="id62">
+<h3>Performance<a class="headerlink" href="#id62" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>update cmake-vcpkg baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/af8e83a9a84cda787669d1b3261d9ac78a0dd8bf">af8e83a</a>)</p></li>
+<li><p>use cmake-modules install and include tools (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/65fb8e76f38e8a2ef9a5cba2b8f93b07dbe9edc2">65fb8e7</a>)</p></li>
+</ul>
+</section>
+<section id="id63">
+<h3>Chores<a class="headerlink" href="#id63" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>pre-commit write changes on codespell (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ad42e041bb76d194ef753660e756387c96389e58">ad42e04</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id64">
+<h2>1.0.0 (2023-10-17)<a class="headerlink" href="#id64" title="Permalink to this heading">#</a></h2>
+<section id="id65">
+<h3>Features<a class="headerlink" href="#id65" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add coverage reports to sphinx docs (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/dc1a9941f06a1f87b621dc89cdcbb154ab482607">dc1a994</a>)</p></li>
+<li><p>add sphinx docs generator (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b29eabde3efd8f4d910da7e56318e4f4322f68c9">b29eabd</a>)</p></li>
+<li><p>convert to copier template (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/3">#3</a>) (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c34e6ca3a5fc81cfd65901e103a518ab89e146cd">c34e6ca</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/2">#2</a></p></li>
+</ul>
+</section>
+<section id="id66">
+<h3>Bug Fixes<a class="headerlink" href="#id66" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>absl log initialize (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/1cd782ff6a7812d657be75ca4534798cbf6de3d4">1cd782f</a>)</p></li>
+<li><p>cdash missed submit url (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e1036ead2d6fa8917dc3c21ee7a81825e70fb588">e1036ea</a>)</p></li>
+<li><p>correct cmake config (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/23d1c38485bab06e63622340d06c8bdb49b3d6ef">23d1c38</a>)</p></li>
+<li><p>missing debug distribution libs on windows (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/fa29779f694a9fa3c01658332b68d5e52a6a7ea6">fa29779</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/7">#7</a></p></li>
+</ul>
+</section>
+<section id="id67">
+<h3>Style<a class="headerlink" href="#id67" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add note to CPM usage and jinja format for cmake files (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/eb339629e09744c8346ad42f1762b8859496fffd">eb33962</a>)</p></li>
+<li><p>change doxygen style from &#64; to \ (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c942de5550cca3925f53d1a3f5f96e6427e8967d">c942de5</a>)</p></li>
+<li><p>cmake format (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/620098edc34b0f7b3f2f4d5184e4fcf464f0f120">620098e</a>)</p></li>
+<li><p>confrom to pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/610db4af5139a821e90fef80dbc2a4393601b2cb">610db4a</a>)</p></li>
+<li><p>confront to precommit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6f7799f0565236f408fcb91e53dbd7f5c4b5c2a6">6f7799f</a>)</p></li>
+<li><p>disable cmake format block (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/d1e5d6731c8fe7fc0f84a4536c5d09b6cc869702">d1e5d67</a>)</p></li>
+<li><p>fix typo (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b7dfbf22a96a894e2eae56b2fc1cd613c73b1a69">b7dfbf2</a>)</p></li>
+<li><p>format cmake module OSInstall (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9184142a05d7e7a691401693e861cb20204e13c9">9184142</a>)</p></li>
+</ul>
+</section>
+<section id="id68">
+<h3>Performance<a class="headerlink" href="#id68" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add header-only demo and move tests (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/bf8d79e5bc850be01dc4343051e01d66cfadf0f5">bf8d79e</a>)</p></li>
+<li><p>add header/app/api options to copier (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4df21102fa74894acbbe6065ff61b8740e2179f2">4df2110</a>)</p></li>
+<li><p><strong>build:</strong> perf memcheck with valgrind and sanitizers (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0b141426cf0155b488e71c6aa4cffe407c4a2bcc">0b14142</a>)</p></li>
+<li><p>check vcpkg build env existence (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/159d238071276f3df133d2c77acf5eee1806fbd6">159d238</a>)</p></li>
+<li><p>cmake install exclude test things (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/90b3ddaa46cb42496ff1f4fbd32062b3e5eaec18">90b3dda</a>)</p></li>
+<li><p>cmake output about rpath (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6bb694fc34676cb8272da7d4e0cc17f6be38d012">6bb694f</a>)</p></li>
+<li><p>consistency test output name (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c7742349adf16590e90ac67935585060a368e9dd">c774234</a>)</p></li>
+<li><p>correct config annotation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/765869417533befd4cabd9e497eb7026b0fe96c0">7658694</a>)</p></li>
+<li><p>dev container (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0161274011b0dbb99e10dd7b2101ecff90614fb7">0161274</a>)</p></li>
+<li><p>improve readablity on OS dependencies resolving (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/2d52c34ea19bf810f8d51138582fd6da77278003">2d52c34</a>)</p></li>
+<li><p>make cpm/conan as a option based on copier (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ef04c79e12870edbd922fd4166805c29f798d5c9">ef04c79</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/11">#11</a></p></li>
+<li><p>make the cdash as an option (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c6bedddd942468f9b99cf9b6af7d0d4c3c4e4429">c6beddd</a>)</p></li>
+<li><p>resort cmake (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/68ba0319c840d426708f145a27c4ba193af58d31">68ba031</a>)</p></li>
+<li><p>robust sanitizer and dependentcies  config (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/84dcf20f136c2b2e6a4f1a6f9893a02720e7f43e">84dcf20</a>)</p></li>
+<li><p>runpath setup for shared libraries and executables (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/70603aa7039b8eb23d3f16514b4d6a6a0e79e646">70603aa</a>)</p></li>
+<li><p>simplify matches on sanitizer (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/09291ec78387a3dc9f60b5d3bd83d7c0aaf7d5f8">09291ec</a>)</p></li>
+<li><p>update cmake-registry baseline and related gtest conf (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ed6874e758150c59ca4d2242f80cf46173deca04">ed6874e</a>)</p></li>
+<li><p>use cmake-registry (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9fa3fd3b40c7fd483aaaf9ec87f96dca5b208b0a">9fa3fd3</a>), closes <a class="reference external" href="https://github.com/msclock/cpp-scaffold/issues/4">#4</a></p></li>
+<li><p>use snake case for cmake config files (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e241e26547b61ffe59360c45ab652cdee4e0637b">e241e26</a>)</p></li>
+</ul>
+</section>
+<section id="id69">
+<h3>Chores<a class="headerlink" href="#id69" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add _DEBUG macro on linux when using Debug configuration. (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f47cdf7b1f5765a02c008b44b106e0edb4d8ac1d">f47cdf7</a>)</p></li>
+<li><p>add C detection and set version 0.0.0 (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/bb3c0901e5b7c8af07b3f0d3e3b7f16ed5ef9859">bb3c090</a>)</p></li>
+<li><p>add cmake files to editorconfig (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6dd07b6563c13deb8802ffd9c50d21f390986705">6dd07b6</a>)</p></li>
+<li><p>add editorconfig (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/402c74d212dfb9ef301943edd300949d504ef904">402c74d</a>)</p></li>
+<li><p>add extension for editorconfig and containerEnv TZ (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/7b6eb2de351f74e4bc886ce5593df554fcbd525b">7b6eb2d</a>)</p></li>
+<li><p>add sanitizer for gnu (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e59a9973868187db70582b68c065c78138881866">e59a997</a>)</p></li>
+<li><p>adjust project layout (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f8ef81ed96f2e8fb56b392857cf86d4893634cb5">f8ef81e</a>)</p></li>
+<li><p>bind cmake preset and more relative docs (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/cf01fe9bc1a3bead236f91c2ca5e274531497598">cf01fe9</a>)</p></li>
+<li><p><strong>build:</strong>  add system deps libs when installing (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/a11cc713d0e4ff6d524d428e6d2943c8dd328b7c">a11cc71</a>)</p></li>
+<li><p><strong>build:</strong> add ccache and ipo perf (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c1df9838aec983429ff610fbb01da559adad6557">c1df983</a>)</p></li>
+<li><p><strong>build:</strong> cmake build assistant tools (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/952fa611d003fa10ec74d2ad1cc19e167f218deb">952fa61</a>)</p></li>
+<li><p><strong>build:</strong> cmakePresets and sanitizer not support with llvm on windows (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/37197d18086ff1431bc1ee6e936e3f6b097b144b">37197d1</a>)</p></li>
+<li><p><strong>build:</strong> config for debug library generation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/af123ffe5aa7008508dd7843b87a97b08a40491f">af123ff</a>)</p></li>
+<li><p><strong>build:</strong> distinguish clangcl from clang on windows (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0264a7b262670f8100d22770459be18c9fb59680">0264a7b</a>)</p></li>
+<li><p><strong>build:</strong> perf coverage compilation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/5c2015adcd8f0f3e6bd63a88d42c7ce9b0192871">5c2015a</a>)</p></li>
+<li><p><strong>build:</strong> remove useless cmake scripts for cpack (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/fbd0d6714c3aefc57df3e46112e625d93ccc8ced">fbd0d67</a>)</p></li>
+<li><p><strong>build:</strong> resort cmake sanitizer annotations (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b1e8267b986185dcc049f104b03bfd66782d3827">b1e8267</a>)</p></li>
+<li><p><strong>build:</strong> robust build system and annotations (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/7525bb91141a75c874cc8c63754afd79ddebca05">7525bb9</a>)</p></li>
+<li><p><strong>build:</strong> robust cmake presets and other tools (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6aac10d171fa3d8d774a3ee638aea115567f7f35">6aac10d</a>)</p></li>
+<li><p><strong>build:</strong> 添加 VS Coverage 链接选项/PROFILE (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0e8448761835878d923f6d1bc3fc2e9721a77105">0e84487</a>)</p></li>
+<li><p><strong>ci:</strong> fix warning from job pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/81b8b901febd1f1f7cb9742f75a809300e581976">81b8b90</a>)</p></li>
+<li><p><strong>cmake:</strong> cdash and fix cmakepresets (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/33d8b0641991153bc06c55741211ab0eac09d875">33d8b06</a>)</p></li>
+<li><p>coverage configuration for gcc and clang (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/96b1a28b13165cd6cd6b376f382f6ec2a4e541fe">96b1a28</a>)</p></li>
+<li><p><strong>deps:</strong> resort deps (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/567857b376eb8ea3860f139d505004e29f8ef41d">567857b</a>)</p></li>
+<li><p>dev container and more format (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/892102d6a470b39e7567b2e88f21acdd0da48f1a">892102d</a>)</p></li>
+<li><p>dev less exts (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/3e7cd9cb001f513ef2264af769bde8c4edd8a00c">3e7cd9c</a>)</p></li>
+<li><p><strong>dev:</strong> change dev deps (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ad1e48b74370e988fd4a4425956cb193b2b12633">ad1e48b</a>)</p></li>
+<li><p>devcontainer missing path ~/.local/bin (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b09598509002625dc419110e17f1eefd3c1e7c1c">b095985</a>)</p></li>
+<li><p><strong>dev:</strong> default devcontainer settings (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0493d64629b185f6dc5fe4c9a9184c15d61b656d">0493d64</a>)</p></li>
+<li><p><strong>dev:</strong> remove some useless exts (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/cc68ffbc290421df1772c7ced11c7f6704a92278">cc68ffb</a>)</p></li>
+<li><p>disable build binary on source dir (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b92ebfe00f82ef05544b06c55a053d9040f048ed">b92ebfe</a>)</p></li>
+<li><p>disable dart warnings (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6cdd25b22133662f7a6bcd3faaf0ec82d2010441">6cdd25b</a>)</p></li>
+<li><p><strong>docs:</strong> fix docs generation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/d4a3ef8051b24dbdc0e761bbe49742e2b457d1ec">d4a3ef8</a>)</p></li>
+<li><p>fix .cmake ext based on editorconfig (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/56357ba270a256827de17ca3e80fd57e79e987c1">56357ba</a>)</p></li>
+<li><p>gtest from gitlab is more accessible (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e37c35cfb9c45ceb4d3099562b415d7a44172491">e37c35c</a>)</p></li>
+<li><p>improve pre-commit and add md lint fix (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/bd7dfd10116ce14c6d20ee8a46559ee2fb0ab358">bd7dfd1</a>)</p></li>
+<li><p>improve readability (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/cfe19065898b0f5ba604ae7ff0c44548f0976568">cfe1906</a>)</p></li>
+<li><p>improve readability on sphinx module (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9bcd5d7c69320b0c6449b1ec1f4fc88bba1ee8d8">9bcd5d7</a>)</p></li>
+<li><p>more annotations about coverage (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9948907b68f39ed416da631aa7ae168ba600ba42">9948907</a>)</p></li>
+<li><p>more dev container docs (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4132095057fed1dce56bcf9db5494361f110f031">4132095</a>)</p></li>
+<li><p>more general config on copier.yml (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/5b85fc31cc27fb2884cdad71e3f2f4d27dd25e56">5b85fc3</a>)</p></li>
+<li><p>more generic devcontainer configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/be86677c97ed58da4480a1ae01c66041dd9b862b">be86677</a>)</p></li>
+<li><p>more readable cmake presets (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b04273901aa77471b15367c8049c9b092fe72da1">b042739</a>)</p></li>
+<li><p>more robust and more readable (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b536dbc26e246535e8bb8f8a63edc0b38a4a9a9c">b536dbc</a>)</p></li>
+<li><p>optimize devcontainer and docs, scripts (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/8aa921b07668f989f1fe4f7b5771c8749ad151ce">8aa921b</a>)</p></li>
+<li><p>perf runpath (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/d28e11fe55bb90c9c0b1d50e6dd9dc7f6f3cead1">d28e11f</a>)</p></li>
+<li><p><strong>perf:</strong> add dotnet to dev container (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/d4413512120dde698a62b97766a9117775097a57">d441351</a>)</p></li>
+<li><p>reduce requirement from manifest <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/df67e7fc4f8ea83625ef9b4c52cd64c9be16d3ed">df67e7f</a>)</p></li>
+<li><p>remove and update useless hook (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/3f8f53f74fd512e7086803a763cabd48a375f6ff">3f8f53f</a>)</p></li>
+<li><p>remove github mirror access (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4d9431948c49384918dc3f055bfa13a83b419ce2">4d94319</a>)</p></li>
+<li><p>remove libredwg (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/fcd964c05068ab6b861e983538b24dc04390f0ad">fcd964c</a>)</p></li>
+<li><p>remove reconfigure to sphinx conf.py (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/300199686340762812f36a89f2f2f0e2e4f7bc51">3001996</a>)</p></li>
+<li><p>remove redundant feature (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/30b963c5bd851e94161cc8306ced95641120dc40">30b963c</a>)</p></li>
+<li><p>remove redundant link from gcov with llvm coverage tools (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/46d4b99baf6d1103ff4eda7b79427b8a20fdaef3">46d4b99</a>)</p></li>
+<li><p>rm .copier-answers.yml (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/dd44a886704b322edd95e6cae23ae31e1a1d36b5">dd44a88</a>)</p></li>
+<li><p>schudle update pre-commit on 0 0 1 * * (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/deb923c926522922c9fec3a6392bbdd2ef09fd5f">deb923c</a>)</p></li>
+<li><p>spell check failed (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/2f32f611e0c28c1679e0e34c770a7e7c1402fa1a">2f32f61</a>)</p></li>
+<li><p>update devcontainer and pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b8e6c1a73145ffc3a523888367dfd43908b0e2bf">b8e6c1a</a>)</p></li>
+<li><p>update devcontainer configuration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ebb39438a72f8477edf4eba27a9b81155a098b3c">ebb3943</a>)</p></li>
+<li><p>update git config (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f6376a463dcf994f403a03750510c1a808addbf7">f6376a4</a>)</p></li>
+<li><p>update gtest 3d787f5a0d5 (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b3a1868d5f6ddfc52d2937a7902b76bdb00eeca4">b3a1868</a>)</p></li>
+<li><p>update LICENSE (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/2cea54dacc649d1930db29b58096a1fdcc2a6f3b">2cea54d</a>)</p></li>
+<li><p>update vcpkg configuration baseline (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/26297510a26fd64d412a7ac511e3fa1be27f37a0">2629751</a>)</p></li>
+<li><p>update yaml lint for pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/c37375ec403ebc25a6d774bcb48e6ef9944c89f3">c37375e</a>)</p></li>
+<li><p>using GITHUB_TOKEN (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/cde37b5d096b91b4b8a28fab64d98f2a0eede9d3">cde37b5</a>)</p></li>
+<li><p>using yaml instead of jsonc (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e3e45cd18f55411811746e4c5881c411d202ea8c">e3e45cd</a>)</p></li>
+<li><p>优化dev container (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/175921664231e431a765851dd07d048aa1f1d7b1">1759216</a>)</p></li>
+<li><p>优化runpath (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/fa504b5036bbf12aec7ba8d2ad8d6c3abe5ce0f7">fa504b5</a>)</p></li>
+<li><p>剔除 OpenMP 依赖 (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/a9778e079c47097bd5255a9ad510d351d2e059a9">a9778e0</a>)</p></li>
+</ul>
+</section>
+<section id="id70">
+<h3>Build<a class="headerlink" href="#id70" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>dependency library installation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/9bc21e845af1770c7f25823c48123543b3466a2a">9bc21e8</a>)</p></li>
+<li><p>ipo support (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/938eb17280bd27ac7690b76e74b224bdc80f9f6b">938eb17</a>)</p></li>
+<li><p><strong>lint:</strong> lint integration (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/0e648b11b647912cefe1d9835c9e0d80dc82155a">0e648b1</a>)</p></li>
+<li><p><strong>perf:</strong> docs generation (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/679377fbbad72d75f9b139d6e364959c5dc99b5d">679377f</a>)</p></li>
+<li><p><strong>refactor:</strong> refact from export api to app api (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/5a0cdb6eb00d4c7c1152b20a63d38593b6b6c337">5a0cdb6</a>)</p></li>
+<li><p>update vcpkg baseline and related modules (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b8b084d447784ecb90aa7d38ab6c746367339de0">b8b084d</a>)</p></li>
+<li><p>构建环境 (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4bebe8abef36f71a89de941c01b9e296fee26935">4bebe8a</a>)</p></li>
+</ul>
+</section>
+<section id="id71">
+<h3>CI<a class="headerlink" href="#id71" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>add release flow (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/38aec3b31e2e408be8ecf1d86b9b677f883ed7b0">38aec3b</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/25a39e67187acd912cfe7fad3bb16adfebb93dc2">25a39e6</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/7114474020b048011eb1424fffaf37df78dc135e">7114474</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/8505d4ffe17ffeb04880138a65e204429a6aadf9">8505d4f</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/6821b0bc8593d598ef8a6948bbe17caa196baf36">6821b0b</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/e067c9c5d333d3ae0a2925b4d8609b8552569cb9">e067c9c</a>)</p></li>
+<li><p>auto fixes from pre-commit (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/4c2bba8a10a0851b77f966da4173ddce90217e44">4c2bba8</a>)</p></li>
+<li><p>provide main ci and organise ci rules (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/f9167fc8d6efa862be0a53b47ab625e479bd10d1">f9167fc</a>)</p></li>
+<li><p>update pre-commit hooks (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/82fa0bb5bb65bfcffd85dfa3b3cccaed8d4b71b1">82fa0bb</a>)</p></li>
+<li><p>update pre-commit hooks (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/b6eeab8bcaf9209372b6a52b357770e1a6d5b51e">b6eeab8</a>)</p></li>
+</ul>
+</section>
+<section id="id72">
+<h3>Docs<a class="headerlink" href="#id72" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>readme:</strong> more info on readme (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/7718e76eb9dc7d2b24e8b817b1f6630d9d562e6c">7718e76</a>)</p></li>
+<li><p>remove some useless heading separator (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/ec8f1e9c4df65effdbddac43d28626d5fe983393">ec8f1e9</a>)</p></li>
+<li><p>Update README.md (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/3a9587ccf9feeca215fdd7884125f8d580087607">3a9587c</a>)</p></li>
+</ul>
+</section>
+<section id="tests">
+<h3>Tests<a class="headerlink" href="#tests" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>configure as googletest (<a class="reference external" href="https://github.com/msclock/cpp-scaffold/commit/912e6e255d1a9c5d7d71afadc32b18e64e918c22">912e6e2</a>)</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="api.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">ss-cpp API</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="contributing.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Contributing</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022-2024 Serious Scaffold
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#id1">1.3.0 (2024-03-13)</a><ul>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#refactor">Refactor</a></li>
+<li><a class="reference internal" href="#chores">Chores</a></li>
+<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#ci">CI</a></li>
+<li><a class="reference internal" href="#docs">Docs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">1.2.11 (2023-11-19)</a><ul>
+<li><a class="reference internal" href="#performance">Performance</a></li>
+<li><a class="reference internal" href="#id3">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id4">1.2.10 (2023-11-18)</a><ul>
+<li><a class="reference internal" href="#id5">Performance</a></li>
+<li><a class="reference internal" href="#id6">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">1.2.9 (2023-11-18)</a><ul>
+<li><a class="reference internal" href="#id8">Performance</a></li>
+<li><a class="reference internal" href="#id9">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id10">1.2.8 (2023-11-06)</a><ul>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id11">Performance</a></li>
+<li><a class="reference internal" href="#id12">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id13">1.2.7 (2023-11-01)</a><ul>
+<li><a class="reference internal" href="#id14">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id15">1.2.6 (2023-10-30)</a><ul>
+<li><a class="reference internal" href="#id16">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id17">1.2.5 (2023-10-30)</a><ul>
+<li><a class="reference internal" href="#id18">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id19">1.2.4 (2023-10-28)</a><ul>
+<li><a class="reference internal" href="#id20">Performance</a></li>
+<li><a class="reference internal" href="#id21">Docs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id22">1.2.3 (2023-10-28)</a><ul>
+<li><a class="reference internal" href="#id23">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id24">1.2.2 (2023-10-28)</a><ul>
+<li><a class="reference internal" href="#id25">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id26">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id27">1.2.1 (2023-10-28)</a><ul>
+<li><a class="reference internal" href="#id28">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id29">1.2.0 (2023-10-28)</a><ul>
+<li><a class="reference internal" href="#id30">Features</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id31">1.1.6 (2023-10-27)</a><ul>
+<li><a class="reference internal" href="#id32">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id33">1.1.5 (2023-10-27)</a><ul>
+<li><a class="reference internal" href="#id34">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id35">Performance</a></li>
+<li><a class="reference internal" href="#id36">Chores</a></li>
+<li><a class="reference internal" href="#id37">CI</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id38">1.1.4 (2023-10-26)</a><ul>
+<li><a class="reference internal" href="#id39">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id40">Performance</a></li>
+<li><a class="reference internal" href="#id41">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id42">1.1.3 (2023-10-26)</a><ul>
+<li><a class="reference internal" href="#id43">Bug Fixes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id44">1.1.2 (2023-10-26)</a><ul>
+<li><a class="reference internal" href="#id45">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id46">1.1.1 (2023-10-25)</a><ul>
+<li><a class="reference internal" href="#id47">Performance</a></li>
+<li><a class="reference internal" href="#id48">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id49">1.1.0 (2023-10-25)</a><ul>
+<li><a class="reference internal" href="#id50">Features</a></li>
+<li><a class="reference internal" href="#id51">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id52">Docs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id53">1.0.4 (2023-10-24)</a><ul>
+<li><a class="reference internal" href="#id54">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id55">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id56">1.0.3 (2023-10-22)</a><ul>
+<li><a class="reference internal" href="#id57">Performance</a></li>
+<li><a class="reference internal" href="#id58">Docs</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id59">1.0.2 (2023-10-19)</a><ul>
+<li><a class="reference internal" href="#id60">Performance</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id61">1.0.1 (2023-10-18)</a><ul>
+<li><a class="reference internal" href="#style">Style</a></li>
+<li><a class="reference internal" href="#id62">Performance</a></li>
+<li><a class="reference internal" href="#id63">Chores</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id64">1.0.0 (2023-10-17)</a><ul>
+<li><a class="reference internal" href="#id65">Features</a></li>
+<li><a class="reference internal" href="#id66">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id67">Style</a></li>
+<li><a class="reference internal" href="#id68">Performance</a></li>
+<li><a class="reference internal" href="#id69">Chores</a></li>
+<li><a class="reference internal" href="#id70">Build</a></li>
+<li><a class="reference internal" href="#id71">CI</a></li>
+<li><a class="reference internal" href="#id72">Docs</a></li>
+<li><a class="reference internal" href="#tests">Tests</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/tabs.js?v=3ee01567"></script>
+    </body>
+</html>
