@@ -148,7 +148,8 @@ jobs:
           sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
           sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
           wine64 true || true
-          echo "wait 10s for wine registry to be created" && sleep 10
+          echo "timeout 10s to execute a loop to check wine registry to be created"
+          timeout 10s bash -c "while [ ! -f ~/.wine/system.reg ] ; do echo 'waiting for wine registry to be created' ; sleep 1 ; done" && echo "wine registry created"
           sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
 
 
