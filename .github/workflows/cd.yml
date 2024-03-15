@@ -17,6 +17,11 @@ concurrency:
 env:
   FORCE_COLOR: 3
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   pages:
     name: Deploy to GitHub Pages
@@ -26,8 +31,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.head_ref }}
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Cache
         uses: actions/cache@v4
@@ -51,7 +61,7 @@ jobs:
           pip install -r docs/requirements.txt
 
       - name: Configure
-        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+        run: cmake -S . --preset=x64-linux-gcc -DUSE_SANITIZER=OFF -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
 
       - name: Build Docs
         run: cmake --build out/build/x64-linux-gcc --target ss-cpp-docs

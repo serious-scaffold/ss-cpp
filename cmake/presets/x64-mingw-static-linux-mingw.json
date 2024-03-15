@@ -14,10 +14,7 @@
         "linux",
         "mingw",
         "x64-mingw-static"
-      ],
-      "cacheVariables": {
-        "USE_SANITIZER": "FALSE"
-      }
+      ]
     }
   ],
   "buildPresets": [

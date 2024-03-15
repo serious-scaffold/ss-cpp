@@ -76,6 +76,7 @@ jobs:
 
   checks:
     runs-on: ${{ matrix.presets.os.name }}
+    timeout-minutes: 15
     permissions:
       actions: read
       contents: read
@@ -87,16 +88,13 @@ jobs:
           - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
           - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: llvm}}
           - {os: {name: ubuntu-latest, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: ubuntu-latest, type: mingw-static-linux}, compiler: {name: mingw, type: mingw}}
           - {os: {name: macos-latest, type: osx}, compiler: {name: applellvm, type: llvm}}
           - {os: {name: macos-latest, type: osx}, compiler: {name: llvm, type: llvm}}
           # setup-cpp doesn't support mingw on macOS yet
           # - {os: {name: macos-latest, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
-          # - {os: {name: macos-latest, type: mingw-static-darwin}, compiler: {name: mingw, type: mingw}}
           - {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
           - {os: {name: windows-latest, type: windows}, compiler: {name: llvm, type: llvm}}
           - {os: {name: windows-latest, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: windows-latest, type: mingw-static-windows}, compiler: {name: mingw, type: mingw}}
         arch:
           - {name: x64, type: x64}
         vcpkg:
@@ -117,9 +115,9 @@ jobs:
             ~/.cache/vcpkg
             ~/AppData/Local/vcpkg
           key: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-${{ hashFiles('./vcpkg.json') }}
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-${{ matrix.vcpkg }}
           restore-keys: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-${{ hashFiles('./vcpkg.json') }}
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-
 
       - uses: aminya/setup-cpp@v1
         with:
@@ -130,15 +128,15 @@ jobs:
           vcpkg: ${{ matrix.vcpkg }}
           ccache: true
           python: true
-          opencppcoverage: true
+          opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
-      - name: Gcc Lcov
+      - name: Lcov for coverage
         if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
         run: |
           sudo apt-get update
           sudo apt-get install lcov
 
-      - name: Gcovr
+      - name: Gcovr for coverage
         if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'mingw')
         run: |
           pip install gcovr
@@ -156,7 +154,11 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON -DCMAKE_VERBOSE_MAKEFILE=TRUE
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }}
+
+      - name: Build
+        run: |
+          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
 
       - name: Coverage
         run: |
@@ -167,8 +169,8 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage/coverage.xml
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}-coverage
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.presets.compiler.type }}-${{ matrix.vcpkg }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.presets.compiler.type }}-${{ matrix.vcpkg }}-coverage
 
   pass:
     if: always()

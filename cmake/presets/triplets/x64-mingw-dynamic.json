@@ -12,7 +12,8 @@
       ],
       "cacheVariables": {
         "VCPKG_TARGET_TRIPLET": "x64-mingw-dynamic",
-        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic"
+        "VCPKG_HOST_TRIPLET": "x64-mingw-dynamic",
+        "USE_SANITIZER": "OFF"
       }
     }
   ]
