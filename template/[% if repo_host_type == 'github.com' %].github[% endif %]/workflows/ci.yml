@@ -168,9 +168,10 @@ jobs:
         uses: codecov/codecov-action@v4.1.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage/coverage.xml
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.presets.compiler.type }}-${{ matrix.vcpkg }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.presets.compiler.type }}-${{ matrix.vcpkg }}-coverage
+          directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
+          files: ./coverage.xml, ./coverage.info, ./coverage.json
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-coverage
 
   pass:
     if: always()
