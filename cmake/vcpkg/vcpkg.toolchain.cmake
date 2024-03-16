@@ -17,26 +17,23 @@ endif()
 unset(IN_TRY_COMPILE)
 
 # Vcpkg build environment
-
 file(READ ${CMAKE_SOURCE_DIR}/vcpkg.json _vcpkg_json)
 string(JSON _builtin_baseline GET ${_vcpkg_json} builtin-baseline)
 
 # Respect VCPKG_ROOT environment variable if set
 if(DEFINED ENV{VCPKG_ROOT})
-  set(VCPKG_ROOT "$ENV{VCPKG_ROOT}")
   set(_VCPKG_ROOT
       "$ENV{VCPKG_ROOT}"
-      CACHE PATH "Vcpkg root directory")
+      CACHE PATH "Vcpkg root directory" FORCE)
+else()
+  unset(_VCPKG_ROOT CACHE)
 endif()
 
 include(${CMAKE_CURRENT_LIST_DIR}/bootstrap/vcpkg-config.cmake)
-
-vcpkg_configure(CACHE_DIR_NAME ss-cpp REPO
-                https://github.com/microsoft/vcpkg.git REF ${_builtin_baseline})
 
 set(VCPKG_VERBOSE
     ON
     CACHE BOOL "Vcpkg VCPKG_VERBOSE")
 
-message(STATUS "vcpkg_toolchain_file:$CACHE{_VCPKG_TOOLCHAIN_FILE}")
-include("$CACHE{_VCPKG_TOOLCHAIN_FILE}")
+vcpkg_configure(CACHE_DIR_NAME ss-cpp REPO
+                https://github.com/microsoft/vcpkg.git REF ${_builtin_baseline})

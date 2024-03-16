@@ -100,6 +100,25 @@ jobs:
         vcpkg:
           - true
           - false
+        export_mode:
+          - ON
+          - OFF
+
+        include:
+          - presets:
+              os:
+                name: windows-latest
+                type: windows
+              compiler:
+                name: msvc
+                type: msvc
+            arch:
+              name: x64
+              type: x64
+            vcpkg: true
+            export_mode: ON
+        exclude:
+          - export_mode: ON
 
     steps:
       - uses: actions/checkout@v4
@@ -154,7 +173,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }}
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }} ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
 
       - name: Build
         run: |
@@ -170,8 +189,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
           files: ./coverage.xml, ./coverage.info, ./coverage.json
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}-coverage
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}${{ matrix.export_mode == 'ON' && '-export' || '' }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}${{ matrix.export_mode == 'ON' && '-export' || '' }}-coverage
 
   pass:
     if: always()

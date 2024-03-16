@@ -93,3 +93,22 @@ The generated project provides the following targets:
 - `coverage` - runs the tests.
 - `install` - installs the project to the install directory.
 - `uninstall` - uninstalls the project from the install directory.
+
+
+## Export Mode
+
+Because the command `vcpkg install` supports with vcpkg manifest file `vcpkg.json` referring the blog post [Export for Manifests](https://devblogs.microsoft.com/cppblog/vcpkg-2023-10-19-release-export-for-manifests-documentation-improvements-and-more/). We create an export mode is a special mode that allows you to export vcpkg packages to a export directory. This directory can then be used to as vcpkg cmake toolchain without the cloned vcpkg repository. Importantly, this mode does not require any vcpkg installation on the machine and can be used to build projects offline.
+
+### Usage
+
+To use the export mode, a configuration variable `VCPKG_EXPORT_MANIFET` needs to pass to cmake configure step.
+
+```bash
+[cmake configure command] -DVCPKG_EXPORT_MODE=ON
+```
+
+After configuring the project with the export mode, the exported integration files will be available in the `cmake/vcpkg/export` directory. It should be kept in version control or in ci cache to ensure that packages are consistent across different machines.
+
+### Offline Build
+
+If all dependencies are from the vcpkg manifest, the project can be built offline that means it does not require any vcpkg environment to be installed on the machine. And the building process is still the same as the previous one.
