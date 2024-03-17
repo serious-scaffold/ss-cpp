@@ -84,13 +84,7 @@ endfunction()
 function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
   file(LOCK "${vcpkg_root}" DIRECTORY)
 
-  execute_process(
-    COMMAND ${GIT_EXECUTABLE} rev-parse --is-inside-work-tree
-    WORKING_DIRECTORY ${vcpkg_root}
-    RESULT_VARIABLE in_git_work_tree
-    OUTPUT_QUIET ERROR_QUIET)
-
-  if(NOT in_git_work_tree EQUAL 0)
+  if(NOT EXISTS "${vcpkg_root}/.git")
     message(WARNING "vcpkg not found in git work tree, skipping upgrade")
     return()
   endif()
@@ -189,10 +183,6 @@ function(_vcpkg_bootstrap)
   else()
     message(STATUS "Found vcpkg in: ${vcpkg_root}")
     _vcpkg_upgrade(${vcpkg_root} ${arg_REPO} ${arg_REF})
-  endif()
-
-  if(DEFINED CACHE{_VCPKG_TOOLCHAIN_FILE})
-    return()
   endif()
 
   _vcpkg_set_cache_variables("${vcpkg_root}")

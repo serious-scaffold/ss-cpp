@@ -10,7 +10,8 @@ endfunction()
 # disable vcpkg manifest install step on cmake reconfigure if vcpkg.json has not
 # changed.
 function(_vcpkg_skip_install_on_reconfigure)
-  if(DEFINED CACHE{VCPKG_MANIFEST_DIR})
+  if(DEFINED CACHE{VCPKG_MANIFEST_DIR} AND NOT $CACHE{VCPKG_MANIFEST_DIR}
+                                           STREQUAL "")
     set(vcpkg_manifest_file "$CACHE{VCPKG_MANIFEST_DIR}/vcpkg.json")
   else()
     set(vcpkg_manifest_file "${CMAKE_SOURCE_DIR}/vcpkg.json")

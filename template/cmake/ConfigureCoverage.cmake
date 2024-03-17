@@ -13,7 +13,7 @@ include_guard(GLOBAL)
 
 # cmake-format: off
 include(cmake-modules/test/Coverage)
-list(APPEND _excludes "${CMAKE_BINARY_DIR}" "${VCPKG_INSTALLED_DIR}")
+list(APPEND _excludes "${CMAKE_BINARY_DIR}" "${VCPKG_INSTALLED_DIR}" "${CMAKE_SOURCE_DIR}/vcpkg")
 
 # Exclude system directories from code coverage
 if(NOT CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
