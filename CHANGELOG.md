@@ -1,3 +1,16 @@
+## [1.4.1](https://github.com/serious-scaffold/ss-cpp/compare/v1.4.0...v1.4.1) (2024-03-17)
+
+
+### Performance
+
+* simplify checks with the automated installation of vcpkg ([#80](https://github.com/serious-scaffold/ss-cpp/issues/80)) ([85a23fe](https://github.com/serious-scaffold/ss-cpp/commit/85a23feeb07810624ee65b05efd6c6aa202dfb1a))
+
+
+### CI
+
+* optimize to cancel preview pages ([#81](https://github.com/serious-scaffold/ss-cpp/issues/81)) ([1054592](https://github.com/serious-scaffold/ss-cpp/commit/1054592b8d7ec25cf9b02d734a06f74e99fa99c3))
+* setup release permission ([#79](https://github.com/serious-scaffold/ss-cpp/issues/79)) ([8702873](https://github.com/serious-scaffold/ss-cpp/commit/870287372ad5cef7343a97de6e4c10ad4751cb40))
+
 ## [1.4.0](https://github.com/serious-scaffold/ss-cpp/compare/v1.3.0...v1.4.0) (2024-03-17)
 
 
