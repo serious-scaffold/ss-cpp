@@ -146,6 +146,11 @@ jobs:
           python: true
           opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
+      - name: Disable pre-installedd vcpkg for testing automaical vcpkg installation
+        if: ${{ matrix.vcpkg == false }}
+        run: |
+          echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
+
       - name: Lcov for coverage
         if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
         run: |
@@ -167,7 +172,6 @@ jobs:
           echo "timeout 10s to execute a loop to check wine registry to be created"
           timeout 10s bash -c "while [ ! -f ~/.wine/system.reg ] ; do echo 'waiting for wine registry to be created' ; sleep 1 ; done" && echo "wine registry created"
           sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
-
 
       - name: Configure CMake
         run: |
