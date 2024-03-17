@@ -105,20 +105,17 @@ jobs:
           - OFF
 
         include:
-          - presets:
-              os:
-                name: windows-latest
-                type: windows
-              compiler:
-                name: msvc
-                type: msvc
-            arch:
-              name: x64
-              type: x64
+          - presets: {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+            arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
+          - presets: {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+            arch: {name: x64, type: x64}
+            vcpkg: false
+            export_mode: OFF
         exclude:
           - export_mode: ON
+          - vcpkg: false
 
     steps:
       - uses: actions/checkout@v4
