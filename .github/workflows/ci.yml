@@ -105,20 +105,17 @@ jobs:
           - OFF
 
         include:
-          - presets:
-              os:
-                name: windows-latest
-                type: windows
-              compiler:
-                name: msvc
-                type: msvc
-            arch:
-              name: x64
-              type: x64
+          - presets: {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+            arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
+          - presets: {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+            arch: {name: x64, type: x64}
+            vcpkg: false
+            export_mode: OFF
         exclude:
           - export_mode: ON
+          - vcpkg: false
 
     steps:
       - uses: actions/checkout@v4
@@ -149,6 +146,11 @@ jobs:
           python: true
           opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
+      - name: Disable pre-installedd vcpkg for testing automaical vcpkg installation
+        if: ${{ matrix.vcpkg == false }}
+        run: |
+          echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
+
       - name: Lcov for coverage
         if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
         run: |
@@ -171,7 +173,6 @@ jobs:
           timeout 10s bash -c "while [ ! -f ~/.wine/system.reg ] ; do echo 'waiting for wine registry to be created' ; sleep 1 ; done" && echo "wine registry created"
           sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
 
-
       - name: Configure CMake
         run: |
           cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }} ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
@@ -190,8 +191,8 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
           files: ./coverage.xml, ./coverage.info, ./coverage.json
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}${{ matrix.export_mode == 'ON' && '-export' || '' }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ matrix.vcpkg }}${{ matrix.export_mode == 'ON' && '-export' || '' }}-coverage
+          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}
+          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}-coverage
 
   pass:
     if: always()
