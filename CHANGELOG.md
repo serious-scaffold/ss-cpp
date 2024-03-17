@@ -1,3 +1,25 @@
+## [1.4.0](https://github.com/serious-scaffold/ss-cpp/compare/v1.3.0...v1.4.0) (2024-03-17)
+
+
+### Features
+
+* exported vcpkg supports manifest ([#78](https://github.com/serious-scaffold/ss-cpp/issues/78)) ([f3c6543](https://github.com/serious-scaffold/ss-cpp/commit/f3c6543563870ae1d7185d28a9ed936e034e1450))
+
+
+### Chores
+
+* **deps:** update cmake-modules to v1.3.18 ([#77](https://github.com/serious-scaffold/ss-cpp/issues/77)) ([e1ba0d0](https://github.com/serious-scaffold/ss-cpp/commit/e1ba0d0d07b7c32bc5c0f3120ff429f0a2baca64))
+* exclude system directories from coverage ([#68](https://github.com/serious-scaffold/ss-cpp/issues/68)) ([776cc8f](https://github.com/serious-scaffold/ss-cpp/commit/776cc8fc7d7ee99514ab2e515004fba63df60539))
+
+
+### CI
+
+* optimize to configure mingw wine test environment ([#76](https://github.com/serious-scaffold/ss-cpp/issues/76)) ([a69047c](https://github.com/serious-scaffold/ss-cpp/commit/a69047c9a34f3e2b9eeab29aa9c11c363f1c18d9))
+* refine checks and pages deploy ([#67](https://github.com/serious-scaffold/ss-cpp/issues/67)) ([1d58a79](https://github.com/serious-scaffold/ss-cpp/commit/1d58a79fb09e2a75f6b11a288198b22f3d413b09))
+* refine coverage codecov reports ([#75](https://github.com/serious-scaffold/ss-cpp/issues/75)) ([315134d](https://github.com/serious-scaffold/ss-cpp/commit/315134d64551367e4aed6ec2052a52c76ec4836f))
+* set proper permission and git account ([#73](https://github.com/serious-scaffold/ss-cpp/issues/73)) ([be6fc0f](https://github.com/serious-scaffold/ss-cpp/commit/be6fc0f463ec0fcc6b1a06f71b26bc85dbeda484))
+* write content permission for pages ([#74](https://github.com/serious-scaffold/ss-cpp/issues/74)) ([412d342](https://github.com/serious-scaffold/ss-cpp/commit/412d342a40b4c1598b23a10aef759533e55f43cb))
+
 ## [1.3.0](https://github.com/serious-scaffold/ss-cpp/compare/v1.2.11...v1.3.0) (2024-03-13)
 
 
