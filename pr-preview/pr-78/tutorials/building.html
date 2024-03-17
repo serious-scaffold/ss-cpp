@@ -355,7 +355,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h3>
 <p>To use the export mode, a configuration variable <code class="docutils literal notranslate"><span class="pre">VCPKG_EXPORT_MANIFET</span></code> needs to pass to cmake configure step.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>cmake<span class="w"> </span>configure<span class="w"> </span>command<span class="o">]</span><span class="w"> </span>-DVCPKG_EXPORT_MANIFEST<span class="o">=</span>ON
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>cmake<span class="w"> </span>configure<span class="w"> </span>command<span class="o">]</span><span class="w"> </span>-DVCPKG_EXPORT_MODE<span class="o">=</span>ON
 </pre></div>
 </div>
 <p>After configuring the project with the export mode, the exported integration files will be available in the <code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/export</span></code> directory. It should be kept in version control or in ci cache to ensure that packages are consistent across different machines.</p>
