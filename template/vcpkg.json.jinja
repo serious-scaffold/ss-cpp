@@ -4,7 +4,7 @@
   "description": "{{ project_description }}",
   "builtin-baseline": "0719a71389654b88d827501d88e37e58ea8cbd70",
   "dependencies": [
-[%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
+[%- if compile_target != '' or exe_target != '' or header_target != '' %]
     "spdlog",
 [%- endif %]
 [%- if use_conan == true %]
@@ -17,7 +17,7 @@
     "robotology-cmake-ycm"
   ],
   "overrides": [
-[%- if add_compile_target == true or add_executable_target == true or add_header_only_target == true %]
+[%- if compile_target != '' or exe_target != '' or header_target != '' %]
     {
       "name": "spdlog",
       "version": "1.13.0"

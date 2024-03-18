@@ -21,15 +21,15 @@ if(DOXYGEN_FOUND)
   doxygen_add_docs(
     ${doxygen_docs}
     "${CMAKE_BINARY_DIR}/git/include"
-[%- if add_compile_target == true %]
-    "${CMAKE_BINARY_DIR}/src/compile/include"
-    "${PROJECT_SOURCE_DIR}/src/compile/include"
+[%- if compile_target != '' %]
+    "${CMAKE_BINARY_DIR}/src/{{ compile_target }}/include"
+    "${PROJECT_SOURCE_DIR}/src/{{ compile_target }}/include"
 [%- endif %]
-[%- if add_executable_target == true %]
-    "${PROJECT_SOURCE_DIR}/src/executable/include"
+[%- if exe_target != '' %]
+    "${PROJECT_SOURCE_DIR}/src/{{ exe_target }}/include"
 [%- endif %]
-[%- if add_header_only_target == true %]
-    "${PROJECT_SOURCE_DIR}/src/header_only/include"
+[%- if header_target != '' %]
+    "${PROJECT_SOURCE_DIR}/src/{{ header_target }}/include"
 [%- endif %])
 
   if(TARGET ${doxygen_docs})
