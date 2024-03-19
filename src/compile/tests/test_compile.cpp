@@ -2,7 +2,7 @@
 #include "compile.hpp"
 
 TEST(info, version) {
-    const auto version = compile::info::version_compile();
+    const auto version = compile::info::version();
     EXPECT_FALSE(version.empty());
 }
 
