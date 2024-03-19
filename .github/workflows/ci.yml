@@ -84,7 +84,8 @@ jobs:
       fail-fast: false
       matrix:
         presets:
-          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          # use 20.04 and asan doesn't work on ubuntu-22.04 and the above versions, see https://github.com/google/googletest/issues/4491
+          - {os: {name: ubuntu-20.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
           - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: llvm}}
           - {os: {name: ubuntu-latest, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
           - {os: {name: macos-latest, type: osx}, compiler: {name: applellvm, type: llvm}}
@@ -108,7 +109,7 @@ jobs:
             arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
-          - presets: {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          - presets: {os: {name: ubuntu-20.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
             arch: {name: x64, type: x64}
             vcpkg: false
             export_mode: OFF
@@ -174,7 +175,7 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }} ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
 
       - name: Build
         run: |
