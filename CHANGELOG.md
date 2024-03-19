@@ -1,3 +1,10 @@
+## [1.4.3](https://github.com/serious-scaffold/ss-cpp/compare/v1.4.2...v1.4.3) (2024-03-19)
+
+
+### Performance
+
+* optimize the generation of the compile target ([#86](https://github.com/serious-scaffold/ss-cpp/issues/86)) ([81f5536](https://github.com/serious-scaffold/ss-cpp/commit/81f55369396e60f23ae743e96110b8cefabfa9d3))
+
 ## [1.4.2](https://github.com/serious-scaffold/ss-cpp/compare/v1.4.1...v1.4.2) (2024-03-19)
 
 
