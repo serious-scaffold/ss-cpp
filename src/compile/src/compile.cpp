@@ -4,7 +4,7 @@
 
 namespace compile {
 namespace info {
-std::string_view version_compile() noexcept {
+std::string_view version() noexcept {
     return git::ProjectVersion();
 }
 

@@ -9,7 +9,7 @@ namespace info {
  * \brief Get compile version string
  * \return The distribution compile version provided.
  */
-std::string_view COMPILE_EXPORT version_compile() noexcept;
+std::string_view COMPILE_EXPORT version() noexcept;
 
 /**
  * \return A bool represents if it is debug distribution.
