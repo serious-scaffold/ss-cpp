@@ -23,8 +23,8 @@ if(DOXYGEN_FOUND)
     "${CMAKE_BINARY_DIR}/git/include"
     "${CMAKE_BINARY_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/compile/include"
-    "${PROJECT_SOURCE_DIR}/src/executable/include"
-    "${PROJECT_SOURCE_DIR}/src/header_only/include")
+    "${PROJECT_SOURCE_DIR}/src/exe/include"
+    "${PROJECT_SOURCE_DIR}/src/header/include")
 
   if(TARGET ${doxygen_docs})
     set(Sphinx_FIND_COMPONENTS breathe)

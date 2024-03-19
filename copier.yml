@@ -1,3 +1,5 @@
+_exclude:
+  - includes
 _envops:
   block_end_string: '%]'
   block_start_string: '[%'
@@ -150,17 +152,17 @@ use_conan:
   help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
   type: bool
 
-add_executable_target:
-  default: true
-  help: Whether to add an executable target
-  type: bool
+exe_target:
+  default: exe
+  help: Add an executable target, and skip leaving it empty.
+  type: str
 
-add_header_only_target:
-  default: true
-  help: Whether to add a header-only target
-  type: bool
+header_target:
+  default: header
+  help: Add a header-only target, and skip leaving it empty.
+  type: str
 
-add_compile_target:
-  default: true
-  help: Whether to add a compile lib target
-  type: bool
+compile_target:
+  default: compile
+  help: Add a compile lib target, and skip leaving it empty.
+  type: str
