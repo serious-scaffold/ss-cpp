@@ -109,7 +109,7 @@ jobs:
             arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
-          - presets: {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          - presets: {os: {name: ubuntu-20.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
             arch: {name: x64, type: x64}
             vcpkg: false
             export_mode: OFF
