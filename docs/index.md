@@ -26,7 +26,6 @@ contributing
 :titlesonly:
 :caption: References
 
-changelog
 api
 ```
 

@@ -56,7 +56,6 @@ jobs:
             ! -name 'includes' \
             ! -name '.git' \
             ! -name 'copier.yml' \
-            ! -name 'CHANGELOG.md' \
             -exec rm -r {} +
           copier copy -r HEAD -f . .
           rm .copier-answers.yml
@@ -247,8 +246,6 @@ jobs:
               }
             ]
           extra_plugins: |
-            @semantic-release/changelog
-            @semantic-release/git
             @semantic-release/exec
             @semantic-release/github
             conventional-changelog-conventionalcommits
