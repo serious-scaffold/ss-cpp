@@ -218,12 +218,28 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          persist-credentials: false
 
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Generate a bot token with BOT_APP_ID
+        id: bot_token
+        if: vars.BOT_APP_ID && env.BOT_PRIVATE_KEY != null
+        uses: actions/create-github-app-token@v1
+        env:
+          BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+
+      - name: Warn if use GITHUB_TOKEN
+        if: ${{ !steps.bot_token.outputs.token }}
+        run: |
+          echo "# :warning: GITHUB_TOKEN is used" >> $GITHUB_STEP_SUMMARY
+          echo "The GITHUB_TOKEN is used instead of a bot token or PAT that will not emi the released publish event for release workflow." >> $GITHUB_STEP_SUMMARY
 
       - name: Semantic Release
         uses: cycjimmy/semantic-release-action@v4
@@ -251,4 +267,4 @@ jobs:
             @semantic-release/github
             conventional-changelog-conventionalcommits
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
