@@ -215,16 +215,6 @@ jobs:
       pull-requests: write
     needs: [pass]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
       - name: Generate a bot token with BOT_APP_ID
         id: bot_token
         if: vars.BOT_APP_ID && env.BOT_PRIVATE_KEY != null
@@ -234,6 +224,17 @@ jobs:
         with:
           app-id: ${{ vars.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+          token: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
 
       - name: Warn if use GITHUB_TOKEN
         if: ${{ !steps.bot_token.outputs.token }}
