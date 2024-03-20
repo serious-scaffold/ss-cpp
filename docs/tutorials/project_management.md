@@ -55,6 +55,12 @@ Codecov is a popular tool for measuring code coverage. It can be integrated with
 - [GitLab Codecov](https://docs.codecov.com/docs/gitlab-tutorial)
 
 
+### Release
+
+Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the [semantic-release](https://github.com/semantic-release/semantic-release) to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.
+
+See the [release workflow](../topics/release_workflow.md) for more details on how to manage releases painlessly.
+
 ## Project Update
 
 Thanks to the update mechanism provided natively by `copier`, when a new version of the template is released, you can easily update the project. Just run the following command under the root directory:
