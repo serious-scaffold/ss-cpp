@@ -17,5 +17,6 @@ security
 :titlesonly:
 :caption: Maintenance Relateds
 
+semantic_versioning
 release_workflow
 ```
