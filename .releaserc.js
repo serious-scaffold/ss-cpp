@@ -18,6 +18,7 @@ module.exports = {
           { type: "ci", release: false },
           { type: "docs", release: false },
           { type: "test", release: false },
+          { scope: 'no-release', release: false },
         ],
         parseOpts: {
           noteKeywords: ["BREAKING CHANGE", "BREAKING CHANGES", "BREAKING"]
