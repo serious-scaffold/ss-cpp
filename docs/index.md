@@ -18,7 +18,6 @@ Overview <self>
 Tutorials <tutorials/index>
 Topics <topics/index>
 Principles <principles/index>
-contributing
 ```
 
 ```{toctree}
@@ -26,6 +25,7 @@ contributing
 :titlesonly:
 :caption: References
 
+contributing
 api
 ```
 

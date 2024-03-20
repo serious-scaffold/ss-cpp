@@ -1,16 +1,17 @@
 # Contributing
 
-Contributions are welcome, and they are greatly appreciated!
-Every little bit helps.
+Our scaffolds are community-driven and open-source, anddesigned to save time and effort, allowing developers to focus on writing code that matters most. Your contributions are invaluable!
 
 ## Environment setup
 
-Nothing easier!
+Fork and clone the repository.
 
-Fork and clone the repository, then:
+### Light Environment
+
+If you don't want to run the full test suite, you can just create a virtual environment based on python and install copier and pre-commit:
 
 ```bash
-# Optional virtualenv, depends on your develop environment
+Optional virtualenv, depends on your develop environment
 pipx install virtualenv pre-commit
 virtualenv .venv
 source .venv/bin/activate
@@ -18,72 +19,24 @@ source .venv/bin/activate
 pip install copier
 ```
 
-You now have the dependencies installed.
+### Devcontainer Environment
+
+If you want to run the full testable environment, you can use the devcontainer provided in the folder `.devcontainer`.
+
+To use the devcontainer, refer to [Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial).
 
 ## Development
 
 As usual:
 
-- create a new branch: `git switch -c feature-or-bugfix-name`
-- edit the code and/or the documentation
+- create a new branch: `git switch -c feature-or-bugfix-name`.
+- edit the code and/or the documentation.
 - run `copier copy --vcs-ref=HEAD -l . .` to generate the current repository.
 - run `pre-commit run -a` to check if any errors can be fixed.
-- if everything is fine, your changes are ready to commit.
+- if everything is fine, your changes are ready to commit and follow our convention based on the Commit Convention.
+- push your branch to your fork and create a pull request.
 
-## Commit message convention
-
-Commit messages must follow our convention based on the
-[Angular style](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message)
-or the [Karma convention](https://karma-runner.github.io/4.0/dev/git-commit-msg.html):
-
-```tex
-<type>[(scope)]: Subject
-
-[Body]
-```
-
-**Subject and body must be valid Markdown.**
-Subject must have proper casing (uppercase for first letter
-if it makes sense), but no dot at the end, and no punctuation
-in general.
-
-Scope and body are optional. Type can be:
-
-- `build`: About packaging, building wheels, etc.
-- `chore`: About packaging or repo/files management.
-- `ci`: About Continuous Integration.
-- `deps`: Dependencies update.
-- `docs`: About documentation.
-- `feat`: New feature.
-- `fix`: Bug fix.
-- `perf`: About performance.
-- `refactor`: Changes that are not features or bug fixes.
-- `style`: A change in code style/format.
-- `tests`: About tests.
-
-If you write a body, please add trailers at the end
-(for example issues and PR references, or co-authors),
-without relying on GitHub's flavored Markdown:
-
-```tex
-Body.
-
-Issue #10: https://github.com/namespace/project/issues/10
-Related to PR namespace/other-project#15: https://github.com/namespace/other-project/pull/15
-```
-
-These "trailers" must appear at the end of the body,
-without any blank lines between them. The trailer title
-can contain any character except colons `:`.
-We expect a full URI for each trailer, not just GitHub autolinks
-(for example, full GitHub URLs for commits and issues,
-not the hash or the #issue-number).
-
-We do not enforce a line length on commit messages summary and body,
-but please avoid very long summaries, and very long lines in the body,
-unless they are part of code blocks that must not be wrapped.
-
-## Pull requests guidelines
+## Pull Requests Guidelines
 
 Link to any related issue in the Pull Request message.
 
