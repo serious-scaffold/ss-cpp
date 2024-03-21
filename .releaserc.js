@@ -1,7 +1,6 @@
 module.exports = {
   branches: [
     '+([0-9])?(.{+([0-9]),x}).x',
-    'master',
     {
       name: 'beta',
       prerelease: true
@@ -9,7 +8,8 @@ module.exports = {
     {
       name: 'alpha',
       prerelease: true
-    }
+    },
+    'master',
   ],
   dryRun: false,
   plugins: [
