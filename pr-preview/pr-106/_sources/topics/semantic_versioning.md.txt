@@ -4,7 +4,7 @@ This document describes the semantic versioning scheme used in the project.
 
 ## Why use semantic versioning?
 
-We need to resolve the tranditional problem `dependency hell`. And the solutionSemantic versioning is a simple and well-defined versioning scheme that provides a clear and consistent way to communicate software versions. It allows us to communicate the meaning of changes to our software between developers. And through the use of semantic versioning, we can have faith to manage our dependencies. See [semver.org](https://semver.org/) for more information on semantic versioning.
+[Dependency hell](https://en.wikipedia.org/wiki/Dependency_hell) is a common problem needing to be addressed in modern software development. Semantic versioning is a simple and well-defined versioning scheme that provides a clear and consistent way to communicate software versions. Through the use of semantic versioning, one can gain insights into the impact of code changes across different versions and confidently manage dependencies. For more information on semantic versioning, please visit [semver.org](https://semver.org/).
 
 ## Versioning scheme
 
