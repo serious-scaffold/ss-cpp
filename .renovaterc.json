@@ -1,0 +1,154 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    ":enablePreCommit",
+    ":maintainLockFilesWeekly"
+  ],
+  "packageRules": [
+    {
+      "groupName": "renovate docker tag",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchDepNames": [
+        "ghcr.io/renovatebot/renovate",
+        "renovate/renovate"
+      ]
+    },
+    {
+      "matchDepTypes": [
+        "action"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "find template -type f -exec sed -i 's|{{{depName}}}@{{{currentDigest}}} # {{{currentValue}}}|{{{depName}}}@{{{newDigest}}} # {{{newValue}}}|g' {} +"
+        ]
+      }
+    },
+    {
+      "matchDepTypes": [
+        "github-runner"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "find template -type f -exec sed -i 's|{{{depName}}}-{{{currentValue}}}|{{{depName}}}-{{{newValue}}}|g' {} +"
+        ]
+      }
+    },
+    {
+      "matchManagers": [
+        "pre-commit"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "find template -type f -name '.pre-commit-config.yaml.jinja' -exec sed -i '/{{{replace \"/\" \"\\/\" depName}}}/{N;s/rev: {{{currentValue}}}/rev: {{{newValue}}}/}' {} +"
+        ]
+      }
+    },
+    {
+      "matchDepTypes": [
+        "container",
+        "image",
+        "image-name",
+        "service-image"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "find template -type f -exec sed -i 's|{{{depName}}}:{{{currentValue}}}@{{{currentDigest}}}|{{{depName}}}:{{{newValue}}}@{{{newDigest}}}|g' {} +"
+        ]
+      }
+    },
+    {
+      "addLabels": [
+        "vcpkg-baseline"
+      ],
+      "matchDepTypes": [
+        "vcpkg-builtin-baseline",
+        "registration-baseline"
+      ],
+      "matchFileNames": [
+        "vcpkg.json"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "find template -type f -name 'vcpkg.json.jinja' -exec sed -i 's|{{{currentDigest}}}|{{{newDigest}}}|g' {} +"
+        ]
+      }
+    },
+    {
+      "commitMessageTopic": "serious-scaffold-python",
+      "matchDepTypes": [
+        "copier-template"
+      ],
+      "postUpgradeTasks": {
+        "commands": [
+          "git stash",
+          "pip install copier",
+          "copier update --defaults --vcs-ref {{{newVersion}}}"
+        ]
+      },
+      "semanticCommitScope": "copier-template"
+    },
+    {
+      "description": "Group apt packages to avoid failure when multiple packages are outdated.",
+      "groupName": "apt packages",
+      "matchDepTypes": [
+        "apt"
+      ]
+    }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "pypi",
+      "fileMatch": [
+        "^\\.github\\/workflows\\/ci.yml$",
+        "^template\\/\\.github\\/workflows\\/ci.yml$"
+      ],
+      "matchStrings": [
+        "pipx install (?<depName>.*?)==(?<currentValue>.*?)"
+      ]
+    },
+    {
+      "description": " Update vcpkg.json builtin-baseline with git hash",
+      "customType": "regex",
+      "currentValueTemplate": "master",
+      "datasourceTemplate": "git-refs",
+      "depNameTemplate": "https://github.com/microsoft/vcpkg",
+      "depTypeTemplate": "vcpkg-builtin-baseline",
+      "fileMatch": [
+        "^vcpkg\\.json$"
+      ],
+      "matchStrings": [
+        "\"builtin-baseline\": \"(?<currentDigest>.*?)\""
+      ]
+    },
+    {
+      "description": "Update registration baseline with git hash",
+      "customType": "regex",
+      "currentValueTemplate": "master",
+      "datasourceTemplate": "git-refs",
+      "depTypeTemplate": "registration-baseline",
+      "fileMatch": [
+        "^vcpkg\\.json$"
+      ],
+      "matchStrings": [
+        "\"baseline\": \"(?<currentDigest>.*?)\"[^}]+?\"repository\": \"(?<depName>.*?)\""
+      ]
+    },
+    {
+      "customType": "regex",
+      "datasourceTemplate": "git-tags",
+      "depNameTemplate": "https://github.com/serious-scaffold/ss-cpp.git",
+      "depTypeTemplate": "copier-template",
+      "fileMatch": [
+        "^\\.copier-answers\\.yml$"
+      ],
+      "matchStrings": [
+        "_commit: (?<currentValue>.*?)\n"
+      ],
+      "versioningTemplate": "semver"
+    }
+  ]
+}
