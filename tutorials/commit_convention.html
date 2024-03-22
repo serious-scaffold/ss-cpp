@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Project Management" href="project_management.html" /><link rel="prev" title="Welcome to Serious Scaffold Cpp’s documentation" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Topics" href="../topics/index.html" /><link rel="prev" title="Dependencies" href="dependencies.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Tutorials - Serious Scaffold Cpp documentation</title>
+        <title>Commit Convention - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -159,12 +159,12 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="project_management.html">Project Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="building.html">Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Commit Convention</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
@@ -209,30 +209,90 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <!-- Provide a brief introduction to the tutorials. -->
-<section id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this heading">#</a></h1>
-<p>This section provides a brief introduction to the tutorials.The following pages will cover the main all necessary topics for using the scaffold to ease a complete C++ development process. From the initial phases of <strong>project initiation and quick validation</strong>, to maintenance phase of the <strong>code quality</strong> and <strong>testing</strong> processes, to <strong>packaging</strong> the software, the tutorials provide a step-by-step guide to help developers get started with the scaffold. We aim to provide a comprehensive and practical guide for modern C++ developers on open-source platforms like GitHub and GitLab, from novice to expert, who want to build reliable and maintainable software.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Best practices can vary based on specific circumstances. We are open to comments and suggestions to refine the approach.</p>
+          <section id="commit-convention">
+<h1>Commit Convention<a class="headerlink" href="#commit-convention" title="Permalink to this heading">#</a></h1>
+<p>This guides the contributors to follow a consistent commit message format. And it helpes maintain a clean and readable git history and streamline the release process for release automation tools like semantic-release we use in this project.</p>
+<section id="for-release-automation">
+<h2>For Release Automation<a class="headerlink" href="#for-release-automation" title="Permalink to this heading">#</a></h2>
+<p>Because we need to support semantic-release to automate the <a class="reference internal" href="../topics/release_workflow.html"><span class="std std-doc">release workflow</span></a>, and it supports parsing of many semantic commit formats such as <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-angular"><code class="docutils literal notranslate"><span class="pre">angular</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-atom"><code class="docutils literal notranslate"><span class="pre">atom</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-codemirror"><code class="docutils literal notranslate"><span class="pre">codemirror</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-ember"><code class="docutils literal notranslate"><span class="pre">ember</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-eslint"><code class="docutils literal notranslate"><span class="pre">eslint</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-express"><code class="docutils literal notranslate"><span class="pre">express</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-jquery"><code class="docutils literal notranslate"><span class="pre">jquery</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-jshint"><code class="docutils literal notranslate"><span class="pre">jshint</span></code></a>, <a class="reference external" href="https://github.com/conventional-changelog/conventional-changelog/tree/master/packages/conventional-changelog-conventionalcommits"><code class="docutils literal notranslate"><span class="pre">conventionalcommits</span></code></a>.</p>
+<p>We combine and customize the commit message format angular and conventionalcommits.</p>
+<section id="commit-message-format">
+<h3>Commit Message Format<a class="headerlink" href="#commit-message-format" title="Permalink to this heading">#</a></h3>
+<p>The commit message format should be in the following format:</p>
+<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>&lt;type&gt;(&lt;scope&gt;): &lt;short summary&gt;
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: a specific component or part of the system affected by the change.
+  │
+  └─⫸ Commit Type: build|chore|ci|docs|feat|fix|perf|refactor|test
+
+Commit Message Body
+
+Commit Message Footer
+</pre></div>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="project_management.html">Project Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="building.html">Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
-</ul>
+</section>
+<section id="commit-message-types">
+<h3>Commit Message Types<a class="headerlink" href="#commit-message-types" title="Permalink to this heading">#</a></h3>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">build</span></code></p></td>
+<td><p>Changes that affect the build system or dependencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">chore</span></code></p></td>
+<td><p>Routine tasks or changes outside the src/runtime code.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ci</span></code></p></td>
+<td><p>Changes related to continuous integration.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">doc</span></code></p></td>
+<td><p>Documentation changes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">feat</span></code></p></td>
+<td><p>New features.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fix</span></code></p></td>
+<td><p>Bug fixes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">perf</span></code></p></td>
+<td><p>Performance improvements.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">refactor</span></code></p></td>
+<td><p>Code restructuring without changing behavior.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">revert</span></code></p></td>
+<td><p>Revert a previous commit.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">style</span></code></p></td>
+<td><p>Code formatting changes.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">test</span></code></p></td>
+<td><p>Add or update tests.</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>See the <a class="reference internal" href="../topics/release_workflow.html"><span class="std std-doc">release workflow</span></a> for more details how the configuration can be used to automate the release.</p>
+</section>
+</section>
+<section id="for-semantic-versioning">
+<h2>For Semantic Versioning<a class="headerlink" href="#for-semantic-versioning" title="Permalink to this heading">#</a></h2>
+<p>Commit convention is also important for semantic versioning. It helps us to understand the impact of changes on the codebase and how to determine the next version number. With the help of semantic-release, we can automate the versioning process based on the commit messages.</p>
+<p>See the <a class="reference internal" href="../topics/semantic_versioning.html"><span class="std std-doc">semantic versioning</span></a> for more details how the commit convention impacts codebase versioning.</p>
+</section>
 </section>
 
         </article>
@@ -240,23 +300,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="project_management.html">
+          <a class="next-page" href="../topics/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Project Management</div>
+                <div class="title">Topics</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="dependencies.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Dependencies</div>
                 
               </div>
             </a>
@@ -278,8 +338,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Commit Convention</a><ul>
+<li><a class="reference internal" href="#for-release-automation">For Release Automation</a><ul>
+<li><a class="reference internal" href="#commit-message-format">Commit Message Format</a></li>
+<li><a class="reference internal" href="#commit-message-types">Commit Message Types</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#for-semantic-versioning">For Semantic Versioning</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

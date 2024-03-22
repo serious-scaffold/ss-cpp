@@ -157,26 +157,29 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
-<ul class="current">
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="index.html">Overview</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/project_management.html">Project Management</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/development_environment.html">Development Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/building.html">Building</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorials/dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials/commit_convention.html">Commit Convention</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="topics/overlays.html">Overlays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="topics/triplet_presets.html">Triplet Presets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="topics/security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topics/semantic_versioning.html">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="topics/release_workflow.html">Release Workflow</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="principles/index.html">Principles</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Contributing</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
-<ul>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Contributing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="api.html">ss-cpp API</a></li>
 </ul>
 
@@ -214,13 +217,14 @@
         <article role="main">
           <section id="contributing">
 <h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading">#</a></h1>
-<p>Contributions are welcome, and they are greatly appreciated!
-Every little bit helps.</p>
+<p>Our scaffolds are community-driven and open-source, anddesigned to save time and effort, allowing developers to focus on writing code that matters most. Your contributions are invaluable!</p>
 <section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this heading">#</a></h2>
-<p>Nothing easier!</p>
-<p>Fork and clone the repository, then:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional virtualenv, depends on your develop environment</span>
+<p>Fork and clone the repository.</p>
+<section id="light-environment">
+<h3>Light Environment<a class="headerlink" href="#light-environment" title="Permalink to this heading">#</a></h3>
+<p>If you don’t want to run the full test suite, you can just create a virtual environment based on python and install copier and pre-commit:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Optional<span class="w"> </span>virtualenv,<span class="w"> </span>depends<span class="w"> </span>on<span class="w"> </span>your<span class="w"> </span>develop<span class="w"> </span>environment
 pipx<span class="w"> </span>install<span class="w"> </span>virtualenv<span class="w"> </span>pre-commit
 virtualenv<span class="w"> </span>.venv
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate
@@ -228,68 +232,27 @@ virtualenv<span class="w"> </span>.venv
 pip<span class="w"> </span>install<span class="w"> </span>copier
 </pre></div>
 </div>
-<p>You now have the dependencies installed.</p>
+</section>
+<section id="devcontainer-environment">
+<h3>Devcontainer Environment<a class="headerlink" href="#devcontainer-environment" title="Permalink to this heading">#</a></h3>
+<p>If you want to run the full testable environment, you can use the devcontainer provided in the folder <code class="docutils literal notranslate"><span class="pre">.devcontainer</span></code>.</p>
+<p>To use the devcontainer, refer to <a class="reference external" href="https://code.visualstudio.com/docs/devcontainers/tutorial">Dev Containers tutorial</a>.</p>
+</section>
 </section>
 <section id="development">
 <h2>Development<a class="headerlink" href="#development" title="Permalink to this heading">#</a></h2>
 <p>As usual:</p>
 <ul class="simple">
-<li><p>create a new branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">feature-or-bugfix-name</span></code></p></li>
-<li><p>edit the code and/or the documentation</p></li>
+<li><p>create a new branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">switch</span> <span class="pre">-c</span> <span class="pre">feature-or-bugfix-name</span></code>.</p></li>
+<li><p>edit the code and/or the documentation.</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">copier</span> <span class="pre">copy</span> <span class="pre">--vcs-ref=HEAD</span> <span class="pre">-l</span> <span class="pre">.</span> <span class="pre">.</span></code> to generate the current repository.</p></li>
 <li><p>run <code class="docutils literal notranslate"><span class="pre">pre-commit</span> <span class="pre">run</span> <span class="pre">-a</span></code> to check if any errors can be fixed.</p></li>
-<li><p>if everything is fine, your changes are ready to commit.</p></li>
+<li><p>if everything is fine, your changes are ready to commit and follow our convention based on the Commit Convention.</p></li>
+<li><p>push your branch to your fork and create a pull request.</p></li>
 </ul>
-</section>
-<section id="commit-message-convention">
-<h2>Commit message convention<a class="headerlink" href="#commit-message-convention" title="Permalink to this heading">#</a></h2>
-<p>Commit messages must follow our convention based on the
-<a class="reference external" href="https://gist.github.com/stephenparish/9941e89d80e2bc58a153#format-of-the-commit-message">Angular style</a>
-or the <a class="reference external" href="https://karma-runner.github.io/4.0/dev/git-commit-msg.html">Karma convention</a>:</p>
-<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>&lt;type&gt;[(scope)]: Subject
-
-[Body]
-</pre></div>
-</div>
-<p><strong>Subject and body must be valid Markdown.</strong>
-Subject must have proper casing (uppercase for first letter
-if it makes sense), but no dot at the end, and no punctuation
-in general.</p>
-<p>Scope and body are optional. Type can be:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">build</span></code>: About packaging, building wheels, etc.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">chore</span></code>: About packaging or repo/files management.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ci</span></code>: About Continuous Integration.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">deps</span></code>: Dependencies update.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code>: About documentation.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">feat</span></code>: New feature.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fix</span></code>: Bug fix.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">perf</span></code>: About performance.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">refactor</span></code>: Changes that are not features or bug fixes.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: A change in code style/format.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tests</span></code>: About tests.</p></li>
-</ul>
-<p>If you write a body, please add trailers at the end
-(for example issues and PR references, or co-authors),
-without relying on GitHub’s flavored Markdown:</p>
-<div class="highlight-tex notranslate"><div class="highlight"><pre><span></span>Body.
-
-Issue #10: https://github.com/namespace/project/issues/10
-Related to PR namespace/other-project#15: https://github.com/namespace/other-project/pull/15
-</pre></div>
-</div>
-<p>These “trailers” must appear at the end of the body,
-without any blank lines between them. The trailer title
-can contain any character except colons <code class="docutils literal notranslate"><span class="pre">:</span></code>.
-We expect a full URI for each trailer, not just GitHub autolinks
-(for example, full GitHub URLs for commits and issues,
-not the hash or the #issue-number).</p>
-<p>We do not enforce a line length on commit messages summary and body,
-but please avoid very long summaries, and very long lines in the body,
-unless they are part of code blocks that must not be wrapped.</p>
 </section>
 <section id="pull-requests-guidelines">
-<h2>Pull requests guidelines<a class="headerlink" href="#pull-requests-guidelines" title="Permalink to this heading">#</a></h2>
+<h2>Pull Requests Guidelines<a class="headerlink" href="#pull-requests-guidelines" title="Permalink to this heading">#</a></h2>
 <p>Link to any related issue in the Pull Request message.</p>
 <p>During the review, we recommend using fixups:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># SHA is the SHA of the commit you want to fix</span>
@@ -365,10 +328,13 @@ and we will squash them ourselves if needed, before merging.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Contributing</a><ul>
-<li><a class="reference internal" href="#environment-setup">Environment setup</a></li>
+<li><a class="reference internal" href="#environment-setup">Environment setup</a><ul>
+<li><a class="reference internal" href="#light-environment">Light Environment</a></li>
+<li><a class="reference internal" href="#devcontainer-environment">Devcontainer Environment</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#development">Development</a></li>
-<li><a class="reference internal" href="#commit-message-convention">Commit message convention</a></li>
-<li><a class="reference internal" href="#pull-requests-guidelines">Pull requests guidelines</a></li>
+<li><a class="reference internal" href="#pull-requests-guidelines">Pull Requests Guidelines</a></li>
 </ul>
 </li>
 </ul>

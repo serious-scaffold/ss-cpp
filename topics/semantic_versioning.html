@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Project Management" href="project_management.html" /><link rel="prev" title="Welcome to Serious Scaffold Cpp’s documentation" href="../index.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Release Workflow" href="release_workflow.html" /><link rel="prev" title="Security" href="security.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Tutorials - Serious Scaffold Cpp documentation</title>
+        <title>Semantic Versioning - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -159,20 +159,20 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="project_management.html">Project Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="building.html">Building</a></li>
-<li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/project_management.html">Project Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/development_environment.html">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/commit_convention.html">Commit Convention</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../topics/overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/triplet_presets.html">Triplet Presets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/security.html">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/semantic_versioning.html">Semantic Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/release_workflow.html">Release Workflow</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
@@ -209,30 +209,33 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <!-- Provide a brief introduction to the tutorials. -->
-<section id="tutorials">
-<h1>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this heading">#</a></h1>
-<p>This section provides a brief introduction to the tutorials.The following pages will cover the main all necessary topics for using the scaffold to ease a complete C++ development process. From the initial phases of <strong>project initiation and quick validation</strong>, to maintenance phase of the <strong>code quality</strong> and <strong>testing</strong> processes, to <strong>packaging</strong> the software, the tutorials provide a step-by-step guide to help developers get started with the scaffold. We aim to provide a comprehensive and practical guide for modern C++ developers on open-source platforms like GitHub and GitLab, from novice to expert, who want to build reliable and maintainable software.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Best practices can vary based on specific circumstances. We are open to comments and suggestions to refine the approach.</p>
-</div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="project_management.html">Project Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="building.html">Building</a></li>
-<li class="toctree-l1"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
+          <section id="semantic-versioning">
+<h1>Semantic Versioning<a class="headerlink" href="#semantic-versioning" title="Permalink to this heading">#</a></h1>
+<p>This document describes the semantic versioning scheme used in the project.</p>
+<section id="why-use-semantic-versioning">
+<h2>Why use semantic versioning?<a class="headerlink" href="#why-use-semantic-versioning" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Dependency_hell">Dependency hell</a> is a common problem needing to be addressed in modern software development. Semantic versioning is a simple and well-defined versioning scheme that provides a clear and consistent way to communicate software versions. Through the use of semantic versioning, one can gain insights into the impact of code changes across different versions and confidently manage dependencies. For more information on semantic versioning, please visit <a class="reference external" href="https://semver.org/">semver.org</a>.</p>
+</section>
+<section id="versioning-scheme">
+<h2>Versioning scheme<a class="headerlink" href="#versioning-scheme" title="Permalink to this heading">#</a></h2>
+<p>The versioning scheme used in the project is <code class="docutils literal notranslate"><span class="pre">MAJOR.MINOR.PATCH</span></code>. It contains the common rules for incrementing the version number:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MAJOR</span></code> version when you make incompatible API changes,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MINOR</span></code> version when you add functionality in a backwards-compatible manner, and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PATCH</span></code> version when you make backwards-compatible bug fixes.</p></li>
 </ul>
-</div>
+<p>And more about pre-release and build metadata can be found in the <a class="reference external" href="https://semver.org/">semver.org</a>.</p>
+</section>
+<section id="how-to-use-semantic-versioning-in-the-project">
+<h2>How to use semantic versioning in the project<a class="headerlink" href="#how-to-use-semantic-versioning-in-the-project" title="Permalink to this heading">#</a></h2>
+<p>Happily, the automatic <a class="reference internal" href="release_workflow.html"><span class="std std-doc">release workflow</span></a> in the project will automatically generate a new release with a new semantic version number based on the changes in the code. So, all we need to do is to follow the <a class="reference internal" href="../tutorials/commit_convention.html"><span class="std std-doc">Commit conventions</span></a> and make sure that the changes are backward-compatible.</p>
+</section>
 </section>
 
         </article>
@@ -240,23 +243,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="project_management.html">
+          <a class="next-page" href="release_workflow.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Project Management</div>
+                <div class="title">Release Workflow</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="security.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Home</div>
+                <div class="title">Security</div>
                 
               </div>
             </a>
@@ -278,8 +281,29 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Semantic Versioning</a><ul>
+<li><a class="reference internal" href="#why-use-semantic-versioning">Why use semantic versioning?</a></li>
+<li><a class="reference internal" href="#versioning-scheme">Versioning scheme</a></li>
+<li><a class="reference internal" href="#how-to-use-semantic-versioning-in-the-project">How to use semantic versioning in the project</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
