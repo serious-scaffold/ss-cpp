@@ -1,0 +1,61 @@
+name: Renovate
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '*/15 0-3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  renovate:
+    container:
+      env:
+        LOG_LEVEL: debug
+        RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: '["^git", "^pip", "^copier", "^find"]'
+        RENOVATE_BRANCH_PREFIX: renovate-github/
+        RENOVATE_ENABLED: ${{ vars.RENOVATE_ENABLED || true }}
+        RENOVATE_ENABLED_MANAGERS: '["pep621", "github-actions", "regex", "pre-commit"]'
+        RENOVATE_OPTIMIZE_FOR_DISABLED: 'true'
+        RENOVATE_PLATFORM: github
+        RENOVATE_REPOSITORIES: '["${{ github.repository }}"]'
+        RENOVATE_REPOSITORY_CACHE: enabled
+      image: ghcr.io/renovatebot/renovate:37.252.0-full@sha256:2bc8d148bb065192baeb43451805855dc917ba0dc22ce2aec68734e165e78967
+      options: --user root
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      packages: write
+      id-token: write
+      pull-requests: write
+
+    steps:
+      - run: env | sort
+      - id: generate-token
+        name: Generate a token with GitHub App if App ID exists
+        if: vars.BOT_APP_ID
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.BOT_APP_ID }}
+          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+
+      - name: Warn if use others instead of bot token
+        if: ${{ !steps.generate-token.outputs.token }}
+        run: |
+          echo "# :warning: not-bot token is used" >> $GITHUB_STEP_SUMMARY
+          echo "The not-bot token may create a ghost account and cause security issues. Please use the bot token by configuring BOT_APP_ID in the variables and BOT_PRIVATE_KEY in the secrets." >> $GITHUB_STEP_SUMMARY
+
+      - name: Run Renovate
+        env:
+          RENOVATE_TOKEN: ${{ steps.generate-token.outputs.token || secrets.RENOVATE_TOKEN }}
+          RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
+        run: |
+          if [ -n "${{ steps.generate-token.outputs.token }}" ]; then
+            unset RENOVATE_GIT_AUTHOR
+            export RENOVATE_USERNAME='${{ steps.generate-token.outputs.app-slug }}[bot]'
+          fi
+
+          if [ -z "$RENOVATE_TOKEN" ]; then
+            echo "RENOVATE_TOKEN is not properly configured, skipping ..."
+          else
+            renovate $RENOVATE_EXTRA_FLAG
+          fi
