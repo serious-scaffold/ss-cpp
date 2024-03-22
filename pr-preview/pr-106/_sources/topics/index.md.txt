@@ -18,6 +18,5 @@ security
 :caption: Maintenance Relateds
 
 semantic_versioning
-annotated_tagging
 release_workflow
 ```
