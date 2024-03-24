@@ -19,4 +19,5 @@ security
 
 semantic_versioning
 release_workflow
+automate_dependencies
 ```
