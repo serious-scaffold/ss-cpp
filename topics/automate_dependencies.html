@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Overlays" href="overlays.html" /><link rel="prev" title="Commit Convention" href="../tutorials/commit_convention.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Principles" href="../principles/index.html" /><link rel="prev" title="Release Workflow" href="release_workflow.html" />
 
     <!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Topics - Serious Scaffold Cpp documentation</title>
+        <title>Automate Dependencies - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -167,13 +167,13 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/commit_convention.html">Commit Convention</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children current-page"><a class="current reference internal" href="#">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
 <li class="toctree-l2"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
 <li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Automate Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
@@ -216,25 +216,34 @@
           </label>
         </div>
         <article role="main">
-          <section id="topics">
-<h1>Topics<a class="headerlink" href="#topics" title="Permalink to this heading">#</a></h1>
-<p>This section contains various topics related to the development tricks, tools, and techniques used in the scaffold project. These topics are divided into various categories.</p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Vcpkg Relateds</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="overlays.html">Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="security.html">Security</a></li>
-</ul>
+          <section id="automate-dependencies">
+<h1>Automate Dependencies<a class="headerlink" href="#automate-dependencies" title="Permalink to this heading">#</a></h1>
+<p>This page describes how we can be aware of and manage our dependencies and their updates using the tool renovate.</p>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading">#</a></h2>
+<p>It requires a token <code class="docutils literal notranslate"><span class="pre">RENOVATE_TOKEN</span></code> with the appropriate permissions to make changes to the repository and trigger the CI/CD pipeline of that change.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For open-source repositories or organizations, a bot account is recommended to avoid the risk of exposing the token and make team collaboration more manageable.</p>
 </div>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Maintenance Relateds</span></p>
+<section id="on-github">
+<h3>On GitHub<a class="headerlink" href="#on-github" title="Permalink to this heading">#</a></h3>
+<p>It can simply reuse the existing configuration of the release workflow . See the <a class="reference internal" href="release_workflow.html"><span class="std std-doc">release workflow configuration</span></a> section.</p>
+<ul class="simple">
+<li><p>Apply the same bot configured variables and secrets:</p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a></li>
+<li><p>BOT_APP_ID</p></li>
+<li><p>BOT_PRIVATE_KEY</p></li>
 </ul>
-</div>
+</li>
+<li><p>Apply the same PAT.</p></li>
+</ul>
+</section>
+</section>
+<section id="customize-dependencies-detection">
+<h2>Customize dependencies detection<a class="headerlink" href="#customize-dependencies-detection" title="Permalink to this heading">#</a></h2>
+<p>Although we have configured the dependencise covering common dependencies we use in the project ,it can be customized to include more dependencies detection into the renovate configuration <code class="docutils literal notranslate"><span class="pre">renovaterc.json</span></code>, which is located in the root directory of the repository. See the <a class="reference external" href="https://docs.renovatebot.com/configuration-options/">official documentation</a> for more information.</p>
+</section>
 </section>
 
         </article>
@@ -242,23 +251,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="overlays.html">
+          <a class="next-page" href="../principles/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Overlays</div>
+                <div class="title">Principles</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../tutorials/commit_convention.html">
+          <a class="prev-page" href="release_workflow.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Commit Convention</div>
+                <div class="title">Release Workflow</div>
                 
               </div>
             </a>
@@ -292,7 +301,12 @@
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Topics</a><ul>
+<li><a class="reference internal" href="#">Automate Dependencies</a><ul>
+<li><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li><a class="reference internal" href="#on-github">On GitHub</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#customize-dependencies-detection">Customize dependencies detection</a></li>
 </ul>
 </li>
 </ul>

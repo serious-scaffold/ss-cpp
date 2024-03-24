@@ -173,6 +173,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../topics/security.html">Security</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../topics/semantic_versioning.html">Semantic Versioning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../topics/release_workflow.html">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/automate_dependencies.html">Automate Dependencies</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
@@ -292,6 +293,10 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <p>Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the <a class="reference external" href="https://github.com/semantic-release/semantic-release">semantic-release</a> to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.</p>
 <p>See the <a class="reference internal" href="../topics/release_workflow.html"><span class="std std-doc">release workflow</span></a> for more details on how to manage releases painlessly.</p>
 </section>
+<section id="renovate">
+<h3>Renovate<a class="headerlink" href="#renovate" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://docs.renovatebot.com/">Renovate</a> is a popular tool for automating dependency updates. It can be integrated with GitHub/GitLab to automatically create pull requests to update the dependencies. The project need a Renovate token <code class="docutils literal notranslate"><span class="pre">RENOVATE_TOKEN</span></code> to enable the integration. It is disabled by default, see the <a class="reference internal" href="../topics/automate_dependencies.html"><span class="std std-doc">Automating Dependency Updates</span></a> topic to learn how to enable it.</p>
+</section>
 </section>
 <section id="project-update">
 <h2>Project Update<a class="headerlink" href="#project-update" title="Permalink to this heading">#</a></h2>
@@ -381,6 +386,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <li><a class="reference internal" href="#pages">Pages</a></li>
 <li><a class="reference internal" href="#coverage">Coverage</a></li>
 <li><a class="reference internal" href="#release">Release</a></li>
+<li><a class="reference internal" href="#renovate">Renovate</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#project-update">Project Update</a></li>
