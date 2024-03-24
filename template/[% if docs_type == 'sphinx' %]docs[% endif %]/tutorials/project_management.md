@@ -54,12 +54,15 @@ Codecov is a popular tool for measuring code coverage. It can be integrated with
 - [GitHub Codecov](https://docs.codecov.com/docs/github-tutorial)
 - [GitLab Codecov](https://docs.codecov.com/docs/gitlab-tutorial)
 
-
 ### Release
 
 Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the [semantic-release](https://github.com/semantic-release/semantic-release) to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.
 
 See the [release workflow](../topics/release_workflow.md) for more details on how to manage releases painlessly.
+
+### Renovate
+
+[Renovate](https://docs.renovatebot.com/) is a popular tool for automating dependency updates. It can be integrated with GitHub/GitLab to automatically create pull requests to update the dependencies. The project need a Renovate token `RENOVATE_TOKEN` to enable the integration. It is disabled by default, see the [Automating Dependency Updates](../topics/automate_dependencies.md) topic to learn how to enable it.
 
 ## Project Update
 
