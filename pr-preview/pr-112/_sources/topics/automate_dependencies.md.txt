@@ -20,6 +20,6 @@ It can simply reuse the existing configuration of the release workflow . See the
 - Apply the same PAT.
 
 
-## Customizing Renovate Configuration
+## Customize dependencies detection
 
 Although we have configured the dependencise covering common dependencies we use in the project ,it can be customized to include more dependencies detection into the renovate configuration `renovaterc.json`, which is located in the root directory of the repository. See the [official documentation](https://docs.renovatebot.com/configuration-options/) for more information.
