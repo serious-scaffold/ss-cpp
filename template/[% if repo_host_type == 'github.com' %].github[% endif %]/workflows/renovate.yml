@@ -22,12 +22,6 @@ jobs:
       image: ghcr.io/renovatebot/renovate:37.252.0-full@sha256:2bc8d148bb065192baeb43451805855dc917ba0dc22ce2aec68734e165e78967
       options: --user root
     runs-on: ubuntu-22.04
-    permissions:
-      contents: write
-      packages: write
-      id-token: write
-      pull-requests: write
-
     steps:
       - run: env | sort
       - id: generate-token
@@ -37,13 +31,6 @@ jobs:
         with:
           app-id: ${{ vars.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
-
-      - name: Warn if use others instead of bot token
-        if: ${{ !steps.generate-token.outputs.token }}
-        run: |
-          echo "# :warning: not-bot token is used" >> $GITHUB_STEP_SUMMARY
-          echo "The not-bot token may create a ghost account and cause security issues. Please use the bot token by configuring BOT_APP_ID in the variables and BOT_PRIVATE_KEY in the secrets." >> $GITHUB_STEP_SUMMARY
-
       - name: Run Renovate
         env:
           RENOVATE_TOKEN: ${{ steps.generate-token.outputs.token || secrets.RENOVATE_TOKEN }}
