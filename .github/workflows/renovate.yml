@@ -24,6 +24,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: env | sort
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate Renovate configuration
+        run: |
+          renovate-config-validator ${{ vars.RENOVATE_CONFIG_VALIDATOR_EXTRA_FLAGS }}
       - id: generate-token
         name: Generate a token with GitHub App if App ID exists
         if: vars.BOT_APP_ID
@@ -38,7 +44,7 @@ jobs:
         run: |
           if [ -n "${{ steps.generate-token.outputs.token }}" ]; then
             unset RENOVATE_GIT_AUTHOR
-            export RENOVATE_USERNAME='${{ steps.generate-token.outputs.app-slug }}[bot]'
+            export RENOVATE_USERNAME="${{ steps.generate-token.outputs.app-slug }}[bot]"
           fi
 
           if [ -z "$RENOVATE_TOKEN" ]; then
