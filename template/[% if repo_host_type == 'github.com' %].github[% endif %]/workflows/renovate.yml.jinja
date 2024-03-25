@@ -8,14 +8,16 @@ on:
   push:
     paths:
       - .renovaterc.json
+[%- if repo_name == 'ss-cpp' %]
       - template/.renovaterc.json.jinja
+[%- endif %]
 
 jobs:
   config-validator:
     container:
       env:
         LOG_LEVEL: debug
-        RENOVATE_ENABLED: ${{ vars.RENOVATE_ENABLED || true }}
+        RENOVATE_ENABLED: {{ '${{ vars.RENOVATE_ENABLED || true }}' }}
         RENOVATE_OPTIMIZE_FOR_DISABLED: 'true'
         RENOVATE_PLATFORM: github
         RENOVATE_REPOSITORY_CACHE: enabled
@@ -29,7 +31,7 @@ jobs:
           fetch-depth: 0
       - name: Validate Renovate configuration
         run: |
-          renovate-config-validator ${{ vars.RENOVATE_CONFIG_VALIDATOR_EXTRA_FLAGS }}
+          renovate-config-validator {{ '${{ vars.RENOVATE_CONFIG_VALIDATOR_EXTRA_FLAGS }}' }}
 
   renovate:
     container:
@@ -37,11 +39,11 @@ jobs:
         LOG_LEVEL: debug
         RENOVATE_ALLOWED_POST_UPGRADE_COMMANDS: '["^git", "^pip", "^copier", "^find"]'
         RENOVATE_BRANCH_PREFIX: renovate-github/
-        RENOVATE_ENABLED: ${{ vars.RENOVATE_ENABLED || true }}
+        RENOVATE_ENABLED: {{ '${{ vars.RENOVATE_ENABLED || true }}' }}
         RENOVATE_ENABLED_MANAGERS: '["pep621", "github-actions", "regex", "pre-commit"]'
         RENOVATE_OPTIMIZE_FOR_DISABLED: 'true'
         RENOVATE_PLATFORM: github
-        RENOVATE_REPOSITORIES: '["${{ github.repository }}"]'
+        RENOVATE_REPOSITORIES: '["{{ '${{ github.repository }}' }}"]'
         RENOVATE_REPOSITORY_CACHE: enabled
       image: ghcr.io/renovatebot/renovate:37.269.3-full@sha256:9445e3bc58cfd9885de7c04d8b96640628a320c6022fb5928c04103196a0d09f
       options: --user root
@@ -54,16 +56,16 @@ jobs:
         if: vars.BOT_APP_ID
         uses: actions/create-github-app-token@v1
         with:
-          app-id: ${{ vars.BOT_APP_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          app-id: {{ '${{ vars.BOT_APP_ID }}' }}
+          private-key: {{ '${{ secrets.BOT_PRIVATE_KEY }}' }}
       - name: Run Renovate
         env:
-          RENOVATE_TOKEN: ${{ steps.generate-token.outputs.token || secrets.RENOVATE_TOKEN }}
-          RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
+          RENOVATE_TOKEN: {{ '${{ steps.generate-token.outputs.token || secrets.RENOVATE_TOKEN }}' }}
+          RENOVATE_GIT_AUTHOR: {{ '${{ vars.RENOVATE_GIT_AUTHOR }}' }}
         run: |
-          if [ -n "${{ steps.generate-token.outputs.token }}" ]; then
+          if [ -n "{{ '${{ steps.generate-token.outputs.token }}' }}" ]; then
             unset RENOVATE_GIT_AUTHOR
-            export RENOVATE_USERNAME="${{ steps.generate-token.outputs.app-slug }}[bot]"
+            export RENOVATE_USERNAME="{{ '${{ steps.generate-token.outputs.app-slug }}' }}[bot]"
           fi
 
           if [ -z "$RENOVATE_TOKEN" ]; then
