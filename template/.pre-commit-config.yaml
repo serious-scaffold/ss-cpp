@@ -34,7 +34,7 @@ repos:
 
   # Check yaml
   - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-    rev: v2.10.0
+    rev: v2.12.0
     hooks:
       - id: pretty-format-yaml
         args:
