@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A development-focused Cpp project template.",
-  "builtin-baseline": "0719a71389654b88d827501d88e37e58ea8cbd70",
+  "builtin-baseline": "a34c873a9717a888f58dc05268dea15592c2f0ff",
   "dependencies": [
     "spdlog",
     "cmake-modules",
