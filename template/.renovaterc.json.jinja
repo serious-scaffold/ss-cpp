@@ -8,16 +8,6 @@
   "packageRules": [
 [%- if repo_name == 'ss-cpp' %]
     {
-      "groupName": "renovate docker tag",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchDepNames": [
-        "ghcr.io/renovatebot/renovate",
-        "renovate/renovate"
-      ]
-    },
-    {
       "matchDepTypes": [
         "action"
       ],
@@ -78,6 +68,23 @@
       }
     },
 [%- endif %]
+    {
+      "description": "Group renovate docker tag and pre-commit-hooks tag",
+      "groupName": "renovate group",
+      "matchDatasources": [
+        "docker",
+        "github-tags"
+      ],
+      "matchDepNames": [
+[%- if repo_host_type == 'github.com' %]
+        "ghcr.io/renovatebot/renovate",
+[%- endif %]
+[%- if repo_host_type == 'gitlab.com' or reop_host_type == 'gitlab-self-managed' or repo_name == 'ss-cpp' %]
+        "renovate/renovate",
+[%- endif %]
+        "renovatebot/pre-commit-hooks"
+      ]
+    },
     {
       "commitMessageTopic": "serious-scaffold-python",
       "matchDepTypes": [
