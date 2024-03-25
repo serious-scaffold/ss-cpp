@@ -7,16 +7,6 @@
   ],
   "packageRules": [
     {
-      "groupName": "renovate docker tag",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchDepNames": [
-        "ghcr.io/renovatebot/renovate",
-        "renovate/renovate"
-      ]
-    },
-    {
       "matchDepTypes": [
         "action"
       ],
@@ -75,6 +65,18 @@
           "find template -type f -name 'vcpkg.json.jinja' -exec sed -i 's|{{{currentDigest}}}|{{{newDigest}}}|g' {} +"
         ]
       }
+    },
+    {
+      "description": "Group renovate docker tag and pre-commit-hooks tag",
+      "groupName": "renovate group",
+      "matchDatasources": [
+        "docker"
+      ],
+      "matchDepNames": [
+        "ghcr.io/renovatebot/renovate",
+        "renovate/renovate",
+        "renovatebot/pre-commit-hooks"
+      ]
     },
     {
       "commitMessageTopic": "serious-scaffold-python",
