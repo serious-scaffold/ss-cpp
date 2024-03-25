@@ -19,7 +19,7 @@ concurrency:
 jobs:
 
   pre-commit:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
         with:
@@ -84,16 +84,16 @@ jobs:
       fail-fast: false
       matrix:
         presets:
-          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
-          - {os: {name: ubuntu-latest, type: linux}, compiler: {name: llvm, type: llvm}}
-          - {os: {name: ubuntu-latest, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: macos-latest, type: osx}, compiler: {name: applellvm, type: llvm}}
-          - {os: {name: macos-latest, type: osx}, compiler: {name: llvm, type: llvm}}
+          - {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          - {os: {name: ubuntu-22.04, type: linux}, compiler: {name: llvm, type: llvm}}
+          - {os: {name: ubuntu-22.04, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: macos-13, type: osx}, compiler: {name: applellvm, type: llvm}}
+          - {os: {name: macos-13, type: osx}, compiler: {name: llvm, type: llvm}}
           # setup-cpp doesn't support mingw on macOS yet
-          # - {os: {name: macos-latest, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
-          - {os: {name: windows-latest, type: windows}, compiler: {name: llvm, type: llvm}}
-          - {os: {name: windows-latest, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
+          # - {os: {name: macos-13, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
+          - {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
+          - {os: {name: windows-2022, type: windows}, compiler: {name: llvm, type: llvm}}
+          - {os: {name: windows-2022, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
         arch:
           - {name: x64, type: x64}
         vcpkg:
@@ -104,11 +104,11 @@ jobs:
           - OFF
 
         include:
-          - presets: {os: {name: windows-latest, type: windows}, compiler: {name: msvc, type: msvc}}
+          - presets: {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
             arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
-          - presets: {os: {name: ubuntu-latest, type: linux}, compiler: {name: gcc-11, type: gcc}}
+          - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
             arch: {name: x64, type: x64}
             vcpkg: false
             export_mode: OFF
@@ -172,10 +172,17 @@ jobs:
           timeout 10s bash -c "while [ ! -f ~/.wine/system.reg ] ; do echo 'waiting for wine registry to be created' ; sleep 1 ; done" && echo "wine registry created"
           sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
 
-      # skip asan on ubuntu-latest, see https://github.com/google/googletest/issues/4491
+      # see https://github.com/actions/runner-images/issues/9524
+      - name: Fix kernel mmap rnd bits
+        # Asan in llvm 14 provided in ubuntu 22.04 is incompatible with
+        # high-entropy ASLR in much newer kernels that GitHub runners are
+        # using leading to random crashes: https://reviews.llvm.org/D148280
+        if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
+        run: sudo sysctl vm.mmap_rnd_bits=28
+
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.presets.os.type == 'linux' && '-DUSE_SANITIZER=OFF' || '' }} ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
+          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
 
       - name: Build
         run: |
@@ -197,7 +204,7 @@ jobs:
   pass:
     if: always()
     needs: [pre-commit, consistency, checks]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
       - name: Decide whether the needed jobs succeeded or failed
@@ -207,7 +214,7 @@ jobs:
 
   release:
     name: release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event_name != 'pull_request'
     permissions:
       contents: write

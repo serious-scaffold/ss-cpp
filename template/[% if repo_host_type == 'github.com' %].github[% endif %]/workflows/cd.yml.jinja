@@ -20,7 +20,7 @@ env:
 jobs:
   pages:
     name: Deploy to GitHub Pages
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: {{ '${{ github.ref_name == github.event.repository.default_branch || (github.event_name == \'release\' && github.event.action == \'published\') }}' }}
     permissions:
       contents: write
