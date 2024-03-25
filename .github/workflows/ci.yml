@@ -208,6 +208,7 @@ jobs:
   release:
     name: release
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
     permissions:
       contents: write
       id-token: write
