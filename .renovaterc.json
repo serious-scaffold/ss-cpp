@@ -70,11 +70,11 @@
       "description": "Group renovate docker tag",
       "groupName": "renovate tag",
       "matchDatasources": [
-        "docker",
+        "docker"
       ],
       "matchDepNames": [
-          "ghcr.io/renovatebot/renovate",
-          "renovate/renovate"
+        "ghcr.io/renovatebot/renovate",
+        "renovate/renovate"
       ]
     },
     {
