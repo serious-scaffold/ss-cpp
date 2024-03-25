@@ -1,6 +1,6 @@
 # Commit Convention
 
-This guides the contributors to follow a consistent commit message format. And it helpes maintain a clean and readable git history and streamline the release process for release automation tools like semantic-release we use in this project.
+This guides the contributors to follow a consistent commit message format. And it helps maintain a clean and readable git history and streamline the release process for release automation tools like semantic-release we use in this project.
 
 ## For Release Automation
 
@@ -28,19 +28,19 @@ Commit Message Footer
 
 ### Commit Message Types
 
-| Type      | Description                                            |
-|-----------|--------------------------------------------------------|
-| `build`   | Changes that affect the build system or dependencies.  |
-| `chore`   | Routine tasks or changes outside the src/runtime code. |
-| `ci`      | Changes related to continuous integration.             |
-| `doc`     | Documentation changes.                                 |
-| `feat`    | New features.                                          |
-| `fix`     | Bug fixes.                                             |
-| `perf`    | Performance improvements.                              |
-| `refactor`| Code restructuring without changing behavior.          |
-| `revert`  | Revert a previous commit.                              |
-| `style`   | Code formatting changes.                               |
-| `test`    | Add or update tests.                                   |
+| Type       | Description                                            |
+|------------|--------------------------------------------------------|
+| `build`    | Changes that affect the build system or dependencies.  |
+| `chore`    | Routine tasks or changes outside the src/runtime code. |
+| `ci`       | Changes related to continuous integration.             |
+| `docs`     | Documentation changes.                                 |
+| `feat`     | New features.                                          |
+| `fix`      | Bug fixes.                                             |
+| `perf`     | Performance improvements.                              |
+| `refactor` | Code restructuring without changing behavior.          |
+| `revert`   | Revert a previous commit.                              |
+| `style`    | Code formatting changes.                               |
+| `test`     | Add or update tests.                                   |
 
 See the [release workflow](../topics/release_workflow.md) for more details how the configuration can be used to automate the release.
 

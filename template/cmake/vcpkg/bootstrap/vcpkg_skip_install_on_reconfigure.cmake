@@ -34,8 +34,8 @@ function(_vcpkg_skip_install_on_reconfigure)
         CACHE INTERNAL "")
   endif()
 
-  # I was not able to propgate vcpkg_manifest_hash via defer call, so workaround
-  # it with another cache variable.
+  # I was not able to propagate vcpkg_manifest_hash via defer call, so
+  # workaround it with another cache variable.
   set(__VCPKG_MANIFEST_HASH
       "${vcpkg_manifest_hash}"
       CACHE INTERNAL "")
