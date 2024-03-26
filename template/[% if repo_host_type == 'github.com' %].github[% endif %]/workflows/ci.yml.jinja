@@ -191,7 +191,7 @@ jobs:
       - name: Coverage
         run: |
           cmake --build out/build/{{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }} --target ccov-all
-
+[% if use_codecov == true %]
       - name: Upload coverage report
         uses: codecov/codecov-action@v4.1.0
         with:
@@ -200,6 +200,7 @@ jobs:
           files: ./coverage.xml, ./coverage.info, ./coverage.json
           flags: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}
           name: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}-coverage
+[%- endif %]
 
   pass:
     if: always()

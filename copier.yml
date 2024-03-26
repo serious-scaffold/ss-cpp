@@ -166,3 +166,8 @@ compile_target:
   default: compile
   help: Add a compile lib target, and skip leaving it empty.
   type: str
+
+use_codecov:
+  default: true
+  help: 'Whether to add codecov integration:'
+  type: bool
