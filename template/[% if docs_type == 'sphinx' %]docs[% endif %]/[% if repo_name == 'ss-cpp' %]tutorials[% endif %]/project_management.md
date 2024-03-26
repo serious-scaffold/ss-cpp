@@ -47,12 +47,16 @@ GitHub/GitLab Pages is a convenient way to host static websites for your project
 
 - GitHub Pages: To enable GitHub Pages, you need to navigate to the repository settings and enable the Pages feature and set the source branch to `gh-pages`.
 
-### Coverage
+### Codecov
 
 Codecov is a popular tool for measuring code coverage. It can be integrated with GitHub/GitLab to provide a visual representation of the code coverage of the project. The project need a Codecov token `CODECOV_TOKEN` to enable the integration.
 
 - [GitHub Codecov](https://docs.codecov.com/docs/github-tutorial)
 - [GitLab Codecov](https://docs.codecov.com/docs/gitlab-tutorial)
+
+```{note}
+It is enabled by default. And you can disable the Codecov integration by passing the flag `-d/--data use_codecov=false` to copier.
+```
 
 ### Release
 
