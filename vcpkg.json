@@ -3,6 +3,7 @@
   "name": "ss-cpp",
   "description": "A development-focused Cpp project template.",
   "builtin-baseline": "9de2e978bdfec6bb7852cc1d6ecf375c923c485c",
+  "homepage": "https://github.com/serious-scaffold/ss-cpp",
   "dependencies": [
     "spdlog",
     "cmake-modules",
