@@ -1,8 +1,10 @@
+[%- from pathjoin("includes", "variable.jinja") import repo_url with context -%]
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "{{ repo_name }}",
   "description": "{{ project_description }}",
   "builtin-baseline": "9de2e978bdfec6bb7852cc1d6ecf375c923c485c",
+  "homepage": "https://{{ repo_url() }}",
   "dependencies": [
 [%- if compile_target != '' or exe_target != '' or header_target != '' %]
     "spdlog",
