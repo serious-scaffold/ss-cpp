@@ -1,4 +1,4 @@
-name: Deploy PR previews
+name: Preview
 
 on:
   pull_request:
@@ -13,7 +13,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  pages-preview:
+  pages:
+    name: Deploy to GitHub Preview Pages
     runs-on: ubuntu-22.04
     permissions:
       issues: write
