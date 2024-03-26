@@ -280,13 +280,17 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <li><p>GitHub Pages: To enable GitHub Pages, you need to navigate to the repository settings and enable the Pages feature and set the source branch to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
 </ul>
 </section>
-<section id="coverage">
-<h3>Coverage<a class="headerlink" href="#coverage" title="Permalink to this heading">#</a></h3>
+<section id="codecov">
+<h3>Codecov<a class="headerlink" href="#codecov" title="Permalink to this heading">#</a></h3>
 <p>Codecov is a popular tool for measuring code coverage. It can be integrated with GitHub/GitLab to provide a visual representation of the code coverage of the project. The project need a Codecov token <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> to enable the integration.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.codecov.com/docs/github-tutorial">GitHub Codecov</a></p></li>
 <li><p><a class="reference external" href="https://docs.codecov.com/docs/gitlab-tutorial">GitLab Codecov</a></p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is enabled by default. And you can disable the Codecov integration by passing the flag <code class="docutils literal notranslate"><span class="pre">-d/--data</span> <span class="pre">use_codecov=false</span></code> to copier.</p>
+</div>
 </section>
 <section id="release">
 <h3>Release<a class="headerlink" href="#release" title="Permalink to this heading">#</a></h3>
@@ -384,7 +388,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <li><a class="reference internal" href="#protection">Protection</a></li>
 <li><a class="reference internal" href="#merge-strategy">Merge Strategy</a></li>
 <li><a class="reference internal" href="#pages">Pages</a></li>
-<li><a class="reference internal" href="#coverage">Coverage</a></li>
+<li><a class="reference internal" href="#codecov">Codecov</a></li>
 <li><a class="reference internal" href="#release">Release</a></li>
 <li><a class="reference internal" href="#renovate">Renovate</a></li>
 </ul>
