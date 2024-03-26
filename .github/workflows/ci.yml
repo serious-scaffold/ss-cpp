@@ -75,6 +75,7 @@ jobs:
 
   checks:
     runs-on: ${{ matrix.presets.os.name }}
+    needs: [pre-commit, consistency]
     timeout-minutes: 15
     permissions:
       actions: read
@@ -203,7 +204,7 @@ jobs:
 
   pass:
     if: always()
-    needs: [pre-commit, consistency, checks]
+    needs: [checks]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:

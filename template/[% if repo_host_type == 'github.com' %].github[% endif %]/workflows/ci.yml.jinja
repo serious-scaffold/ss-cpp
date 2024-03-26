@@ -75,6 +75,11 @@ jobs:
 [% endif %]
   checks:
     runs-on: {{ '${{ matrix.presets.os.name }}' }}
+    needs: [pre-commit
+[%- if repo_name == 'ss-cpp' -%]
+    , consistency
+[%- endif -%]
+    ]
     timeout-minutes: 15
     permissions:
       actions: read
@@ -204,11 +209,7 @@ jobs:
 
   pass:
     if: always()
-    needs: [pre-commit
-[%- if repo_name == 'ss-cpp' -%]
-    , consistency
-[%- endif -%]
-    , checks]
+    needs: [checks]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
