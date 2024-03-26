@@ -5,6 +5,8 @@
     ":enablePreCommit",
     ":maintainLockFilesWeekly"
   ],
+  "platformAutomerge": true,
+  "prCreation":"not-pending",
   "packageRules": [
 [%- if repo_name == 'ss-cpp' %]
     {
@@ -51,6 +53,8 @@
       }
     },
     {
+      "description": "Group vcpkg.json baseline with auto-update",
+      "groupName": "group vcpkg-baseline",
       "addLabels": [
         "vcpkg-baseline"
       ],
@@ -61,6 +65,8 @@
       "matchFileNames": [
         "vcpkg.json"
       ],
+      "automerge": true,
+      "schedule": ["before 8:00pm on the first day of the month"],
       "postUpgradeTasks": {
         "commands": [
           "find template -type f -name 'vcpkg.json.jinja' -exec sed -i {{ '\'s|{{{currentDigest}}}|{{{newDigest}}}|g\'' }} {} +"
