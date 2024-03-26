@@ -13,7 +13,7 @@ on:
   pull_request:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: {{ '${{ github.workflow }}-${{ github.ref }}' }}
   cancel-in-progress: true
 
 jobs:
@@ -32,9 +32,9 @@ jobs:
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: --hook-stage manual --all-files
-
+[% if repo_name == 'ss-cpp' %]
   consistency:
-    if: ${{ !cancelled() && ! failure() }}
+    if: {{ '${{ !cancelled() && ! failure() }}' }}
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -72,9 +72,9 @@ jobs:
             echo "Please run 'copier copy -r HEAD -f . .' to fix them." >>$GITHUB_STEP_SUMMARY && \
             exit 1 \
           )
-
+[% endif %]
   checks:
-    runs-on: ${{ matrix.presets.os.name }}
+    runs-on: {{ '${{ matrix.presets.os.name }}' }}
     timeout-minutes: 15
     permissions:
       actions: read
@@ -130,23 +130,23 @@ jobs:
             ~/.cache/vcpkg
             ~/AppData/Local/vcpkg
           key: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-${{ matrix.vcpkg }}
+            {{ '${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles(\'vcpkg.json\') }}-${{ matrix.vcpkg }}' }}
           restore-keys: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-
+            {{ '${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles(\'vcpkg.json\') }}-' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: ${{ matrix.presets.compiler.name }}
-          vcvarsall: ${{ contains(matrix.presets.os.type, 'windows' )}}
+          compiler: {{ '${{ matrix.presets.compiler.name }}' }}
+          vcvarsall: {{ '${{ contains(matrix.presets.os.type, \'windows\' )}}' }}
           cmake: true
           ninja: true
-          vcpkg: ${{ matrix.vcpkg }}
+          vcpkg: {{ '${{ matrix.vcpkg }}' }}
           ccache: true
           python: true
-          opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
+          opencppcoverage: {{ '${{ contains(matrix.presets.os.type, \'windows\' )}}' }}
 
       - name: Disable pre-installedd vcpkg for testing automaical vcpkg installation
-        if: ${{ matrix.vcpkg == false }}
+        if: {{ '${{ matrix.vcpkg == false }}' }}
         run: |
           echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
 
@@ -182,35 +182,39 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
+          cmake -S . --preset={{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == \'ON\' && \'-DVCPKG_EXPORT_MODE=ON\' || \'\' }}' }}
 
       - name: Build
         run: |
-          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
+          cmake --build out/build/{{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }} --target all
 
       - name: Coverage
         run: |
-          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
+          cmake --build out/build/{{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }} --target ccov-all
 
       - name: Upload coverage report
         uses: codecov/codecov-action@v4.1.0
         with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
+          token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
+          directory: out/build/{{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }}/code_coverage
           files: ./coverage.xml, ./coverage.info, ./coverage.json
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}-coverage
+          flags: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}
+          name: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}-coverage
 
   pass:
     if: always()
-    needs: [pre-commit, consistency, checks]
+    needs: [pre-commit
+[%- if repo_name == 'ss-cpp' -%]
+    , consistency
+[%- endif -%]
+    , checks]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
-          jobs: ${{ toJSON(needs) }}
+          jobs: {{ '${{ toJSON(needs) }}' }}
 
   release:
     name: release
@@ -229,16 +233,16 @@ jobs:
         if: vars.BOT_APP_ID && env.BOT_PRIVATE_KEY != null
         uses: actions/create-github-app-token@v1
         env:
-          BOT_PRIVATE_KEY: ${{ secrets.BOT_PRIVATE_KEY }}
+          BOT_PRIVATE_KEY: {{ '${{ secrets.BOT_PRIVATE_KEY }}' }}
         with:
-          app-id: ${{ vars.BOT_APP_ID }}
-          private-key: ${{ secrets.BOT_PRIVATE_KEY }}
+          app-id: {{ '${{ vars.BOT_APP_ID }}' }}
+          private-key: {{ '${{ secrets.BOT_PRIVATE_KEY }}' }}
 
       - name: Warn if use GITHUB_TOKEN
         if: env._GITHUB_TOKEN == env._TO_BE_VERIFIED_TOKEN
         env:
-          _GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          _TO_BE_VERIFIED_TOKEN: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
+          _GITHUB_TOKEN: {{ '${{ secrets.GITHUB_TOKEN }}' }}
+          _TO_BE_VERIFIED_TOKEN: {{ '${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}' }}
         run: |
           echo "# :warning: GITHUB_TOKEN is used" >> $GITHUB_STEP_SUMMARY
           echo "The GITHUB_TOKEN is used instead of a bot token or PAT that will not emit the released publish event for triggering a released workflow." >> $GITHUB_STEP_SUMMARY
@@ -246,7 +250,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
+          token: {{ '${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}' }}
 
       - uses: actions/setup-node@v4
         with:
@@ -261,4 +265,4 @@ jobs:
             @semantic-release/github
             conventional-changelog-conventionalcommits
         env:
-          GITHUB_TOKEN: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: {{ '${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}' }}

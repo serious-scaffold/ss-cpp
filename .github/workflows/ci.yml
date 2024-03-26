@@ -130,9 +130,9 @@ jobs:
             ~/.cache/vcpkg
             ~/AppData/Local/vcpkg
           key: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-${{ matrix.vcpkg }}
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-${{ matrix.vcpkg }}
           restore-keys: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('./vcpkg.json') }}-
+            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-
 
       - uses: aminya/setup-cpp@v1
         with:
