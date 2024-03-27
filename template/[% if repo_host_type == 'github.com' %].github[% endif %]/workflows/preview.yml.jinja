@@ -12,18 +12,20 @@ concurrency:
   group: preview-{{ '${{ github.workflow }}-${{ github.ref }}' }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  id-token: write
+  pull-requests: write
+
 jobs:
   pages:
     name: Deploy to GitHub Preview Pages
     runs-on: ubuntu-22.04
-    permissions:
-      issues: write
-      pull-requests: write
-      contents: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          token: {{ '${{ secrets.GITHUB_TOKEN }}' }}
 
       - name: Cache
         uses: actions/cache@v4
