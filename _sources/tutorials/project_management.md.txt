@@ -7,7 +7,7 @@ This page provides a full guide on how to manage a serious-scaffold-generated pr
 [`copier`](https://copier.readthedocs.io/) serves as a key tool in `serious-scaffold`, differentiating it from other project templates. The installation can be done with the following command.
 
 ```{note}
-Using `pipx` for management is recommended and you can find pipx's installation instructions [here](https://pypa.github.io/pipx/installation/).
+Using `pipx` for management is recommended and you can find pipx's installation instructions [here](https://pipx.pypa.io/stable/).
 ```
 
 ```bash

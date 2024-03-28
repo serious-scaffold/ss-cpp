@@ -90,7 +90,10 @@ The generated project provides the following targets:
 
 - `all` - builds all targets in the project.
 - `<repo_name>-docs` - builds the documentation.
-- `coverage` - runs the tests.
+- `ccov-all` - runs the tests and generates the code coverage report.
+- `<repo_name>-docs` - builds the documentation.
+- `<repo_name>-docs-check` - checks the documentation with warnings as errors.
+- `<repo_name>-linkcheck` - checks the documentation for broken links.
 - `install` - installs the project to the install directory.
 - `uninstall` - uninstalls the project from the install directory.
 
