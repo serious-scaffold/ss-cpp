@@ -1,0 +1,422 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Development Environment" href="development_environment.html" /><link rel="prev" title="Tutorials" href="index.html" />
+
+    <link rel="shortcut icon" href="https://img.shields.io/badge/SS-blue"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
+        <title>Project Management - Serious Scaffold Cpp documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/solid.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/brands.min.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Serious Scaffold Cpp  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">Serious Scaffold Cpp  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Project Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../topics/overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/semantic_versioning.html">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/release_workflow.html">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/automate_dependencies.html">Automate Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">ss-cpp API</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="project-management">
+<h1>Project Management<a class="headerlink" href="#project-management" title="Permalink to this heading">#</a></h1>
+<p>This page provides a full guide on how to manage a serious-scaffold-generated project on the open-source platform.</p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://copier.readthedocs.io/"><code class="docutils literal notranslate"><span class="pre">copier</span></code></a> serves as a key tool in <code class="docutils literal notranslate"><span class="pre">serious-scaffold</span></code>, differentiating it from other project templates. The installation can be done with the following command.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">pipx</span></code> for management is recommended and you can find pipx’s installation instructions <a class="reference external" href="https://pypa.github.io/pipx/installation/">here</a>.</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copier: Template rendering for projects.</span>
+pipx<span class="w"> </span>install<span class="w"> </span>copier
+</pre></div>
+</div>
+</section>
+<section id="project-creation">
+<h2>Project Creation<a class="headerlink" href="#project-creation" title="Permalink to this heading">#</a></h2>
+<ol class="arabic">
+<li><p>Generate the project.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>copier<span class="w"> </span>copy<span class="w"> </span>gh:serious-scaffold/ss-cpp<span class="w"> </span>/path/to/project
+</pre></div>
+</div>
+</li>
+<li><p>Navigate to the project directory and initialize a git repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/project
+git<span class="w"> </span>init
+</pre></div>
+</div>
+</li>
+<li><p>Commit the initialized project.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Init.&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>That’s it! Feel free to focus on the coding within <code class="docutils literal notranslate"><span class="pre">src</span></code> folder.</p></li>
+</ol>
+</section>
+<section id="project-configuration">
+<h2>Project Configuration<a class="headerlink" href="#project-configuration" title="Permalink to this heading">#</a></h2>
+<p>There are several configurations to utilize the features provided by the project template. These are only the essential ones, you can adjust according to your project’s actual needs.</p>
+<section id="protection">
+<h3>Protection<a class="headerlink" href="#protection" title="Permalink to this heading">#</a></h3>
+<p>Normally, a project on the open-source platform is public and anyone can access it. However, it is recommended to protect the project by some rules, such as:</p>
+<ul class="simple">
+<li><p>Branch Protection: Require pull requests to be reviewed and approved before merging.</p></li>
+<li><p>Tag Protection: Protect the release tags from being modified or deleted.</p></li>
+</ul>
+</section>
+<section id="merge-strategy">
+<h3>Merge Strategy<a class="headerlink" href="#merge-strategy" title="Permalink to this heading">#</a></h3>
+<p>Merge Strategy is a critical aspect of project management. It determines how changes from different branches are merged into the default branch.</p>
+<ul class="simple">
+<li><p>Rebase and Squash Commits: Prefer to use the <code class="docutils literal notranslate"><span class="pre">Rebase</span> <span class="pre">and</span> <span class="pre">Squash</span></code>. This ensures that the commit history is clean and easy to understand.</p></li>
+<li><p>Check Status Before Merging: Ensure that all changes are tested and passing before merging.</p></li>
+</ul>
+</section>
+<section id="pages">
+<h3>Pages<a class="headerlink" href="#pages" title="Permalink to this heading">#</a></h3>
+<p>GitHub/GitLab Pages is a convenient way to host static websites for your project. It can be used to host the documentation, demo, or any other static content.</p>
+<ul class="simple">
+<li><p>GitHub Pages: To enable GitHub Pages, you need to navigate to the repository settings and enable the Pages feature and set the source branch to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code>.</p></li>
+</ul>
+</section>
+<section id="codecov">
+<h3>Codecov<a class="headerlink" href="#codecov" title="Permalink to this heading">#</a></h3>
+<p>Codecov is a popular tool for measuring code coverage. It can be integrated with GitHub/GitLab to provide a visual representation of the code coverage of the project. The project need a Codecov token <code class="docutils literal notranslate"><span class="pre">CODECOV_TOKEN</span></code> to enable the integration.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.codecov.com/docs/github-tutorial">GitHub Codecov</a></p></li>
+<li><p><a class="reference external" href="https://docs.codecov.com/docs/gitlab-tutorial">GitLab Codecov</a></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is enabled by default. And you can disable the Codecov integration by passing the flag <code class="docutils literal notranslate"><span class="pre">-d/--data</span> <span class="pre">use_codecov=false</span></code> to copier.</p>
+</div>
+</section>
+<section id="release">
+<h3>Release<a class="headerlink" href="#release" title="Permalink to this heading">#</a></h3>
+<p>Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the <a class="reference external" href="https://github.com/semantic-release/semantic-release">semantic-release</a> to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.</p>
+<p>See the <a class="reference internal" href="../topics/release_workflow.html"><span class="std std-doc">release workflow</span></a> for more details on how to manage releases painlessly.</p>
+</section>
+<section id="renovate">
+<h3>Renovate<a class="headerlink" href="#renovate" title="Permalink to this heading">#</a></h3>
+<p><a class="reference external" href="https://docs.renovatebot.com/">Renovate</a> is a popular tool for automating dependency updates. It can be integrated with GitHub/GitLab to automatically create pull requests to update the dependencies. The project need a Renovate token <code class="docutils literal notranslate"><span class="pre">RENOVATE_TOKEN</span></code> to enable the integration. It is disabled by default, see the <a class="reference internal" href="../topics/automate_dependencies.html"><span class="std std-doc">Automating Dependency Updates</span></a> topic to learn how to enable it.</p>
+</section>
+</section>
+<section id="project-update">
+<h2>Project Update<a class="headerlink" href="#project-update" title="Permalink to this heading">#</a></h2>
+<p>Thanks to the update mechanism provided natively by <code class="docutils literal notranslate"><span class="pre">copier</span></code>, when a new version of the template is released, you can easily update the project. Just run the following command under the root directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>copier<span class="w"> </span>update
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-A/--skip-answered</span></code> flag can be used to skip questions that have already been answered.</p>
+</div>
+<p>In most cases, <code class="docutils literal notranslate"><span class="pre">copier</span></code> will manage updates seamlessly. If conflicts arise, they can be resolved manually since everything is version-controlled by Git.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To minimize potential conflicts, there are several suggestions to follow:</p>
+<ol class="arabic simple">
+<li><p>Avoid modifying the auto-generated files unless absolutely necessary.</p></li>
+<li><p>For template-related changes, consider proposing an issue or change request directly to the template repository.</p></li>
+<li><p>For project-specific changes, adopt an inheritance or extension approach to minimize the changes to auto-generated contents.</p></li>
+</ol>
+</div>
+<p>For more details, please refer to <code class="docutils literal notranslate"><span class="pre">copier</span> <span class="pre">update</span> <span class="pre">--help</span></code> and <a class="reference external" href="https://copier.readthedocs.io/en/stable/updating/">the copier official documentation</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="development_environment.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Development Environment</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Tutorials</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2022-2024 Serious Scaffold
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link fa-brands fa-solid fa-github fa-lg" href="https://github.com/serious-scaffold/ss-cpp" aria-label="GitHub"></a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Project Management</a><ul>
+<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li><a class="reference internal" href="#project-creation">Project Creation</a></li>
+<li><a class="reference internal" href="#project-configuration">Project Configuration</a><ul>
+<li><a class="reference internal" href="#protection">Protection</a></li>
+<li><a class="reference internal" href="#merge-strategy">Merge Strategy</a></li>
+<li><a class="reference internal" href="#pages">Pages</a></li>
+<li><a class="reference internal" href="#codecov">Codecov</a></li>
+<li><a class="reference internal" href="#release">Release</a></li>
+<li><a class="reference internal" href="#renovate">Renovate</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-update">Project Update</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    </body>
+</html>
