@@ -194,7 +194,7 @@ jobs:
           cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v4.1.0
+        uses: codecov/codecov-action@v4.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
