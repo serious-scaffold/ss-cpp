@@ -13,7 +13,9 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+from pathlib import Path
 
+ROOT = Path(__file__).parent.parent.resolve()
 
 # -- Project information -----------------------------------------------------
 
@@ -99,3 +101,9 @@ html_theme_options = {
         },
     ],
 }
+
+# -- breath configuration ----------------------------------------------------
+
+breathe_projects = {"ss-cpp-doxygen": f"{ROOT}/docs/_build/xml"}
+breathe_default_project = "ss-cpp-doxygen"
+breathe_debug_trace_directives = False
