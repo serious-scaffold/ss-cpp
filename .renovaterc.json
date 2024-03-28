@@ -6,7 +6,6 @@
     ":maintainLockFilesWeekly"
   ],
   "platformAutomerge": true,
-  "prCreation":"not-pending",
   "packageRules": [
     {
       "matchDepTypes": [
