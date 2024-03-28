@@ -207,9 +207,52 @@ jobs:
           name: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}-coverage
 [%- endif %]
 
+  docs:
+    name: Docs build and checks
+    runs-on: ubuntu-22.04
+    needs: [pre-commit
+[%- if repo_name == 'ss-cpp' -%]
+    , consistency
+[%- endif -%]
+    ]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/vcpkg
+          key: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc
+          cmake: true
+          ninja: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+          python: true
+
+      - name: Install docs dependencies
+        run: |
+          pip install -r docs/requirements.txt
+
+      - name: Configure
+        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+
+      - name: Checks the docs with warnings as errors
+        run: cmake --build out/build/x64-linux-gcc --target {{ repo_name }}-docs-check
+
+      - name: Checks the docs for broken links
+        run: cmake --build out/build/x64-linux-gcc --target {{ repo_name }}-docs-linkcheck
+
   pass:
     if: always()
-    needs: [checks]
+    needs: [checks, docs]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
