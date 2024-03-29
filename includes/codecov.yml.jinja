@@ -1,0 +1,12 @@
+codecov:
+  notify:
+    after_n_builds: {{ codecov_notify_builds}}
+coverage:
+  status:
+    project:
+      default:
+        target: auto
+        threshold: {{ codecov_threshold }}
+    patch:
+      default:
+        informational: true
