@@ -5,62 +5,47 @@ find_package(spdlog CONFIG REQUIRED)
 file(GLOB_RECURSE _srcs "src/*.cpp")
 file(GLOB_RECURSE _hdrs "include/*.hpp")
 
-# shared library
-add_library(${target_name}-shared SHARED "")
-target_code_coverage(${target_name}-shared ALL)
+add_library(${target_name} "")
+target_code_coverage(${target_name} ALL)
 
 include(GenerateExportHeader)
 generate_export_header(
-  ${target_name}-shared BASE_NAME "${target_name}" EXPORT_FILE_NAME
+  ${target_name} BASE_NAME "${target_name}" EXPORT_FILE_NAME
   "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}_export.hpp")
 
-target_sources(${target_name}-shared PRIVATE ${_srcs} ${_hdrs})
+target_sources(${target_name} PRIVATE ${_srcs} ${_hdrs})
 
 target_include_interface_directories(
-  ${target_name}-shared ${CMAKE_CURRENT_BINARY_DIR}/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
+  ${target_name}
+  ${CMAKE_CURRENT_BINARY_DIR}/include # for include export header
+  ${CMAKE_CURRENT_SOURCE_DIR}/include # for public headers
+  ${CMAKE_BINARY_DIR}/git/include # for git hash
+)
 
 target_compile_options(
-  ${target_name}-shared
-  PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
+  ${target_name} PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
 
-target_link_libraries(${target_name}-shared PRIVATE spdlog::spdlog)
+target_link_libraries(${target_name} PRIVATE spdlog::spdlog)
 
 set_target_properties(
-  ${target_name}-shared
+  ${target_name}
   PROPERTIES POSITION_INDEPENDENT_CODE 1
              CXX_VISIBILITY_PRESET hidden
              VISIBILITY_INLINES_HIDDEN 1
              SOVERSION ${CMAKE_PROJECT_VERSION_MAJOR}
              MACOSX_RPATH ON)
 
-# static library
-add_library(${target_name}-static STATIC "")
-target_code_coverage(${target_name}-static ALL)
+if(NOT BUILD_SHARED_LIBS)
+  set(static_define ${target_name}_STATIC_DEFINE)
+  string(TOUPPER ${static_define} static_define)
+  target_compile_definitions(${target_name} PUBLIC ${static_define})
+endif()
 
-target_sources(${target_name}-static PRIVATE ${_srcs} ${_hdrs})
-
-set(static_define ${target_name}_STATIC_DEFINE)
-string(TOUPPER ${static_define} static_define)
-target_compile_definitions(${target_name}-static PUBLIC ${static_define})
-
-target_include_interface_directories(
-  ${target_name}-static ${CMAKE_CURRENT_BINARY_DIR}/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_BINARY_DIR}/git/include)
-
-target_compile_options(
-  ${target_name}-static
-  PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
-
-target_link_libraries(${target_name}-static PRIVATE spdlog::spdlog)
-
-# msvc layout in solution
-source_group("impl" REGULAR_EXPRESSION "impl/.*\\.[h|cpp]")
-source_group("${target_name}" FILES "${target_name}.hpp;${target_name}.cpp")
-
-if(CMAKE_HOST_WIN32 AND $<CXX_COMPILER_ID:MSVC>)
+if(BUILD_SHARED_LIBS
+   AND CMAKE_HOST_WIN32
+   AND $<CXX_COMPILER_ID:MSVC>)
   install(
-    FILES $<TARGET_PDB_FILE:${target_name}-shared>
+    FILES $<TARGET_PDB_FILE:${target_name}>
     DESTINATION ${CMAKE_INSTALL_BINDIR}$<$<CONFIG:Debug>:/../debug/bin>
     OPTIONAL)
 endif()
@@ -69,8 +54,7 @@ install_target(
   NAME
   ${target_name}
   TARGETS
-  ${target_name}-shared
-  ${target_name}-static
+  ${target_name}
   VERSION
   ${CMAKE_PROJECT_VERSION}
   INCLUDES
@@ -82,7 +66,7 @@ install_target(
   DEPENDENCIES
   spdlog::spdlog)
 
-install_dependency(TARGETS ${target_name}-shared ${target_name}-static)
+install_dependency(TARGETS ${target_name})
 
 # Tests
 message(STATUS "BUILD_TESTING:${BUILD_TESTING}")
