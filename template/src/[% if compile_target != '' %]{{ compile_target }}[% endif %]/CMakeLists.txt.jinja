@@ -6,6 +6,7 @@ file(GLOB_RECURSE _srcs "src/*.cpp")
 file(GLOB_RECURSE _hdrs "include/*.hpp")
 
 add_library(${target_name} "")
+sanitize_target(${target_name})
 target_code_coverage(${target_name} ALL)
 
 include(GenerateExportHeader)
