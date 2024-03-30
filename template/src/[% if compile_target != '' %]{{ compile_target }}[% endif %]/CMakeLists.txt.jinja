@@ -71,9 +71,6 @@ install_target(
 
 install_dependency(TARGETS ${target_name})
 
-# Tests
-message(STATUS "BUILD_TESTING:${BUILD_TESTING}")
-
 if(BUILD_TESTING)
-  add_subdirectory(tests)
+  add_test_subdirectory(tests)
 endif()

@@ -29,7 +29,6 @@ include(cmake-modules/build/Cppcheck)
 include(cmake-modules/build/Ccache)
 include(cmake-modules/build/LinkOptimization)
 include(cmake-modules/test/Default)
-include(cmake-modules/test/GoogleTest)
 include(cmake-modules/test/Valgrind)
 include(cmake-modules/install/Default)
 include(cmake-modules/install/Common)
@@ -46,6 +45,10 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 include(ConfigureVersion)
 include(ConfigureDocs)
 include(ConfigureCoverage)
+
+if(test IN_LIST VCPKG_MANIFEST_FEATURES)
+  include(ConfigureTest)
+endif()
 
 add_subdirectory(src)
 

@@ -25,7 +25,6 @@ install_target(
   DEPENDENCIES
   spdlog::spdlog)
 
-# Test
 if(BUILD_TESTING)
-  add_subdirectory(tests)
+  add_test_subdirectory(tests)
 endif()

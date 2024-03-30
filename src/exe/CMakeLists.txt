@@ -32,7 +32,6 @@ install(TARGETS ${target_name}
 
 install_dependency(TARGETS ${target_name})
 
-# Test
 if(BUILD_TESTING)
-  add_subdirectory(tests)
+  add_test_subdirectory(tests)
 endif()
