@@ -15,5 +15,5 @@ std::string_view COMPILE_EXPORT version() noexcept;
  * \return A bool represents if it is debug distribution.
  */
 bool COMPILE_EXPORT is_debug() noexcept;
-}; // namespace info
-}; // namespace compile
+} // namespace info
+} // namespace compile
