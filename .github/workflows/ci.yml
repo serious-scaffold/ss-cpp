@@ -143,6 +143,7 @@ jobs:
           ninja: true
           vcpkg: ${{ matrix.vcpkg }}
           ccache: true
+          cppcheck: true
           python: true
           opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
