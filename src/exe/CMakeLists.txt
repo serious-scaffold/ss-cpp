@@ -19,8 +19,8 @@ set(target_name exe)
 file(GLOB_RECURSE _srcs "src/*.cpp")
 
 add_executable(${target_name} ${_srcs})
+sanitize_target(${target_name})
 target_code_coverage(${target_name} ALL)
-copy_sanitizer_runtime(${target_name})
 
 target_link_libraries(${target_name} PRIVATE spdlog::spdlog
                                              ${target_name_private})
