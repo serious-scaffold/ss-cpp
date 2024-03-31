@@ -107,19 +107,28 @@ jobs:
         export_mode:
           - ON
           - OFF
+        cppcheck: [true, false]
 
         include:
           - presets: {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
             arch: {name: x64, type: x64}
             vcpkg: true
             export_mode: ON
+            cppcheck: false
           - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
             arch: {name: x64, type: x64}
             vcpkg: false
             export_mode: OFF
+            cppcheck: false
+          - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
+            arch: {name: x64, type: x64}
+            vcpkg: true
+            export_mode: OFF
+            cppcheck: true
         exclude:
           - export_mode: ON
           - vcpkg: false
+          - cppcheck: true
 
     steps:
       - uses: actions/checkout@v4
@@ -147,6 +156,7 @@ jobs:
           ninja: true
           vcpkg: {{ '${{ matrix.vcpkg }}' }}
           ccache: true
+          cppcheck: {{ '${{ matrix.cppcheck == true }}' }}
           python: true
           opencppcoverage: {{ '${{ contains(matrix.presets.os.type, \'windows\' )}}' }}
 
@@ -203,8 +213,8 @@ jobs:
           token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
           directory: out/build/{{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }}/code_coverage
           files: ./coverage.xml, ./coverage.info, ./coverage.json
-          flags: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}
-          name: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}' }}-coverage
+          flags: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}${{ matrix.cppcheck == true && \'-cppcheck\' || \'\' }}' }}
+          name: {{ '${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}${{ matrix.cppcheck == true && \'-cppcheck\' || \'\' }}' }}-coverage
 [%- endif %]
 
   docs:
