@@ -46,8 +46,14 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Install copier for template rendering using pipx
-        run: pipx install copier
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.11
+
+      - name: Install copier
+        run: |
+          pip install pyyaml-include==1.4.1
+          pip install copier==9.1.0
 
       - name: Generate the project with the default value
         run: |
