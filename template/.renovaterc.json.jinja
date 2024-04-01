@@ -2,6 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
+[%- if repo_name == 'ss-cpp' or repo_host_type == 'github.com' %]
+    "helpers:pinGitHubActionDigests",
+[%- endif %]
     ":enablePreCommit",
     ":maintainLockFilesWeekly"
   ],
@@ -14,7 +17,7 @@
       ],
       "postUpgradeTasks": {
         "commands": [
-          "find template -type f -exec sed -i {{ '\'s|{{{depName}}}@{{{currentDigest}}} # {{{currentValue}}}|{{{depName}}}@{{{newDigest}}} # {{{newValue}}}|g\'' }} {} +"
+          "find template -type f -exec sed -i {{ '\'s|{{{depName}}}@{{{currentDigest}}}|{{{depName}}}@{{{newDigest}}}|g\'' }} {} +"
         ]
       }
     },
