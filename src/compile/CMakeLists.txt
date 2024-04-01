@@ -7,6 +7,7 @@ file(GLOB_RECURSE _hdrs "include/*.hpp")
 
 add_library(${target_name} "")
 warn_target(${target_name})
+harden_target(${target_name})
 sanitize_target(${target_name})
 target_code_coverage(${target_name} ALL)
 
