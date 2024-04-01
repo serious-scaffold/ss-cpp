@@ -2,6 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
+[%- if repo_name == 'ss-cpp' or repo_host_type == 'github.com' %]
+    "helpers:pinGitHubActionDigests",
+[%- endif %]
     ":enablePreCommit",
     ":maintainLockFilesWeekly"
   ],
