@@ -9,7 +9,6 @@ This section contains various topics related to the development tricks, tools, a
 
 overlays
 triplet_presets
-security
 ```
 
 ```{toctree}
@@ -20,4 +19,13 @@ security
 semantic_versioning
 release_workflow
 automate_dependencies
+```
+
+```{toctree}
+:maxdepth: 1
+:titlesonly:
+:caption: Security Relateds
+
+warnings
+hardening
 ```
