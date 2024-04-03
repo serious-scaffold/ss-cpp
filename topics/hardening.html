@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contributing" href="../contributing.html" /><link rel="prev" title="Hardening" href="../topics/hardening.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Principles" href="../principles/index.html" /><link rel="prev" title="Warnings" href="warnings.html" />
 
     <link rel="shortcut icon" href="https://img.shields.io/badge/SS-blue"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
-        <title>Principles - Serious Scaffold Cpp documentation</title>
+        <title>Hardening - Serious Scaffold Cpp documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -139,7 +139,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -171,17 +171,17 @@
 <li class="toctree-l2"><a class="reference internal" href="../tutorials/security.html">Security</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../topics/overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/triplet_presets.html">Triplet Presets</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/semantic_versioning.html">Semantic Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/release_workflow.html">Release Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/automate_dependencies.html">Automate Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/warnings.html">Warnings</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../topics/hardening.html">Hardening</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html">Warnings</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Hardening</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Principles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">References</span></p>
 <ul>
@@ -215,16 +215,93 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="principles">
-<h1>Principles<a class="headerlink" href="#principles" title="Permalink to this heading">#</a></h1>
-<p>This section will provide a overview of the principles that underpin the design of the SS-CPP project.</p>
-<p>TODO…</p>
+          <section id="hardening">
+<h1>Hardening<a class="headerlink" href="#hardening" title="Permalink to this heading">#</a></h1>
+<p>This section will cover various hardening compilation options that can be used to build reliable secure programs.</p>
+<p>We adopts the hardening compilation options recommended referred to in the following resources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://best.openssf.org/Compiler-Hardening-Guides/Compiler-Options-Hardening-Guide-for-C-and-C++.html">https://best.openssf.org/Compiler-Hardening-Guides/Compiler-Options-Hardening-Guide-for-C-and-C++.html</a></p></li>
+<li><p><a class="reference external" href="https://learn.microsoft.com/en-us/cpp/code-quality/build-reliable-secure-programs?view=msvc-170">https://learn.microsoft.com/en-us/cpp/code-quality/build-reliable-secure-programs?view=msvc-170</a></p></li>
+</ul>
+<section id="hardening-options">
+<h2>Hardening Options<a class="headerlink" href="#hardening-options" title="Permalink to this heading">#</a></h2>
+<p>Hardening options can be customized based on your specific needs with the below cmake options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_HARDENING_FLAGS</span></code>: Enables hardening compiler options.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_HARDENING_LINKS</span></code>: Enables hardening linker options.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All given options will be checked and applied only if the compiler supports them. Otherwise, the options will be ignored.</p>
+</div>
+<p>Here are the hardening options defautlly used in the ss-cpp project.</p>
+<section id="msvc">
+<h3>MSVC<a class="headerlink" href="#msvc" title="Permalink to this heading">#</a></h3>
+<section id="use-hardening-flags">
+<h4>USE_HARDENING_FLAGS<a class="headerlink" href="#use-hardening-flags" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/sdl</span></code>: Enable additional security checks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/guard:cf</span></code>: Enable CFG (Control Flow Guard).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/NXCOMPAT</span></code>: Data Execution Prevention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/DYNAMICBASE</span></code>: Image Randomization.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/CETCOMPAT</span></code>: Enhanced Mitigation Experience Toolkit (EMET).</p></li>
+</ul>
+</section>
+<section id="use-hardening-links">
+<h4>USE_HARDENING_LINKS<a class="headerlink" href="#use-hardening-links" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/NXCOMPAT</span></code>: Data Execution Prevention.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/CETCOMPAT</span></code>: Enhanced Mitigation Experience Toolkit (EMET).</p></li>
+</ul>
+</section>
+</section>
+<section id="gcc-clang">
+<h3>GCC/Clang<a class="headerlink" href="#gcc-clang" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h4>USE_HARDENING_FLAGS<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-D_GLIBCXX_ASSERTIONS</span></code>: Enable assertions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-U_FORTIFY_SOURCE</span></code>: Disable stack protector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-D_FORTIFY_SOURCE=3</span></code>: Enable stack protector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fstack-protector-strong</span></code>: Enable stack protector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fcf-protection</span></code>: Control Flow Guard.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fstack-clash-protection</span></code>: Control Flow Guard.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wimplicit-fallthrough</span></code>: Enabled in compiler flags by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fstrict-flex-arrays=3</span></code>: Enable strict array bounds.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wformat</span></code>: Enabled in compiler flags by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wformat=2</span></code>: Enabled in compiler flags by default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,nodlopen</span></code>: Restrict dlopen(3) calls to shared objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,noexecstack</span></code>: Enable data execution prevention by marking stack memory as non-executable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,relro</span></code>: Mark relocation table entries resolved at load-time as read-only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,now</span></code>: Mark relocation table entries resolved at load-time as read-only. It impacts startup performance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fsanitize=undefined</span> <span class="pre">-fsanitize-minimal-runtime</span></code>: Enable minimal runtime undefined behavior sanitizer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fno-delete-null-pointer-checks</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fno-strict-overflow</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fno-strict-aliasing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-ftrivial-auto-var-init=zero</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wtrampolines</span></code>: Enable trampolines(gcc only).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-mbranch-protection=standard</span></code>: Enable indirect branches(aarch64 only).</p></li>
+</ul>
+</section>
+<section id="id2">
+<h4>USE_HARDENING_LINKS<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-fstack-protector-strong</span></code>: Enable stack protector.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,nodlopen</span></code>: Restrict dlopen(3) calls to shared objects.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,noexecstack</span></code>: Enable data execution prevention by marking stack memory as non-executable.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,relro</span></code>: Mark relocation table entries resolved at load-time as read-only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Wl,-z,now</span></code>: Mark relocation table entries resolved at load-time as read-only. It impacts startup performance.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-fsanitize=undefined</span> <span class="pre">-fsanitize-minimal-runtime</span></code>: Enable minimal runtime undefined behavior sanitizer.</p></li>
+</ul>
+</section>
+</section>
+</section>
 </section>
 
         </article>
@@ -232,23 +309,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="../contributing.html">
+          <a class="next-page" href="../principles/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Contributing</div>
+                <div class="title">Principles</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../topics/hardening.html">
+          <a class="prev-page" href="warnings.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Hardening</div>
+                <div class="title">Warnings</div>
                 
               </div>
             </a>
@@ -273,8 +350,39 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Hardening</a><ul>
+<li><a class="reference internal" href="#hardening-options">Hardening Options</a><ul>
+<li><a class="reference internal" href="#msvc">MSVC</a><ul>
+<li><a class="reference internal" href="#use-hardening-flags">USE_HARDENING_FLAGS</a></li>
+<li><a class="reference internal" href="#use-hardening-links">USE_HARDENING_LINKS</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gcc-clang">GCC/Clang</a><ul>
+<li><a class="reference internal" href="#id1">USE_HARDENING_FLAGS</a></li>
+<li><a class="reference internal" href="#id2">USE_HARDENING_LINKS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

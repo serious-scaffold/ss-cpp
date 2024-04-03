@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Semantic Versioning" href="semantic_versioning.html" /><link rel="prev" title="Triplet Presets" href="triplet_presets.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Topics" href="../topics/index.html" /><link rel="prev" title="Commit Convention" href="commit_convention.html" />
 
     <link rel="shortcut icon" href="https://img.shields.io/badge/SS-blue"/><!-- Generated with Sphinx 7.1.2 and Furo 2024.01.29 -->
         <title>Security - Serious Scaffold Cpp documentation</title>
@@ -139,7 +139,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -162,21 +162,23 @@
   <p class="caption" role="heading"><span class="caption-text">Guide</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../index.html">Overview</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../tutorials/index.html">Tutorials</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/project_management.html">Project Management</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/development_environment.html">Development Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/building.html">Building</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/dependencies.html">Dependencies</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials/commit_convention.html">Commit Convention</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Tutorials</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Tutorials</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="project_management.html">Project Management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development_environment.html">Development Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building.html">Building</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="commit_convention.html">Commit Convention</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Security</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Topics</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="overlays.html">Overlays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
-<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Security</a></li>
-<li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../topics/index.html">Topics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Topics</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../topics/overlays.html">Overlays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/semantic_versioning.html">Semantic Versioning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/release_workflow.html">Release Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/automate_dependencies.html">Automate Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/warnings.html">Warnings</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/hardening.html">Hardening</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
@@ -213,7 +215,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -221,8 +223,41 @@
         <article role="main">
           <section id="security">
 <h1>Security<a class="headerlink" href="#security" title="Permalink to this heading">#</a></h1>
-<p>This section will cover the security aspects of the project.</p>
-<p>TODO…</p>
+<p>The section covers the concerning of security and the measures taken within the C++ project.</p>
+<blockquote>
+<div><p>C++ is a risky language because of its low-level nature and its ability to access and manipulate memory directly. It is important to understand the security implications of using C++ and to take appropriate measures to protect against potential vulnerabilities.</p>
+</div></blockquote>
+<p>Here are some of the points to consider:</p>
+<ul class="simple">
+<li><p>Best secure coding practices.</p></li>
+<li><p>Warnings detectors.</p></li>
+<li><p>Protection mechanisms from OS.</p></li>
+<li><p>Protection tests.</p></li>
+</ul>
+<section id="best-secure-coding-practices">
+<h2>Best Secure Coding Practices<a class="headerlink" href="#best-secure-coding-practices" title="Permalink to this heading">#</a></h2>
+<p>For developers, there are several best secure coding practices that can be followed while developing C++ applications. These include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">ISO CPP Core Guidelines</a></p></li>
+<li><p><a class="reference external" href="https://wiki.sei.cmu.edu/confluence/display/seccode/SEI+CERT+Coding+Standards">SEI CERT C++ Coding Standard</a></p></li>
+</ul>
+<p>These guidelines cover various aspects of C++ programming, such as memory management, resource management, input validation, and error handling. Best of luck with implementing secure coding practices!</p>
+</section>
+<section id="warnings-detectors">
+<h2>Warnings Detectors<a class="headerlink" href="#warnings-detectors" title="Permalink to this heading">#</a></h2>
+<p>Modern, security-aware C and C++ secure coding practices aim to proactively avoid introducing vulnerabilities into software. However, in practice, it is difficult to write secure code perfectly from scratch. Therefore, it is essential to use warning detectors to identify potential vulnerabilities in the development process from analysis tools, compilers and OS to make the appropriate decisions.</p>
+<p>Here we have provided some of the warning detectors include Compiler Warnings Options, Static Analysis Tools, and Dynamic Analysis Tools. See
+the topic on <a class="reference internal" href="../topics/warnings.html"><span class="std std-doc">Warnings</span></a> to learn how to use these tools effectively.</p>
+</section>
+<section id="protection-mechanisms-from-os">
+<h2>Protection Mechanisms from OS<a class="headerlink" href="#protection-mechanisms-from-os" title="Permalink to this heading">#</a></h2>
+<p>In realities, it is not possible to completely eliminate all vulnerabilities in the developers’s hands. Therefore, it is important to use OS-level protection mechanisms to protect against potential vulnerabilities from the outside.</p>
+<p>This mechanism requires the applications to be prepared at build time enabling specific option flags from the compiler or linker. These options can be used to enable security features from the OS, such as stack protection, data execution prevention, and address space layout randomization. See the topic on <a class="reference internal" href="../topics/hardening.html"><span class="std std-doc">Hardening</span></a> to learn more about these mechanisms.</p>
+</section>
+<section id="protection-tests">
+<h2>Protection Tests<a class="headerlink" href="#protection-tests" title="Permalink to this heading">#</a></h2>
+<p>In addition to the above security measures, it is essential to conduct regular security tests to ensure that the application is secure. These tests can include penetration testing, fuzz testing, and security code reviews.</p>
+</section>
 </section>
 
         </article>
@@ -230,23 +265,23 @@
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="semantic_versioning.html">
+          <a class="next-page" href="../topics/index.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Semantic Versioning</div>
+                <div class="title">Topics</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="triplet_presets.html">
+          <a class="prev-page" href="commit_convention.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Triplet Presets</div>
+                <div class="title">Commit Convention</div>
                 
               </div>
             </a>
@@ -271,8 +306,30 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Security</a><ul>
+<li><a class="reference internal" href="#best-secure-coding-practices">Best Secure Coding Practices</a></li>
+<li><a class="reference internal" href="#warnings-detectors">Warnings Detectors</a></li>
+<li><a class="reference internal" href="#protection-mechanisms-from-os">Protection Mechanisms from OS</a></li>
+<li><a class="reference internal" href="#protection-tests">Protection Tests</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
