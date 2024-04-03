@@ -20,6 +20,7 @@ file(GLOB_RECURSE _srcs "src/*.cpp")
 
 add_executable(${target_name} ${_srcs})
 warn_target(${target_name})
+harden_target(${target_name})
 sanitize_target(${target_name})
 target_code_coverage(${target_name} ALL)
 
