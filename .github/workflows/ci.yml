@@ -162,14 +162,8 @@ jobs:
         run: |
           echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
 
-      - name: Lcov for coverage
-        if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
-        run: |
-          sudo apt-get update
-          sudo apt-get install lcov
-
       - name: Gcovr for coverage
-        if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'mingw')
+        if: contains(matrix.presets.compiler.type, 'mingw') || contains(matrix.presets.os.type, 'linux')
         run: |
           pip install gcovr
 
@@ -208,6 +202,7 @@ jobs:
         uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8 # v4.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
           directory: out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
           files: ./coverage.xml, ./coverage.info
           flags: ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}
