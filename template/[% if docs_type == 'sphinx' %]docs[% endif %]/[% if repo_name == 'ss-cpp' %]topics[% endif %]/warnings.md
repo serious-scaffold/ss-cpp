@@ -13,7 +13,7 @@ The warning flags can be customized to pass the CMake configurable options:
 - `COMPILER_FLAGS_WARNINGS_GNU`: Flags for gcc/clang compilers.
 - `COMPILER_FLAGS_WARNINGS_MSVC`: Flags for msvc compilers.
 - `COMPILER_FLAGS_WARNINGS_CUDA`: Flags for cuda compilers.
-- `COMPILER_FLAGS_WARNINGS_AS_ERRORS`: If treat warnings as errors. Default is OFF.
+- `CMAKE_COMPILE_WARNING_AS_ERROR`: If treat warnings as errors. Default is false.
 - `COMPILER_FLAGS_SKIP_TARGETS_REGEXES`: List of regexes to skip targets. Default is empty.
 
 ```{note}
