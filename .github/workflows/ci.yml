@@ -101,29 +101,24 @@ jobs:
           - {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
           - {os: {name: windows-2022, type: windows}, compiler: {name: llvm, type: llvm}}
           - {os: {name: windows-2022, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
-        arch:
-          - {name: x64, type: x64}
-        vcpkg:
-          - true
-          - false
-        export_mode:
-          - ON
-          - OFF
+        arch: [x64]
+        vcpkg: [true, false]
+        export_mode: [ON, OFF]
         cppcheck: [true, false]
 
         include:
           - presets: {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
-            arch: {name: x64, type: x64}
+            arch: x64
             vcpkg: true
             export_mode: ON
             cppcheck: false
           - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
-            arch: {name: x64, type: x64}
+            arch: x64
             vcpkg: false
             export_mode: OFF
             cppcheck: false
           - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
-            arch: {name: x64, type: x64}
+            arch: x64
             vcpkg: true
             export_mode: OFF
             cppcheck: true
@@ -146,9 +141,9 @@ jobs:
             ~/.cache/vcpkg
             ~/AppData/Local/vcpkg
           key: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-${{ matrix.vcpkg }}
+            ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-${{ matrix.vcpkg }}
           restore-keys: |
-            ${{ matrix.arch.name }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-
+            ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-
 
       - uses: aminya/setup-cpp@v1
         with:
@@ -199,24 +194,24 @@ jobs:
 
       - name: Configure CMake
         run: |
-          cmake -S . --preset=${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILE_WARNING_AS_ERROR=ON -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
+          cmake -S . --preset=${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILE_WARNING_AS_ERROR=ON -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
 
       - name: Build
         run: |
-          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
+          cmake --build out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
 
       - name: Coverage
         run: |
-          cmake --build out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
+          cmake --build out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
 
       - name: Upload coverage report
         uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8 # v4.1.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: out/build/${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
+          directory: out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
           files: ./coverage.xml, ./coverage.info, ./coverage.json
-          flags: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}
-          name: ${{ matrix.arch.type }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}-coverage
+          flags: ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}
+          name: ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}-coverage
 
   docs:
     name: Docs build and checks
