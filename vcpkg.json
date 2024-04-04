@@ -23,6 +23,17 @@
       "version": "0.15.3"
     }
   ],
+  "features": {
+    "test": {
+      "description": "Dependencies for testing",
+      "dependencies": [
+        {
+          "name": "gtest",
+          "version>=": "1.14.0"
+        }
+      ]
+    }
+  },
   "vcpkg-configuration": {
     "registries": [
       {

@@ -29,6 +29,20 @@ function(_vcpkg_setup_export export_export_dir export_vcpkg_root)
       )
     endif()
 
+    if(DEFINED VCPKG_FEATURE_FLAGS OR DEFINED CACHE{VCPKG_FEATURE_FLAGS})
+      list(JOIN VCPKG_FEATURE_FLAGS "," vcpkg_feature_flags)
+      set(vcpkg_feature_flags "--feature-flags=${vcpkg_feature_flags}")
+    endif()
+
+    foreach(_vcpkg_feature IN LISTS VCPKG_MANIFEST_FEATURES)
+      list(APPEND vcpkg_additional_manifest_params
+           "--x-feature=${_vcpkg_feature}")
+    endforeach()
+
+    if(VCPKG_MANIFEST_NO_DEFAULT_FEATURES)
+      list(APPEND vcpkg_additional_manifest_params "--x-no-default-features")
+    endif()
+
     set(_additional_args
         --vcpkg-root
         ${_VCPKG_ROOT}
@@ -44,8 +58,11 @@ function(_vcpkg_setup_export export_export_dir export_vcpkg_root)
         "${_export_install_dir}")
 
     execute_process(
-      COMMAND ${vcpkg_cmd} install --x-manifest-root ${CMAKE_SOURCE_DIR}
-              ${_additional_args} ${VCPKG_INSTALL_OPTIONS}
+      COMMAND
+        ${vcpkg_cmd} install "--x-wait-for-lock"
+        "--x-manifest-root=${CMAKE_SOURCE_DIR}" ${_additional_args}
+        ${vcpkg_feature_flags} ${vcpkg_additional_manifest_params}
+        ${VCPKG_INSTALL_OPTIONS}
       WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       RESULT_VARIABLE install_packages_result)
 

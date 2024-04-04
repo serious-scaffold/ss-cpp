@@ -7,6 +7,7 @@
       "toolchainFile": "${sourceDir}/cmake/vcpkg/vcpkg.toolchain.cmake",
       "cacheVariables": {
         "VCPKG_INSTALL_OPTIONS": "--no-print-usage",
+        "VCPKG_MANIFEST_FEATURES": "test",
         "VCPKG_OVERLAY_TRIPLETS": "${sourceDir}/cmake/vcpkg/triplets",
         "VCPKG_OVERLAY_PORTS": "${sourceDir}/cmake/vcpkg/ports"
       }

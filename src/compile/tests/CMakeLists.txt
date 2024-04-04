@@ -1,3 +1,6 @@
+find_package(GTest CONFIG REQUIRED)
+include(GoogleTest)
+
 file(GLOB files "*.cpp")
 
 foreach(_file ${files})
