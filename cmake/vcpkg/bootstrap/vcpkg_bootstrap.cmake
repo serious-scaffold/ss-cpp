@@ -134,9 +134,8 @@ endfunction()
 
 # find root
 function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
-  if(DEFINED ENV{VCPKG_INSTALLATION_ROOT}
-     AND NOT "$ENV{VCPKG_INSTALLATION_ROOT}" STREQUAL "")
-    set(root "$ENV{VCPKG_INSTALLATION_ROOT}")
+  if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
+    set(root "$ENV{VCPKG_ROOT}")
   elseif("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(root "$ENV{LOCALAPPDATA}/vcpkg/projects/${cache_dir_name}/cache")
   else()

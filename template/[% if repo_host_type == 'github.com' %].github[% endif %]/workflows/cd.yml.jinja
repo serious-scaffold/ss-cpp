@@ -24,6 +24,7 @@ jobs:
     permissions:
       contents: write
       id-token: write
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -34,29 +35,42 @@ jobs:
       - name: Cache
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         with:
-          path: ~/.cache/vcpkg
-          key: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          path: |
+            ~/vcpkg
+            ~/.cache/pip
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc
+          compiler: gcc-13
           cmake: true
           ninja: true
           ccache: true
           doxygen: true
-          graphviz: true
-          python: true
+
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
+        with:
+          python-version: 3.x
 
       - name: Install docs dependencies
         run: |
           pip install -r docs/requirements.txt
 
       - name: Configure
-        run: cmake -S . --preset=x64-linux-gcc -DUSE_SANITIZER=OFF -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=OFF
 
       - name: Build Docs
-        run: cmake --build out/build/x64-linux-gcc --target {{ repo_name }}-docs
+        run: cmake --build out/build/default --target {{ repo_name }}-docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@373f7f263a76c20808c831209c920827a82a2847 # v3
