@@ -12,6 +12,7 @@ It supports detecting and using the following coverage tools:
 include_guard(GLOBAL)
 
 # cmake-format: off
+set(CODE_COVERAGE_GCOVR_REPORT_FORMAT xml)
 include(cmake-modules/test/Coverage)
 list(APPEND _excludes "${CMAKE_BINARY_DIR}" "${VCPKG_INSTALLED_DIR}" "${CMAKE_SOURCE_DIR}/vcpkg")
 
