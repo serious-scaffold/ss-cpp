@@ -213,7 +213,7 @@ jobs:
         with:
           token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
           directory: out/build/{{ '${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}' }}/code_coverage
-          files: ./coverage.xml, ./coverage.info, ./coverage.json
+          files: ./coverage.xml, ./coverage.info
           flags: {{ '${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}${{ matrix.cppcheck == true && \'-cppcheck\' || \'\' }}' }}
           name: {{ '${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && \'-vcpkg\' || \'\' }}${{ matrix.export_mode == \'ON\' && \'-export\' || \'\' }}${{ matrix.cppcheck == true && \'-cppcheck\' || \'\' }}' }}-coverage
 [%- endif %]
