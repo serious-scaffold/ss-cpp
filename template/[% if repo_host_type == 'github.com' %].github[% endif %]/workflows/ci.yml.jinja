@@ -645,11 +645,11 @@ jobs:
           compiler: gcc-13
           cmake: true
           ninja: true
+          gcovr: 7.2
           ccache: true
 
-      - name: Prepare for lcov
+      - name: Prepare for gcovr
         run: |
-          sudo apt-get update; sudo apt-get install lcov -y
           gcc_compiler=gcc-13
           gcov_version=${gcc_compiler##*-}
           sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-$gcov_version 100
@@ -677,7 +677,8 @@ jobs:
           token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
           fail_ci_if_error: true
           disable_search: true
-          file: ./out/build/default/code_coverage/coverage.info
+          plugin: pycoverage # disable gcov plugin
+          file: ./out/build/default/code_coverage/coverage.xml
           verbose: true
 [% endif %]
 [% if repo_name == 'ss-cpp' %]
