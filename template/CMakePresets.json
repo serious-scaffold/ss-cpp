@@ -6,6 +6,7 @@
     "patch": 0
   },
   "include": [
+    "cmake/presets/default.json",
     "cmake/presets/x64-linux-llvm.json",
     "cmake/presets/x64-linux-gcc.json",
     "cmake/presets/x64-mingw-dynamic-windows-mingw.json",

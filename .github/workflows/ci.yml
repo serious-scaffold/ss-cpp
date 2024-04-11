@@ -17,7 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-
   pre-commit:
     runs-on: ubuntu-22.04
     steps:
@@ -32,6 +31,7 @@ jobs:
       - uses: pre-commit/action@2c7b3805fd2a0fd8c1884dcaebf91fc102a13ecd # v3.0.1
         with:
           extra_args: --hook-stage manual --all-files
+
 
   consistency:
     if: ${{ !cancelled() && ! failure() }}
@@ -79,53 +79,246 @@ jobs:
             exit 1 \
           )
 
-  checks:
-    runs-on: ${{ matrix.presets.os.name }}
+
+  check-on-linux:
+    runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
     strategy:
       fail-fast: false
       matrix:
-        presets:
-          - {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
-          - {os: {name: ubuntu-22.04, type: linux}, compiler: {name: llvm, type: llvm}}
-          - {os: {name: ubuntu-22.04, type: mingw-dynamic-linux}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: macos-13, type: osx}, compiler: {name: applellvm, type: llvm}}
-          - {os: {name: macos-13, type: osx}, compiler: {name: llvm, type: llvm}}
-          # setup-cpp doesn't support mingw on macOS yet
-          # - {os: {name: macos-13, type: mingw-dynamic-darwin}, compiler: {name: mingw, type: mingw}}
-          - {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
-          - {os: {name: windows-2022, type: windows}, compiler: {name: llvm, type: llvm}}
-          - {os: {name: windows-2022, type: mingw-dynamic-windows}, compiler: {name: mingw, type: mingw}}
-        arch: [x64]
-        vcpkg: [true, false]
-        export_mode: [ON, OFF]
-        cppcheck: [true, false]
+        triplet: [x64-linux]
+        compiler: [gcc-13, llvm-17]
+        std: [20]
+        build_type: [Debug, RelWithDebInfo]
 
-        include:
-          - presets: {os: {name: windows-2022, type: windows}, compiler: {name: msvc, type: msvc}}
-            arch: x64
-            vcpkg: true
-            export_mode: ON
-            cppcheck: false
-          - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
-            arch: x64
-            vcpkg: false
-            export_mode: OFF
-            cppcheck: false
-          - presets: {os: {name: ubuntu-22.04, type: linux}, compiler: {name: gcc-11, type: gcc}}
-            arch: x64
-            vcpkg: true
-            export_mode: OFF
-            cppcheck: true
-        exclude:
-          - export_mode: ON
-          - vcpkg: false
-          - cppcheck: true
+    name: check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Prepare for lcov
+        if: contains(matrix.compiler, 'gcc')
+        run: |
+          sudo apt-get update; sudo apt-get install lcov -y
+          gcc_compiler=${{ matrix.compiler }}
+          gcov_version=${gcc_compiler##*-}
+          sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-$gcov_version 100
+
+      - name: Prepare for llvm-cov
+        if: contains(matrix.compiler, 'llvm')
+        run: |
+          llvm_compiler=${{ matrix.compiler }}
+          llvm_cov_version=${llvm_compiler##*-}
+          sudo update-alternatives --install /usr/bin/llvm-cov llvm-cov /usr/bin/llvm-cov-$llvm_cov_version 100
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_STANDARD=${{ matrix.std }}
+          -DCMAKE_C_COMPILER=${{ contains(matrix.compiler, 'gcc') && 'gcc' || contains(matrix.compiler, 'llvm') && 'clang' }}
+          -DCMAKE_CXX_COMPILER=${{ contains(matrix.compiler, 'gcc') && 'g++' || contains(matrix.compiler, 'llvm') && 'clang++' }}
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+          -DCODE_COVERAGE=ON
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
+
+      - name: Coverage
+        run: cmake --build out/build/default --target ccov-all
+
+
+  check-on-macos:
+    runs-on: macos-12
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        triplet: [x64-osx]
+        compiler: [gcc-13, llvm@17]
+        std: [20]
+        build_type: [Debug, RelWithDebInfo]
+
+    name: check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ contains(matrix.compiler, 'gcc') && matrix.compiler || '' }}
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Install ${{ matrix.compiler }} through brew
+        if: contains(matrix.compiler, 'llvm')
+        run: |
+          brew install ${{ matrix.compiler }}
+          echo "CC=/usr/local/opt/${{ matrix.compiler }}/bin/clang" >> $GITHUB_ENV
+          echo "CXX=/usr/local/opt/${{ matrix.compiler }}/bin/clang++" >> $GITHUB_ENV
+          echo "PATH=/usr/local/opt/llvm/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Prepare for lcov
+        if: contains(matrix.compiler, 'gcc')
+        run: |
+          curl -o /tmp/lcov.rb https://raw.githubusercontent.com/Homebrew/homebrew-core/e92d2ae54954ebf485b484d8522104700b144fee/Formula/lcov.rb
+          HOMEBREW_NO_AUTO_UPDATE=1 brew install --formula /tmp/lcov.rb
+          brew pin lcov
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_STANDARD=${{ matrix.std }}
+          -DCMAKE_C_COMPILER="${CC}"
+          -DCMAKE_CXX_COMPILER="${CXX}"
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+          -DCODE_COVERAGE=ON
+          -DBUILD_TESTING=ON
+          ${{ contains(matrix.compiler, 'gcc') && '-DCODE_COVERAGE_GCOV=${GCOV}' }}
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
+
+      - name: Coverage
+        run: cmake --build out/build/default --target ccov-all
+
+
+  check-on-windows:
+    runs-on: windows-2022
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        triplet: [x64-windows]
+        compiler: [msvc-2022, llvm-17]
+        std: [20]
+        build_type: [Debug, RelWithDebInfo]
+
+    name: check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+            ~/AppData/Local/vcpkg
+          key: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: ${{ matrix.compiler }}
+          vcvarsall: true
+          cmake: true
+          ninja: true
+          ccache: true
+          opencppcoverage: true
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default ${{ contains(matrix.compiler, 'llvm') && '-DVCPKG_PLATFORM_TOOLSET=ClangCL' || '' }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_STANDARD=${{ matrix.std }}
+          -DCMAKE_C_COMPILER=${{ contains(matrix.compiler, 'msvc') && '"cl"' || contains(matrix.compiler, 'llvm') && '"clang-cl.exe"' }}
+          -DCMAKE_CXX_COMPILER=${{ contains(matrix.compiler, 'msvc') && '"cl"' || contains(matrix.compiler, 'llvm') && '"clang-cl.exe"' }}
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DUSE_SANITIZER=${{ contains(matrix.compiler, 'llvm') && 'OFF' || 'ON' }}
+          -DVCPKG_TARGET_TRIPLET=${{ matrix.triplet }}
+          -DCODE_COVERAGE=ON
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
+
+      - name: Coverage
+        run: cmake --build out/build/default --target ccov-all
+
+
+  check-mingw:
+    runs-on: windows-2022
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        triplet: [x64-mingw-dynamic]
+        compiler: [mingw]
+        std: [20]
+        build_type: [Debug, RelWithDebInfo]
+
+    name: check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -140,80 +333,51 @@ jobs:
             ~/.cache/pip
             ~/.cache/vcpkg
             ~/AppData/Local/vcpkg
-          key: |
-            ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-${{ matrix.vcpkg }}
-          restore-keys: |
-            ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}-${{ hashFiles('vcpkg.json') }}-
+          key: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: ${{ matrix.presets.compiler.name }}
-          vcvarsall: ${{ contains(matrix.presets.os.type, 'windows' )}}
+          compiler: ${{ matrix.compiler }}
           cmake: true
           ninja: true
-          vcpkg: ${{ matrix.vcpkg }}
           ccache: true
-          cppcheck: ${{ matrix.cppcheck == true }}
-          python: true
-          opencppcoverage: ${{ contains(matrix.presets.os.type, 'windows' )}}
 
-      - name: Disable pre-installedd vcpkg for testing automaical vcpkg installation
-        if: ${{ matrix.vcpkg == false }}
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
+        with:
+          python-version: 3.x
+
+      - name: Install docs dependencies
         run: |
-          echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
-
-      - name: Lcov for coverage
-        if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
-        run: |
-          sudo apt-get update
-          sudo apt-get install lcov
-
-      - name: Gcovr for coverage
-        if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'mingw')
-        run: |
-          pip install gcovr
-
-      - name: Target Windows on Linux (Mingw-w64)
-        if: contains(matrix.presets.compiler.type, 'mingw') && contains(matrix.presets.os.type, 'linux')
-        run: |
-          sudo apt-get update && sudo apt-get install mingw-w64 wine wine64 powershell
-          sudo update-alternatives --set x86_64-w64-mingw32-g++ /usr/bin/x86_64-w64-mingw32-g++-posix
-          sudo update-alternatives --set x86_64-w64-mingw32-gcc /usr/bin/x86_64-w64-mingw32-gcc-posix
-          wine64 true || true
-          echo "timeout 10s to execute a loop to check wine registry to be created"
-          timeout 10s bash -c "while [ ! -f ~/.wine/system.reg ] ; do echo 'waiting for wine registry to be created' ; sleep 1 ; done" && echo "wine registry created"
-          sed -i '/"PATH"/ s|"$|;Z:/usr/lib/gcc/x86_64-w64-mingw32/10-posix;Z:/usr/x86_64-w64-mingw32/lib"|g' ~/.wine/system.reg && echo "wine registry updated"
-
-      # see https://github.com/actions/runner-images/issues/9524
-      - name: Fix kernel mmap rnd bits
-        # Asan in llvm 14 provided in ubuntu 22.04 is incompatible with
-        # high-entropy ASLR in much newer kernels that GitHub runners are
-        # using leading to random crashes: https://reviews.llvm.org/D148280
-        if: contains(matrix.presets.compiler.type, 'gcc') && contains(matrix.presets.os.type, 'linux')
-        run: sudo sysctl vm.mmap_rnd_bits=28
+          pip install gcovr==7.2
 
       - name: Configure CMake
-        run: |
-          cmake -S . --preset=${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_COMPILE_WARNING_AS_ERROR=ON -DCODE_COVERAGE=ON -DBUILD_TESTING=ON ${{ matrix.export_mode == 'ON' && '-DVCPKG_EXPORT_MODE=ON' || '' }}
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DCMAKE_CXX_STANDARD=${{ matrix.std }}
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DUSE_SANITIZER=OFF
+          -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
+          -DCODE_COVERAGE=ON
+          -DBUILD_TESTING=ON
 
       - name: Build
-        run: |
-          cmake --build out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target all
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
 
       - name: Coverage
-        run: |
-          cmake --build out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }} --target ccov-all
+        run: cmake --build out/build/default --target ccov-all
 
-      - name: Upload coverage report
-        uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8 # v4.1.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          directory: out/build/${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.type }}/code_coverage
-          files: ./coverage.xml, ./coverage.info
-          flags: ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}
-          name: ${{ matrix.arch }}-${{ matrix.presets.os.type }}-${{ matrix.presets.compiler.name }}${{ matrix.vcpkg == true && '-vcpkg' || '' }}${{ matrix.export_mode == 'ON' && '-export' || '' }}${{ matrix.cppcheck == true && '-cppcheck' || '' }}-coverage
-
-  docs:
+  check-docs:
     name: Docs build and checks
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
@@ -221,40 +385,266 @@ jobs:
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
 
       - name: Cache
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
         with:
-          path: ~/.cache/vcpkg
-          key: x64-linux-gcc-${{ hashFiles('vcpkg.json') }}
-          restore-keys: x64-linux-gcc-${{ hashFiles('vcpkg.json') }}
+          path: |
+            ~/vcpkg
+            ~/.cache/pip
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc
+          compiler: gcc-13
           cmake: true
           ninja: true
           ccache: true
           doxygen: true
           graphviz: true
-          python: true
+
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
+        with:
+          python-version: 3.x
 
       - name: Install docs dependencies
         run: |
           pip install -r docs/requirements.txt
 
-      - name: Configure
-        run: cmake -S . --preset=x64-linux-gcc -DBUILD_TESTING=OFF -DCODE_COVERAGE=OFF
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=OFF
 
       - name: Checks the docs with warnings as errors
-        run: cmake --build out/build/x64-linux-gcc --target ss-cpp-docs-check
+        run: cmake --build out/build/default --target ss-cpp-docs-check
 
       - name: Checks the docs for broken links
-        run: cmake --build out/build/x64-linux-gcc --target ss-cpp-docs-linkcheck
+        run: cmake --build out/build/default --target ss-cpp-docs-linkcheck
+
+  codecov:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Prepare for lcov
+        run: |
+          sudo apt-get update; sudo apt-get install lcov -y
+          gcc_compiler=gcc-13
+          gcov_version=${gcc_compiler##*-}
+          sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-$gcov_version 100
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DCODE_COVERAGE=ON
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Coverage
+        run: cmake --build out/build/default --target ccov-all
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@c16abc29c95fcf9174b58eb7e1abf4c866893bc8 # v4.1.1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          directory: out/build/default/code_coverage
+          files: ./coverage.info
+
+
+  check-export-mode:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+          -DVCPKG_EXPORT_MODE=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
+
+
+  check-auto-vcpkg-install:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Disable preinstalled vcpkg in the runner to test vcpkg automatic installation
+        run: echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
+
+
+  check-auto-detect-triplet:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
 
   pass:
     if: always()
-    needs: [checks, docs]
+    needs: [check-on-linux, check-on-macos, check-on-windows, check-mingw, check-docs, codecov, check-export-mode, check-auto-vcpkg-install, check-auto-detect-triplet]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
