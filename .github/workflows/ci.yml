@@ -160,7 +160,7 @@ jobs:
 
 
   check-on-macos:
-    runs-on: macos-12
+    runs-on: macos-14
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
