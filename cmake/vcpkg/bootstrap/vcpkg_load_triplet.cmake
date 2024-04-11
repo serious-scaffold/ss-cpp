@@ -82,15 +82,14 @@ function(_vcpkg_detect_host_triplet)
         return()
       endif()
     else()
-      find_program(Z_VCPKG_CL cl)
-      if(Z_VCPKG_CL MATCHES "amd64/cl.exe$" OR Z_VCPKG_CL MATCHES "x64/cl.exe$")
+      find_program(_vcpkg_cl cl)
+      if(_vcpkg_cl MATCHES "amd64/cl.exe$" OR _vcpkg_cl MATCHES "x64/cl.exe$")
         set(_detect_target_triplet_arch x64)
-      elseif(Z_VCPKG_CL MATCHES "arm/cl.exe$")
+      elseif(_vcpkg_cl MATCHES "arm/cl.exe$")
         set(_detect_target_triplet_arch arm)
-      elseif(Z_VCPKG_CL MATCHES "arm64/cl.exe$")
+      elseif(_vcpkg_cl MATCHES "arm64/cl.exe$")
         set(_detect_target_triplet_arch arm64)
-      elseif(Z_VCPKG_CL MATCHES "bin/cl.exe$" OR Z_VCPKG_CL MATCHES
-                                                 "x86/cl.exe$")
+      elseif(_vcpkg_cl MATCHES "bin/cl.exe$" OR _vcpkg_cl MATCHES "x86/cl.exe$")
         set(_detect_target_triplet_arch x86)
       elseif(
         CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "x86_64"
@@ -114,17 +113,10 @@ function(_vcpkg_detect_host_triplet)
       elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "loongarch64")
         set(_detect_target_triplet_arch loongarch64)
       else()
-        if(Z_VCPKG_CMAKE_IN_TRY_COMPILE)
-          message(
-            STATUS
-              "Unable to determine target architecture, continuing without vcpkg."
-          )
-        else()
-          message(
-            WARNING
-              "Unable to determine target architecture, continuing without vcpkg."
-          )
-        endif()
+        message(
+          WARNING
+            "Unable to determine target architecture, continuing without vcpkg."
+        )
         set(VCPKG_TOOLCHAIN ON)
         cmake_policy(POP)
         return()
@@ -199,6 +191,8 @@ macro(_vcpkg_load_triplet)
           "Unable to determine target triplet, please set it manually.")
     endif()
   endif()
+
+  # Load triplet variables from VCPKG_TARGET_TRIPLET triplet file
 
   set(_triplet "triplets/${VCPKG_TARGET_TRIPLET}.cmake")
   set(_community_triplet "triplets/community/${VCPKG_TARGET_TRIPLET}.cmake")

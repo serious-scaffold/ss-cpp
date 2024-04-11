@@ -2,7 +2,6 @@
   "version": 6,
   "include": [
     "base.json",
-    "arch/x64.json",
     "generators/ninja.json"
   ],
   "configurePresets": [
@@ -10,7 +9,6 @@
       "name": "default",
       "inherits": [
         "base",
-        "x64",
         "ninja"
       ]
     }

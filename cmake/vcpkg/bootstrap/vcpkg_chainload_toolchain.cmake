@@ -17,6 +17,8 @@ function(_vcpkg_chainload_toolchain)
     )
   endif()
 
+  # Load toolchain variables from triplet and architecture
+
   string(LENGTH "${VCPKG_TARGET_ARCHITECTURE}-" _prefix_len)
   string(SUBSTRING ${VCPKG_TARGET_TRIPLET} ${_prefix_len} -1 _stripped_string)
   string(REPLACE "-" ";" _triplet_parts "${_stripped_string}")
