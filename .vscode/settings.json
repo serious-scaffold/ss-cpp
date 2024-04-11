@@ -1,6 +1,6 @@
 {
   "cmake.useCMakePresets": "always",
-  "cmake.options.statusBarVisibility": "icon",
+  "cmake.options.statusBarVisibility": "compact",
   "files.exclude": {
     "**/.clangd/**": true
   },
