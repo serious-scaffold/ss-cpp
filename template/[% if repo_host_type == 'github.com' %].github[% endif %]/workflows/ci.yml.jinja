@@ -203,7 +203,7 @@ jobs:
           ccache: true
           cppcheck: true
 
-      - name: Install {{ '${{ matrix.compiler }}' }} through brew
+      - name: Install llvm through brew
         if: contains(matrix.compiler, 'llvm')
         run: |
           brew install {{ '${{ matrix.compiler }}' }}
