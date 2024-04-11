@@ -13,9 +13,9 @@
         "action"
       ],
       "postUpgradeTasks": {
-        "commands": [
-          "find template -type f -exec sed -i 's|{{{depName}}}@{{{currentDigest}}}|{{{depName}}}@{{{newDigest}}}|g' {} +"
-        ]
+          "commands": [
+              "find template -type f -exec sed -i 's|{{{depName}}}@{{{currentDigest}}} # {{{currentValue}}}|{{{depName}}}@{{{newDigest}}} # {{{newValue}}}|g' {} +"
+          ]
       }
     },
     {
