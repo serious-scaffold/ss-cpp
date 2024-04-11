@@ -230,13 +230,13 @@
 <ul class="simple">
 <li><p>Architecture: x86, x64, arm, arm64, ppc64le, s390x, wasm32, etc.</p></li>
 <li><p>Target Compiling OS/Toolchain: windows, linux, macos, freebsd, android, ios, mingw, etc.</p></li>
-<li><p>Distribution: dynamic, static, release, etc.</p></li>
-<li><p>Compiler: MSVC, GCC, Clang, MinGW.</p></li>
+<li><p>Distribution(Optional): dynamic, static, release, etc.</p></li>
+<li><p>Compiler(Optional): MSVC, GCC, Clang, MinGW, etc.</p></li>
 </ul>
 </section>
-<section id="triplet-preset-creation">
-<h2>Triplet Preset Creation<a class="headerlink" href="#triplet-preset-creation" title="Permalink to this heading">#</a></h2>
-<p>To create a triplet preset, we can refer to the existing triplet preset files in the <code class="docutils literal notranslate"><span class="pre">cmake/presets</span></code> directory and extend or modify them as per our requirements.</p>
+<section id="triplet-preset-customization">
+<h2>Triplet Preset Customization<a class="headerlink" href="#triplet-preset-customization" title="Permalink to this heading">#</a></h2>
+<p>To customize a triplet preset, we can refer to the existing triplet preset files in the <code class="docutils literal notranslate"><span class="pre">cmake/presets</span></code> directory and extend or modify them as per our requirements.</p>
 <section id="preset-folder-structure">
 <h3>Preset Folder Structure<a class="headerlink" href="#preset-folder-structure" title="Permalink to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">cmake/presets</span></code> directory contains the following subfolders:</p>
@@ -256,7 +256,7 @@
 <ul class="simple">
 <li><p>The triplet preset file should be named as <code class="docutils literal notranslate"><span class="pre">&lt;Architecture&gt;-&lt;Target</span> <span class="pre">Compiling</span> <span class="pre">OS/Toolchain&gt;-&lt;Distribution&gt;-&lt;Compiler&gt;.json</span></code>.</p></li>
 <li><p>Conform to the existing triplet presets’ folder structure.</p></li>
-<li><p>Use existing components where possible.</p></li>
+<li><p>Use existing components if possible.</p></li>
 </ul>
 </section>
 </section>
@@ -322,7 +322,7 @@
             <ul>
 <li><a class="reference internal" href="#">Triplet Presets</a><ul>
 <li><a class="reference internal" href="#triplet-preset-naming-convention">Triplet Preset Naming Convention</a></li>
-<li><a class="reference internal" href="#triplet-preset-creation">Triplet Preset Creation</a><ul>
+<li><a class="reference internal" href="#triplet-preset-customization">Triplet Preset Customization</a><ul>
 <li><a class="reference internal" href="#preset-folder-structure">Preset Folder Structure</a></li>
 <li><a class="reference internal" href="#best-practices">Best Practices</a></li>
 </ul>

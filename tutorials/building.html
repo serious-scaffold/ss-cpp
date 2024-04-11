@@ -223,7 +223,7 @@
         <article role="main">
           <section id="building">
 <h1>Building<a class="headerlink" href="#building" title="Permalink to this heading">#</a></h1>
-<p>A general guide on how to build the project is provided here. The project uses CMake as the build system and vcpkg as the package manager.</p>
+<p>A general guide on how to build the project is provided here. The project uses CMake as the build system and vcpkg as the package manager. Essentially, we follow the vcpkg triplet and toolchain configuration to build the project.</p>
 <section id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -268,7 +268,7 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 <tr class="row-odd"><th class="head"><p>Variable</p></th>
 <th class="head"><p>Requirement</p></th>
 <th class="head"><p>Description</p></th>
-<th class="head"><p>Value</p></th>
+<th class="head"><p>Allowed Values</p></th>
 </tr>
 </thead>
 <tbody>
@@ -285,32 +285,47 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 <tr class="row-even"><td><p>CMAKE_GENERATOR</p></td>
 <td><p>Required</p></td>
 <td><p>Generator for the build system</p></td>
-<td><p>Ninja, Unix Makefiles, Visual Studio 16 2019, etc.</p></td>
+<td><p>Ninja, Unix Makefiles, etc.</p></td>
+</tr>
+<tr class="row-odd"><td><p>VCPKG_TARGET_TRIPLET</p></td>
+<td><p>Required</p></td>
+<td><p>Target triplet</p></td>
+<td><p>x64-windows, x64-linux, arm64-windows, etc.</p></td>
+</tr>
+<tr class="row-even"><td><p>VCPKG_HOST_TRIPLET</p></td>
+<td><p>Optional</p></td>
+<td><p>Host triplet</p></td>
+<td><p>x64-windows, x64-linux, arm64-windows, etc.</p></td>
 </tr>
 <tr class="row-odd"><td><p>VCPKG_ROOT</p></td>
 <td><p>Optional</p></td>
-<td><p>Path to a vcpkg installation directory.</p></td>
+<td><p>Path to a vcpkg installation directory</p></td>
 <td><p>vcpkg installation directory</p></td>
 </tr>
-<tr class="row-even"><td><p>VCPKG_TARGET_TRIPLET</p></td>
-<td><p>Required</p></td>
-<td><p>Target triplet</p></td>
-<td><p>x86-windows, x64-windows, x64-linux, arm64-windows, etc.</p></td>
-</tr>
-<tr class="row-odd"><td><p>VCPKG_HOST_TRIPLET</p></td>
+<tr class="row-even"><td><p>VCPKG_INSTALLATION_ROOT</p></td>
 <td><p>Optional</p></td>
-<td><p>Host triplet</p></td>
-<td><p>x86-windows, x64-windows, x64-linux, arm64-windows, etc.</p></td>
+<td><p>Path to a vcpkg installation directory</p></td>
+<td><p>vcpkg installation directory</p></td>
 </tr>
-<tr class="row-even"><td><p>VCPKG_OVERLAY_TRIPLETS</p></td>
+<tr class="row-odd"><td><p>VCPKG_OVERLAY_TRIPLETS</p></td>
 <td><p>Optional</p></td>
 <td><p>Path to the overlay triplets directory</p></td>
 <td><p>cmake/vcpkg/triplets</p></td>
 </tr>
-<tr class="row-odd"><td><p>VCPKG_OVERLAY_PORTS</p></td>
+<tr class="row-even"><td><p>VCPKG_OVERLAY_PORTS</p></td>
 <td><p>Optional</p></td>
 <td><p>Path to the overlay ports directory</p></td>
 <td><p>cmake/vcpkg/ports</p></td>
+</tr>
+<tr class="row-odd"><td><p>VCPKG_EXPORT_MODE</p></td>
+<td><p>Optional</p></td>
+<td><p>Enable vcpkg manifest mode</p></td>
+<td><p>OFF, ON</p></td>
+</tr>
+<tr class="row-even"><td><p>VCPKG_MANIFEST_FEATURES</p></td>
+<td><p>Optional</p></td>
+<td><p>Enable vcpkg manifest features</p></td>
+<td><p>test</p></td>
 </tr>
 </tbody>
 </table>
@@ -319,8 +334,9 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 <p class="admonition-title">Note</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/vcpkg.toolchain.cmake</span></code> contains the triplet and vcpkg environment initialization steps which loads triplet variables and chainload toolchain according to VCPKG_TARGET_TRIPLET.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_ROOT</span></code> is optional and it’s used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_ROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">VCPKG_INSTALLATION_ROOT</span></code> are same and both are optional and it’s used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_GENERATOR</span></code> is recommended to use Ninja as it’s faster than the default generator.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_HOST_TRIPLET</span></code> is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.</p></li>
 </ul>
 </div>
 <p>Here’s an example of building the project with the specified variables:</p>
@@ -330,9 +346,10 @@ cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>
 <span class="w">    </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Debug<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-G<span class="w"> </span>Ninja<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-DVCPKG_TARGET_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-DVCPKG_HOST_TRIPLET<span class="o">=</span>x64-linux<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>-DVCPKG_OVERLAY_TRIPLETS<span class="o">=</span>cmake/vcpkg/triplets<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-DVCPKG_OVERLAY_PORTS<span class="o">=</span>cmake/vcpkg/ports
+<span class="w">    </span>-DVCPKG_OVERLAY_PORTS<span class="o">=</span>cmake/vcpkg/ports<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-DVCPKG_MANIFEST_FEATURES<span class="o">=</span><span class="nb">test</span><span class="w"> </span><span class="c1"># Enable test feature</span>
+
 <span class="c1"># Build</span>
 cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Debug
 <span class="c1"># Testing</span>
@@ -340,7 +357,9 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"
 <span class="c1"># Memcheck</span>
 <span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>ctest<span class="w"> </span>-C<span class="w"> </span>Debug<span class="w"> </span>-T<span class="w"> </span>memcheck
 <span class="c1"># Install</span>
-cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--config<span class="w"> </span>Debug<span class="w"> </span>--target<span class="w"> </span>install
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>install
+<span class="c1"># Uninstall</span>
+cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>--target<span class="w"> </span>uninstall
 </pre></div>
 </div>
 <p>Most of the variables can refer to <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration">https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration</a>.</p>
@@ -365,7 +384,7 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"
 <p>Because the command <code class="docutils literal notranslate"><span class="pre">vcpkg</span> <span class="pre">install</span></code> supports with vcpkg manifest file <code class="docutils literal notranslate"><span class="pre">vcpkg.json</span></code> referring the blog post <a class="reference external" href="https://devblogs.microsoft.com/cppblog/vcpkg-2023-10-19-release-export-for-manifests-documentation-improvements-and-more/">Export for Manifests</a>. We create an export mode is a special mode that allows you to export vcpkg packages to a export directory. This directory can then be used to as vcpkg cmake toolchain without the cloned vcpkg repository. Importantly, this mode does not require any vcpkg installation on the machine and can be used to build projects offline.</p>
 <section id="usage">
 <h3>Usage<a class="headerlink" href="#usage" title="Permalink to this heading">#</a></h3>
-<p>To use the export mode, a configuration variable <code class="docutils literal notranslate"><span class="pre">VCPKG_EXPORT_MANIFET</span></code> needs to pass to cmake configure step.</p>
+<p>To use the export mode, a configuration variable <code class="docutils literal notranslate"><span class="pre">VCPKG_EXPORT_MODE</span></code> needs to pass to cmake configure step.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>cmake<span class="w"> </span>configure<span class="w"> </span>command<span class="o">]</span><span class="w"> </span>-DVCPKG_EXPORT_MODE<span class="o">=</span>ON
 </pre></div>
 </div>

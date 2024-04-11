@@ -8,14 +8,13 @@ A triplet preset is a JSON file following the syntax of CMake CMakePresets.json 
 
 - Architecture: x86, x64, arm, arm64, ppc64le, s390x, wasm32, etc.
 - Target Compiling OS/Toolchain: windows, linux, macos, freebsd, android, ios, mingw, etc.
-- Distribution: dynamic, static, release, etc.
-- Compiler: MSVC, GCC, Clang, MinGW.
+- Distribution(Optional): dynamic, static, release, etc.
+- Compiler(Optional): MSVC, GCC, Clang, MinGW, etc.
 
 
-## Triplet Preset Creation
+## Triplet Preset Customization
 
-To create a triplet preset, we can refer to the existing triplet preset files in the `cmake/presets` directory and extend or modify them as per our requirements.
-
+To customize a triplet preset, we can refer to the existing triplet preset files in the `cmake/presets` directory and extend or modify them as per our requirements.
 
 ### Preset Folder Structure
 
@@ -36,4 +35,4 @@ Here are some best practices to follow while creating a triplet preset:
 
 - The triplet preset file should be named as `<Architecture>-<Target Compiling OS/Toolchain>-<Distribution>-<Compiler>.json`.
 - Conform to the existing triplet presets' folder structure.
-- Use existing components where possible.
+- Use existing components if possible.

@@ -1,6 +1,6 @@
 # Building
 
-A general guide on how to build the project is provided here. The project uses CMake as the build system and vcpkg as the package manager.
+A general guide on how to build the project is provided here. The project uses CMake as the build system and vcpkg as the package manager. Essentially, we follow the vcpkg triplet and toolchain configuration to build the project.
 
 ## Prerequisites
 
@@ -42,21 +42,25 @@ But it is documented here for reference to reveal the underlying mechanism which
 
 The Table below shows the necessary variables for different platforms and configurations:
 
-| Variable               | Requirement | Description                             | Value                                                    |
-|------------------------|-------------|-----------------------------------------|----------------------------------------------------------|
-| CMAKE_TOOLCHAIN_FILE   | Required    | Path to the project's toolchain file    | cmake/vcpkg/vcpkg.toolchain.cmake                        |
-| CMAKE_BUILD_TYPE       | Required    | Build configuration                     | Debug, Release, RelWithDebInfo, MinSizeRel               |
-| CMAKE_GENERATOR        | Required    | Generator for the build system          | Ninja, Unix Makefiles, Visual Studio 16 2019, etc.       |
-| VCPKG_ROOT             | Optional    | Path to a vcpkg installation directory. | vcpkg installation directory                             |
-| VCPKG_TARGET_TRIPLET   | Required    | Target triplet                          | x86-windows, x64-windows, x64-linux, arm64-windows, etc. |
-| VCPKG_HOST_TRIPLET     | Optional    | Host triplet                            | x86-windows, x64-windows, x64-linux, arm64-windows, etc. |
-| VCPKG_OVERLAY_TRIPLETS | Optional    | Path to the overlay triplets directory  | cmake/vcpkg/triplets                                     |
-| VCPKG_OVERLAY_PORTS    | Optional    | Path to the overlay ports directory     | cmake/vcpkg/ports                                        |
+| Variable                | Requirement | Description                            | Allowed Values                              |
+|-------------------------|-------------|----------------------------------------|---------------------------------------------|
+| CMAKE_TOOLCHAIN_FILE    | Required    | Path to the project's toolchain file   | cmake/vcpkg/vcpkg.toolchain.cmake           |
+| CMAKE_BUILD_TYPE        | Required    | Build configuration                    | Debug, Release, RelWithDebInfo, MinSizeRel  |
+| CMAKE_GENERATOR         | Required    | Generator for the build system         | Ninja, Unix Makefiles, etc.                 |
+| VCPKG_TARGET_TRIPLET    | Required    | Target triplet                         | x64-windows, x64-linux, arm64-windows, etc. |
+| VCPKG_HOST_TRIPLET      | Optional    | Host triplet                           | x64-windows, x64-linux, arm64-windows, etc. |
+| VCPKG_ROOT              | Optional    | Path to a vcpkg installation directory | vcpkg installation directory                |
+| VCPKG_INSTALLATION_ROOT | Optional    | Path to a vcpkg installation directory | vcpkg installation directory                |
+| VCPKG_OVERLAY_TRIPLETS  | Optional    | Path to the overlay triplets directory | cmake/vcpkg/triplets                        |
+| VCPKG_OVERLAY_PORTS     | Optional    | Path to the overlay ports directory    | cmake/vcpkg/ports                           |
+| VCPKG_EXPORT_MODE       | Optional    | Enable vcpkg manifest mode             | OFF, ON                                     |
+| VCPKG_MANIFEST_FEATURES | Optional    | Enable vcpkg manifest features         | test                                        |
 
 ```{note}
  - `cmake/vcpkg/vcpkg.toolchain.cmake` contains the triplet and vcpkg environment initialization steps which loads triplet variables and chainload toolchain according to VCPKG_TARGET_TRIPLET.
- - `VCPKG_ROOT` is optional and it's used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.
+ - `VCPKG_ROOT` and `VCPKG_INSTALLATION_ROOT` are same and both are optional and it's used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.
  - `CMAKE_GENERATOR` is recommended to use Ninja as it's faster than the default generator.
+ - `VCPKG_HOST_TRIPLET` is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.
 ```
 
 Here's an example of building the project with the specified variables:
@@ -68,9 +72,10 @@ cmake -S . -B build \
     -DCMAKE_BUILD_TYPE=Debug \
     -G Ninja \
     -DVCPKG_TARGET_TRIPLET=x64-linux \
-    -DVCPKG_HOST_TRIPLET=x64-linux \
     -DVCPKG_OVERLAY_TRIPLETS=cmake/vcpkg/triplets \
-    -DVCPKG_OVERLAY_PORTS=cmake/vcpkg/ports
+    -DVCPKG_OVERLAY_PORTS=cmake/vcpkg/ports \
+    -DVCPKG_MANIFEST_FEATURES=test # Enable test feature
+
 # Build
 cmake --build build --config Debug
 # Testing
@@ -78,7 +83,9 @@ cd build && ctest -C Debug -T test --output-on-failure
 # Memcheck
 cd build && ctest -C Debug -T memcheck
 # Install
-cmake --build build --config Debug --target install
+cmake --build build --target install
+# Uninstall
+cmake --build build --target uninstall
 ```
 
 Most of the variables can refer to <https://learn.microsoft.com/en-us/vcpkg/users/buildsystems/cmake-integration>.
@@ -104,7 +111,7 @@ Because the command `vcpkg install` supports with vcpkg manifest file `vcpkg.jso
 
 ### Usage
 
-To use the export mode, a configuration variable `VCPKG_EXPORT_MANIFET` needs to pass to cmake configure step.
+To use the export mode, a configuration variable `VCPKG_EXPORT_MODE` needs to pass to cmake configure step.
 
 ```bash
 [cmake configure command] -DVCPKG_EXPORT_MODE=ON
