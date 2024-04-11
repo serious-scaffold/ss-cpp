@@ -1,0 +1,51 @@
+{
+  "version": 6,
+  "include": [
+    "base.json",
+    "arch/x64.json",
+    "generators/ninja.json"
+  ],
+  "configurePresets": [
+    {
+      "name": "default",
+      "inherits": [
+        "base",
+        "x64",
+        "ninja"
+      ]
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "inherits": "base",
+      "configurePreset": "default"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "default",
+      "inherits": "base",
+      "configurePreset": "default"
+    }
+  ],
+  "workflowPresets": [
+    {
+      "name": "default",
+      "steps": [
+        {
+          "type": "configure",
+          "name": "default"
+        },
+        {
+          "type": "build",
+          "name": "default"
+        },
+        {
+          "type": "test",
+          "name": "default"
+        }
+      ]
+    }
+  ]
+}

@@ -20,10 +20,15 @@ unset(IN_TRY_COMPILE)
 file(READ ${CMAKE_SOURCE_DIR}/vcpkg.json _vcpkg_json)
 string(JSON _builtin_baseline GET ${_vcpkg_json} builtin-baseline)
 
-# Respect VCPKG_ROOT environment variable if set
-if(DEFINED ENV{VCPKG_ROOT})
+# Respect environment variable VCPKG_ROOT and VCPKG_INSTALLATION_ROOT if set
+if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
   set(_VCPKG_ROOT
       "$ENV{VCPKG_ROOT}"
+      CACHE PATH "Vcpkg root directory" FORCE)
+elseif(DEFINED ENV{VCPKG_INSTALLATION_ROOT}
+       AND NOT "$ENV{VCPKG_INSTALLATION_ROOT}" STREQUAL "")
+  set(_VCPKG_ROOT
+      "$ENV{VCPKG_INSTALLATION_ROOT}"
       CACHE PATH "Vcpkg root directory" FORCE)
 else()
   unset(_VCPKG_ROOT CACHE)

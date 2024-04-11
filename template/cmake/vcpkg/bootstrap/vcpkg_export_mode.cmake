@@ -43,6 +43,11 @@ function(_vcpkg_setup_export export_export_dir export_vcpkg_root)
       list(APPEND vcpkg_additional_manifest_params "--x-no-default-features")
     endif()
 
+    if(DEFINED VCPKG_HOST_TRIPLET AND NOT VCPKG_HOST_TRIPLET STREQUAL "")
+      list(APPEND vcpkg_additional_manifest_params
+           "--host-triplet=${VCPKG_HOST_TRIPLET}")
+    endif()
+
     set(_additional_args
         --vcpkg-root
         ${_VCPKG_ROOT}
@@ -52,8 +57,6 @@ function(_vcpkg_setup_export export_export_dir export_vcpkg_root)
         "${VCPKG_OVERLAY_TRIPLETS}"
         --triplet
         ${VCPKG_TARGET_TRIPLET}
-        --host-triplet
-        ${VCPKG_HOST_TRIPLET}
         --x-install-root
         "${_export_install_dir}")
 
