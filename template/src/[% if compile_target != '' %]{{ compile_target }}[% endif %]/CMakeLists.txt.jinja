@@ -1,6 +1,6 @@
-set(target_name {{ compile_target }})
-
 find_package(spdlog CONFIG REQUIRED)
+
+set(target_name {{ compile_target }})
 
 file(GLOB_RECURSE _srcs "src/*.cpp")
 file(GLOB_RECURSE _hdrs "include/*.hpp")

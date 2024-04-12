@@ -1,8 +1,8 @@
+find_package(spdlog CONFIG REQUIRED)
+
 # The private target will not be installed and only act as requirements for main
 # and tests internally
 set(target_name_private {{ exe_target }}_private)
-
-find_package(spdlog CONFIG REQUIRED)
 
 add_library(${target_name_private} INTERFACE)
 

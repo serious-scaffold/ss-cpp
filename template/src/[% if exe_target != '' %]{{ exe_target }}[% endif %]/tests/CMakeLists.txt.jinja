@@ -1,4 +1,5 @@
 find_package(GTest CONFIG REQUIRED)
+
 include(GoogleTest)
 
 file(GLOB files "*.cpp")

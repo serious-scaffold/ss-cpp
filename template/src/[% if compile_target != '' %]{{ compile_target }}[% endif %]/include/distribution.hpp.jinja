@@ -1,0 +1,12 @@
+#pragma once
+
+#include "{{ compile_target }}_export.hpp"
+
+namespace {{ compile_target }} {
+namespace distribution {
+/**
+ * \return A bool represents if it is debug distribution.
+ */
+bool {{ compile_target|upper }}_EXPORT is_debug() noexcept;
+} // namespace distribution
+} // namespace {{ compile_target }}

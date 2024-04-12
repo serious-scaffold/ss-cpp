@@ -1,9 +1,10 @@
 ﻿#include <spdlog/spdlog.h>
 
+#include "distribution.hpp"
 #include "git.h"
-#include "helpers.hpp"
 
 int main() {
-    spdlog::info("Get a returned value: {} ; Version: {}", exe::helpers::some_fun(), git::ProjectVersion());
+    spdlog::info("Build Version: {}", git::ProjectVersion());
+    spdlog::info("Distribution Type: {}", exe::distribution::is_debug() ? "Debug" : "Release");
     return 0;
 }

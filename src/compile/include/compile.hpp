@@ -1,19 +1,4 @@
 #pragma once
 
-#include <string>
-#include "compile_export.hpp"
-
-namespace compile {
-namespace info {
-/**
- * \brief Get compile version string
- * \return The distribution compile version provided.
- */
-std::string_view COMPILE_EXPORT version() noexcept;
-
-/**
- * \return A bool represents if it is debug distribution.
- */
-bool COMPILE_EXPORT is_debug() noexcept;
-} // namespace info
-} // namespace compile
+#include "distribution.hpp"
+#include "git.h"

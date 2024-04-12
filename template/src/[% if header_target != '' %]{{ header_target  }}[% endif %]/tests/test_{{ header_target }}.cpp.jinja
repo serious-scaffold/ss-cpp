@@ -1,12 +1,16 @@
 #include <gtest/gtest.h>
 #include "{{ header_target }}/{{ header_target }}.hpp"
 
-TEST(common, some_fun) {
-    const auto fun_ret = {{ header_target }}::common::some_fun();
-    GTEST_ASSERT_EQ(0, fun_ret);
+TEST({{ header_target }}, version) {
+    const auto version = git_ProjectVersion();
+    EXPECT_STRNE(version, "");
 }
 
-TEST(common, const_string) {
-    const auto fun_ret = {{ header_target }}::common::const_string();
-    GTEST_ASSERT_GT(fun_ret.size(), 0);
+TEST({{ header_target }}, distribution) {
+    const auto is_debug = {{ header_target }}::distribution::is_debug();
+#ifdef _DEBUG
+    EXPECT_TRUE(is_debug);
+#else
+    EXPECT_FALSE(is_debug);
+#endif
 }

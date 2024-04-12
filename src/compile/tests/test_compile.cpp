@@ -1,16 +1,16 @@
 #include <gtest/gtest.h>
 #include "compile.hpp"
 
-TEST(info, version) {
-    const auto version = compile::info::version();
-    EXPECT_FALSE(version.empty());
+TEST(compile, version) {
+    const auto version = git_ProjectVersion();
+    EXPECT_STRNE(version, "");
 }
 
-TEST(info, distribution) {
-    const auto is_debug = compile::info::is_debug();
+TEST(compile, distribution) {
+    const auto is_debug = compile::distribution::is_debug();
 #ifdef _DEBUG
-    GTEST_ASSERT_TRUE(is_debug);
+    EXPECT_TRUE(is_debug);
 #else
-    GTEST_ASSERT_FALSE(is_debug);
+    EXPECT_FALSE(is_debug);
 #endif
 }
