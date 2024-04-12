@@ -29,7 +29,7 @@ project_name:
 project_description:
   default: |
     [%- if project_name == 'Serious Scaffold Cpp' -%]
-      A development-focused Cpp project template.
+      A continuously evolving basic template for cpp development.
     [%- endif -%]
   help: 'Provide a brief description for the project:'
   type: str

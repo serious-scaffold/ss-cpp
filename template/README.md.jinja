@@ -1,56 +1,60 @@
+[% from pathjoin("includes", "variable.jinja") import documentation_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import license_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import license_url with context -%]
 [% from pathjoin("includes", "variable.jinja") import pipeline_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import release_badge with context -%]
+[% from pathjoin("includes", "variable.jinja") import codecov_badge with context -%]
 # {{ project_name }}
 
 {{ project_description }}
 
-{{ pipeline_badge() }}
-{{ release_badge() }}
+{{ documentation_badge() }}
 {{ license_badge() }}
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![SS Cpp](https://img.shields.io/badge/Serious%20Scaffold-c++-blue)](https://github.com/serious-scaffold/ss-cpp)
 
+{{ pipeline_badge() }}
+{{ codecov_badge() }}
+{{ release_badge() }}
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![clang-format](https://img.shields.io/badge/clang--format-enabled-blue)](https://github.com/pre-commit/mirrors-clang-format)
+[![cmake-format](https://img.shields.io/badge/cmake--format-enabled-blue)](https://github.com/cheshirekow/cmake-format-precommit)
+[![codespell](https://img.shields.io/badge/codespell-enabled-blue)](https://github.com/codespell-project/codespell)
+[![markdownlint](https://img.shields.io/badge/markdownlint-enabled-blue)](https://github.com/igorshubovych/markdownlint-cli)
+[![shellcheck](https://img.shields.io/badge/shellcheck-enabled-blue)](https://github.com/shellcheck-py/shellcheck-py)
+
 [% if repo_name == 'ss-cpp' -%]
-## 🛠️ Features
+## Features
 
 - Project setup and template update with [copier](https://github.com/copier-org/copier/).
-- Customizable container development environment(vscode dev container).
-- `Googletest` integration.
-- `Vcpkg` integration.
-- Standard development source layout based on cmake and configuration cmake presets.
-- Manage cmake modules using [cmake-registry](https://github.com/msclock/cmake-registry).
-- Lint tool `pre-commit` integration.
-- Sphinx integration as the sync docs tool.
-
-## 🚀 Quickstart
-
-1. Generate the project.
-
-   ```bash
-   copier copy gh:{{ repo_namespace }}/ss-cpp /path/to/project
-   ```
-
-2. Navigate to the project directory and initialize a git repository.
-
-   ```bash
-   cd /path/to/project
-   git init
-   ```
-
-3. Commit the initialized project.
-
-   ```bash
-   git add .
-   git commit -m "Init."
-   ```
-
-4. That's it! Feel free to focus on the coding within `src` folder.
+- Containerization for development and deployment with [dev container](https://containers.dev/).
+- Continuous Integration with [GitHub Actions](https://docs.github.com/actions).
+- Automate dependency updates with [Renovate](https://github.com/renovatebot/renovate).
+- Fully featured [vcpkg](https://learn.microsoft.com/en-us/vcpkg/) integration.
+  - Supports baseline autoupdate.
+  - Supports manifest export mode and build offline.
+  - Supports vcpkg port/triplet/toolchain customization.
+  - Supports vcpkg triplet auto-detection.
+  - Supports vcpkg feature test.
+  - Supports auto loads of vcpkg triplet and toolchain variables.
+- Build with [cmake](https://cmake.org/documentation/) integration.
+  - provides sorts of cmake `presets`.
+  - provides vcpkg automatic installation or use existing vcpkg installation.
+  - provides `static/runtime analysis`including cppcheck, sanitizers, valgrind.
+  - supports `code coverage` with [lcov](https://github.com/linux-test-project/lcov), [gcovr](https://github.com/gcovr/gcovr), llvm-cov, and [opencppcoverage](https://github.com/OpenCppCoverage/OpenCppCoverage).
+  - supports `hardening compilation `for MSVC, Clang, and GCC.
+  - provides compile, header, application target generation.
+  - Build with preset build types: Debug, Release, RelWithDebInfo(Default), MinSizeRel.
+  - Supports package managers: [vcpkg](https://github.com/microsoft/vcpkg), [conan](https://github.com/conan-io/cmake-conan), and [cpm](https://github.com/cpm-cmake/CPM.cmake).
+- Use [cmake-registry](https://github.com/msclock/cmake-registry) to provide various cmake modules and scripts.
+- Lint tool `pre-commit` integration with various linters, including [clang-format](https://github.com/pre-commit/mirrors-clang-format), [codespell](https://github.com/codespell-project/codespell), [markdownlint](https://github.com/igorshubovych/markdownlint-cli), and more.
+- Documentation generation with [doxygen](https://www.doxygen.nl/index.html) and [sphinx](https://www.sphinx-doc.org/en/master/) theme [furo](https://github.com/pradyunsg/furo).
+- Automatic release workflow with [semantic-release](https://github.com/semantic-release/semantic-release).
+- Maintainable [documentation](https://serious-scaffold.github.io/ss-cpp/) guides for configuration, development, security and contribution based on ss-cpp.
 [%- else -%]
 <!-- writes more things here -->
 [%- endif %]
 
-## 📜 License
+## License
 
 {{ copyright_license }}, for more details, see the [LICENSE]({{ license_url() }}) file.

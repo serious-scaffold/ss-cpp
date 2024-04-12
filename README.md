@@ -1,48 +1,52 @@
 # Serious Scaffold Cpp
 
-A development-focused Cpp project template.
+A continuously evolving basic template for cpp development.
 
-[![GitHub CI Status](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml)
-[![GitHub Release](https://img.shields.io/github/v/release/serious-scaffold/ss-cpp)](https://github.com/serious-scaffold/ss-cpp/releases)
-[![GitHub License](https://img.shields.io/github/license/serious-scaffold/ss-cpp)](https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![Documentation](https://img.shields.io/badge/Documentation-sphinx-blue)](https://serious-scaffold.github.io/ss-cpp)
+[![License](https://img.shields.io/github/license/serious-scaffold/ss-cpp)](https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE)
 [![SS Cpp](https://img.shields.io/badge/Serious%20Scaffold-c++-blue)](https://github.com/serious-scaffold/ss-cpp)
 
-## 🛠️ Features
+[![CI](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml)
+[![CD](https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml)
+[![Renovate](https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml)
+[![codecov](https://codecov.io/gh/serious-scaffold/ss-cpp/branch/master/graph/badge.svg?token=123456789)](https://codecov.io/gh/serious-scaffold/ss-cpp)
+[![Release](https://img.shields.io/github/v/release/serious-scaffold/ss-cpp)](https://github.com/serious-scaffold/ss-cpp/releases)
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+[![clang-format](https://img.shields.io/badge/clang--format-enabled-blue)](https://github.com/pre-commit/mirrors-clang-format)
+[![cmake-format](https://img.shields.io/badge/cmake--format-enabled-blue)](https://github.com/cheshirekow/cmake-format-precommit)
+[![codespell](https://img.shields.io/badge/codespell-enabled-blue)](https://github.com/codespell-project/codespell)
+[![markdownlint](https://img.shields.io/badge/markdownlint-enabled-blue)](https://github.com/igorshubovych/markdownlint-cli)
+[![shellcheck](https://img.shields.io/badge/shellcheck-enabled-blue)](https://github.com/shellcheck-py/shellcheck-py)
+
+## Features
 
 - Project setup and template update with [copier](https://github.com/copier-org/copier/).
-- Customizable container development environment(vscode dev container).
-- `Googletest` integration.
-- `Vcpkg` integration.
-- Standard development source layout based on cmake and configuration cmake presets.
-- Manage cmake modules using [cmake-registry](https://github.com/msclock/cmake-registry).
-- Lint tool `pre-commit` integration.
-- Sphinx integration as the sync docs tool.
+- Containerization for development and deployment with [dev container](https://containers.dev/).
+- Continuous Integration with [GitHub Actions](https://docs.github.com/actions).
+- Automate dependency updates with [Renovate](https://github.com/renovatebot/renovate).
+- Fully featured [vcpkg](https://learn.microsoft.com/en-us/vcpkg/) integration.
+  - Supports baseline autoupdate.
+  - Supports manifest export mode and build offline.
+  - Supports vcpkg port/triplet/toolchain customization.
+  - Supports vcpkg triplet auto-detection.
+  - Supports vcpkg feature test.
+  - Supports auto loads of vcpkg triplet and toolchain variables.
+- Build with [cmake](https://cmake.org/documentation/) integration.
+  - provides sorts of cmake `presets`.
+  - provides vcpkg automatic installation or use existing vcpkg installation.
+  - provides `static/runtime analysis`including cppcheck, sanitizers, valgrind.
+  - supports `code coverage` with [lcov](https://github.com/linux-test-project/lcov), [gcovr](https://github.com/gcovr/gcovr), llvm-cov, and [opencppcoverage](https://github.com/OpenCppCoverage/OpenCppCoverage).
+  - supports `hardening compilation `for MSVC, Clang, and GCC.
+  - provides compile, header, application target generation.
+  - Build with preset build types: Debug, Release, RelWithDebInfo(Default), MinSizeRel.
+  - Supports package managers: [vcpkg](https://github.com/microsoft/vcpkg), [conan](https://github.com/conan-io/cmake-conan), and [cpm](https://github.com/cpm-cmake/CPM.cmake).
+- Use [cmake-registry](https://github.com/msclock/cmake-registry) to provide various cmake modules and scripts.
+- Lint tool `pre-commit` integration with various linters, including [clang-format](https://github.com/pre-commit/mirrors-clang-format), [codespell](https://github.com/codespell-project/codespell), [markdownlint](https://github.com/igorshubovych/markdownlint-cli), and more.
+- Documentation generation with [doxygen](https://www.doxygen.nl/index.html) and [sphinx](https://www.sphinx-doc.org/en/master/) theme [furo](https://github.com/pradyunsg/furo).
+- Automatic release workflow with [semantic-release](https://github.com/semantic-release/semantic-release).
+- Maintainable [documentation](https://serious-scaffold.github.io/ss-cpp/) guides for configuration, development, security and contribution based on ss-cpp.
 
-## 🚀 Quickstart
-
-1. Generate the project.
-
-   ```bash
-   copier copy gh:serious-scaffold/ss-cpp /path/to/project
-   ```
-
-2. Navigate to the project directory and initialize a git repository.
-
-   ```bash
-   cd /path/to/project
-   git init
-   ```
-
-3. Commit the initialized project.
-
-   ```bash
-   git add .
-   git commit -m "Init."
-   ```
-
-4. That's it! Feel free to focus on the coding within `src` folder.
-
-## 📜 License
+## License
 
 MIT License, for more details, see the [LICENSE](https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE) file.

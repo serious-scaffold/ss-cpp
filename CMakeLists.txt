@@ -6,7 +6,7 @@ project(
   ss-cpp
   LANGUAGES CXX C
   HOMEPAGE_URL "https://github.com/serious-scaffold/ss-cpp"
-  DESCRIPTION "A development-focused Cpp project template.")
+  DESCRIPTION "A continuously evolving basic template for cpp development.")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
