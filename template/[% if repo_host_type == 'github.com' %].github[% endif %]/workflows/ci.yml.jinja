@@ -772,14 +772,22 @@ jobs:
 [% endif %]
   pass:
     if: always()
-    needs: [check-on-linux, check-on-macos, check-on-windows, check-mingw, check-docs
-[%- if use_codecov == true -%]
-    , codecov
-[%- endif -%]
-[%- if repo_name == 'ss-cpp' -%]
-    , check-export-mode, check-auto-vcpkg-install, check-auto-detect-triplet, check-auto-build-type
-[%- endif -%]
-    ]
+    needs:
+      - check-on-linux
+      - check-on-macos
+      - check-on-windows
+      - check-mingw
+      - check-docs
+      - check-valgrind
+[%- if use_codecov == true %]
+      - codecov
+[%- endif %]
+[%- if repo_name == 'ss-cpp' %]
+      - check-export-mode
+      - check-auto-vcpkg-install
+      - check-auto-detect-triplet
+      - check-auto-build-type
+[%- endif %]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
