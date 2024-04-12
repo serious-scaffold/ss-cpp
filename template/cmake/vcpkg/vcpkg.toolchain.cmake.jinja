@@ -16,6 +16,9 @@ endif()
 
 unset(IN_TRY_COMPILE)
 
+# Load the common settings
+include(${CMAKE_CURRENT_LIST_DIR}/scripts/build_type.cmake)
+
 # Vcpkg build environment
 file(READ ${CMAKE_SOURCE_DIR}/vcpkg.json _vcpkg_json)
 string(JSON _builtin_baseline GET ${_vcpkg_json} builtin-baseline)
