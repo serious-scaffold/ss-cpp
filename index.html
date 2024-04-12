@@ -224,50 +224,59 @@
           <section id="welcome-to-serious-scaffold-cpp-s-documentation">
 <h1>Welcome to Serious Scaffold Cpp’s documentation<a class="headerlink" href="#welcome-to-serious-scaffold-cpp-s-documentation" title="Permalink to this heading">#</a></h1>
 <!-- Extract content from start line 1 of README.md -->
-<p>A development-focused Cpp project template.</p>
-<p><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml"><img alt="GitHub CI Status" src="https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml/badge.svg" /></a>
-<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/releases"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/serious-scaffold/ss-cpp" /></a>
-<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/serious-scaffold/ss-cpp" /></a>
-<a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" /></a>
+<p>A continuously evolving basic template for cpp development.</p>
+<p><a class="reference external" href="https://serious-scaffold.github.io/ss-cpp"><img alt="Documentation" src="https://img.shields.io/badge/Documentation-sphinx-blue" /></a>
+<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE"><img alt="License" src="https://img.shields.io/github/license/serious-scaffold/ss-cpp" /></a>
 <a class="reference external" href="https://github.com/serious-scaffold/ss-cpp"><img alt="SS Cpp" src="https://img.shields.io/badge/Serious%20Scaffold-c++-blue" /></a></p>
+<p><a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml/badge.svg" /></a>
+<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml"><img alt="CD" src="https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml/badge.svg" /></a>
+<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml"><img alt="Renovate" src="https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml/badge.svg" /></a>
+<a class="reference external" href="https://codecov.io/gh/serious-scaffold/ss-cpp"><img alt="codecov" src="https://codecov.io/gh/serious-scaffold/ss-cpp/branch/master/graph/badge.svg?token=123456789" /></a>
+<a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/releases"><img alt="Release" src="https://img.shields.io/github/v/release/serious-scaffold/ss-cpp" /></a></p>
+<p><a class="reference external" href="https://github.com/pre-commit/pre-commit"><img alt="pre-commit" src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" /></a>
+<a class="reference external" href="https://github.com/pre-commit/mirrors-clang-format"><img alt="clang-format" src="https://img.shields.io/badge/clang--format-enabled-blue" /></a>
+<a class="reference external" href="https://github.com/cheshirekow/cmake-format-precommit"><img alt="cmake-format" src="https://img.shields.io/badge/cmake--format-enabled-blue" /></a>
+<a class="reference external" href="https://github.com/codespell-project/codespell"><img alt="codespell" src="https://img.shields.io/badge/codespell-enabled-blue" /></a>
+<a class="reference external" href="https://github.com/igorshubovych/markdownlint-cli"><img alt="markdownlint" src="https://img.shields.io/badge/markdownlint-enabled-blue" /></a>
+<a class="reference external" href="https://github.com/shellcheck-py/shellcheck-py"><img alt="shellcheck" src="https://img.shields.io/badge/shellcheck-enabled-blue" /></a></p>
 <section id="features">
-<h2>🛠️ Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
+<h2>Features<a class="headerlink" href="#features" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Project setup and template update with <a class="reference external" href="https://github.com/copier-org/copier/">copier</a>.</p></li>
-<li><p>Customizable container development environment(vscode dev container).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Googletest</span></code> integration.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Vcpkg</span></code> integration.</p></li>
-<li><p>Standard development source layout based on cmake and configuration cmake presets.</p></li>
-<li><p>Manage cmake modules using <a class="reference external" href="https://github.com/msclock/cmake-registry">cmake-registry</a>.</p></li>
-<li><p>Lint tool <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> integration.</p></li>
-<li><p>Sphinx integration as the sync docs tool.</p></li>
+<li><p>Containerization for development and deployment with <a class="reference external" href="https://containers.dev/">dev container</a>.</p></li>
+<li><p>Continuous Integration with <a class="reference external" href="https://docs.github.com/actions">GitHub Actions</a>.</p></li>
+<li><p>Automate dependency updates with <a class="reference external" href="https://github.com/renovatebot/renovate">Renovate</a>.</p></li>
+<li><p>Fully featured <a class="reference external" href="https://learn.microsoft.com/en-us/vcpkg/">vcpkg</a> integration.</p>
+<ul>
+<li><p>Supports baseline autoupdate.</p></li>
+<li><p>Supports manifest export mode and build offline.</p></li>
+<li><p>Supports vcpkg port/triplet/toolchain customization.</p></li>
+<li><p>Supports vcpkg triplet auto-detection.</p></li>
+<li><p>Supports vcpkg feature test.</p></li>
+<li><p>Supports auto loads of vcpkg triplet and toolchain variables.</p></li>
+</ul>
+</li>
+<li><p>Build with <a class="reference external" href="https://cmake.org/documentation/">cmake</a> integration.</p>
+<ul>
+<li><p>provides sorts of cmake <code class="docutils literal notranslate"><span class="pre">presets</span></code>.</p></li>
+<li><p>provides vcpkg automatic installation or use existing vcpkg installation.</p></li>
+<li><p>provides <code class="docutils literal notranslate"><span class="pre">static/runtime</span> <span class="pre">analysis</span></code>including cppcheck, sanitizers, valgrind.</p></li>
+<li><p>supports <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">coverage</span></code> with <a class="reference external" href="https://github.com/linux-test-project/lcov">lcov</a>, <a class="reference external" href="https://github.com/gcovr/gcovr">gcovr</a>, llvm-cov, and <a class="reference external" href="https://github.com/OpenCppCoverage/OpenCppCoverage">opencppcoverage</a>.</p></li>
+<li><p>supports <code class="docutils literal notranslate"><span class="pre">hardening</span> <span class="pre">compilation</span> </code>for MSVC, Clang, and GCC.</p></li>
+<li><p>provides compile, header, application target generation.</p></li>
+<li><p>Build with preset build types: Debug, Release, RelWithDebInfo(Default), MinSizeRel.</p></li>
+<li><p>Supports package managers: <a class="reference external" href="https://github.com/microsoft/vcpkg">vcpkg</a>, <a class="reference external" href="https://github.com/conan-io/cmake-conan">conan</a>, and <a class="reference external" href="https://github.com/cpm-cmake/CPM.cmake">cpm</a>.</p></li>
+</ul>
+</li>
+<li><p>Use <a class="reference external" href="https://github.com/msclock/cmake-registry">cmake-registry</a> to provide various cmake modules and scripts.</p></li>
+<li><p>Lint tool <code class="docutils literal notranslate"><span class="pre">pre-commit</span></code> integration with various linters, including <a class="reference external" href="https://github.com/pre-commit/mirrors-clang-format">clang-format</a>, <a class="reference external" href="https://github.com/codespell-project/codespell">codespell</a>, <a class="reference external" href="https://github.com/igorshubovych/markdownlint-cli">markdownlint</a>, and more.</p></li>
+<li><p>Documentation generation with <a class="reference external" href="https://www.doxygen.nl/index.html">doxygen</a> and <a class="reference external" href="https://www.sphinx-doc.org/en/master/">sphinx</a> theme <a class="reference external" href="https://github.com/pradyunsg/furo">furo</a>.</p></li>
+<li><p>Automatic release workflow with <a class="reference external" href="https://github.com/semantic-release/semantic-release">semantic-release</a>.</p></li>
+<li><p>Maintainable <a class="reference external" href="https://serious-scaffold.github.io/ss-cpp/">documentation</a> guides for configuration, development, security and contribution based on ss-cpp.</p></li>
 </ul>
 </section>
-<section id="quickstart">
-<h2>🚀 Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this heading">#</a></h2>
-<ol class="arabic">
-<li><p>Generate the project.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>copier<span class="w"> </span>copy<span class="w"> </span>gh:serious-scaffold/ss-cpp<span class="w"> </span>/path/to/project
-</pre></div>
-</div>
-</li>
-<li><p>Navigate to the project directory and initialize a git repository.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/project
-git<span class="w"> </span>init
-</pre></div>
-</div>
-</li>
-<li><p>Commit the initialized project.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Init.&quot;</span>
-</pre></div>
-</div>
-</li>
-<li><p>That’s it! Feel free to focus on the coding within <code class="docutils literal notranslate"><span class="pre">src</span></code> folder.</p></li>
-</ol>
-</section>
 <section id="license">
-<h2>📜 License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h2>
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading">#</a></h2>
 <p>MIT License, for more details, see the <a class="reference external" href="https://github.com/serious-scaffold/ss-cpp/blob/master/LICENSE">LICENSE</a> file.</p>
 </section>
 <section id="content">
@@ -307,7 +316,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 </div>
 </section>
 <section id="indices-and-tables">
-<h2>🔖 Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h2>
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
@@ -364,13 +373,12 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Welcome to Serious Scaffold Cpp’s documentation</a><ul>
-<li><a class="reference internal" href="#features">🛠️ Features</a></li>
-<li><a class="reference internal" href="#quickstart">🚀 Quickstart</a></li>
-<li><a class="reference internal" href="#license">📜 License</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
 <li><a class="reference internal" href="#content">Content</a><ul>
 </ul>
 </li>
-<li><a class="reference internal" href="#indices-and-tables">🔖 Indices and tables</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
 </ul>
 </li>
 </ul>

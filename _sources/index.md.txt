@@ -29,7 +29,7 @@ contributing
 api
 ```
 
-## 🔖 Indices and tables
+## Indices and tables
 
 * {ref}`genindex`
 * {ref}`search`
