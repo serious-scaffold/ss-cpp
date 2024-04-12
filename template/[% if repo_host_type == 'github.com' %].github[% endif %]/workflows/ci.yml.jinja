@@ -563,8 +563,8 @@ jobs:
 
       - name: Uninstall
         run: cmake --build out/build/default --target uninstall
-[% endif %]
-[% if repo_name == 'ss-cpp' %]
+
+
   check-auto-vcpkg-install:
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
@@ -616,8 +616,8 @@ jobs:
 
       - name: Uninstall
         run: cmake --build out/build/default --target uninstall
-[% endif %]
-[% if repo_name == 'ss-cpp' %]
+
+
   check-auto-detect-triplet:
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
@@ -665,6 +665,55 @@ jobs:
 
       - name: Uninstall
         run: cmake --build out/build/default --target uninstall
+
+
+  check-auto-build-type:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Test
+        run: cmake --build out/build/default --target test
+
+      - name: Install
+        run: cmake --build out/build/default --target install
+
+      - name: Uninstall
+        run: cmake --build out/build/default --target uninstall
 [% endif %]
   pass:
     if: always()
@@ -673,7 +722,7 @@ jobs:
     , codecov
 [%- endif -%]
 [%- if repo_name == 'ss-cpp' -%]
-    , check-export-mode, check-auto-vcpkg-install, check-auto-detect-triplet
+    , check-export-mode, check-auto-vcpkg-install, check-auto-detect-triplet, check-auto-build-type
 [%- endif -%]
     ]
     runs-on: ubuntu-22.04
