@@ -744,7 +744,18 @@ jobs:
 
   pass:
     if: always()
-    needs: [check-on-linux, check-on-macos, check-on-windows, check-mingw, check-docs, codecov, check-export-mode, check-auto-vcpkg-install, check-auto-detect-triplet, check-auto-build-type]
+    needs:
+      - check-on-linux
+      - check-on-macos
+      - check-on-windows
+      - check-mingw
+      - check-docs
+      - check-valgrind
+      - codecov
+      - check-export-mode
+      - check-auto-vcpkg-install
+      - check-auto-detect-triplet
+      - check-auto-build-type
     runs-on: ubuntu-22.04
     timeout-minutes: 2
     steps:
