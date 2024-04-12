@@ -377,6 +377,56 @@ jobs:
       - name: Coverage
         run: cmake --build out/build/default --target ccov-all
 
+
+  check-valgrind:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Install valgrind
+        run: sudo apt-get install valgrind
+
+      # Use Valgrind must disable sanitizer
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build out/build/default --target all
+
+      - name: Valgrind
+        run: cmake --build out/build/default --target ExperimentalMemCheck
+
+
   check-docs:
     name: Docs build and checks
     runs-on: ubuntu-22.04
@@ -431,6 +481,7 @@ jobs:
 
       - name: Checks the docs for broken links
         run: cmake --build out/build/default --target ss-cpp-docs-linkcheck
+
 
   codecov:
     runs-on: ubuntu-22.04
