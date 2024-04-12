@@ -19,26 +19,44 @@
   [%- endif -%]
 [%- endmacro %]
 
+[% macro documentation_badge() -%]
+  [% if docs_type == 'sphinx' -%]
+[![Documentation](https://img.shields.io/badge/Documentation-sphinx-blue)](https://{{ page_url() }})
+  [%- endif -%]
+[%- endmacro %]
+
 [% macro license_badge() -%]
   [% if repo_host_type == 'github.com' -%]
-[![GitHub License](https://img.shields.io/github/license/{{ repo_namespace }}/{{ repo_name }})]({{ license_url() }})
+[![License](https://img.shields.io/github/license/{{ repo_namespace }}/{{ repo_name }})]({{ license_url() }})
   [%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' -%]
-[![GitLab License](https://img.shields.io/gitlab/license/{{ repo_namespace }}/{{ repo_name }}?gitlab_url=https%3A%2F%2F{{ repo_host }})]({{ license_url() }})
+[![License](https://img.shields.io/gitlab/license/{{ repo_namespace }}/{{ repo_name }}?gitlab_url=https%3A%2F%2F{{ repo_host }})]({{ license_url() }})
   [%- endif -%]
 [%- endmacro %]
 
 [% macro pipeline_badge() -%]
   [% if repo_host_type == 'github.com' -%]
-[![GitHub CI Status](https://{{ repo_url() }}/actions/workflows/ci.yml/badge.svg)](https://{{ repo_url() }}/actions/workflows/ci.yml)
+[![CI](https://{{ repo_url() }}/actions/workflows/ci.yml/badge.svg)](https://{{ repo_url() }}/actions/workflows/ci.yml)
+[![CD](https://{{ repo_url() }}/actions/workflows/cd.yml/badge.svg)](https://{{ repo_url() }}/actions/workflows/cd.yml)
+[![Renovate](https://{{ repo_url() }}/actions/workflows/renovate.yml/badge.svg)](https://{{ repo_url() }}/actions/workflows/renovate.yml)
   [%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' -%]
-[![GitLab Pipeline Status](https://{{ repo_url() }}/badges/master/pipeline.svg)](https://{{ repo_url() }}/-/commits/master)
+[![CI](https://{{ repo_url() }}/badges/master/pipeline.svg)](https://{{ repo_url() }}/-/commits/master)
   [%- endif %]
+[%- endmacro %]
+
+[% macro codecov_badge() -%]
+  [% if use_codecov == true -%]
+    [%- if repo_host_type == 'github.com' -%]
+[![codecov](https://codecov.io/gh/{{ repo_namespace }}/{{ repo_name }}/branch/master/graph/badge.svg?token=123456789)](https://codecov.io/gh/{{ repo_namespace }}/{{ repo_name }})
+    [%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' -%]
+[![codecov](https://codecov.io/gh/{{ repo_namespace }}/{{ repo_name }}/branch/master/graph/badge.svg?token=123456789)](https://codecov.io/gh/{{ repo_namespace }}/{{ repo_name }})
+    [%- endif -%]
+  [%- endif -%]
 [%- endmacro %]
 
 [% macro release_badge() -%]
   [% if repo_host_type == 'github.com' -%]
-[![GitHub Release](https://img.shields.io/github/v/release/{{ repo_namespace }}/{{ repo_name }})](https://github.com/{{ repo_namespace }}/{{ repo_name }}/releases)
+[![Release](https://img.shields.io/github/v/release/{{ repo_namespace }}/{{ repo_name }})](https://github.com/{{ repo_namespace }}/{{ repo_name }}/releases)
   [%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' -%]
-[![GitLab Release](https://{{ repo_url() }}/-/badges/release.svg)](https://{{ repo_url() }}/-/releases)
+[![Release](https://{{ repo_url() }}/-/badges/release.svg)](https://{{ repo_url() }}/-/releases)
   [%- endif -%]
 [%- endmacro %]

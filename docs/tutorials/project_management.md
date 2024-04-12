@@ -15,15 +15,31 @@ Using `pipx` for management is recommended and you can find pipx's installation 
 pipx install copier
 ```
 
-## Project Creation
+## Creation
 
+1. Generate the project.
 
-```{include} ../../README.md
-:start-line: 23
-:end-line: 45
-```
+   ```bash
+   copier copy gh:serious-scaffold/ss-cpp /path/to/project
+   ```
 
-## Project Configuration
+2. Navigate to the project directory and initialize a git repository.
+
+   ```bash
+   cd /path/to/project
+   git init
+   ```
+
+3. Commit the initialized project.
+
+   ```bash
+   git add .
+   git commit -m "Init."
+   ```
+
+4. That's it! Feel free to focus on the coding within `src` folder.
+
+## Configuration
 
 There are several configurations to utilize the features provided by the project template. These are only the essential ones, you can adjust according to your project's actual needs.
 
@@ -68,7 +84,7 @@ See the [release workflow](../topics/release_workflow.md) for more details on ho
 
 [Renovate](https://docs.renovatebot.com/) is a popular tool for automating dependency updates. It can be integrated with GitHub/GitLab to automatically create pull requests to update the dependencies. The project need a Renovate token `RENOVATE_TOKEN` to enable the integration. It is disabled by default, see the [Automating Dependency Updates](../topics/automate_dependencies.md) topic to learn how to enable it.
 
-## Project Update
+## Update
 
 Thanks to the update mechanism provided natively by `copier`, when a new version of the template is released, you can easily update the project. Just run the following command under the root directory:
 
