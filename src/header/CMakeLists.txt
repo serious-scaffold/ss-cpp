@@ -1,6 +1,6 @@
-set(target_name header)
-
 find_package(spdlog CONFIG REQUIRED)
+
+set(target_name header)
 
 add_library(${target_name} INTERFACE)
 

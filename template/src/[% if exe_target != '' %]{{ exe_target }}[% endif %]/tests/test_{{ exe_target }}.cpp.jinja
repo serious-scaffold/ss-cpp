@@ -1,13 +1,14 @@
 #include <gtest/gtest.h>
-#include "header/header.hpp"
+#include "distribution.hpp"
+#include "git.h"
 
-TEST(header, version) {
+TEST({{ exe_target }}, version) {
     const auto version = git_ProjectVersion();
     EXPECT_STRNE(version, "");
 }
 
-TEST(header, distribution) {
-    const auto is_debug = header::distribution::is_debug();
+TEST({{ exe_target }}, distribution) {
+    const auto is_debug = {{ exe_target }}::distribution::is_debug();
 #ifdef _DEBUG
     EXPECT_TRUE(is_debug);
 #else
