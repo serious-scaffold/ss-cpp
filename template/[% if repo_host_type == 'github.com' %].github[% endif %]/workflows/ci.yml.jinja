@@ -144,6 +144,8 @@ jobs:
           -DCMAKE_CXX_COMPILER={{ '${{ contains(matrix.compiler, \'gcc\') && \'g++\' || contains(matrix.compiler, \'llvm\') && \'clang++\' }}' }}
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
+          -DUSE_SANITIZER=OFF
+          -DUSE_VALGRIND=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -227,6 +229,8 @@ jobs:
           -DCMAKE_CXX_COMPILER="${CXX}"
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
+          -DUSE_SANITIZER=OFF
+          -DUSE_VALGRIND=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
           {{ '${{ contains(matrix.compiler, \'gcc\') && \'-DCODE_COVERAGE_GCOV=${GCOV}\' }}' }}
@@ -299,6 +303,7 @@ jobs:
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DUSE_SANITIZER={{ '${{ contains(matrix.compiler, \'llvm\') && \'OFF\' || \'ON\' }}' }}
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -373,8 +378,8 @@ jobs:
           -DCMAKE_BUILD_TYPE={{ '${{ matrix.build_type }}' }}
           -DCMAKE_CXX_STANDARD={{ '${{ matrix.std }}' }}
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
-          -DUSE_SANITIZER=OFF
           -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -393,6 +398,61 @@ jobs:
       - name: Coverage
         run: cmake --build --preset=default --target ccov-all
 
+  check-sanitizers:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit
+[%- if repo_name == 'ss-cpp' -%]
+    , consistency
+[%- endif -%]
+    ]
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        sanitizer:
+          - address,undefined
+        build_type: [Debug, RelWithDebInfo]
+
+    name: {{ 'check • sanitizers • ${{ matrix.sanitizer }} • ${{ matrix.build_type }}' }}
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE={{ '${{ matrix.build_type }}' }}
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER={{ '${{ matrix.sanitizer }}' }}
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build --preset=default --target all
+
+      - name: Test
+        run: ctest --preset=default
 
   check-valgrind:
     runs-on: ubuntu-22.04
@@ -558,6 +618,7 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -609,6 +670,7 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
           -DVCPKG_EXPORT_MODE=ON
@@ -663,6 +725,7 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
@@ -712,6 +775,7 @@ jobs:
           -DCMAKE_BUILD_TYPE=Debug
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
@@ -761,6 +825,7 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_SANITIZER=OFF
           -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
@@ -784,6 +849,7 @@ jobs:
       - check-on-windows
       - check-mingw
       - check-docs
+      - check-sanitizers
       - check-valgrind
 [%- if use_codecov == true %]
       - codecov
