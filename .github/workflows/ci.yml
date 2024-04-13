@@ -144,19 +144,19 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
       - name: Coverage
-        run: cmake --build out/build/default --target ccov-all
+        run: cmake --build --preset=default --target ccov-all
 
 
   check-on-macos:
@@ -224,19 +224,19 @@ jobs:
           ${{ contains(matrix.compiler, 'gcc') && '-DCODE_COVERAGE_GCOV=${GCOV}' }}
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
       - name: Coverage
-        run: cmake --build out/build/default --target ccov-all
+        run: cmake --build --preset=default --target ccov-all
 
 
   check-on-windows:
@@ -291,19 +291,19 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
       - name: Coverage
-        run: cmake --build out/build/default --target ccov-all
+        run: cmake --build --preset=default --target ccov-all
 
 
   check-mingw:
@@ -363,19 +363,19 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
       - name: Coverage
-        run: cmake --build out/build/default --target ccov-all
+        run: cmake --build --preset=default --target ccov-all
 
 
   check-valgrind:
@@ -421,10 +421,10 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Valgrind
-        run: cmake --build out/build/default --target ExperimentalMemCheck
+        run: cmake --build --preset=default --target ExperimentalMemCheck
 
 
   check-docs:
@@ -477,10 +477,10 @@ jobs:
           -DBUILD_TESTING=OFF
 
       - name: Checks the docs with warnings as errors
-        run: cmake --build out/build/default --target ss-cpp-docs-check
+        run: cmake --build --preset=default --target ss-cpp-docs-check
 
       - name: Checks the docs for broken links
-        run: cmake --build out/build/default --target ss-cpp-docs-linkcheck
+        run: cmake --build --preset=default --target ss-cpp-docs-linkcheck
 
 
   codecov:
@@ -528,16 +528,16 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Coverage
-        run: cmake --build out/build/default --target ccov-all
+        run: cmake --build --preset=default --target ccov-all
 
       - name: Upload coverage report
         uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed # v4.3.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: out/build/default/code_coverage
+          directory: --preset=default/code_coverage
           files: ./coverage.info
 
 
@@ -580,16 +580,16 @@ jobs:
           -DVCPKG_EXPORT_MODE=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
 
   check-auto-vcpkg-install:
@@ -633,16 +633,16 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
 
   check-auto-detect-triplet:
@@ -682,16 +682,16 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
 
   check-auto-build-type:
@@ -731,16 +731,16 @@ jobs:
           -DBUILD_TESTING=ON
 
       - name: Build
-        run: cmake --build out/build/default --target all
+        run: cmake --build --preset=default --target all
 
       - name: Test
-        run: cmake --build out/build/default --target test
+        run: ctest --preset=default
 
       - name: Install
-        run: cmake --build out/build/default --target install
+        run: cmake --build --preset=default --target install
 
       - name: Uninstall
-        run: cmake --build out/build/default --target uninstall
+        run: cmake --build --preset=default --target uninstall
 
   pass:
     if: always()
