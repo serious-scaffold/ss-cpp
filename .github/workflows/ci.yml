@@ -382,6 +382,12 @@ jobs:
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [Debug, RelWithDebInfo]
+
+    name: check • valgrind • ${{ matrix.build_type }}
 
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
@@ -412,7 +418,7 @@ jobs:
       - name: Configure CMake
         run: >
           cmake -S . --preset=default
-          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
