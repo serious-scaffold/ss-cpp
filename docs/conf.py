@@ -103,7 +103,8 @@ html_theme_options = {
 }
 
 # -- breath configuration ----------------------------------------------------
+# See https://breathe.readthedocs.io/en/latest/ for more information.
 
-breathe_projects = {"ss-cpp-doxygen": f"{ROOT}/docs/_build/xml"}
+breathe_projects = {"ss-cpp-doxygen": f"{ROOT}/docs/_build/doxygen/xml"}
 breathe_default_project = "ss-cpp-doxygen"
 breathe_debug_trace_directives = False

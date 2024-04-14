@@ -1,7 +1,7 @@
 #[[
 This file creates targets to generate documentation:
 
-   - Doxygen: ${CMAKE_PROJECT_NAME}-doxygen
+   - Doxygen: ${CMAKE_PROJECT_NAME}-doxygen: generates doxygen output.
    - Sphinx:
        - ${CMAKE_PROJECT_NAME}-docs: generates HTML documentation.
        - ${CMAKE_PROJECT_NAME}-docs-check: generates HTML documentation with warnings as errors.
@@ -12,16 +12,26 @@ include(cmake-modules/configure/ConfigDoxygen)
 configdoxygen()
 
 if(DOXYGEN_FOUND)
-  # Generate XML OUTPUT for breathe
-  set(DOXYGEN_GENERATE_HTML NO)
-  set(DOXYGEN_GENERATE_XML YES)
-  set(DOXYGEN_QUIET NO)
-  set(DOXYGEN_REFERENCED_BY_RELATION YES)
-  set(DOXYGEN_REFERENCES_LINK_SOURCE YES)
-  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs/_build)
+  set(DOXYGEN_GENERATE_HTML
+      NO
+      CACHE STRING "Generate HTML output")
+  set(DOXYGEN_GENERATE_XML
+      YES
+      CACHE STRING "Generate XML output for breathe")
+  set(DOXYGEN_QUIET
+      NO
+      CACHE BOOL "Quiet mode")
+  set(DOXYGEN_REFERENCED_BY_RELATION
+      YES
+      CACHE BOOL "Show referenced by relations")
+  set(DOXYGEN_REFERENCES_LINK_SOURCE
+      YES
+      CACHE BOOL "Link to source code from references")
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs/_build/doxygen)
 
   # Add XML generation doxygen target
   set(doxygen_docs ${CMAKE_PROJECT_NAME}-doxygen)
+  # cmake-format: off
   doxygen_add_docs(
     ${doxygen_docs}
     "${CMAKE_BINARY_DIR}/git/include"
@@ -35,11 +45,16 @@ if(DOXYGEN_FOUND)
 [%- if header_target != '' %]
     "${PROJECT_SOURCE_DIR}/src/{{ header_target }}/include"
 [%- endif %])
+  # cmake-format: on
 
   if(TARGET ${doxygen_docs})
     set(Sphinx_FIND_COMPONENTS breathe)
     include(cmake-modules/configure/FindSphinx)
     unset(Sphinx_FIND_COMPONENTS)
+
+    set(DOCS_CHECK_NITPICKY_MODE
+        OFF
+        CACHE BOOL "Nitpicky mode for Sphinx documentation")
 
     set(_common_sphinx_args
         CONF_FILE
@@ -66,7 +81,7 @@ if(DOXYGEN_FOUND)
       BUILDER
       html
       EXTRA_ARGS
-      -n
+      $<$<BOOL:${DOCS_CHECK_NITPICKY_MODE}>:-n>
       -T
       --keep-going
       -W
