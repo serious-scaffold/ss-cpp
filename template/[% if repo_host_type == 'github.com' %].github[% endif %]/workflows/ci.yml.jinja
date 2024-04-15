@@ -118,7 +118,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Prepare for lcov
         if: contains(matrix.compiler, 'gcc')
@@ -203,7 +202,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Install llvm through brew
         if: contains(matrix.compiler, 'llvm')
@@ -435,7 +433,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Configure CMake
         run: >
@@ -489,7 +486,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Install valgrind
         run: sudo apt-get install valgrind
@@ -511,6 +507,55 @@ jobs:
 
       - name: Valgrind
         run: cmake --build --preset=default --target ExperimentalMemCheck
+
+
+  cppcheck:
+    runs-on: macos-12
+    needs: [pre-commit
+[%- if repo_name == 'ss-cpp' -%]
+    , consistency
+[%- endif -%]
+    ]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-osx-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-osx-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          cppcheck: true # use cppcheck of macos, it's newest version
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_C_COMPILER="${CC}"
+          -DCMAKE_CXX_COMPILER="${CXX}"
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-osx
+          -DUSE_CPPCHECK_WARNINGS_AS_ERRORS=ON
+          -DUSE_SANITIZER=OFF
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build --preset=default --target all
 
 
   check-docs:
@@ -602,7 +647,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Prepare for lcov
         run: |
@@ -661,7 +705,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Configure CMake
         run: >
@@ -713,7 +756,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Disable preinstalled vcpkg in the runner to test vcpkg automatic installation
         run: echo "VCPKG_INSTALLATION_ROOT=" >> $GITHUB_ENV
@@ -767,7 +809,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Configure CMake
         run: >
@@ -817,7 +858,6 @@ jobs:
           cmake: true
           ninja: true
           ccache: true
-          cppcheck: true
 
       - name: Configure CMake
         run: >
@@ -851,6 +891,7 @@ jobs:
       - check-docs
       - check-sanitizers
       - check-valgrind
+      - cppcheck
 [%- if use_codecov == true %]
       - codecov
 [%- endif %]
