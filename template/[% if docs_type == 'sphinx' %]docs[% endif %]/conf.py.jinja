@@ -1,4 +1,5 @@
 [%- from pathjoin("includes", "variable.jinja") import repo_url with context -%]
+[%- from pathjoin("includes", "utilities.jinja") import first_letters with context -%]
 # Configuration file for the Sphinx documentation builder.
 #
 # This file only contains a selection of the most common options. For a full
@@ -86,7 +87,7 @@ html_theme = "furo"
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ["_static"]
 
-html_favicon = 'https://img.shields.io/badge/SS-blue'
+html_favicon = 'https://img.shields.io/badge/{{ first_letters(project_name) }}-blue'
 
 html_css_files = [
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css",

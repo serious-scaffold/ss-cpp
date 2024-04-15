@@ -1,0 +1,5 @@
+[% macro first_letters(string) -%]
+  [%- set words = string.replace("-", " ").replace(".", " ").split(' ') -%]
+  [%- set initials = words|map('first')|join() -%]
+  {{ initials|upper }}
+[%- endmacro %]

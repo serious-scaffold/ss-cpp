@@ -83,7 +83,7 @@ html_theme = "furo"
 # so a file named "default.css" will overwrite the builtin "default.css".
 # html_static_path = ["_static"]
 
-html_favicon = 'https://img.shields.io/badge/SS-blue'
+html_favicon = 'https://img.shields.io/badge/SSC-blue'
 
 html_css_files = [
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/fontawesome.min.css",
