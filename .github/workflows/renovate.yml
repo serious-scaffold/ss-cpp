@@ -33,12 +33,12 @@ jobs:
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
       - name: Run Renovate
         env:
-          RENOVATE_TOKEN: ${{ steps.generate-token.outputs.token || secrets.RENOVATE_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN || steps.generate-token.outputs.token }}
           RENOVATE_GIT_AUTHOR: ${{ vars.RENOVATE_GIT_AUTHOR }}
         run: |
-          if [ -n "${{ steps.generate-token.outputs.token }}" ]; then
-            unset RENOVATE_GIT_AUTHOR
-            export RENOVATE_USERNAME="${{ steps.generate-token.outputs.app-slug }}[bot]"
+          if [ -n "${{ steps.generate-token.outputs.token }}" ] && [ -n "$RENOVATE_GIT_AUTHOR" ]; then
+            echo "# :warning: RENOVATE_GIT_AUTHOR is set when using GitHub App token" >> $GITHUB_STEP_SUMMARY
+            echo "Normally, RENOVATE_GIT_AUTHOR will be resolved from the token by Renovate. However, if you set RENOVATE_GIT_AUTHOR, it will override the token's git author." >> $GITHUB_STEP_SUMMARY
           fi
 
           if [ -z "$RENOVATE_TOKEN" ]; then
