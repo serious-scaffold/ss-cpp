@@ -44,10 +44,10 @@ The Table below shows the necessary variables for different platforms and config
 
 | Variable                | Requirement | Description                            | Allowed Values                              |
 |-------------------------|-------------|----------------------------------------|---------------------------------------------|
-| CMAKE_TOOLCHAIN_FILE    | Required    | Path to the project's toolchain file   | cmake/vcpkg/vcpkg.toolchain.cmake           |
-| CMAKE_BUILD_TYPE        | Required    | Build configuration                    | Debug, Release, RelWithDebInfo, MinSizeRel  |
 | CMAKE_GENERATOR         | Required    | Generator for the build system         | Ninja, Unix Makefiles, etc.                 |
-| VCPKG_TARGET_TRIPLET    | Required    | Target triplet                         | x64-windows, x64-linux, arm64-windows, etc. |
+| CMAKE_TOOLCHAIN_FILE    | Required    | Path to the project's toolchain file   | cmake/vcpkg/vcpkg.toolchain.cmake           |
+| CMAKE_BUILD_TYPE        | Optional    | Build configuration                    | Debug, Release, RelWithDebInfo, MinSizeRel  |
+| VCPKG_TARGET_TRIPLET    | Optional    | Target triplet                         | x64-windows, x64-linux, arm64-windows, etc. |
 | VCPKG_HOST_TRIPLET      | Optional    | Host triplet                           | x64-windows, x64-linux, arm64-windows, etc. |
 | VCPKG_ROOT              | Optional    | Path to a vcpkg installation directory | vcpkg installation directory                |
 | VCPKG_INSTALLATION_ROOT | Optional    | Path to a vcpkg installation directory | vcpkg installation directory                |
@@ -60,7 +60,8 @@ The Table below shows the necessary variables for different platforms and config
  - `cmake/vcpkg/vcpkg.toolchain.cmake` contains the triplet and vcpkg environment initialization steps which loads triplet variables and chainload toolchain according to VCPKG_TARGET_TRIPLET.
  - `VCPKG_ROOT` and `VCPKG_INSTALLATION_ROOT` are same and both are optional and it's used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.
  - `CMAKE_GENERATOR` is recommended to use Ninja as it's faster than the default generator.
- - `VCPKG_HOST_TRIPLET` is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.
+ - `VCPKG_TARGET_TRIPLET/VCPKG_HOST_TRIPLET` is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.
+ - `CMAKE_BUILD_TYPE` is optional and default is set to RelWithDebInfo by `cmake/vcpkg/vcpkg.toolchain.cmake`.
 ```
 
 Here's an example of building the project with the specified variables:
