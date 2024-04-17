@@ -639,8 +639,10 @@ jobs:
         uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed # v4.3.0
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: --preset=default/code_coverage
-          files: ./coverage.info
+          fail_ci_if_error: true
+          disable_search: true
+          files: ./out/build/default/code_coverage/coverage.info
+          verbose: true
 
 
   check-export-mode:
