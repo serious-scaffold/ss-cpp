@@ -183,3 +183,9 @@ codecov_threshold:
   help: 'Specify the minimum coverage threshold for codecov:'
   type: str
   when: '{{ use_codecov == true }}'
+
+use_codeql:
+  default: true
+  help: 'Whether to add codeql integration:'
+  type: bool
+  when: '{{ repo_host_type == "github.com" }}'

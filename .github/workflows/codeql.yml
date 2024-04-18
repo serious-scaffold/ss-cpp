@@ -53,11 +53,7 @@ jobs:
         uses: github/codeql-action/init@1b1aada464948af03b950897e5eb522f92603cc2 # v3.24.9
         with:
           languages: ${{ matrix.language }}
-          paths-ignore: src/**/tests/*
-          # If you wish to specify custom queries, you can do so here or in a config file.
-          # By default, queries listed here will override any specified in a config file.
-          # Prefix the list here with "+" to use these queries and those in the config file.
-          # queries: ./path/to/local/query, your-org/your-repo/queries@main
+          config-file: ./.github/codeql-config.yml
 
       - name: Cache
         uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
@@ -65,8 +61,8 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
 
       - uses: aminya/setup-cpp@v1
         with:

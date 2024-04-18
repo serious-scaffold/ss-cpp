@@ -74,6 +74,14 @@ Codecov is a popular tool for measuring code coverage. It can be integrated with
 It is enabled by default. And you can disable the Codecov integration by passing the flag `-d/--data use_codecov=false` to copier.
 ```
 
+### CodeQL
+
+CodeQL is a static analysis tool that can be used to identify security vulnerabilities and coding errors. It can be integrated with GitHub/GitLab to provide a visual representation of the code quality of the project.
+
+```{note}
+It is enabled by default. And you can disable the CodeQL integration by passing the flag `-d/--data use_codeql=false` to copier.
+```
+
 ### Release
 
 Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the [semantic-release](https://github.com/semantic-release/semantic-release) to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.
