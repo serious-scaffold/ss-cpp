@@ -641,7 +641,7 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           disable_search: true
-          files: ./out/build/default/code_coverage/coverage.info
+          file: ./out/build/default/code_coverage/coverage.info
           verbose: true
 
 
