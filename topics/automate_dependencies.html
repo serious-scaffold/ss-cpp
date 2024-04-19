@@ -235,14 +235,18 @@
 <h3>On GitHub<a class="headerlink" href="#on-github" title="Permalink to this heading">#</a></h3>
 <p>It can simply reuse the existing configuration of the release workflow . See the <a class="reference internal" href="release_workflow.html"><span class="std std-doc">release workflow configuration</span></a> section.</p>
 <ul class="simple">
-<li><p>Apply the same bot configured variables and secrets:</p>
+<li><p>Option 1: Apply the same bot configured variables and secrets:</p>
 <ul>
 <li><p>BOT_APP_ID</p></li>
 <li><p>BOT_PRIVATE_KEY</p></li>
 </ul>
 </li>
-<li><p>Apply the same PAT.</p></li>
+<li><p>Option 2: Apply the same PAT to set as the renovat token <code class="docutils literal notranslate"><span class="pre">RENOVATE_TOKEN</span></code>.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Normally, the author of prs created by Renovate will be assigned automatically to the bot account if it is configured with Option 1 or the account of the PAT if it is configured with Option 2. But it may be customized to assign the author by <code class="docutils literal notranslate"><span class="pre">RENOVATE_GIT_AUTHOR</span></code> variable. And its format should be <code class="docutils literal notranslate"><span class="pre">username</span> <span class="pre">&lt;useremail&gt;</span></code>.</p>
+</div>
 </section>
 </section>
 <section id="customize-dependencies-detection">
