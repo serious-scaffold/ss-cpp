@@ -297,6 +297,14 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <p>It is enabled by default. And you can disable the Codecov integration by passing the flag <code class="docutils literal notranslate"><span class="pre">-d/--data</span> <span class="pre">use_codecov=false</span></code> to copier.</p>
 </div>
 </section>
+<section id="codeql">
+<h3>CodeQL<a class="headerlink" href="#codeql" title="Permalink to this heading">#</a></h3>
+<p>CodeQL is a static analysis tool that can be used to identify security vulnerabilities and coding errors. It can be integrated with GitHub/GitLab to provide a visual representation of the code quality of the project.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is enabled by default. And you can disable the CodeQL integration by passing the flag <code class="docutils literal notranslate"><span class="pre">-d/--data</span> <span class="pre">use_codeql=false</span></code> to copier.</p>
+</div>
+</section>
 <section id="release">
 <h3>Release<a class="headerlink" href="#release" title="Permalink to this heading">#</a></h3>
 <p>Release is also a critical aspect of project management. It is important to follow a standardized release process to ensure that the project is well-maintained and up-to-date. We apply the <a class="reference external" href="https://github.com/semantic-release/semantic-release">semantic-release</a> to automate the release process. At least, a permitted token is required to enable the published release can trigger the released CD pipeline.</p>
@@ -397,6 +405,7 @@ git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </sp
 <li><a class="reference internal" href="#merge-strategy">Merge Strategy</a></li>
 <li><a class="reference internal" href="#pages">Pages</a></li>
 <li><a class="reference internal" href="#codecov">Codecov</a></li>
+<li><a class="reference internal" href="#codeql">CodeQL</a></li>
 <li><a class="reference internal" href="#release">Release</a></li>
 <li><a class="reference internal" href="#renovate">Renovate</a></li>
 </ul>
