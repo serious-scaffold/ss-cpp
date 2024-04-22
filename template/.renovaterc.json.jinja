@@ -15,6 +15,19 @@
       "matchDepTypes": [
         "action"
       ],
+      "matchDepNames": [
+        "github/codeql-action"
+      ],
+      "postUpgradeTasks": {
+          "commands": [
+              "find template -type f -exec sed -i {{ '\'s/{{{replace \\"/\\" \\"\\\\/\\" depName}}}\\\\(init|analyze\\\\)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \\"/\\" \\"\\\\/\\" depName}}}\\\\1@{{{newDigest}}} # {{{newValue}}}/g\' {} +' }}"
+          ]
+      }
+    },
+    {
+      "matchDepTypes": [
+        "action"
+      ],
       "postUpgradeTasks": {
           "commands": [
               "find template -type f -exec sed -i {{ '\'s|{{{depName}}}@{{{currentDigest}}} # {{{currentValue}}}|{{{depName}}}@{{{newDigest}}} # {{{newValue}}}|g\' {} +' }}"
