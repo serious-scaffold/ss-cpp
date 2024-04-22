@@ -20,7 +20,7 @@ It can simply reuse the existing configuration of the release workflow . See the
 - Option 2: Apply the same PAT to set as the renovat token `RENOVATE_TOKEN`.
 
 ```{note}
-Normally, the author of prs created by Renovate will be assigned automatically to the bot account if it is configured with Option 1 or the account of the PAT if it is configured with Option 2. But it may be customized to assign the author by `RENOVATE_GIT_AUTHOR` variable. And its format should be `username <useremail>`.
+Normally, the author of prs created by Renovate will be assigned automatically to the bot account or the account of the RENOVATE_TOKEN on GitHub. But it may be customized to assign the author by `RENOVATE_GIT_AUTHOR` variable. And its format should be `username <useremail>`. It should be careful to use a valid author, otherwise the commits will be associated by a ghost account.
 ```
 
 ## Customize dependencies detection
