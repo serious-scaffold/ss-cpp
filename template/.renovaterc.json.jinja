@@ -79,10 +79,15 @@
     {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
+      "addLabels": [
+        "renovate"
+      ],
       "matchDatasources": [
         "docker",
         "github-tags"
       ],
+      "automerge": true,
+      "schedule": ["before 8:00pm on the first day of the month"],
       "matchDepNames": [
 [%- if repo_host_type == 'github.com' %]
         "ghcr.io/renovatebot/renovate",
