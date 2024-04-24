@@ -14,7 +14,7 @@
       ],
       "postUpgradeTasks": {
           "commands": [
-              "find template -type f -exec sed -i 's|{{{depName}}}@{{{currentDigest}}} # {{{currentValue}}}|{{{depName}}}@{{{newDigest}}} # {{{newValue}}}|g' {} +"
+              "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +"
           ]
       }
     },
@@ -75,10 +75,15 @@
     {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
+      "addLabels": [
+        "renovate"
+      ],
       "matchDatasources": [
         "docker",
         "github-tags"
       ],
+      "automerge": true,
+      "schedule": ["before 8:00pm on the first day of the month"],
       "matchDepNames": [
         "ghcr.io/renovatebot/renovate",
         "renovate/renovate",
