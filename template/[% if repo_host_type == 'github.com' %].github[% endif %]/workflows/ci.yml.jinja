@@ -165,7 +165,7 @@ jobs:
 
 
   check-on-macos:
-    runs-on: macos-12
+    runs-on: macos-13
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -509,7 +509,7 @@ jobs:
 
 
   cppcheck:
-    runs-on: macos-12
+    runs-on: macos-13
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
