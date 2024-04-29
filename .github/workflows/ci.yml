@@ -161,14 +161,14 @@ jobs:
 
 
   check-on-macos:
-    runs-on: macos-12
+    runs-on: macos-14
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
         triplet: [x64-osx]
-        compiler: [gcc-13, llvm@17]
+        compiler: [gcc@13, llvm@17]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
@@ -188,19 +188,12 @@ jobs:
           key: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
           restore-keys: ${{ matrix.triplet }}-${{ matrix.compiler }}-${{ hashFiles('vcpkg.json') }}
 
-      - uses: aminya/setup-cpp@v1
-        with:
-          compiler: ${{ contains(matrix.compiler, 'gcc') && matrix.compiler || '' }}
-          cmake: true
-          ninja: true
-          ccache: true
-
-      - name: Install llvm through brew
-        if: contains(matrix.compiler, 'llvm')
+      - name: Install compilers and build tools
         run: |
-          brew install ${{ matrix.compiler }}
-          echo "CC=/usr/local/opt/${{ matrix.compiler }}/bin/clang" >> $GITHUB_ENV
-          echo "CXX=/usr/local/opt/${{ matrix.compiler }}/bin/clang++" >> $GITHUB_ENV
+          brew update
+          brew install ${{ matrix.compiler }} ninja cmake
+          echo "CC=/usr/local/opt/${{ matrix.compiler }}/bin/${{ contains(matrix.compiler, 'gcc') && 'gcc' || contains(matrix.compiler, 'llvm') && 'clang' }}" >> $GITHUB_ENV
+          echo "CXX=/usr/local/opt/${{ matrix.compiler }}/bin/${{ contains(matrix.compiler, 'gcc') && 'g++' || contains(matrix.compiler, 'llvm') && 'clang++' }}" >> $GITHUB_ENV
           echo "PATH=/usr/local/opt/${{ matrix.compiler }}/bin:$PATH" >> $GITHUB_ENV
 
       - name: Prepare for lcov
@@ -485,7 +478,7 @@ jobs:
 
 
   cppcheck:
-    runs-on: macos-12
+    runs-on: macos-14
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -500,16 +493,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-osx-gcc-13-${{ hashFiles('vcpkg.json') }}
-          restore-keys: x64-osx-gcc-13-${{ hashFiles('vcpkg.json') }}
+          key: x64-osx-gcc@13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-osx-gcc@13-${{ hashFiles('vcpkg.json') }}
 
-      - uses: aminya/setup-cpp@v1
-        with:
-          compiler: gcc-13
-          cmake: true
-          ninja: true
-          ccache: true
-          cppcheck: true # use cppcheck of macos, it's newest version
+      - name: Install compiler and tools
+        run: |
+          brew install gcc@13 ninja cmake cppcheck
 
       - name: Configure CMake
         run: >
