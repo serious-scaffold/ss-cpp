@@ -9,6 +9,7 @@ Here are some of the points to consider:
 - Best secure coding practices.
 - Warnings detectors.
 - Protection mechanisms from OS.
+- Use latest compiler and OS updates.
 - Protection tests.
 
 ## Best Secure Coding Practices
@@ -32,6 +33,12 @@ the topic on [Warnings](../topics/warnings.md) to learn how to use these tools e
 In realities, it is not possible to completely eliminate all vulnerabilities in the developers's hands. Therefore, it is important to use OS-level protection mechanisms to protect against potential vulnerabilities from the outside.
 
 This mechanism requires the applications to be prepared at build time enabling specific option flags from the compiler or linker. These options can be used to enable security features from the OS, such as stack protection, data execution prevention, and address space layout randomization. See the topic on [Hardening](../topics/hardening.md) to learn more about these mechanisms.
+
+## Use Latest Compiler and OS Updates
+
+It is essential to use the latest compiler and OS updates to ensure that the application is secure. These updates can include security patches, bug fixes, and enhancements.
+
+- Latest [compiler](https://en.cppreference.com/w/cpp/compiler_support) from vendor support.
 
 ## Protection Tests
 
