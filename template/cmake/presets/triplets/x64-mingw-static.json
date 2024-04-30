@@ -11,8 +11,7 @@
         "x64"
       ],
       "cacheVariables": {
-        "VCPKG_TARGET_TRIPLET": "x64-mingw-static",
-        "USE_SANITIZER": "OFF"
+        "VCPKG_TARGET_TRIPLET": "x64-mingw-static"
       }
     }
   ]
