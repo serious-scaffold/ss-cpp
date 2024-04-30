@@ -193,7 +193,7 @@ jobs:
           brew install ${{ matrix.compiler }} cmake ninja ccache
 
       - name: Prepare PATH for compilers
-        run: echo "PATH=/usr/local/opt/$compiler/bin:$PATH" >> $GITHUB_ENV
+        run: echo "PATH=/usr/local/opt/${{ matrix.compiler }}/bin:$PATH" >> $GITHUB_ENV
 
       - name: Prepare for llvm
         if: contains(matrix.compiler, 'llvm')
