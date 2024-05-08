@@ -94,3 +94,4 @@ repos:
     rev: 37.326.3
     hooks:
       - id: renovate-config-validator
+        stages: [manual]
