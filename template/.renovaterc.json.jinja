@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended",
-[%- if repo_name == 'ss-cpp' or repo_host_type == 'github.com' %]
+[%- if repo_name == 'ss-cpp' or repo_platform == 'github' %]
     "helpers:pinGitHubActionDigests",
 [%- endif %]
     ":enablePreCommit",
@@ -89,10 +89,10 @@
       "automerge": true,
       "schedule": ["before 8:00pm on the first day of the month"],
       "matchDepNames": [
-[%- if repo_host_type == 'github.com' %]
+[%- if repo_platform == 'github' %]
         "ghcr.io/renovatebot/renovate",
 [%- endif %]
-[%- if repo_host_type == 'gitlab.com' or reop_host_type == 'gitlab-self-managed' or repo_name == 'ss-cpp' %]
+[%- if repo_platform == 'gitlab' or reop_host_type == 'gitlab-self-managed' or repo_name == 'ss-cpp' %]
         "renovate/renovate",
 [%- endif %]
         "renovatebot/pre-commit-hooks"
