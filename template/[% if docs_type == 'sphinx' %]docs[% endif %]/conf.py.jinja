@@ -98,16 +98,16 @@ html_css_files = [
 html_theme_options = {
     "footer_icons": [
         {
-[%- if repo_host_type == 'github.com' %]
+[%- if repo_platform == 'github' %]
             "name": "GitHub",
-[%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' %]
+[%- elif repo_platform == 'gitlab' or repo_platform == 'gitlab-self-managed' %]
             "name": "GitLab",
 [%- endif %]
             "url": "https://{{ repo_url() }}",
             "html": "",
-[%- if repo_host_type == 'github.com' %]
+[%- if repo_platform == 'github' %]
             "class": "fa-brands fa-solid fa-github fa-lg",
-[%- elif repo_host_type == 'gitlab.com' or repo_host_type == 'gitlab-self-managed' %]
+[%- elif repo_platform == 'gitlab' or repo_platform == 'gitlab-self-managed' %]
             "class": "fa-brands fa-solid fa-gitlab fa-lg",
 [%- endif %]
         },

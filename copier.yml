@@ -84,31 +84,36 @@ author_email:
   help: 'Specify the email address of the author:'
   type: str
 
-repo_host_type:
-  default: github.com
+repo_platform:
+  default: github
   choices:
-    GitHub: github.com
-    GitLab: gitlab.com
+    GitHub: github
+    GitLab: gitlab
     GitLab (self-managed): gitlab-self-managed
-  help: 'Choose the host for the repository:'
+  help: 'Choose the platform for the repository:'
   type: str
 
 repo_host:
-  default: '{{ repo_host_type }}'
+  default: |-
+    [% if repo_platform == 'github' -%]
+      github.com
+    [%- elif repo_platform == 'gitlab' -%]
+      gitlab.com
+    [%- endif %]
   help: 'Specify the host of the self-managed GitLab:'
   type: str
-  when: '{{ repo_host_type == "gitlab-self-managed" }}'
+  when: '{{ repo_platform == "gitlab-self-managed" }}'
 
 page_host:
   default: |-
-    [% if repo_host_type == 'github.com' -%]
+    [% if repo_platform == 'github' -%]
       github.io
-    [%- elif repo_host_type == 'gitlab.com' -%]
+    [%- elif repo_platform == 'gitlab' -%]
       gitlab.io
     [%- endif %]
   help: 'Specify the host of the self-managed GitLab Pages:'
   type: str
-  when: '{{ repo_host_type == "gitlab-self-managed" }}'
+  when: '{{ repo_platform == "gitlab-self-managed" }}'
 
 repo_namespace:
   default: '{{ organization_name|lower|replace(" ", "-") }}'
@@ -188,4 +193,4 @@ use_codeql:
   default: true
   help: 'Whether to add codeql integration:'
   type: bool
-  when: '{{ repo_host_type == "github.com" }}'
+  when: '{{ repo_platform == "github.com" }}'
