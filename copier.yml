@@ -193,4 +193,4 @@ use_codeql:
   default: true
   help: 'Whether to add codeql integration:'
   type: bool
-  when: '{{ repo_platform == "github.com" }}'
+  when: '{{ repo_platform == "github" }}'
