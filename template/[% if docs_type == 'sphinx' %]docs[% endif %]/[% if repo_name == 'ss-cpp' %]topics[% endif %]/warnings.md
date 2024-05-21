@@ -86,7 +86,6 @@ It can be configured using the following options:
 
 - `USE_CPPCHECK`: If use cppcheck. Default is ON.
 - `USE_CPPCHECK_OPTIONS`: cppcheck run options. Default is --enable=style,performance,warning,portability;--inline-suppr;--suppress=cppcheckError;--suppress=internalAstError;--suppress=unmatchedSuppression;--suppress=passedByValue;--suppress=syntaxError;--suppress=preprocessorErrorDirective;--inconclusive
-- `USE_CPPCHECK_SUPPRESS_DIR`: Directory to suppress cppcheck warnings. Default is `*:/workspaces/ss-cpp/out/build/x64-linux-llvm/_deps/*.h`.
 - `USE_CPPCHECK_WARNINGS_AS_ERRORS`: Treat cppcheck warnings as errors. Default is OFF.
 
 ## Runtime Analysis
