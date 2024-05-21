@@ -491,6 +491,57 @@ jobs:
         run: cmake --build --preset=default --target ExperimentalMemCheck
 
 
+  clang-tidy:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+
+      - uses: actions/setup-python@82c7e631bb3cdc910f68e0081d67478d79c6982d # v5
+        with:
+          python-version: 3.x
+
+      - name: Install docs dependencies
+        run: |
+          pip install clang-tidy==18.1.1
+
+      - name: Configure CMake
+        run: >
+          cmake -S . --preset=default
+          -DCMAKE_BUILD_TYPE=Debug
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          -DUSE_CLANGTIDY=ON
+          -DUSE_CLANGTIDY_WARNINGS_AS_ERRORS=ON
+          -DUSE_SANITIZER=OFF
+          -DCODE_COVERAGE=OFF
+          -DBUILD_TESTING=ON
+
+      - name: Build
+        run: cmake --build --preset=default --target all
+
+
   cppcheck:
     runs-on: macos-12
     needs: [pre-commit, consistency]
@@ -863,6 +914,7 @@ jobs:
       - check-docs
       - check-sanitizers
       - check-valgrind
+      - clang-tidy
       - cppcheck
       - codecov
       - check-export-mode
