@@ -304,6 +304,16 @@
 </section>
 <section id="static-analysis">
 <h2>Static Analysis<a class="headerlink" href="#static-analysis" title="Permalink to this heading">#</a></h2>
+<section id="clang-tidy">
+<h3>Clang-tidy<a class="headerlink" href="#clang-tidy" title="Permalink to this heading">#</a></h3>
+<p>The <a class="reference external" href="https://clang.llvm.org/extra/clang-tidy/">Clang-tidy</a> tool is a clang-based C++ linter tool. It checks for style, performance, and security issues in C++ code.</p>
+<p>It can be configured using the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY</span></code>: If use clang-tidy. Default is ON.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY_OPTIONS</span></code>: Clang-tidy run options. Default is -extra-arg=-Wno-unknown-warning-option;-extra-arg=-Wno-ignored-optimization-argument;-extra-arg=-Wno-unused-command-line-argument;-p;<code class="docutils literal notranslate"><span class="pre">&lt;build_dir&gt;</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY_WARNINGS_AS_ERRORS</span></code>: Treat clang-tidy warnings as errors. Default is OFF.</p></li>
+</ul>
+</section>
 <section id="cppcheck">
 <h3>Cppcheck<a class="headerlink" href="#cppcheck" title="Permalink to this heading">#</a></h3>
 <p>The <a class="reference external" href="http://cppcheck.net/manual.html">Cppcheck</a> tool is a static analysis tool for C/C++ code. It detects various types of bugs and offers a convenient way to suppress false positives.</p>
@@ -440,6 +450,7 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#static-analysis">Static Analysis</a><ul>
+<li><a class="reference internal" href="#clang-tidy">Clang-tidy</a></li>
 <li><a class="reference internal" href="#cppcheck">Cppcheck</a></li>
 </ul>
 </li>
