@@ -309,7 +309,7 @@
 <p>The <a class="reference external" href="https://clang.llvm.org/extra/clang-tidy/">Clang-tidy</a> tool is a clang-based C++ linter tool. It checks for style, performance, and security issues in C++ code.</p>
 <p>It can be configured using the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY</span></code>: If use clang-tidy. Default is ON.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY</span></code>: If use clang-tidy. Default is OFF.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY_OPTIONS</span></code>: Clang-tidy run options. Default is -extra-arg=-Wno-unknown-warning-option;-extra-arg=-Wno-ignored-optimization-argument;-extra-arg=-Wno-unused-command-line-argument;-p;<code class="docutils literal notranslate"><span class="pre">&lt;build_dir&gt;</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_CLANGTIDY_WARNINGS_AS_ERRORS</span></code>: Treat clang-tidy warnings as errors. Default is OFF.</p></li>
 </ul>
@@ -319,7 +319,7 @@
 <p>The <a class="reference external" href="http://cppcheck.net/manual.html">Cppcheck</a> tool is a static analysis tool for C/C++ code. It detects various types of bugs and offers a convenient way to suppress false positives.</p>
 <p>It can be configured using the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">USE_CPPCHECK</span></code>: If use cppcheck. Default is ON.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_CPPCHECK</span></code>: If use cppcheck. Default is OFF.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_CPPCHECK_OPTIONS</span></code>: cppcheck run options. Default is –enable=style,performance,warning,portability;–inline-suppr;–suppress=cppcheckError;–suppress=internalAstError;–suppress=unmatchedSuppression;–suppress=passedByValue;–suppress=syntaxError;–suppress=preprocessorErrorDirective;–inconclusive</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_CPPCHECK_WARNINGS_AS_ERRORS</span></code>: Treat cppcheck warnings as errors. Default is OFF.</p></li>
 </ul>
@@ -331,7 +331,7 @@
 <h3>Sanitizers<a class="headerlink" href="#sanitizers" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://clang.llvm.org/docs/index.html">Sanitizers</a> are tools that can detect memory leaks, use-after-free, and other memory errors at runtime. They can be configured using the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">USE_SANITIZER</span></code>: Default is <code class="docutils literal notranslate"><span class="pre">Address,Undefined</span></code>.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_SANITIZER</span></code>: Default is <code class="docutils literal notranslate"><span class="pre">OFF</span></code>.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code>: Disable sanitizers.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Address</span></code>: Enable AddressSanitizer to detect most issues dealing with memory.</p></li>
@@ -365,12 +365,8 @@
 <h3>Valgrind<a class="headerlink" href="#valgrind" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://valgrind.org/docs/manual/manual.html">Valgrind</a> is a tool for detecting memory leaks, errors, and other runtime issues. It can be configured using the following options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">USE_VALGRIND</span></code>: Default is <code class="docutils literal notranslate"><span class="pre">--leak-check=full</span> <span class="pre">--gen-suppressions=all</span> <span class="pre">--track-origins=yes</span></code>.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">--leak-check=full</span> <span class="pre">--gen-suppressions=all</span> <span class="pre">--track-origins=yes</span></code>: Default valgrind command.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">OFF</span></code>: Disable valgrind.</p></li>
-</ul>
-</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_VALGRIND</span></code>: If use valgrind to check memory issues. Default is <code class="docutils literal notranslate"><span class="pre">OFF</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">USE_VALGRIND_OPTIONS</span></code>: Default is –show-leak-kinds=all;–gen-suppressions=all;–track-origins=yes.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_VALGRIND_SUPPRESSION_FILE</span></code>: path to valgrind suppress config file.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">USE_VALGRIND_ENABLE_MEMCHECK</span></code>: enable memory check with ctest command, e.g. ctest -T memcheck. Default is ON.</p></li>
 </ul>

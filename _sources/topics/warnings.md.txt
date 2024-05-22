@@ -84,7 +84,7 @@ The [Clang-tidy](https://clang.llvm.org/extra/clang-tidy/) tool is a clang-based
 
 It can be configured using the following options:
 
-- `USE_CLANGTIDY`: If use clang-tidy. Default is ON.
+- `USE_CLANGTIDY`: If use clang-tidy. Default is OFF.
 - `USE_CLANGTIDY_OPTIONS`: Clang-tidy run options. Default is -extra-arg=-Wno-unknown-warning-option;-extra-arg=-Wno-ignored-optimization-argument;-extra-arg=-Wno-unused-command-line-argument;-p;`<build_dir>`.
 - `USE_CLANGTIDY_WARNINGS_AS_ERRORS`: Treat clang-tidy warnings as errors. Default is OFF.
 
@@ -94,7 +94,7 @@ The [Cppcheck](http://cppcheck.net/manual.html) tool is a static analysis tool f
 
 It can be configured using the following options:
 
-- `USE_CPPCHECK`: If use cppcheck. Default is ON.
+- `USE_CPPCHECK`: If use cppcheck. Default is OFF.
 - `USE_CPPCHECK_OPTIONS`: cppcheck run options. Default is --enable=style,performance,warning,portability;--inline-suppr;--suppress=cppcheckError;--suppress=internalAstError;--suppress=unmatchedSuppression;--suppress=passedByValue;--suppress=syntaxError;--suppress=preprocessorErrorDirective;--inconclusive
 - `USE_CPPCHECK_WARNINGS_AS_ERRORS`: Treat cppcheck warnings as errors. Default is OFF.
 
@@ -104,7 +104,7 @@ It can be configured using the following options:
 
 [Sanitizers](https://clang.llvm.org/docs/index.html) are tools that can detect memory leaks, use-after-free, and other memory errors at runtime. They can be configured using the following options:
 
-- `USE_SANITIZER`: Default is `Address,Undefined`.
+- `USE_SANITIZER`: Default is `OFF`.
   - `OFF`: Disable sanitizers.
   - `Address`: Enable AddressSanitizer to detect most issues dealing with memory.
   - `Memory`: Enable MemorySanitizer to detect uninitialized reads.
@@ -132,9 +132,8 @@ It can be configured using the following options:
 
 [Valgrind](https://valgrind.org/docs/manual/manual.html) is a tool for detecting memory leaks, errors, and other runtime issues. It can be configured using the following options:
 
-- `USE_VALGRIND`: Default is `--leak-check=full --gen-suppressions=all --track-origins=yes`.
-  - `--leak-check=full --gen-suppressions=all --track-origins=yes`: Default valgrind command.
-  - `OFF`: Disable valgrind.
+- `USE_VALGRIND`: If use valgrind to check memory issues. Default is `OFF`.
+- `USE_VALGRIND_OPTIONS`: Default is --show-leak-kinds=all;--gen-suppressions=all;--track-origins=yes.
 - `USE_VALGRIND_SUPPRESSION_FILE`: path to valgrind suppress config file.
 - `USE_VALGRIND_ENABLE_MEMCHECK`: enable memory check with ctest command, e.g. ctest -T memcheck. Default is ON.
 
