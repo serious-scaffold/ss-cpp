@@ -78,6 +78,16 @@ references:
 
 ## Static Analysis
 
+### Clang-tidy
+
+The [Clang-tidy](https://clang.llvm.org/extra/clang-tidy/) tool is a clang-based C++ linter tool. It checks for style, performance, and security issues in C++ code.
+
+It can be configured using the following options:
+
+- `USE_CLANGTIDY`: If use clang-tidy. Default is ON.
+- `USE_CLANGTIDY_OPTIONS`: Clang-tidy run options. Default is -extra-arg=-Wno-unknown-warning-option;-extra-arg=-Wno-ignored-optimization-argument;-extra-arg=-Wno-unused-command-line-argument;-p;`<build_dir>`.
+- `USE_CLANGTIDY_WARNINGS_AS_ERRORS`: Treat clang-tidy warnings as errors. Default is OFF.
+
 ### Cppcheck
 
 The [Cppcheck](http://cppcheck.net/manual.html) tool is a static analysis tool for C/C++ code. It detects various types of bugs and offers a convenient way to suppress false positives.
