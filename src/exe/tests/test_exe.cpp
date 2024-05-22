@@ -1,9 +1,10 @@
-#include <gtest/gtest.h>
+#include "gtest/gtest.h"
+
 #include "distribution.hpp"
 #include "git.h"
 
 TEST(exe, version) {
-    const auto version = git_ProjectVersion();
+    const auto* const version = git_ProjectVersion();
     EXPECT_STRNE(version, "");
 }
 

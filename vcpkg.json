@@ -16,7 +16,7 @@
     },
     {
       "name": "cmake-modules",
-      "version": "1.4.38"
+      "version": "1.5.2"
     },
     {
       "name": "robotology-cmake-ycm",
@@ -38,7 +38,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "b00333132c28d35a655b62c4f714a83ac1c025f5",
+        "baseline": "c69c2bcfd3a01bb5fc6ff02a39d121f7c9501117",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",

@@ -66,6 +66,7 @@ jobs:
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
           -DUSE_SANITIZER=OFF
+          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=OFF
 
