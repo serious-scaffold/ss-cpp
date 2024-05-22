@@ -143,9 +143,6 @@ jobs:
           -DCMAKE_CXX_COMPILER={{ '${{ contains(matrix.compiler, \'gcc\') && \'g++\' || contains(matrix.compiler, \'llvm\') && \'clang++\' }}' }}
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
-          -DUSE_SANITIZER=OFF
-          -DUSE_VALGRIND=OFF
-          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -235,9 +232,6 @@ jobs:
           -DCMAKE_CXX_COMPILER="${CXX}"
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
-          -DUSE_SANITIZER=OFF
-          -DUSE_VALGRIND=OFF
-          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
           {{ '${{ contains(matrix.compiler, \'gcc\') && \'-DCODE_COVERAGE_GCOV=${GCOV}\' }}' }}
@@ -309,8 +303,6 @@ jobs:
           -DCMAKE_CXX_COMPILER={{ '${{ contains(matrix.compiler, \'msvc\') && \'"cl"\' || contains(matrix.compiler, \'llvm\') && \'"clang-cl.exe"\' }}' }}
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET={{ '${{ matrix.triplet }}' }}
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -386,8 +378,6 @@ jobs:
           -DCMAKE_CXX_STANDARD={{ '${{ matrix.std }}' }}
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-mingw-dynamic
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -452,8 +442,6 @@ jobs:
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
           -DUSE_SANITIZER={{ '${{ matrix.sanitizer }}' }}
-          -DCODE_COVERAGE=OFF
-          -DUSE_CLANGTIDY=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -509,9 +497,7 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
+          -DUSE_VALGRIND=ON
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -566,10 +552,8 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
           -DUSE_CLANGTIDY=ON
           -DUSE_CLANGTIDY_WARNINGS_AS_ERRORS=ON
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -616,10 +600,8 @@ jobs:
           -DCMAKE_CXX_COMPILER="${CXX}"
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-osx
+          -DUSE_CPPCHECK=ON
           -DUSE_CPPCHECK_WARNINGS_AS_ERRORS=ON
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -675,10 +657,6 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
-          -DBUILD_TESTING=OFF
 
       - name: Checks the docs with warnings as errors
         run: cmake --build --preset=default --target {{ repo_name }}-docs-check
@@ -731,8 +709,6 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
           -DCODE_COVERAGE=ON
           -DBUILD_TESTING=ON
 
@@ -785,9 +761,6 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
           -DVCPKG_EXPORT_MODE=ON
 
@@ -840,9 +813,6 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -890,9 +860,6 @@ jobs:
           -DCMAKE_BUILD_TYPE=Debug
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
@@ -940,9 +907,6 @@ jobs:
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
-          -DUSE_SANITIZER=OFF
-          -DUSE_CLANGTIDY=OFF
-          -DCODE_COVERAGE=OFF
           -DBUILD_TESTING=ON
 
       - name: Build
