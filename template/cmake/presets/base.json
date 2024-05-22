@@ -17,7 +17,7 @@
       "cacheVariables": {
         "CMAKE_EXPORT_COMPILE_COMMANDS": true,
         "CMAKE_COMPILE_WARNING_AS_ERROR": false,
-        "CMAKE_VERBOSE_MAKEFILE": true
+        "CMAKE_VERBOSE_MAKEFILE": "FALSE"
       }
     }
   ],
