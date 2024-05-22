@@ -19,6 +19,8 @@
         "CMAKE_COMPILE_WARNING_AS_ERROR": false,
         "CMAKE_VERBOSE_MAKEFILE": "FALSE",
         "USE_SANITIZER": "OFF",
+        "USE_VALGRIND": "OFF",
+        "USE_CLANGTIDY": "OFF",
         "CODE_COVERAGE": "OFF"
       }
     }
