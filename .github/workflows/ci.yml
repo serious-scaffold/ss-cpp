@@ -527,7 +527,7 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install docs dependencies
+      - name: Install latest clang-tidy
         run: |
           pip install clang-tidy==18.1.1
 
