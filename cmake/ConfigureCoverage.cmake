@@ -12,9 +12,13 @@ It supports detecting and using the following coverage tools:
 include_guard(GLOBAL)
 
 # cmake-format: off
+set(CODE_COVERAGE OFF CACHE BOOL "Enables code coverage.")
 set(CODE_COVERAGE_GCOVR_REPORT_FORMAT xml CACHE STRING "Sets the gcovr report format.")
 set(CODE_COVERAGE_LCOV_EXTRA_FLAGS "--ignore-errors=gcov" CACHE STRING "Extra flags to pass to lcov")
+
 include(cmake-modules/test/Coverage)
+
+# Exclude directories from code coverage
 list(APPEND _excludes "${CMAKE_BINARY_DIR}")
 if(VCPKG_EXPORT_MODE)
   list(APPEND _excludes "${CMAKE_SOURCE_DIR}/cmake/vcpkg/export")
@@ -22,7 +26,7 @@ endif()
 
 # Exclude system directories from code coverage
 if(NOT CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
-  list(APPEND _excludes "/usr" "/opt" "/opt/local")
+  list(APPEND _excludes "/usr" "/opt")
 endif()
 
 add_code_coverage_all_targets(
