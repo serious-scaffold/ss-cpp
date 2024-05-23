@@ -51,9 +51,7 @@ jobs:
           python-version: 3.11
 
       - name: Install copier
-        run: |
-          pip install pyyaml-include==1.4.1
-          pip install copier==9.1.0
+        run: pipx install copier==9.2.0
 
       - name: Generate the project with the default value
         run: |
