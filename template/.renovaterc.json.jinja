@@ -122,16 +122,19 @@
   ],
   "customManagers": [
     {
+      "description": "Update python packages installed with pip or pipx",
       "customType": "regex",
       "datasourceTemplate": "pypi",
       "fileMatch": [
-        "^\\.github\\/workflows\\/ci.yml$"
+        "^\\.github/workflows/.+\\.yml$",
+        "^\\.renovaterc\\.json$"
 [%- if repo_name == 'ss-cpp' %],
-        "^template\\/\\.github\\/workflows\\/ci.yml$"
+        "^template/\\.github/workflows/.+\\.yml(\\.jinja)?$",
+        "^template/\\.renovaterc\\.json\\.jinja$"
 [%- endif %]
       ],
       "matchStrings": [
-        "pipx install (?<depName>.*?)==(?<currentValue>.*?)"
+        "pipx? install.* (?<depName>.*?)==(?<currentValue>.*?)[\\s\";]"
       ]
     },
     {
