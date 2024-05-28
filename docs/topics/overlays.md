@@ -26,3 +26,13 @@ References:
 
 - <https://learn.microsoft.com/en-us/vcpkg/concepts/overlay-ports>
 - [Why overlay ports? Install locally modified package](https://learn.microsoft.com/en-us/vcpkg/consume/install-locally-modified-package)
+
+## Overlay of a custom chianload toolchain
+
+>  a toolchain file is selected from `scripts/toolchains/` appropriate to the platform by default.
+
+To use a custom chianload toolchain, a directory `cmake/vcpkg/scripts/toolchains` has been created in the root of the scaffold.
+
+References:
+
+- [What is a chianload toolchain in vcpkg?](https://learn.microsoft.com/en-us/vcpkg/users/triplets#vcpkg_chainload_toolchain_file)
