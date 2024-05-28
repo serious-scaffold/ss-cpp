@@ -40,4 +40,6 @@ function(_vcpkg_chainload_toolchain)
         "Could not find toolchain file for ${_chainload_toolchain_name}, skipping chainload"
     )
   endif()
+  message(
+    STATUS "vcpkg_chainload_toolchain_file: ${VCPKG_CHAINLOAD_TOOLCHAIN_FILE}")
 endfunction()
