@@ -8,8 +8,7 @@ Best practices can vary based on specific circumstances. We are open to comments
 ```
 
 ```{toctree}
-:maxdepth: 1
-:titlesonly:
+:maxdepth: 3
 :caption: Table of Contents
 
 project_management

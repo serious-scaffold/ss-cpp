@@ -227,23 +227,82 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Vcpkg Relateds</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="overlays.html">Overlays</a></li>
-<li class="toctree-l1"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overlays.html">Overlays</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html#overlay-of-a-custom-triplet">Overlay of a custom triplet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html#overlay-of-a-custom-port">Overlay of a custom port</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overlays.html#overlay-of-a-custom-chianload-toolchain">Overlay of a custom chianload toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="triplet_presets.html">Triplet Presets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html#triplet-preset-naming-convention">Triplet Preset Naming Convention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triplet_presets.html#triplet-preset-customization">Triplet Preset Customization</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="triplet_presets.html#preset-folder-structure">Preset Folder Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="triplet_presets.html#best-practices">Best Practices</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Maintenance Relateds</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="release_workflow.html">Release Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semantic_versioning.html">Semantic Versioning</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html#why-use-semantic-versioning">Why use semantic versioning?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html#versioning-scheme">Versioning scheme</a></li>
+<li class="toctree-l2"><a class="reference internal" href="semantic_versioning.html#how-to-use-semantic-versioning-in-the-project">How to use semantic versioning in the project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="release_workflow.html">Release Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="release_workflow.html#on-github">On GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html#available-workflows">Available Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html#release-configurations">Release Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_workflow.html#no-release-with-commits">No release with commits</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="automate_dependencies.html">Automate Dependencies</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="automate_dependencies.html#configuration">Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="automate_dependencies.html#on-github">On GitHub</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="automate_dependencies.html#customize-dependencies-detection">Customize dependencies detection</a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Security Relateds</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="warnings.html">Warnings</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hardening.html">Hardening</a></li>
+<li class="toctree-l1"><a class="reference internal" href="warnings.html">Warnings</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#compiling-warnings">Compiling Warnings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#gcc-clang">GCC/Clang</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#msvc">MSVC</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#static-analysis">Static Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#clang-tidy">Clang-tidy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#cppcheck">Cppcheck</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="warnings.html#runtime-analysis">Runtime Analysis</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#sanitizers">Sanitizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="warnings.html#valgrind">Valgrind</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hardening.html">Hardening</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="hardening.html#hardening-options">Hardening Options</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="hardening.html#msvc">MSVC</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hardening.html#gcc-clang">GCC/Clang</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
