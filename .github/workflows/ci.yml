@@ -478,8 +478,23 @@ jobs:
         run: cmake --build --preset=default --target all
 
       - name: Valgrind
-        run: cmake --build --preset=default --target ExperimentalMemCheck
+        run: cmake --build --preset=default --target ExperimentalMemCheck | tee out/valgrind.log
 
+      - name: Check if valgrind found some errors
+        run: |
+          if grep -q "Memory Leak" out/valgrind.log; then
+              echo "# :error: Memory Leak found! Please fix it." >> $GITHUB_STEP_SUMMARY
+              echo -e "References: \n - <https://valgrind.org/docs/manual/manual.html>\n - <https://stackoverflow.com/a/44989219/23467261>" >> $GITHUB_STEP_SUMMARY
+              tar -czf out/valgrind-results.tar.gz out/build/default/Testing
+              exit 1
+          fi
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: valgrind-results
+          path: out/valgrind-results.tar.gz
 
   clang-tidy:
     runs-on: ubuntu-22.04

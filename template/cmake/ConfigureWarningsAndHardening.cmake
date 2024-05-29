@@ -26,6 +26,16 @@ include(cmake-modules/build/Sanitizer)
 set(USE_VALGRIND
     OFF
     CACHE BOOL "Enable Valgrind")
+set(USE_VALGRIND_OPTIONS
+    --leak-check=full # Each individual leak will be shown in detail.
+    --show-leak-kinds=all # Show all of "definite, indirect, possible,
+                          # reachable" leak kinds in the "full" report.
+    --gen-suppressions=all # gen suppress info automatically.
+    --track-origins=yes # Favor useful output over speed. This tracks the
+                        # origins of uninitialized values, which could be very
+                        # useful for memory errors. Consider turning off if
+                        # Valgrind is unacceptably slow.
+    CACHE STRING "valgrind options.")
 
 include(cmake-modules/test/Valgrind)
 
