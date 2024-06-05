@@ -54,6 +54,7 @@
     {
       "description": "Group vcpkg.json baseline with auto-update",
       "groupName": "group vcpkg-baseline",
+      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
         "vcpkg-baseline"
       ],
@@ -65,7 +66,6 @@
         "vcpkg.json"
       ],
       "automerge": true,
-      "schedule": ["before 8:00pm on the first day of the month"],
       "postUpgradeTasks": {
         "commands": [
           "find template -type f -name 'vcpkg.json.jinja' -exec sed -i 's|{{{currentDigest}}}|{{{newDigest}}}|g' {} +"
@@ -75,6 +75,7 @@
     {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
+      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
         "renovate"
       ],
@@ -83,7 +84,6 @@
         "github-tags"
       ],
       "automerge": true,
-      "schedule": ["before 8:00pm on the first day of the month"],
       "matchDepNames": [
         "ghcr.io/renovatebot/renovate",
         "renovate/renovate",
