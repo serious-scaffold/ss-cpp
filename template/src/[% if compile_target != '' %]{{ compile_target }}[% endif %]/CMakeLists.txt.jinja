@@ -16,13 +16,15 @@ generate_export_header(
   ${target_name} BASE_NAME "${target_name}" EXPORT_FILE_NAME
   "${CMAKE_CURRENT_BINARY_DIR}/include/${target_name}_export.hpp")
 
+generate_git_header(VERSION_NAMESPACE_PREFIX ${target_name})
+
 target_sources(${target_name} PRIVATE ${_srcs} ${_hdrs})
 
 target_include_interface_directories(
   ${target_name}
   ${CMAKE_CURRENT_BINARY_DIR}/include # for include export header
   ${CMAKE_CURRENT_SOURCE_DIR}/include # for public headers
-  ${CMAKE_BINARY_DIR}/git/include # for git hash
+  ${CMAKE_CURRENT_BINARY_DIR}/git_version # for git hash
 )
 
 target_compile_options(
@@ -63,7 +65,7 @@ install_target(
   INCLUDES
   ${CMAKE_CURRENT_SOURCE_DIR}/include/
   ${CMAKE_CURRENT_BINARY_DIR}/include/
-  ${CMAKE_BINARY_DIR}/git/include/
+  ${CMAKE_CURRENT_BINARY_DIR}/git_version/
   LICENSE_FILE_LIST
   ${CMAKE_SOURCE_DIR}/LICENSE
   DEPENDENCIES

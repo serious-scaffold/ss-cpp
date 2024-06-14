@@ -1,7 +1,7 @@
 #include "gtest/gtest.h"
 
+#include "_version.hpp"
 #include "distribution.hpp"
-#include "git.h"
 
 TEST(exe, version) {
     const auto* const version = git_ProjectVersion();

@@ -31,4 +31,3 @@ endif()
 
 # Set major, minor, patch and tweak version numbers
 extract_version(CMAKE_PROJECT CMAKE_PROJECT REVERSE_NAME)
-generate_git_header()
