@@ -34,7 +34,6 @@ if(DOXYGEN_FOUND)
   # cmake-format: off
   doxygen_add_docs(
     ${doxygen_docs}
-    "${CMAKE_BINARY_DIR}/git/include"
     "${CMAKE_BINARY_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/compile/include"
     "${PROJECT_SOURCE_DIR}/src/exe/include"
