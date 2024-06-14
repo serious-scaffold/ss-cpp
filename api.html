@@ -273,143 +273,6 @@
 
 <dl>
 <dt class="sig sig-object cpp">
-<span class="target" id="git_8h"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">git.h</span></span></dt>
-<dd><div class="docutils container">
-<em>#include &lt;stdbool.h&gt;</em></div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.GIT_EXTERN_C_BEGIN">
-<span class="target" id="git_8h_1abc3a14d6c85b4089436e6ac5d69c8e5c"></span><span class="sig-name descname"><span class="n"><span class="pre">GIT_EXTERN_C_BEGIN</span></span></span><a class="headerlink" href="#c.GIT_EXTERN_C_BEGIN" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-<dl class="cpp macro">
-<dt class="sig sig-object cpp" id="c.GIT_VERSION_TRACKING_EXTERN_C_END">
-<span class="target" id="git_8h_1ad537c72b2017f8304b815037d3bdd1de"></span><span class="sig-name descname"><span class="n"><span class="pre">GIT_VERSION_TRACKING_EXTERN_C_END</span></span></span><a class="headerlink" href="#c.GIT_VERSION_TRACKING_EXTERN_C_END" title="Permalink to this definition">#</a><br /></dt>
-<dd></dd></dl>
-
-</div>
-<div class="breathe-sectiondef docutils container">
-<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv418git_ProjectVersionv">
-<span id="_CPPv318git_ProjectVersionv"></span><span id="_CPPv218git_ProjectVersionv"></span><span id="git_ProjectVersion"></span><span class="target" id="git_8h_1af1335d8a0eb1b05b97a38a46b9c1a61c"></span><span class="pre">GIT_EXTERN_C_BEGIN</span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_ProjectVersion</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418git_ProjectVersionv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit project version. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv423git_ProjectVersionMajorv">
-<span id="_CPPv323git_ProjectVersionMajorv"></span><span id="_CPPv223git_ProjectVersionMajorv"></span><span id="git_ProjectVersionMajor"></span><span class="target" id="git_8h_1a0d3fd197afb162e20e7cee74eefc9dec"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_ProjectVersionMajor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423git_ProjectVersionMajorv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit project version major. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv423git_ProjectVersionMinorv">
-<span id="_CPPv323git_ProjectVersionMinorv"></span><span id="_CPPv223git_ProjectVersionMinorv"></span><span id="git_ProjectVersionMinor"></span><span class="target" id="git_8h_1a9e7bc02398ff85ec25ab9496fcc4e012"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_ProjectVersionMinor</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423git_ProjectVersionMinorv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit project version minor. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv423git_ProjectVersionPatchv">
-<span id="_CPPv323git_ProjectVersionPatchv"></span><span id="_CPPv223git_ProjectVersionPatchv"></span><span id="git_ProjectVersionPatch"></span><span class="target" id="git_8h_1a033cc5688f0e2a08f6c7270a9f772d5b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_ProjectVersionPatch</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423git_ProjectVersionPatchv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit project version patch. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv423git_ProjectVersionTweakv">
-<span id="_CPPv323git_ProjectVersionTweakv"></span><span id="_CPPv223git_ProjectVersionTweakv"></span><span id="git_ProjectVersionTweak"></span><span class="target" id="git_8h_1a903ab13e5c0f2745940aa1bb1ec2ca21"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_ProjectVersionTweak</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423git_ProjectVersionTweakv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit project version tweak. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv414git_AuthorNamev">
-<span id="_CPPv314git_AuthorNamev"></span><span id="_CPPv214git_AuthorNamev"></span><span id="git_AuthorName"></span><span class="target" id="git_8h_1ab29a64ecf7c38e15059a2e50dd3c553f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_AuthorName</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414git_AuthorNamev" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit author’s name. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv415git_AuthorEmailv">
-<span id="_CPPv315git_AuthorEmailv"></span><span id="_CPPv215git_AuthorEmailv"></span><span id="git_AuthorEmail"></span><span class="target" id="git_8h_1a7b7cfd266bccc8605dd90cb4df5af78e"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_AuthorEmail</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415git_AuthorEmailv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit author’s email. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv413git_CommitTagv">
-<span id="_CPPv313git_CommitTagv"></span><span id="_CPPv213git_CommitTagv"></span><span id="git_CommitTag"></span><span class="target" id="git_8h_1a8290acd48000526d246b4d98f9574e26"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitTag</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413git_CommitTagv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit last tag. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv421git_CommitTagRevisionv">
-<span id="_CPPv321git_CommitTagRevisionv"></span><span id="_CPPv221git_CommitTagRevisionv"></span><span id="git_CommitTagRevision"></span><span class="target" id="git_8h_1a066c8ab76d300797f20572e031e5d974"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitTagRevision</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421git_CommitTagRevisionv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit number since last tag. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv418git_CommitRevisionv">
-<span id="_CPPv318git_CommitRevisionv"></span><span id="_CPPv218git_CommitRevisionv"></span><span id="git_CommitRevision"></span><span class="target" id="git_8h_1a13269ebf063fcab64baf17374d4595d7"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitRevision</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418git_CommitRevisionv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit number. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv422git_CommitDateRevisionv">
-<span id="_CPPv322git_CommitDateRevisionv"></span><span id="_CPPv222git_CommitDateRevisionv"></span><span id="git_CommitDateRevision"></span><span class="target" id="git_8h_1a059d3861499ecd78205c6e552cfadf3b"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitDateRevision</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422git_CommitDateRevisionv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit number of the day. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv414git_CommitSHA1v">
-<span id="_CPPv314git_CommitSHA1v"></span><span id="_CPPv214git_CommitSHA1v"></span><span id="git_CommitSHA1"></span><span class="target" id="git_8h_1a13ce73435eb034b14630763c0e2e0750"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitSHA1</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414git_CommitSHA1v" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit SHA1. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv419git_CommitSHA1Shortv">
-<span id="_CPPv319git_CommitSHA1Shortv"></span><span id="_CPPv219git_CommitSHA1Shortv"></span><span id="git_CommitSHA1Short"></span><span class="target" id="git_8h_1ac985f91ec5233b265dd7a73a172d0a83"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitSHA1Short</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419git_CommitSHA1Shortv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit short SHA1. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv414git_CommitDatev">
-<span id="_CPPv314git_CommitDatev"></span><span id="_CPPv214git_CommitDatev"></span><span id="git_CommitDate"></span><span class="target" id="git_8h_1ad3544f1f49da8359735c910e41990f62"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitDate</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414git_CommitDatev" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit date. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv414git_CommitTimev">
-<span id="_CPPv314git_CommitTimev"></span><span id="_CPPv214git_CommitTimev"></span><span id="git_CommitTime"></span><span class="target" id="git_8h_1a9b7f940bb780e11cb64c1491f8108f5f"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitTime</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414git_CommitTimev" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit time. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv412git_CommitTZv">
-<span id="_CPPv312git_CommitTZv"></span><span id="_CPPv212git_CommitTZv"></span><span id="git_CommitTZ"></span><span class="target" id="git_8h_1a10b5eef2c480fbf8dc87abedd7814b2c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitTZ</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412git_CommitTZv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit TZ. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv417git_CommitSubjectv">
-<span id="_CPPv317git_CommitSubjectv"></span><span id="_CPPv217git_CommitSubjectv"></span><span id="git_CommitSubject"></span><span class="target" id="git_8h_1a5a421b2a4235d64ec1e62d0d10615c12"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitSubject</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417git_CommitSubjectv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit subject. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv414git_CommitBodyv">
-<span id="_CPPv314git_CommitBodyv"></span><span id="_CPPv214git_CommitBodyv"></span><span id="git_CommitBody"></span><span class="target" id="git_8h_1a9ddb6f76bfc4d675cbf5212a4510a984"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_CommitBody</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414git_CommitBodyv" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit body. </p>
-</dd></dl>
-
-<dl class="cpp function">
-<dt class="sig sig-object cpp" id="_CPPv412git_Describev">
-<span id="_CPPv312git_Describev"></span><span id="_CPPv212git_Describev"></span><span id="git_Describe"></span><span class="target" id="git_8h_1a0ba476b6f979ecd4ce39f98810781c4c"></span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">git_Describe</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412git_Describev" title="Permalink to this definition">#</a><br /></dt>
-<dd><p>The commit describe. </p>
-</dd></dl>
-
-</div>
-</dd></dl>
-
-<dl>
-<dt class="sig sig-object cpp">
 <span class="target" id="compile__export_8hpp"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">compile_export.hpp</span></span></dt>
 <dd><div class="breathe-sectiondef docutils container">
 <p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
@@ -445,9 +308,9 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="compile_8hpp"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">compile.hpp</span></span></dt>
 <dd><div class="docutils container">
-<em>#include “<a class="reference internal" href="#compile_2include_2distribution_8hpp"><span class="std std-ref">distribution.hpp</span></a>”</em></div>
+<em>#include “_version.hpp”</em></div>
 <div class="docutils container">
-<em>#include “<a class="reference internal" href="#git_8h"><span class="std std-ref">git.h</span></a>”</em></div>
+<em>#include “<a class="reference internal" href="#compile_2include_2distribution_8hpp"><span class="std std-ref">distribution.hpp</span></a>”</em></div>
 </dd></dl>
 
 <dl>
@@ -466,7 +329,7 @@
 <dt class="sig sig-object cpp">
 <span class="target" id="header_8hpp"></span><em><span class="pre">file</span></em> <span class="sig-name descname"><span class="pre">header.hpp</span></span></dt>
 <dd><div class="docutils container">
-<em>#include “<a class="reference internal" href="#git_8h"><span class="std std-ref">git.h</span></a>”</em></div>
+<em>#include “_version.hpp”</em></div>
 </dd></dl>
 
 <dl>
@@ -496,22 +359,12 @@
 
 <dl>
 <dt class="sig sig-object cpp">
-<span class="target" id="dir_eeccf6e1e610b3cd67f07c2044f9b9ed"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">out/build/default/git</span></span></dt>
-<dd></dd></dl>
-
-<dl>
-<dt class="sig sig-object cpp">
 <span class="target" id="dir_8408bad1c8b66572738be7dc5ba73ab6"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">src/header</span></span></dt>
 <dd></dd></dl>
 
 <dl>
 <dt class="sig sig-object cpp">
 <span class="target" id="dir_9e241c9e78b8c82ea4952cc67768e94a"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">src/header/include/header</span></span></dt>
-<dd></dd></dl>
-
-<dl>
-<dt class="sig sig-object cpp">
-<span class="target" id="dir_b83cff9e9d9e011fb80fb26e2e45af1b"></span><em><span class="pre">dir</span></em> <span class="sig-name descname"><span class="pre">out/build/default/git/include</span></span></dt>
 <dd></dd></dl>
 
 <dl>
