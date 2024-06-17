@@ -20,7 +20,7 @@ jobs:
   pre-commit:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -37,7 +37,7 @@ jobs:
     if: {{ '${{ !cancelled() && ! failure() }}' }}
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -97,7 +97,7 @@ jobs:
     name: {{ 'check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -179,7 +179,7 @@ jobs:
     name: {{ 'check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -269,7 +269,7 @@ jobs:
     name: {{ 'check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -339,7 +339,7 @@ jobs:
     name: {{ 'check • ${{ matrix.triplet }} • ${{ matrix.compiler }} • c++${{ matrix.std }} • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -412,7 +412,7 @@ jobs:
     name: {{ 'check • sanitizers • ${{ matrix.sanitizer }} • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -464,7 +464,7 @@ jobs:
     name: {{ 'check • valgrind • ${{ matrix.build_type }}' }}
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -530,7 +530,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -583,7 +583,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -632,7 +632,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -688,7 +688,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -747,7 +747,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -796,7 +796,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -847,7 +847,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -894,7 +894,7 @@ jobs:
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
 
@@ -994,7 +994,7 @@ jobs:
           echo "# :warning: GITHUB_TOKEN is used" >> $GITHUB_STEP_SUMMARY
           echo "The GITHUB_TOKEN is used instead of a bot token or PAT that will not emit the released publish event for triggering a released workflow." >> $GITHUB_STEP_SUMMARY
 
-      - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
           fetch-depth: 0
           token: {{ '${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}' }}
