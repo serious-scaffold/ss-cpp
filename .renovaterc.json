@@ -120,7 +120,7 @@
       "fileMatch": [
         "^\\.github/workflows/.+\\.yml$",
         "^\\.renovaterc\\.json$",
-        "^template/\\.github/workflows/.+\\.yml(\\.jinja)?$",
+        "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
         "^template/\\.renovaterc\\.json\\.jinja$"
       ],
       "matchStrings": [
