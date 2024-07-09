@@ -129,7 +129,7 @@
         "^\\.github/workflows/.+\\.yml$",
         "^\\.renovaterc\\.json$"
 [%- if repo_name == 'ss-cpp' %],
-        "^template/\\.github/workflows/.+\\.yml(\\.jinja)?$",
+        "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
         "^template/\\.renovaterc\\.json\\.jinja$"
 [%- endif %]
       ],
