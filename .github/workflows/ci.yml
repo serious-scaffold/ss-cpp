@@ -969,3 +969,13 @@ jobs:
             conventional-changelog-conventionalcommits@7
         env:
           GITHUB_TOKEN: ${{ steps.bot_token.outputs.token || secrets.PAT || secrets.GITHUB_TOKEN }}
+
+  approve:
+    runs-on: ubuntu-22.04
+    if: contains(github.event.pull_request.labels.*.name, 'auto-approval')
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: hmarr/auto-approve-action@v4
+        with:
+          review-message: Auto approved automated PR

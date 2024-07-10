@@ -59,6 +59,9 @@
       "groupName": "group vcpkg-baseline",
       "extends": ["schedule:automergeMonthly"],
       "addLabels": [
+[%- if repo_platform == 'github' %]
+        "auto-approval",
+[%- endif %]
         "vcpkg-baseline"
       ],
       "matchDepTypes": [
@@ -81,6 +84,9 @@
       "groupName": "renovate group",
       "extends": ["schedule:automergeMonthly"],
       "addLabels": [
+[%- if repo_platform == 'github' %]
+        "auto-approval",
+[%- endif %]
         "renovate"
       ],
       "matchDatasources": [
