@@ -56,6 +56,7 @@
       "groupName": "group vcpkg-baseline",
       "extends": ["schedule:automergeMonthly"],
       "addLabels": [
+        "auto-approval",
         "vcpkg-baseline"
       ],
       "matchDepTypes": [
@@ -77,6 +78,7 @@
       "groupName": "renovate group",
       "extends": ["schedule:automergeMonthly"],
       "addLabels": [
+        "auto-approval",
         "renovate"
       ],
       "matchDatasources": [
