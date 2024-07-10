@@ -100,7 +100,7 @@
       "postUpgradeTasks": {
         "commands": [
           "git stash",
-          "pip install copier==9.2.0",
+          "pip install copier==9.3.1",
           "copier update --defaults --vcs-ref {{{newVersion}}}"
         ]
       },
@@ -122,7 +122,7 @@
       "fileMatch": [
         "^\\.github/workflows/.+\\.yml$",
         "^\\.renovaterc\\.json$",
-        "^template/\\.github/workflows/.+\\.yml(\\.jinja)?$",
+        "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
         "^template/\\.renovaterc\\.json\\.jinja$"
       ],
       "matchStrings": [
