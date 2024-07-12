@@ -16,8 +16,6 @@ jobs:
       id-token: write
       issues: write
       pull-requests: write
-    needs: [pass]
-
     steps:
       - name: Generate a bot token with BOT_APP_ID
         id: bot_token
