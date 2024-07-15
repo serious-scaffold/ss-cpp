@@ -9,6 +9,7 @@ A continuously evolving basic template for cpp development.
 [![CI](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/ci.yml)
 [![CD](https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/cd.yml)
 [![Renovate](https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/renovate.yml)
+[![Semantic Release](https://github.com/serious-scaffold/ss-cpp/actions/workflows/semantic-release.yml/badge.svg)](https://github.com/serious-scaffold/ss-cpp/actions/workflows/semantic-release.yml)
 [![codecov](https://codecov.io/gh/serious-scaffold/ss-cpp/branch/master/graph/badge.svg?token=123456789)](https://codecov.io/gh/serious-scaffold/ss-cpp)
 [![Release](https://img.shields.io/github/v/release/serious-scaffold/ss-cpp)](https://github.com/serious-scaffold/ss-cpp/releases)
 
