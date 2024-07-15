@@ -23,25 +23,9 @@ set(CMAKE_CXX_EXTENSIONS
 # Source includes from vcpkg
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
-# Shared modules from # https://github.com/msclock/cmake-registry.
+# From # https://github.com/msclock/cmake-registry.
 find_package(cmake-modules REQUIRED)
-include(cmake-modules/configure/Default)
-include(cmake-modules/configure/Common)
-include(cmake-modules/configure/CheckBuildDir)
-include(cmake-modules/configure/UniqueOutputBinaryDir)
-include(cmake-modules/build/Default)
-include(cmake-modules/build/Ccache)
-include(cmake-modules/build/LinkOptimization)
-include(cmake-modules/test/Default)
-include(cmake-modules/install/Default)
-include(cmake-modules/install/Common)
-include(cmake-modules/install/InstallDependency)
-include(cmake-modules/install/Runpath)
-
-# Add _DEBUG macro
-add_debug_macro()
-
-create_uninstall_target()
+include(cmake-modules/ProjectDefault)
 
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
