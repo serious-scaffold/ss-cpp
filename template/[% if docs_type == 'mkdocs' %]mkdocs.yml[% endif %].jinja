@@ -1,0 +1,235 @@
+[% from pathjoin("includes", "variable.jinja") import repo_url with context -%]
+[% from pathjoin("includes", "variable.jinja") import page_url with context -%]
+
+site_name: {{ project_name }}
+site_description: {{ project_description }}
+site_url: https://{{ page_url() }}
+repo_url: https://{{ repo_url() }}
+repo_name: {{ repo_namespace }}/{{ repo_name }}
+copyright: Copyright &copy; {{ copyright_year }} {{ copyright_holder }}
+edit_uri: edit/master
+docs_dir: .
+
+exclude_docs: |
+  out
+  docs/includes
+[%- if repo_name == 'ss-cpp' %]
+  template
+[%- endif %]
+
+theme:
+  name: material
+
+  features:
+    - content.action.edit
+    - content.action.view
+    - content.code.copy
+    - content.code.select
+    - content.tooltips
+    - navigation.footer
+    - navigation.instant
+    - navigation.path
+    - navigation.sections
+    # - navigation.tabs
+    # - navigation.tabs.sticky
+    - navigation.top
+    - navigation.indexes
+    - toc.follow
+    # - toc.integrate
+
+  palette:
+    # Palette toggle for automatic mode
+    - media: (prefers-color-scheme)
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  languages: en
+
+  icon:
+    logo: material/book-open-page-variant
+[%- if repo_platform == 'github' %]
+    repo: fontawesome/brands/github
+[%- elif repo_platform == 'gitlab' or repo_platform == 'gitlab-self-managed' %]
+    repo: fontawesome/brands/gitlab
+[%- endif %]
+
+extra:
+  generator: false
+
+extra_css:
+  - docs/css/mkdocstrings.css
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji
+  - pymdownx.tasklist
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.snippets:
+      check_paths: true
+      auto_append:
+        - docs/includes/abbreviations.md
+  - toc:
+      permalink: ¤
+
+plugins:
+  - search
+  - same-dir
+  - git-revision-date-localized:
+      enable_creation_date: true
+      fallback_to_build_date: true
+      type: datetime
+      exclude:
+          - out/*
+[%- if compile_target != '' %]
+          - '{{ compile_target }}/*.md'
+[%- endif %]
+[%- if header_target != '' %]
+          - '{{ header_target }}/*.md'
+[%- endif %]
+[%- if exe_target != '' %]
+          - '{{ exe_target }}/*.md'
+[%- endif %]
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      htmlmin_opts:
+        remove_comments: true
+      cache_safe: true
+  - mkdoxy:
+      projects:
+        [% if compile_target != '' -%]
+        {{ compile_target }}:
+          src-dirs: src/{{ compile_target }}/include src/{{ compile_target }}/src
+          full-doc: true
+          doxy-cfg:
+            FILE_PATTERNS: '*.cpp *.h*'
+            RECURSIVE: true
+        [%- endif %]
+        [% if exe_target != '' -%]
+        {{ exe_target }}:
+          src-dirs: src/{{ exe_target }}/include src/{{ exe_target }}/src
+          full-doc: true
+          doxy-cfg:
+            FILE_PATTERNS: '*.cpp *.h*'
+            RECURSIVE: true
+        [%- endif %]
+        [% if header_target != '' -%]
+        {{ header_target }}:
+          src-dirs: src/{{ header_target }}/include
+          full-doc: true
+          doxy-cfg:
+            FILE_PATTERNS: '*.cpp *.h*'
+            RECURSIVE: true
+        [%- endif %]
+
+watch:
+  - docs
+[%- if repo_name == 'ss-cpp' %]
+  - CONTRIBUTING.md
+[%- endif %]
+  - LICENSE
+  - README.md
+  - mkdocs.yml
+
+nav:
+  - Home: docs/index.md
+  - References:
+      - {{ repo_name }} API:
+[%- if compile_target != '' %]
+          - {{ compile_target }}:
+              - Links: {{ compile_target }}/links.md
+              - Classes:
+                  - Class List: {{ compile_target }}/annotated.md
+                  - Class Index: {{ compile_target }}/classes.md
+                  - Class Hierarchy: {{ compile_target }}/hierarchy.md
+                  - Class Members: {{ compile_target }}/class_members.md
+                  - Class Member Functions: {{ compile_target }}/class_member_functions.md
+                  - Class Member Variables: {{ compile_target }}/class_member_variables.md
+                  - Class Member Typedefs: {{ compile_target }}/class_member_typedefs.md
+                  - Class Member Enumerations: {{ compile_target }}/class_member_enums.md
+              - Namespaces:
+                  - Namespace List: {{ compile_target }}/namespaces.md
+                  - Namespace Members: {{ compile_target }}/namespace_members.md
+                  - Namespace Member Functions: {{ compile_target }}/namespace_member_functions.md
+                  - Namespace Member Variables: {{ compile_target }}/namespace_member_variables.md
+                  - Namespace Member Typedefs: {{ compile_target }}/namespace_member_typedefs.md
+                  - Namespace Member Enumerations: {{ compile_target }}/namespace_member_enums.md
+              - Functions: {{ compile_target }}/functions.md
+              - Variables: {{ compile_target }}/variables.md
+              - Macros: {{ compile_target }}/macros.md
+              - Files: {{ compile_target }}/files.md
+[%- endif %]
+[%- if exe_target != '' %]
+          - {{ exe_target }}:
+              - Links: {{ exe_target }}/links.md
+              - Classes:
+                  - Class List: {{ exe_target }}/annotated.md
+                  - Class Index: {{ exe_target }}/classes.md
+                  - Class Hierarchy: {{ exe_target }}/hierarchy.md
+                  - Class Members: {{ exe_target }}/class_members.md
+                  - Class Member Functions: {{ exe_target }}/class_member_functions.md
+                  - Class Member Variables: {{ exe_target }}/class_member_variables.md
+                  - Class Member Typedefs: {{ exe_target }}/class_member_typedefs.md
+                  - Class Member Enumerations: {{ exe_target }}/class_member_enums.md
+              - Namespaces:
+                  - Namespace List: {{ exe_target }}/namespaces.md
+                  - Namespace Members: {{ exe_target }}/namespace_members.md
+                  - Namespace Member Functions: {{ exe_target }}/namespace_member_functions.md
+                  - Namespace Member Variables: {{ exe_target }}/namespace_member_variables.md
+                  - Namespace Member Typedefs: {{ exe_target }}/namespace_member_typedefs.md
+                  - Namespace Member Enumerations: {{ exe_target }}/namespace_member_enums.md
+              - Functions: {{ exe_target }}/functions.md
+              - Variables: {{ exe_target }}/variables.md
+              - Macros: {{ exe_target }}/macros.md
+              - Files: {{ exe_target }}/files.md
+[%- endif %]
+[%- if header_target != '' %]
+          - {{ header_target }}:
+              - Links: {{ header_target }}/links.md
+              - Classes:
+                  - Class List: {{ header_target }}/annotated.md
+                  - Class Index: {{ header_target }}/classes.md
+                  - Class Hierarchy: {{ header_target }}/hierarchy.md
+                  - Class Members: {{ header_target }}/class_members.md
+                  - Class Member Functions: {{ header_target }}/class_member_functions.md
+                  - Class Member Variables: {{ header_target }}/class_member_variables.md
+                  - Class Member Typedefs: {{ header_target }}/class_member_typedefs.md
+                  - Class Member Enumerations: {{ header_target }}/class_member_enums.md
+              - Namespaces:
+                  - Namespace List: {{ header_target }}/namespaces.md
+                  - Namespace Members: {{ header_target }}/namespace_members.md
+                  - Namespace Member Functions: {{ header_target }}/namespace_member_functions.md
+                  - Namespace Member Variables: {{ header_target }}/namespace_member_variables.md
+                  - Namespace Member Typedefs: {{ header_target }}/namespace_member_typedefs.md
+                  - Namespace Member Enumerations: {{ header_target }}/namespace_member_enums.md
+              - Functions: {{ header_target }}/functions.md
+              - Variables: {{ header_target }}/variables.md
+              - Macros: {{ header_target }}/macros.md
+              - Files: {{ header_target }}/files.md
+[%- endif %]

@@ -1,4 +1,4 @@
-.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-doxygen docs-requirements docs docs-check docs-linkcheck template-watch template-build
+.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-clean docs-pip-requirements docs docs-check docs-serve docs-linkcheck template-watch template-build
 
 ########################################################################################
 # Variables
@@ -64,6 +64,8 @@ test-build: cmake-configure cmake-build
 
 test-build-memcheck: test-build cmake-build-template-ExperimentalMemCheck
 
+test-build-doxygen: cmake-configure cmake-build-template-ss-cpp-doxygen
+
 test-build-test: test-build cmake-test
 
 test-build-test-install: test-build-test cmake-install cmake-uninstall
@@ -102,14 +104,15 @@ test-export-mode:
 # Documentation
 ########################################################################################
 
-docs-doxygen:
-	$(MAKE) cmake-build-template-ss-cpp-doxygen
+docs-clean:
+	cmake -E rm -rf docs/_build/html
 
-docs-requirements: docs-doxygen
+docs-pip-requirements:
 	pip install -r docs/requirements.txt
 
-docs: docs-requirements
-	cmake -E rm -rf docs/_build/html
+docs-doxygen: cmake-build-template-ss-cpp-doxygen
+
+docs: docs-pip-requirements docs-doxygen docs-clean
 	sphinx-build -T $(SPHINX_EXTRA_OPTS) -c docs docs docs/_build/html
 
 docs-check:
@@ -117,6 +120,10 @@ docs-check:
 
 docs-linkcheck:
 	$(MAKE) docs SPHINX_EXTRA_OPTS="-b linkcheck $(SPHINX_EXTRA_OPTS)"
+
+docs-serve: docs-requirements docs-clean
+	pip install sphinx-autobuild
+	sphinx-autobuild -T $(SPHINX_EXTRA_OPTS) -c docs docs docs/_build/html
 
 ########################################################################################
 # Template
@@ -127,5 +134,5 @@ template-watch:
 
 template-build:
 	find . -maxdepth 1 | grep -vE '(\.|\.git|template|includes|copier\.yml)$$' | xargs -I {} rm -r {}
-	copier copy -r HEAD --data-file includes/copier-answers-sample.yml -f . .
+	copier copy -r HEAD --data-file includes/copier-answers-sample.yml $(COPIER_EXTRA_OPTS) -f . .
 	rm -rf .copier-answers.yml

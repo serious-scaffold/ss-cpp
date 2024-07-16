@@ -22,6 +22,8 @@
 [% macro documentation_badge() -%]
   [% if docs_type == 'sphinx' -%]
 [![Documentation](https://img.shields.io/badge/Documentation-sphinx-blue)](https://{{ page_url() }})
+  [%- elif docs_type == 'mkdocs' -%]
+[![Documentation](https://img.shields.io/badge/Documentation-mkdocs-blue)](https://{{ page_url() }})
   [%- endif -%]
 [%- endmacro %]
 
