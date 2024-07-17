@@ -53,16 +53,8 @@ jobs:
       - name: Install copier
         run: pipx install copier==9.3.1
 
-      - name: Generate the project with the default value
-        run: |
-          find . -maxdepth 1 ! -name '.' \
-            ! -name 'template' \
-            ! -name 'includes' \
-            ! -name '.git' \
-            ! -name 'copier.yml' \
-            -exec rm -r {} +
-          copier copy -r HEAD -f . .
-          rm .copier-answers.yml
+      - name: Verify template
+        run: make template-build
 
       - name: Test for consistency
         run: |
