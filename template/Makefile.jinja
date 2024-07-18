@@ -52,8 +52,7 @@ cmake-configure:
 cmake-build-%:
 	cmake --build $(_PRESET_ARGS) --target $*
 
-cmake-build:
-	$(MAKE) cmake-build-all
+cmake-build: cmake-build-all
 
 cmake-test:
 	ctest $(_PRESET_ARGS)
@@ -83,17 +82,13 @@ test-valgrind:
 test-sanitizer-template-%:
 	$(MAKE) test-build-test CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DUSE_SANITIZER=$*" FRESH_CMAKE_CACHE=1
 
-test-sanitizer-address:
-	$(MAKE) test-sanitizer-template-address
+test-sanitizer-address: test-sanitizer-template-address
 
-test-sanitizer-leak:
-	$(MAKE) test-sanitizer-template-leak
+test-sanitizer-leak: test-sanitizer-template-leak
 
-test-sanitizer-memory:
-	$(MAKE) test-sanitizer-template-memory
+test-sanitizer-memory: test-sanitizer-template-memory
 
-test-sanitizer-undefined:
-	$(MAKE) test-sanitizer-template-undefined
+test-sanitizer-undefined: test-sanitizer-template-undefined
 
 test-sanitizer: test-sanitizer-template-address test-sanitizer-template-leak test-sanitizer-template-memory test-sanitizer-template-undefined
 
