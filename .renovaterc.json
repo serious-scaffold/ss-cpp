@@ -122,7 +122,7 @@
       "fileMatch": [
         "^\\.github/workflows/.+\\.yml$",
         "^\\.renovaterc\\.json$",
-        "^Makefile$",,
+        "^Makefile$",
         "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
         "^template/\\.renovaterc\\.json\\.jinja$",
         "^template/Makefile\\.jinja$",
