@@ -133,10 +133,12 @@
       "datasourceTemplate": "pypi",
       "fileMatch": [
         "^\\.github/workflows/.+\\.yml$",
-        "^\\.renovaterc\\.json$"
+        "^\\.renovaterc\\.json$",
+        "^Makefile$"
 [%- if repo_name == 'ss-cpp' %],
         "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
-        "^template/\\.renovaterc\\.json\\.jinja$"
+        "^template/\\.renovaterc\\.json\\.jinja$",
+        "^template/Makefile\\.jinja$",
 [%- endif %]
       ],
       "matchStrings": [

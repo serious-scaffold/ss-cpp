@@ -54,20 +54,17 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install docs dependencies
-        run: |
-          pip install -r docs/requirements.txt
-
       - name: Configure
         run: >
-          cmake -S . --preset=default
+          make cmake-configure CONFIGURE="
           -DCMAKE_BUILD_TYPE=RelWithDebInfo
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          "
 
       - name: Build Docs
-        run: cmake --build out/build/default --target {{ repo_name }}-docs
+        run: make docs
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4

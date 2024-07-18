@@ -53,16 +53,8 @@ jobs:
       - name: Install copier
         run: pipx install copier==9.3.1
 
-      - name: Generate the project with the default value
-        run: |
-          find . -maxdepth 1 ! -name '.' \
-            ! -name 'template' \
-            ! -name 'includes' \
-            ! -name '.git' \
-            ! -name 'copier.yml' \
-            -exec rm -r {} +
-          copier copy -r HEAD -f . .
-          rm .copier-answers.yml
+      - name: Verify template
+        run: make template-build
 
       - name: Test for consistency
         run: |
@@ -623,23 +615,20 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Install docs dependencies
-        run: |
-          pip install -r docs/requirements.txt
-
       - name: Configure CMake
         run: >
-          cmake -S . --preset=default
+          make cmake-configure CONFIGURE="
           -DCMAKE_BUILD_TYPE=RelWithDebInfo
           -DCMAKE_CXX_STANDARD=20
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
+          "
 
       - name: Checks the docs with warnings as errors
-        run: cmake --build --preset=default --target ss-cpp-docs-check
+        run: make docs-check SPHINX_EXTRA_OPTS="-n"
 
       - name: Checks the docs for broken links
-        run: cmake --build --preset=default --target ss-cpp-docs-linkcheck
+        run: make docs-linkcheck
 
 
   codecov:
