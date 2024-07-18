@@ -41,11 +41,14 @@ macro(vcpkg_configure)
   if(NOT VCPKG_EXPORT_MODE)
     _vcpkg_bootstrap(${ARGN})
     _vcpkg_skip_install_on_reconfigure()
-  else()
-    _vcpkg_export_mode(${ARGN})
   endif()
 
   _vcpkg_load_triplet()
+
+  if(VCPKG_EXPORT_MODE)
+    _vcpkg_export_mode(${ARGN})
+  endif()
+
   _vcpkg_chainload_toolchain()
   message(STATUS "vcpkg_toolchain_file:$CACHE{_VCPKG_TOOLCHAIN_FILE}")
   include("$CACHE{_VCPKG_TOOLCHAIN_FILE}")
