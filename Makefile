@@ -1,4 +1,4 @@
-.PHONY: clean pre-commit prerequisites test cmake-configure cmake-build cmake-test cmake-install cmake-uninstall template-watch template-build
+.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy docs-requirements docs docs-check docs-linkcheck template-watch template-build
 
 ########################################################################################
 # Variables
