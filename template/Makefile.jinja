@@ -111,10 +111,10 @@ docs-requirements:
 	pip install -r docs/requirements.txt
 
 docs: docs-requirements
-	$(MAKE) cmake-build-template-{{ repo_name}}-docs
+	$(MAKE) cmake-build-template-{{ repo_name }}-docs
 
 docs-template-%: docs-requirements
-	$(MAKE) cmake-build-template-{{ repo_name}}-docs-$*
+	$(MAKE) cmake-build-template-{{ repo_name }}-docs-$*
 
 docs-check: docs-template-check
 
