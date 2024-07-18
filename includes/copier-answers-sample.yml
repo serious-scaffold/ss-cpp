@@ -1,0 +1,24 @@
+# Default values for verifying the current project structure
+author_email: msclock@126.com
+author_name: msclock
+codecov_notify_builds: 1
+codecov_threshold: 5%
+compile_target: compile
+copyright_holder: Serious Scaffold
+copyright_license: MIT License
+copyright_year: 2022-2024
+create_devcontainer: true
+docs_type: sphinx
+exe_target: exe
+header_target: header
+organization_name: Serious Scaffold
+project_description: A continuously evolving basic template for cpp development.
+project_name: Serious Scaffold Cpp
+repo_name: ss-cpp
+repo_namespace: serious-scaffold
+repo_platform: github
+use_cdash: false
+use_codecov: true
+use_codeql: true
+use_conan: false
+use_cpm: false
