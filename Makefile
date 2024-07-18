@@ -71,13 +71,13 @@ test-build-test-install: test-build-test cmake-install cmake-uninstall
 test-build-test-install-ccov: test-build-test-install cmake-build-template-ccov-all
 
 test-coverage:
-	$(MAKE) test-build-test-install-ccov CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test-install-ccov CONFIGURE="-DBUILD_TESTING=ON -DCODE_COVERAGE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 test-valgrind:
-	$(MAKE) test-build-memcheck CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DUSE_VALGRIND=ON" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-memcheck CONFIGURE="-DBUILD_TESTING=ON -DUSE_VALGRIND=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 test-sanitizer-template-%:
-	$(MAKE) test-build-test CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DUSE_SANITIZER=$*" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test CONFIGURE="-DBUILD_TESTING=ON -DUSE_SANITIZER=$* $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 test-sanitizer-address: test-sanitizer-template-address
 
@@ -90,13 +90,13 @@ test-sanitizer-undefined: test-sanitizer-template-undefined
 test-sanitizer: test-sanitizer-template-address test-sanitizer-template-leak test-sanitizer-template-memory test-sanitizer-template-undefined
 
 test-cppcheck:
-	$(MAKE) test-build CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DUSE_CPPCHECK=ON" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CPPCHECK=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 test-clang-tidy:
-	$(MAKE) test-build CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DUSE_CLANGTIDY=ON" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CLANGTIDY=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 test-export-mode:
-	$(MAKE) test-build-test-install CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test-install CONFIGURE="-DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
 
 ########################################################################################
 # Documentation
