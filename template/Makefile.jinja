@@ -1,4 +1,4 @@
-.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-requirements docs docs-check docs-linkcheck
+.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-doxygen docs-requirements docs docs-check docs-linkcheck
 [%- if repo_name == "ss-cpp" %] template-watch template-build[% endif %]
 
 ########################################################################################
@@ -107,18 +107,21 @@ test-export-mode:
 # Documentation
 ########################################################################################
 
-docs-requirements:
+docs-doxygen:
+	$(MAKE) cmake-build-template-{{ repo_name }}-doxygen
+
+docs-requirements: docs-doxygen
 	pip install -r docs/requirements.txt
 
 docs: docs-requirements
-	$(MAKE) cmake-build-template-{{ repo_name }}-docs
+	cmake -E rm -rf docs/_build/html
+	sphinx-build -T $(SPHINX_EXTRA_OPTS) -c docs docs docs/_build/html
 
-docs-template-%: docs-requirements
-	$(MAKE) cmake-build-template-{{ repo_name }}-docs-$*
+docs-check:
+	$(MAKE) docs SPHINX_EXTRA_OPTS="--keep-going -W $(SPHINX_EXTRA_OPTS)"
 
-docs-check: docs-template-check
-
-docs-linkcheck: docs-template-linkcheck
+docs-linkcheck:
+	$(MAKE) docs SPHINX_EXTRA_OPTS="-b linkcheck $(SPHINX_EXTRA_OPTS)"
 
 [% if repo_name == "ss-cpp" -%]
 ########################################################################################
