@@ -46,10 +46,10 @@ _PRESET_ARGS = --preset $(PRESET)
 cmake-configure:
 	cmake -S . $(_PRESET_ARGS) $(CONFIGURE) $(if $(FRESH_CMAKE_CACHE),--fresh)
 
-cmake-build-%:
+cmake-build-template-%:
 	cmake --build $(_PRESET_ARGS) --target $*
 
-cmake-build: cmake-build-all
+cmake-build: cmake-build-template-all
 
 cmake-test:
 	ctest $(_PRESET_ARGS)
@@ -62,13 +62,13 @@ cmake-uninstall:
 
 test-build: cmake-configure cmake-build
 
-test-build-memcheck: test-build cmake-build-ExperimentalMemCheck
+test-build-memcheck: test-build cmake-build-template-ExperimentalMemCheck
 
 test-build-test: test-build cmake-test
 
 test-build-test-install: test-build-test cmake-install cmake-uninstall
 
-test-build-test-install-ccov: test-build-test-install cmake-build-ccov-all
+test-build-test-install-ccov: test-build-test-install cmake-build-template-ccov-all
 
 test-coverage:
 	$(MAKE) test-build-test-install-ccov CONFIGURE+="-DCMAKE_BUILD_TYPE=Debug -DCODE_COVERAGE=ON -DBUILD_TESTING=ON" FRESH_CMAKE_CACHE=1
@@ -106,16 +106,14 @@ docs-requirements:
 	pip install -r docs/requirements.txt
 
 docs: docs-requirements
-	$(MAKE) cmake-build-ss-cpp-docs
+	$(MAKE) cmake-build-template-ss-cpp-docs
 
-docs-%: docs-requirements
-	$(MAKE) cmake-build-ss-cpp-docs-$*
+docs-template-%: docs-requirements
+	$(MAKE) cmake-build-template-ss-cpp-docs-$*
 
-docs-check:
-	$(MAKE) cmake-build-ss-cpp-docs-check
+docs-check: docs-template-check
 
-docs-linkcheck:
-	$(MAKE) cmake-build-ss-cpp-docs-linkcheck
+docs-linkcheck: docs-template-linkcheck
 
 ########################################################################################
 # Template
