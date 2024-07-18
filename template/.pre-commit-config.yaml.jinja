@@ -50,6 +50,13 @@ repos:
     rev: v1.5.5
     hooks:
       - id: remove-tabs
+        exclude: |
+          (?x)(
+            Makefile
+[%- if repo_name == "ss-cpp" -%]
+            (\.jinja)?
+[%- endif %]$
+          )
 
   # CMake formatting
   - repo: https://github.com/cheshirekow/cmake-format-precommit
