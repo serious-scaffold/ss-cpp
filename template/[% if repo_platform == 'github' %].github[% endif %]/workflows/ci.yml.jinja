@@ -970,6 +970,10 @@ jobs:
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
           "
+
+      - name: Install copier
+        run: pipx install copier==9.3.1
+
       - name: Apply mkdocs
         run: make template-build COPIER_EXTRA_OPTS="-d docs_type=mkdocs"
 
