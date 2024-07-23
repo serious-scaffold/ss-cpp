@@ -129,9 +129,9 @@ docs-check:
 docs-linkcheck:
 	$(MAKE) docs SPHINX_EXTRA_OPTS="-b linkcheck $(SPHINX_EXTRA_OPTS)"
 
-docs-serve: docs-requirements docs-clean
-	pip install sphinx-autobuild
-	sphinx-autobuild -T $(SPHINX_EXTRA_OPTS) -c docs docs docs/_build/html
+docs-serve: docs-pip-requirements docs-doxygen docs-clean
+	python -m http.server --directory docs/_build/html &
+	watchfiles "make docs" docs src README.md LICENSE --ignore-paths docs/_build
 [%- elif docs_type == "mkdocs" -%]
 
 docs: docs-pip-requirements
