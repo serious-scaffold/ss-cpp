@@ -1,8 +1,8 @@
 #[[
-This file detechs the git commit information and sets the version number accordingly.
+This file detects the git commit information and sets the version number accordingly.
 
 Detected variables:
-  - CMAKE_PROJECT_GIT_COMMIT*: git commit information (see below)
+  - CMAKE_PROJECT_GIT_COMMIT_*: git commit information (see below)
   - CMAKE_PROJECT_VERSION: version number (major.minor.patch.tweak)
   - CMAKE_PROJECT_VERSION_<MAJOR|MINOR|PATCH|TWEAK>: version numbers (as integers)
 
