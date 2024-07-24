@@ -104,8 +104,8 @@ test-clang-tidy:
 [% if repo_name == "ss-cpp" -%]
 test-export-mode:
 	$(MAKE) test-build-test-install CONFIGURE="-DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
-[%- endif %]
 
+[% endif -%]
 ########################################################################################
 # Documentation
 ########################################################################################
@@ -142,9 +142,9 @@ docs-check:
 
 docs-serve: docs-pip-requirements
 	mkdocs serve $(MKDOCS_EXTRA_OPTS)
-[%- endif %]
+[% endif -%]
+[%- if repo_name == "ss-cpp" %]
 
-[% if repo_name == "ss-cpp" -%]
 ########################################################################################
 # Template
 ########################################################################################
