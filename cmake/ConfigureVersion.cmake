@@ -15,7 +15,7 @@ find_package(robotology-cmake-ycm REQUIRED)
 include(robotology-cmake-ycm/modules/GitInfo)
 include(robotology-cmake-ycm/modules/ExtractVersion)
 
-# Retrieve the git commit information to CMAKE_PROJECT* variables
+# Retrieve the git commit information to CMAKE_PROJECT_GIT_WT_* variables
 git_wt_info(SOURCE_DIR ${CMAKE_SOURCE_DIR} PREFIX CMAKE_PROJECT)
 
 # Rename CMAKE_PROJECT_GIT_WT_* variables to CMAKE_PROJECT_GIT_COMMIT_*
