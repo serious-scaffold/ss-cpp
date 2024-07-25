@@ -582,7 +582,6 @@ jobs:
 
 
   check-docs:
-    name: docs build and checks
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
