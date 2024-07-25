@@ -125,7 +125,7 @@
         "^Makefile$",
         "^template/.*?/workflows/.+\\.yml(\\.jinja)?$",
         "^template/\\.renovaterc\\.json\\.jinja$",
-        "^template/Makefile\\.jinja$",
+        "^template/Makefile\\.jinja$"
       ],
       "matchStrings": [
         "pipx? install.* (?<depName>.*?)==(?<currentValue>.*?)[\\s\";]"
