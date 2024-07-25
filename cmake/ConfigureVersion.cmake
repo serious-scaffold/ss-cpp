@@ -1,8 +1,10 @@
 #[[
-This file configures the version of the project based on the git commit.
+This file detects the git commit information and sets the version number accordingly.
 
-It creates a header file ${CMAKE_BINARY_DIR}/git/include with the version
-information, which can be included in the project.
+Detected variables:
+  - CMAKE_PROJECT_GIT_COMMIT_*: git commit information (see below)
+  - CMAKE_PROJECT_VERSION: version number (major.minor.patch.tweak)
+  - CMAKE_PROJECT_VERSION_<MAJOR|MINOR|PATCH|TWEAK>: version numbers (as integers)
 
 ]]
 
@@ -13,9 +15,22 @@ find_package(robotology-cmake-ycm REQUIRED)
 include(robotology-cmake-ycm/modules/GitInfo)
 include(robotology-cmake-ycm/modules/ExtractVersion)
 
-# Retrieve the git commit information to CMAKE_PROJECT* variables
-git_commit_info(SOURCE_DIR ${CMAKE_SOURCE_DIR} PREFIX CMAKE_PROJECT)
+# Retrieve the git commit information to CMAKE_PROJECT_GIT_WT_* variables
+git_wt_info(SOURCE_DIR ${CMAKE_SOURCE_DIR} PREFIX CMAKE_PROJECT)
 
+# Rename CMAKE_PROJECT_GIT_WT_* variables to CMAKE_PROJECT_GIT_COMMIT_*
+# variables
+get_cmake_property(_vars VARIABLES)
+foreach(_var IN LISTS _vars)
+  if(_var MATCHES "^CMAKE_PROJECT_GIT_WT_")
+    string(REGEX REPLACE "^CMAKE_PROJECT_GIT_WT_" "CMAKE_PROJECT_GIT_COMMIT_"
+                         new_name "${_var}")
+    set(${new_name} "${${_var}}")
+    unset(new_name)
+  endif()
+endforeach()
+
+# Set the CMAKE_PROJECT_VERSION variable
 if(NOT CMAKE_PROJECT_GIT_COMMIT_TAG)
   set(CMAKE_PROJECT_VERSION "0.0.0.0")
 else()
@@ -29,5 +44,5 @@ else()
   string(REGEX REPLACE "^v" "" CMAKE_PROJECT_VERSION "${CMAKE_PROJECT_VERSION}")
 endif()
 
-# Set major, minor, patch and tweak version numbers
+# Set the CMAKE_PROJECT_VERSION_<MAJOR|MINOR|PATCH|TWEAK> variables
 extract_version(CMAKE_PROJECT CMAKE_PROJECT REVERSE_NAME)
