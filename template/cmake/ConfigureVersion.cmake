@@ -20,30 +20,14 @@ git_wt_info(SOURCE_DIR ${CMAKE_SOURCE_DIR} PREFIX CMAKE_PROJECT)
 
 # Rename CMAKE_PROJECT_GIT_WT_* variables to CMAKE_PROJECT_GIT_COMMIT_*
 # variables
-foreach(
-  _var
-  DESCRIBE
-  DESCRIBE_CONTAINS
-  TAG
-  REVISION
-  TAG_REVISION
-  DATE_REVISION
-  AUTHOR_DATE
-  AUTHOR_TIME
-  AUTHOR_TZ
-  AUTHOR_NAME
-  AUTHOR_EMAIL
-  COMMITTER_DATE
-  COMMITTER_TIME
-  COMMITTER_TZ
-  COMMITTER_NAME
-  COMMITTER_EMAIL
-  HASH
-  HASH_SHORT
-  SUBJECT
-  BODY
-  DIRTY)
-  set(CMAKE_PROJECT_GIT_COMMIT_${_var} "${CMAKE_PROJECT_GIT_WT_${_var}}")
+get_cmake_property(_vars VARIABLES)
+foreach(_var IN LISTS _vars)
+  if(_var MATCHES "^CMAKE_PROJECT_GIT_WT_")
+    string(REGEX REPLACE "^CMAKE_PROJECT_GIT_WT_" "CMAKE_PROJECT_GIT_COMMIT_"
+                         new_name "${_var}")
+    set(${new_name} "${${_var}}")
+    unset(new_name)
+  endif()
 endforeach()
 
 # Set the CMAKE_PROJECT_VERSION variable
