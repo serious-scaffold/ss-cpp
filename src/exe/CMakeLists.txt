@@ -10,6 +10,10 @@ file(GLOB_RECURSE internal_hdrs "include/*.hpp")
 list(FILTER internal_srcs EXCLUDE REGEX "main.cpp")
 
 add_library(${target_name_internal} OBJECT)
+warn_target(${target_name_internal})
+harden_target(${target_name_internal})
+sanitize_target(${target_name_internal})
+target_code_coverage(${target_name_internal} ALL)
 
 generate_git_header(VERSION_NAMESPACE_PREFIX exe)
 
