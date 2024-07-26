@@ -2,12 +2,9 @@
 
 namespace exe {
 namespace distribution {
-inline bool is_debug() noexcept {
-#ifdef _DEBUG
-    return true;
-#else
-    return false;
-#endif
-}
+/**
+ * \return A bool represents if it is debug distribution.
+ */
+bool is_debug() noexcept;
 } // namespace distribution
 } // namespace exe
