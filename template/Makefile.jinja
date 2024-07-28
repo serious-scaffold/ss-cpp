@@ -1,4 +1,5 @@
-.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-doxygen docs-requirements docs docs-check docs-linkcheck
+.PHONY: clean prerequisites pre-commit cmake-configure cmake-build cmake-test cmake-install cmake-uninstall test-build test-build-memcheck test-build-test test-build-test-install test-build-test-install-ccov test-coverage test-valgrind test-sanitizer-address test-sanitizer-leak test-sanitizer-memory test-sanitizer-undefined test-sanitizer test-cppcheck test-clang-tidy test-export-mode docs-clean docs-pip-requirements docs docs-check docs-serve
+[%- if docs_type == "sphinx" %] docs-linkcheck[% endif %]
 [%- if repo_name == "ss-cpp" %] template-watch template-build[% endif %]
 
 ########################################################################################
@@ -67,6 +68,8 @@ test-build: cmake-configure cmake-build
 
 test-build-memcheck: test-build cmake-build-template-ExperimentalMemCheck
 
+test-build-doxygen: cmake-configure cmake-build-template-{{ repo_name }}-doxygen
+
 test-build-test: test-build cmake-test
 
 test-build-test-install: test-build-test cmake-install cmake-uninstall
@@ -101,20 +104,23 @@ test-clang-tidy:
 [% if repo_name == "ss-cpp" -%]
 test-export-mode:
 	$(MAKE) test-build-test-install CONFIGURE="-DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
-[%- endif %]
 
+[% endif -%]
 ########################################################################################
 # Documentation
 ########################################################################################
 
-docs-doxygen:
-	$(MAKE) cmake-build-template-{{ repo_name }}-doxygen
+docs-clean:
+	cmake -E rm -rf docs/_build/html
 
-docs-requirements: docs-doxygen
+docs-pip-requirements:
 	pip install -r docs/requirements.txt
 
-docs: docs-requirements
-	cmake -E rm -rf docs/_build/html
+[% if docs_type == "sphinx" -%]
+
+docs-doxygen: cmake-build-template-{{ repo_name }}-doxygen
+
+docs: docs-pip-requirements docs-doxygen docs-clean
 	sphinx-build -T $(SPHINX_EXTRA_OPTS) -c docs docs docs/_build/html
 
 docs-check:
@@ -123,7 +129,22 @@ docs-check:
 docs-linkcheck:
 	$(MAKE) docs SPHINX_EXTRA_OPTS="-b linkcheck $(SPHINX_EXTRA_OPTS)"
 
-[% if repo_name == "ss-cpp" -%]
+docs-serve: docs-pip-requirements docs-doxygen docs-clean
+	python -m http.server --directory docs/_build/html &
+	watchfiles "make docs" docs src README.md LICENSE --ignore-paths docs/_build
+[%- elif docs_type == "mkdocs" -%]
+
+docs: docs-pip-requirements
+	mkdocs build -d docs/_build/html $(MKDOCS_EXTRA_OPTS)
+
+docs-check:
+	$(MAKE) docs MKDOCS_EXTRA_OPTS="--strict $(MKDOCS_EXTRA_OPTS)"
+
+docs-serve: docs-pip-requirements
+	mkdocs serve $(MKDOCS_EXTRA_OPTS)
+[% endif -%]
+[%- if repo_name == "ss-cpp" %]
+
 ########################################################################################
 # Template
 ########################################################################################
@@ -133,6 +154,6 @@ template-watch:
 
 template-build:
 	find . -maxdepth 1 | grep -vE '(\.|\.git|template|includes|copier\.yml)$$' | xargs -I {} rm -r {}
-	copier copy -r HEAD --data-file includes/copier-answers-sample.yml -f . .
+	copier copy -r HEAD --data-file includes/copier-answers-sample.yml $(COPIER_EXTRA_OPTS) -f . .
 	rm -rf .copier-answers.yml
 [% endif -%]

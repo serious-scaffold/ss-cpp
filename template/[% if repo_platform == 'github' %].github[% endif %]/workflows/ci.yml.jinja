@@ -614,7 +614,6 @@ jobs:
 
 
   check-docs:
-    name: Docs build and checks
     runs-on: ubuntu-22.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
@@ -659,12 +658,16 @@ jobs:
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
           -DVCPKG_TARGET_TRIPLET=x64-linux
           "
-
+[% if docs_type == 'sphinx' %]
       - name: Checks the docs with warnings as errors
         run: make docs-check SPHINX_EXTRA_OPTS="-n"
 
       - name: Checks the docs for broken links
         run: make docs-linkcheck
+[%- elif docs_type =='mkdocs' %]
+      - name: Checks the docs with warnings as errors
+        run: make docs-check
+[%- endif %]
 
 [% if use_codecov == true %]
   codecov:
@@ -922,6 +925,64 @@ jobs:
 
       - name: Uninstall
         run: cmake --build --preset=default --target uninstall
+
+
+  check-mkdocs-docs:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/pip
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+
+      - uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
+        with:
+          python-version: 3.x
+
+      - name: Configure CMake
+        run: >
+          make cmake-configure CONFIGURE="
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          "
+
+      - name: Install copier
+        run: pipx install copier==9.3.1
+
+      - name: Apply mkdocs
+        run: make template-build COPIER_EXTRA_OPTS="-d docs_type=mkdocs"
+
+      - name: Checks the docs with warnings as errors
+        run: make docs-check
+
 [% endif %]
   pass:
     if: always()
@@ -943,6 +1004,7 @@ jobs:
       - check-auto-vcpkg-install
       - check-auto-detect-triplet
       - check-auto-build-type
+      - check-mkdocs-docs
 [%- endif %]
     runs-on: ubuntu-22.04
     timeout-minutes: 2
