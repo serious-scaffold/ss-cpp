@@ -1,5 +1,3 @@
-_exclude:
-  - includes
 _envops:
   block_end_string: '%]'
   block_start_string: '[%'
@@ -139,6 +137,7 @@ docs_type:
   default: sphinx
   choices:
     Sphinx: sphinx
+    MkDocs: mkdocs
   help: 'Choose the type of documentation to generate:'
   type: str
 

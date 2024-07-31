@@ -582,7 +582,6 @@ jobs:
 
 
   check-docs:
-    name: Docs build and checks
     runs-on: ubuntu-22.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
@@ -883,6 +882,64 @@ jobs:
       - name: Uninstall
         run: cmake --build --preset=default --target uninstall
 
+
+  check-mkdocs-docs:
+    runs-on: ubuntu-22.04
+    needs: [pre-commit, consistency]
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Cache
+        uses: actions/cache@0c45773b623bea8c8e75f6c82b208c3cf94ea4f9 # v4
+        with:
+          path: |
+            ~/vcpkg
+            ~/.cache/pip
+            ~/.cache/vcpkg
+          key: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+          restore-keys: x64-linux-gcc-13-${{ hashFiles('vcpkg.json') }}
+
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
+          doxygen: true
+          graphviz: true
+
+      - uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5
+        with:
+          python-version: 3.x
+
+      - name: Configure CMake
+        run: >
+          make cmake-configure CONFIGURE="
+          -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          -DCMAKE_CXX_STANDARD=20
+          -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
+          -DVCPKG_TARGET_TRIPLET=x64-linux
+          "
+
+      - name: Install copier
+        run: pipx install copier==9.3.1
+
+      - name: Apply mkdocs
+        run: make template-build COPIER_EXTRA_OPTS="-d docs_type=mkdocs"
+
+      - name: Checks the docs with warnings as errors
+        run: make docs-check
+
+
   pass:
     if: always()
     needs:
@@ -900,10 +957,18 @@ jobs:
       - check-auto-vcpkg-install
       - check-auto-detect-triplet
       - check-auto-build-type
+      - check-mkdocs-docs
     runs-on: ubuntu-22.04
     timeout-minutes: 2
+    permissions:
+      pull-requests: write
+
     steps:
       - name: Decide whether the needed jobs succeeded or failed
         uses: re-actors/alls-green@release/v1
         with:
           jobs: ${{ toJSON(needs) }}
+
+      - name: Approve pr if all jobs succeeded
+        if: contains(github.event.pull_request.labels.*.name, 'auto-approval')
+        uses: hmarr/auto-approve-action@v4
