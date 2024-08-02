@@ -9,7 +9,7 @@
       "name": "base",
       "hidden": true,
       "inherits": [
-        "ninja-multi-config",
+        "ninja",
         "vcpkg"
       ],
       "binaryDir": "${sourceDir}/out/build/${presetName}",
@@ -25,7 +25,7 @@
     {
       "name": "base",
       "hidden": true,
-      "inherits": "ninja-multi-config",
+      "inherits": "ninja",
       "configurePreset": "base"
     }
   ],
@@ -33,7 +33,7 @@
     {
       "name": "base",
       "hidden": true,
-      "inherits": "ninja-multi-config",
+      "inherits": "ninja",
       "configurePreset": "base",
       "output": {
         "outputOnFailure": true

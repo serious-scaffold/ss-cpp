@@ -1,15 +1,13 @@
 {
   "version": 6,
   "include": [
-    "base.json",
-    "generators/ninja.json"
+    "base.json"
   ],
   "configurePresets": [
     {
       "name": "default",
       "inherits": [
-        "base",
-        "ninja"
+        "base"
       ]
     }
   ],
