@@ -1,6 +1,6 @@
 # Automate Dependencies
 
-This page describes how we can be aware of and manage our dependencies and their updates using the tool renovate.
+This page describes how we can be aware of and manage our dependencies and upstream updates using the tool renovate.
 
 ## Configuration
 

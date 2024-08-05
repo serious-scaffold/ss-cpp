@@ -2,7 +2,7 @@
 
 This section will cover various hardening compilation options that can be used to build reliable secure programs.
 
-We adopts the hardening compilation options recommended referred to in the following resources:
+We adopt the hardening compilation options recommended referred to in the following resources:
 
 - <https://best.openssf.org/Compiler-Hardening-Guides/Compiler-Options-Hardening-Guide-for-C-and-C++.html>
 - <https://learn.microsoft.com/en-us/cpp/code-quality/build-reliable-secure-programs?view=msvc-170>
