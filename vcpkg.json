@@ -5,11 +5,17 @@
   "builtin-baseline": "cacf5994341f27e9a14a7b8724b0634b138ecb30",
   "homepage": "https://github.com/serious-scaffold/ss-cpp",
   "dependencies": [
+    "fmt",
     "spdlog",
     "cmake-modules",
     "robotology-cmake-ycm"
   ],
   "overrides": [
+    {
+      "name": "fmt",
+      "version": "10.2.1",
+      "port-version": 2
+    },
     {
       "name": "spdlog",
       "version": "1.13.0"
