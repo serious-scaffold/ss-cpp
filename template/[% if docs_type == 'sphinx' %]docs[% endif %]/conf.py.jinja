@@ -64,6 +64,11 @@ cpp_id_attributes = [
     "GIT_EXTERN_C_BEGIN",
 ]
 
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-the-linkcheck-builder
+linkcheck_ignore = [
+   'https://wiki.sei.cmu.edu/confluence/',
+]
+
 # -- Extension configuration -------------------------------------------------
 myst_enable_extensions = [
     "colon_fence",
