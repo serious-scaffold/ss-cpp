@@ -179,6 +179,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../topics/automate_dependencies.html">Automate Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../topics/warnings.html">Warnings</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../topics/hardening.html">Hardening</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../topics/version_header.html">Version Header</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../principles/index.html">Principles</a></li>
@@ -371,11 +372,8 @@ cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"
 <p>The generated project provides the following targets:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">all</span></code> - builds all targets in the project.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repo_name&gt;-docs</span></code> - builds the documentation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repo_name&gt;-doxygen</span></code> - generates doxygen documentation.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ccov-all</span></code> - runs the tests and generates the code coverage report.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repo_name&gt;-docs</span></code> - builds the documentation.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repo_name&gt;-docs-check</span></code> - checks the documentation with warnings as errors.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&lt;repo_name&gt;-linkcheck</span></code> - checks the documentation for broken links.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">install</span></code> - installs the project to the install directory.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uninstall</span></code> - uninstalls the project from the install directory.</p></li>
 </ul>
