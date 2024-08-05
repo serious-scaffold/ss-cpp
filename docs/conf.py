@@ -72,6 +72,9 @@ myst_enable_extensions = [
     "deflist",
 ]
 
+# https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#auto-generated-header-anchors
+myst_heading_anchors = 3
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

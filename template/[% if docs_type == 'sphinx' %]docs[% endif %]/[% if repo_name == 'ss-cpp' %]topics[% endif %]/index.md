@@ -26,3 +26,10 @@ automate_dependencies
 warnings
 hardening
 ```
+
+```{toctree}
+:maxdepth: 3
+:caption: Misc Relateds
+
+version_header
+```
