@@ -27,9 +27,6 @@ target_include_interface_directories(
   ${CMAKE_CURRENT_BINARY_DIR}/git_version # for git hash
 )
 
-target_compile_options(
-  ${target_name} PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/source-charset:utf-8>")
-
 target_link_libraries(${target_name} PRIVATE spdlog::spdlog)
 
 set_target_properties(
