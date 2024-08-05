@@ -21,7 +21,7 @@
       "name": "ninja-multi-config",
       "hidden": true,
       "configurePreset": "ninja-multi-config",
-      "configuration": "Debug"
+      "configuration": "RelWithDebInfo"
     }
   ],
   "testPresets": [
@@ -34,7 +34,7 @@
       "name": "ninja-multi-config",
       "hidden": true,
       "configurePreset": "ninja-multi-config",
-      "configuration": "Debug"
+      "configuration": "RelWithDebInfo"
     }
   ]
 }
