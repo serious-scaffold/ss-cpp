@@ -1,16 +1,17 @@
+[% from pathjoin("includes", "variable.jinja") import license_url with context -%]
 [% from pathjoin("includes", "variable.jinja") import documentation_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import license_badge with context -%]
-[% from pathjoin("includes", "variable.jinja") import license_url with context -%]
+[% from pathjoin("includes", "variable.jinja") import ss_cpp_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import pipeline_badge with context -%]
-[% from pathjoin("includes", "variable.jinja") import release_badge with context -%]
 [% from pathjoin("includes", "variable.jinja") import codecov_badge with context -%]
+[% from pathjoin("includes", "variable.jinja") import release_badge with context -%]
 # {{ project_name }}
 
 {{ project_description }}
 
 {{ documentation_badge() }}
 {{ license_badge() }}
-[![SS Cpp](https://img.shields.io/badge/Serious%20Scaffold-c++-blue)](https://github.com/serious-scaffold/ss-cpp)
+{{ ss_cpp_badge() }}
 
 {{ pipeline_badge() }}
 {{ codecov_badge() }}
