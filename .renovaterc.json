@@ -6,6 +6,8 @@
     ":enablePreCommit",
     ":maintainLockFilesWeekly"
   ],
+  "automergeType": "pr",
+  "automergeStrategy": "merge-commit",
   "platformAutomerge": true,
   "packageRules": [
     {
