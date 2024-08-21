@@ -15,7 +15,9 @@
   "buildPresets": [
     {
       "name": "ninja",
-      "hidden": true
+      "hidden": true,
+      "configurePreset": "ninja",
+      "configuration":"RelWithDebInfo"
     },
     {
       "name": "ninja-multi-config",
@@ -28,7 +30,8 @@
     {
       "name": "ninja",
       "hidden": true,
-      "configurePreset": "ninja"
+      "configurePreset": "ninja",
+      "configuration": "RelWithDebInfo"
     },
     {
       "name": "ninja-multi-config",
