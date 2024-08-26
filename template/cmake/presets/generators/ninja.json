@@ -16,8 +16,7 @@
     {
       "name": "ninja",
       "hidden": true,
-      "configurePreset": "ninja",
-      "configuration":"RelWithDebInfo"
+      "configurePreset": "ninja"
     },
     {
       "name": "ninja-multi-config",
@@ -30,8 +29,7 @@
     {
       "name": "ninja",
       "hidden": true,
-      "configurePreset": "ninja",
-      "configuration": "RelWithDebInfo"
+      "configurePreset": "ninja"
     },
     {
       "name": "ninja-multi-config",
