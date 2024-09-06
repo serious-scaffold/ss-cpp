@@ -21,7 +21,7 @@ set(CMAKE_CXX_EXTENSIONS
 # Source includes from vcpkg
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
-# From # https://github.com/msclock/cmake-registry.
+# From https://github.com/msclock/cmake-registry.
 find_package(cmake-modules REQUIRED)
 include(cmake-modules/ProjectDefault)
 
@@ -32,13 +32,4 @@ include(ConfigureVersion)
 include(ConfigureDocs)
 include(ConfigureCoverage)
 
-if(test IN_LIST VCPKG_MANIFEST_FEATURES)
-  include(ConfigureTest)
-endif()
-
 add_subdirectory(src)
-
-# Print project final information
-show_project_version()
-show_vcpkg_configuration()
-show_installation()
