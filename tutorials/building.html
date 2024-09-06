@@ -338,7 +338,7 @@ ctest<span class="w"> </span>--preset<span class="o">=</span>&lt;preset&gt;<span
 <li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_ROOT</span></code> and <code class="docutils literal notranslate"><span class="pre">VCPKG_INSTALLATION_ROOT</span></code> are same and both are optional and it’s used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_GENERATOR</span></code> is recommended to use Ninja as it’s faster than the default generator.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">VCPKG_TARGET_TRIPLET/VCPKG_HOST_TRIPLET</span></code> is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE</span></code> is optional and default is set to RelWithDebInfo by <code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/vcpkg.toolchain.cmake</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMAKE_BUILD_TYPE</span></code> is optional and default is set to Debug by <code class="docutils literal notranslate"><span class="pre">cmake/vcpkg/vcpkg.toolchain.cmake</span></code>.</p></li>
 </ul>
 </div>
 <p>Here’s an example of building the project with the specified variables:</p>
