@@ -6,12 +6,10 @@ This module initializes the build type.
 ]]
 
 if(NOT CMAKE_BUILD_TYPE)
-  message(
-    STATUS "Setting CMAKE_BUILD_TYPE to 'RelWithDebInfo' as none was specified."
-  )
+  message(STATUS "Setting CMAKE_BUILD_TYPE to 'Debug' as none was specified.")
 endif()
 set(CMAKE_BUILD_TYPE
-    RelWithDebInfo
+    Debug
     CACHE STRING "Choose the type of build.")
 
 # Set the possible values of build type for cmake-gui, ccmake

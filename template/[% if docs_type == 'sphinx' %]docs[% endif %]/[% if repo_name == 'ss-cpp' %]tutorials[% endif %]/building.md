@@ -61,7 +61,7 @@ The Table below shows the necessary variables for different platforms and config
  - `VCPKG_ROOT` and `VCPKG_INSTALLATION_ROOT` are same and both are optional and it's used to specify the path to a vcpkg installation directory. If not specified, cmake/vcpkg/vcpkg.toolchain.cmake will automatically create one for you.
  - `CMAKE_GENERATOR` is recommended to use Ninja as it's faster than the default generator.
  - `VCPKG_TARGET_TRIPLET/VCPKG_HOST_TRIPLET` is optional and it is automatically detected by cmake/vcpkg/vcpkg.toolchain.cmake if not specified.
- - `CMAKE_BUILD_TYPE` is optional and default is set to RelWithDebInfo by `cmake/vcpkg/vcpkg.toolchain.cmake`.
+ - `CMAKE_BUILD_TYPE` is optional and default is set to Debug by `cmake/vcpkg/vcpkg.toolchain.cmake`.
 ```
 
 Here's an example of building the project with the specified variables:

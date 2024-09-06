@@ -40,7 +40,7 @@ A continuously evolving basic template for cpp development.
   - Supports `code coverage` with [lcov](https://github.com/linux-test-project/lcov), [gcovr](https://github.com/gcovr/gcovr), llvm-cov, and [opencppcoverage](https://github.com/OpenCppCoverage/OpenCppCoverage).
   - Supports `hardening compilation `for MSVC, Clang, and GCC.
   - Provides compile, header, application target generation.
-  - Build with preset build types: Debug, Release, RelWithDebInfo(Default), MinSizeRel.
+  - Build with preset build types: Debug(Default), Release, RelWithDebInfo, MinSizeRel.
   - Supports package managers: [vcpkg](https://github.com/microsoft/vcpkg), [conan](https://github.com/conan-io/cmake-conan), and [cpm](https://github.com/cpm-cmake/CPM.cmake).
 - Use [cmake-registry](https://github.com/msclock/cmake-registry) to provide various cmake modules and scripts.
 - Lint tool `pre-commit` integration with various linters, including [clang-format](https://github.com/pre-commit/mirrors-clang-format), [codespell](https://github.com/codespell-project/codespell), [markdownlint](https://github.com/igorshubovych/markdownlint-cli), and more.
