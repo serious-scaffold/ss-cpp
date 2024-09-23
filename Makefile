@@ -27,7 +27,7 @@ clean:
 prerequisites:
 	pipx install --force copier==9.3.1
 	pipx install --force pre-commit==3.8.0
-	pipx install --force watchfiles==0.22.0
+	pipx install --force watchfiles==0.24.0
 
 ########################################################################################
 # Lint
