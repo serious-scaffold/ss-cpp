@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
@@ -35,7 +35,7 @@ jobs:
 [% if repo_name == 'ss-cpp' %]
   consistency:
     if: {{ '${{ !cancelled() && ! failure() }}' }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
@@ -71,7 +71,7 @@ jobs:
 [% endif %]
 
   check-on-linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -387,7 +387,7 @@ jobs:
         run: cmake --build --preset=default --target ccov-all
 
   check-sanitizers:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -441,7 +441,7 @@ jobs:
         run: ctest --preset=default
 
   check-valgrind:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -513,7 +513,7 @@ jobs:
           path: out/valgrind-results.tar.gz
 
   clang-tidy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -614,7 +614,7 @@ jobs:
 
 
   check-docs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -671,7 +671,7 @@ jobs:
 
 [% if use_codecov == true %]
   codecov:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -734,7 +734,7 @@ jobs:
 [% endif %]
 [% if repo_name == 'ss-cpp' %]
   check-export-mode:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -783,7 +783,7 @@ jobs:
 
 
   check-auto-vcpkg-install:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -834,7 +834,7 @@ jobs:
 
 
   check-auto-detect-triplet:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -881,7 +881,7 @@ jobs:
 
 
   check-auto-build-type:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -928,7 +928,7 @@ jobs:
 
 
   check-mkdocs-docs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -1006,7 +1006,7 @@ jobs:
       - check-auto-build-type
       - check-mkdocs-docs
 [%- endif %]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 2
     permissions:
       pull-requests: write
