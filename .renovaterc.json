@@ -15,9 +15,9 @@
         "action"
       ],
       "postUpgradeTasks": {
-          "commands": [
-              "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +"
-          ]
+        "commands": [
+          "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +"
+        ]
       }
     },
     {
@@ -26,7 +26,7 @@
       ],
       "postUpgradeTasks": {
         "commands": [
-          "find template -type f -exec sed -i 's|{{{depName}}}-{{{currentValue}}}|{{{depName}}}-{{{newValue}}}|g' {} +"
+          "find template -type f -regex 'template/.*\\.github.*/workflows/.*' -exec sed -i 's|{{{depName}}}-{{{currentValue}}}|{{{depName}}}-{{{newValue}}}|g' {} +"
         ]
       }
     },
@@ -134,7 +134,7 @@
       ]
     },
     {
-      "description": " Update vcpkg.json builtin-baseline with git hash",
+      "description": "Update vcpkg.json builtin-baseline with git hash",
       "customType": "regex",
       "currentValueTemplate": "master",
       "datasourceTemplate": "git-refs",
