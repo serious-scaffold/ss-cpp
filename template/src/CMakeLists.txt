@@ -4,7 +4,7 @@ file(
   ${CMAKE_CURRENT_SOURCE_DIR}/*)
 
 foreach(_sub_dir ${_sub_dirs})
-  if(IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${_sub_dir})
+  if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/${_sub_dir}/CMakeLists.txt")
     add_subdirectory(${_sub_dir})
   endif()
 endforeach()
