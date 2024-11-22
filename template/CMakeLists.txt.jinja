@@ -23,7 +23,7 @@ set(CMAKE_CXX_EXTENSIONS
 # Source includes from vcpkg
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
-# From https://github.com/msclock/cmake-registry.
+# Project default module
 find_package(cmake-modules REQUIRED)
 include(cmake-modules/ProjectDefault)
 
