@@ -566,7 +566,7 @@ jobs:
 
 
   cppcheck:
-    runs-on: macos-12
+    runs-on: ubuntu-22.04
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -585,26 +585,31 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-osx-gcc@13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-osx-gcc@13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
-      - name: Install compilers and tools # use cppcheck of macos, it's newest version
-        run: brew install gcc@13 cmake ninja ccache cppcheck
+      - uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-13
+          cmake: true
+          ninja: true
+          ccache: true
 
-      - name: Prepare for gcc@13
+      - uses: actions/setup-python@f677139bbe7f9c59b41e40162b753c062f5d49a3 # v5
+        with:
+          python-version: 3.x
+
+      - name: Install latest cppcheck
         run: |
-          echo "CC=gcc" >> $GITHUB_ENV
-          echo "CXX=g++" >> $GITHUB_ENV
+          pip install cppcheck==1.1.2
 
       - name: Configure CMake
         run: >
           cmake -S . --preset=default
           -DCMAKE_BUILD_TYPE=Debug
           -DCMAKE_CXX_STANDARD=20
-          -DCMAKE_C_COMPILER="${CC}"
-          -DCMAKE_CXX_COMPILER="${CXX}"
           -DCMAKE_COMPILE_WARNING_AS_ERROR=ON
-          -DVCPKG_TARGET_TRIPLET=x64-osx
+          -DVCPKG_TARGET_TRIPLET=x64-linux
           -DUSE_CPPCHECK=ON
           -DUSE_CPPCHECK_WARNINGS_AS_ERRORS=ON
           -DBUILD_TESTING=ON
