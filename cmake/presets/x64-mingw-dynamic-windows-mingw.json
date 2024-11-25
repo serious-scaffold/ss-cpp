@@ -31,24 +31,5 @@
       "inherits": "base",
       "configurePreset": "x64-mingw-dynamic-windows-mingw"
     }
-  ],
-  "workflowPresets": [
-    {
-      "name": "x64-mingw-dynamic-windows-mingw",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "x64-mingw-dynamic-windows-mingw"
-        },
-        {
-          "type": "build",
-          "name": "x64-mingw-dynamic-windows-mingw"
-        },
-        {
-          "type": "test",
-          "name": "x64-mingw-dynamic-windows-mingw"
-        }
-      ]
-    }
   ]
 }

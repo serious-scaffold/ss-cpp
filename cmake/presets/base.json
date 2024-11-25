@@ -20,6 +20,21 @@
         "CMAKE_BUILD_TYPE": "Debug",
         "CMAKE_VERBOSE_MAKEFILE": "FALSE"
       }
+    },
+    {
+      "name": "base-config",
+      "hidden": true,
+      "inherits": [
+        "ninja-config",
+        "vcpkg"
+      ],
+      "binaryDir": "${sourceDir}/out/build/${presetName}",
+      "installDir": "${sourceDir}/out/install/${presetName}",
+      "cacheVariables": {
+        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
+        "CMAKE_COMPILE_WARNING_AS_ERROR": false,
+        "CMAKE_VERBOSE_MAKEFILE": "FALSE"
+      }
     }
   ],
   "buildPresets": [
@@ -28,6 +43,18 @@
       "hidden": true,
       "inherits": "ninja",
       "configurePreset": "base"
+    },
+    {
+      "name": "base-config-relwithdebinfo",
+      "hidden": true,
+      "inherits": "ninja-config-relwithdebinfo",
+      "configurePreset": "base-config"
+    },
+    {
+      "name": "base-config-debug",
+      "hidden": true,
+      "inherits": "ninja-config-debug",
+      "configurePreset": "base-config"
     }
   ],
   "testPresets": [
@@ -36,6 +63,32 @@
       "hidden": true,
       "inherits": "ninja",
       "configurePreset": "base",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "base-config-relwithdebinfo",
+      "hidden": true,
+      "inherits": "ninja-config-relwithdebinfo",
+      "configurePreset": "base-config",
+      "output": {
+        "outputOnFailure": true
+      },
+      "execution": {
+        "noTestsAction": "error",
+        "stopOnFailure": true
+      }
+    },
+    {
+      "name": "base-config-debug",
+      "hidden": true,
+      "inherits": "ninja-config-debug",
+      "configurePreset": "base-config",
       "output": {
         "outputOnFailure": true
       },

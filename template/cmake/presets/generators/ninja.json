@@ -7,7 +7,7 @@
       "generator": "Ninja"
     },
     {
-      "name": "ninja-multi-config",
+      "name": "ninja-config",
       "hidden": true,
       "generator": "Ninja Multi-Config"
     }
@@ -19,9 +19,9 @@
       "configurePreset": "ninja"
     },
     {
-      "name": "ninja-multi-config",
+      "name": "ninja-config",
       "hidden": true,
-      "configurePreset": "ninja-multi-config",
+      "configurePreset": "ninja-config",
       "configuration": "RelWithDebInfo"
     }
   ],
@@ -32,9 +32,9 @@
       "configurePreset": "ninja"
     },
     {
-      "name": "ninja-multi-config",
+      "name": "ninja-config",
       "hidden": true,
-      "configurePreset": "ninja-multi-config",
+      "configurePreset": "ninja-config",
       "configuration": "RelWithDebInfo"
     }
   ]
