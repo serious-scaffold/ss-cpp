@@ -176,7 +176,7 @@ endfunction()
 macro(_vcpkg_load_triplet)
   if(NOT DEFINED VCPKG_TARGET_TRIPLET)
     message(
-      WARNING
+      STATUS
         "VCPKG_TARGET_TRIPLET is not defined, detecting triplet from the system"
     )
 
