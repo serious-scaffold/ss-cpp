@@ -19,10 +19,16 @@
       "configurePreset": "ninja"
     },
     {
-      "name": "ninja-config",
+      "name": "ninja-config-relwithdebinfo",
       "hidden": true,
       "configurePreset": "ninja-config",
       "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "ninja-config-debug",
+      "hidden": true,
+      "configurePreset": "ninja-config",
+      "configuration": "Debug"
     }
   ],
   "testPresets": [
@@ -32,10 +38,16 @@
       "configurePreset": "ninja"
     },
     {
-      "name": "ninja-config",
+      "name": "ninja-config-relwithdebinfo",
       "hidden": true,
       "configurePreset": "ninja-config",
       "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "ninja-config-debug",
+      "hidden": true,
+      "configurePreset": "ninja-config",
+      "configuration": "Debug"
     }
   ]
 }
