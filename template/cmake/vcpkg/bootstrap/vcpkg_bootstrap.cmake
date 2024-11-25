@@ -22,17 +22,14 @@ endfunction()
 function(_vcpkg_checkout vcpkg_root vcpkg_ref)
   message(STATUS "vcpkg checkout to ${vcpkg_ref}")
 
-  if(EXISTS "${vcpkg_root}/.git/shallow")
-    message(WARNING "vcpkg is shallow, unshallowing...")
-    execute_process(
-      COMMAND ${GIT_EXECUTABLE} fetch --unshallow
-      WORKING_DIRECTORY ${vcpkg_root}
-      RESULT_VARIABLE result)
+  execute_process(
+    COMMAND ${GIT_EXECUTABLE} fetch origin ${vcpkg_ref}
+    WORKING_DIRECTORY ${vcpkg_root}
+    RESULT_VARIABLE result)
 
-    if(NOT result EQUAL "0")
-      message(
-        FATAL_ERROR "${GIT_EXECUTABLE} fetch --unshallow failed with ${result}")
-    endif()
+  if(NOT result EQUAL "0")
+    message(
+      FATAL_ERROR "${GIT_EXECUTABLE} fetch ${vcpkg_ref} failed with ${result}")
   endif()
 
   execute_process(
@@ -50,7 +47,7 @@ endfunction()
 # clone
 function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
   execute_process(
-    COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root}
+    COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root} --depth=1
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     RESULT_VARIABLE result)
 
@@ -78,7 +75,24 @@ function(_vcpkg_tool_bootstrap vcpkg_root)
     RESULT_VARIABLE result)
 
   if(NOT result EQUAL "0")
-    message(FATAL_ERROR "${bootstrap_cmd} failed with ${result}")
+    if(CMAKE_HOST_UNIX)
+      message(STATUS "Retry to build vcpkg from source...")
+      set(bootstrap_impl "${vcpkg_root}/scripts/bootstrap.sh")
+      file(READ "${bootstrap_impl}" file_contents)
+      string(REPLACE [[elif [ "$ARCH" = "x86_64" ]; then]]
+                     [[elif [ "$ARCH" = "" ]; then]] file_contents
+                     "${file_contents}")
+      file(WRITE "${bootstrap_impl}" "${file_contents}")
+
+      execute_process(
+        COMMAND ${bootstrap_cmd} -disableMetrics
+        WORKING_DIRECTORY ${vcpkg_root}
+        RESULT_VARIABLE result)
+    endif()
+
+    if(NOT result EQUAL "0")
+      message(FATAL_ERROR "${bootstrap_cmd} failed with ${result}")
+    endif()
   endif()
 endfunction()
 
