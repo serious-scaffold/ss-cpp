@@ -9,6 +9,12 @@
       "inherits": [
         "base"
       ]
+    },
+    {
+      "name": "default-config",
+      "inherits": [
+        "base-config"
+      ]
     }
   ],
   "buildPresets": [
@@ -16,6 +22,16 @@
       "name": "default",
       "inherits": "base",
       "configurePreset": "default"
+    },
+    {
+      "name": "default-config-relwithdebinfo",
+      "inherits": "base-config-relwithdebinfo",
+      "configurePreset": "default-config"
+    },
+    {
+      "name": "default-config-debug",
+      "inherits": "base-config-debug",
+      "configurePreset": "default-config"
     }
   ],
   "testPresets": [
@@ -23,25 +39,16 @@
       "name": "default",
       "inherits": "base",
       "configurePreset": "default"
-    }
-  ],
-  "workflowPresets": [
+    },
     {
-      "name": "default",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "default"
-        },
-        {
-          "type": "build",
-          "name": "default"
-        },
-        {
-          "type": "test",
-          "name": "default"
-        }
-      ]
+      "name": "default-config-relwithdebinfo",
+      "inherits": "base-config-relwithdebinfo",
+      "configurePreset": "default-config"
+    },
+    {
+      "name": "default-config-debug",
+      "inherits": "base-config-debug",
+      "configurePreset": "default-config"
     }
   ]
 }

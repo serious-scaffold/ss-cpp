@@ -44,7 +44,7 @@ pre-commit:
 _PRESET_ARGS = --preset $(PRESET)
 
 cmake-configure:
-	cmake -S . $(_PRESET_ARGS) $(CONFIGURE) $(if $(FRESH_CMAKE_CACHE),--fresh)
+	cmake -S . $(_PRESET_ARGS) $(CONFIGURE)
 
 cmake-build-template-%:
 	cmake --build $(_PRESET_ARGS) --target $*
@@ -73,13 +73,13 @@ test-build-test-install: test-build-test cmake-install cmake-uninstall
 test-build-test-install-ccov: test-build-test-install cmake-build-template-ccov-all
 
 test-coverage:
-	$(MAKE) test-build-test-install-ccov CONFIGURE="-DBUILD_TESTING=ON -DCODE_COVERAGE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test-install-ccov CONFIGURE="-DBUILD_TESTING=ON -DCODE_COVERAGE=ON $(CONFIGURE) --fresh"
 
 test-valgrind:
-	$(MAKE) test-build-memcheck CONFIGURE="-DBUILD_TESTING=ON -DUSE_VALGRIND=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-memcheck CONFIGURE="-DBUILD_TESTING=ON -DUSE_VALGRIND=ON $(CONFIGURE) --fresh"
 
 test-sanitizer-template-%:
-	$(MAKE) test-build-test CONFIGURE="-DBUILD_TESTING=ON -DUSE_SANITIZER=$* $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test CONFIGURE="-DBUILD_TESTING=ON -DUSE_SANITIZER=$* $(CONFIGURE) --fresh"
 
 test-sanitizer-address: test-sanitizer-template-address
 
@@ -92,13 +92,13 @@ test-sanitizer-undefined: test-sanitizer-template-undefined
 test-sanitizer: test-sanitizer-template-address test-sanitizer-template-leak test-sanitizer-template-memory test-sanitizer-template-undefined
 
 test-cppcheck:
-	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CPPCHECK=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CPPCHECK=ON $(CONFIGURE) --fresh"
 
 test-clang-tidy:
-	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CLANGTIDY=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build CONFIGURE="-DBUILD_TESTING=ON -DUSE_CLANGTIDY=ON $(CONFIGURE) --fresh"
 
 test-export-mode:
-	$(MAKE) test-build-test-install CONFIGURE="-DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON $(CONFIGURE)" FRESH_CMAKE_CACHE=1
+	$(MAKE) test-build-test-install CONFIGURE="-DBUILD_TESTING=ON -DVCPKG_EXPORT_MODE=ON $(CONFIGURE) --fresh"
 
 ########################################################################################
 # Documentation
