@@ -36,8 +36,26 @@ function(_vcpkg_export_mode)
   message(STATUS "Disable manifest mode for using vcpkg exported artifacts")
 endfunction()
 
+macro(detect_vcpkg)
+  # Respect environment variable VCPKG_ROOT and VCPKG_INSTALLATION_ROOT if set
+  if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
+    set(_VCPKG_ROOT
+        "$ENV{VCPKG_ROOT}"
+        CACHE PATH "Vcpkg root directory" FORCE)
+  elseif(DEFINED ENV{VCPKG_INSTALLATION_ROOT}
+         AND NOT "$ENV{VCPKG_INSTALLATION_ROOT}" STREQUAL "")
+    set(_VCPKG_ROOT
+        "$ENV{VCPKG_INSTALLATION_ROOT}"
+        CACHE PATH "Vcpkg root directory" FORCE)
+  else()
+    unset(_VCPKG_ROOT CACHE)
+  endif()
+endmacro()
+
 # bootstrap and configure vcpkg
 macro(vcpkg_configure)
+  detect_vcpkg()
+
   if(NOT VCPKG_EXPORT_MODE)
     _vcpkg_bootstrap(${ARGN})
     _vcpkg_skip_install_on_reconfigure()

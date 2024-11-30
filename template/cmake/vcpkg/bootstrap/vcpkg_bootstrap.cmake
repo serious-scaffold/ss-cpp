@@ -22,14 +22,20 @@ endfunction()
 function(_vcpkg_checkout vcpkg_root vcpkg_ref)
   message(STATUS "vcpkg checkout to ${vcpkg_ref}")
 
-  execute_process(
-    COMMAND ${GIT_EXECUTABLE} fetch origin ${vcpkg_ref}
-    WORKING_DIRECTORY ${vcpkg_root}
-    RESULT_VARIABLE result)
-
-  if(NOT result EQUAL "0")
+  if(EXISTS "${vcpkg_root}/.git/shallow")
     message(
-      FATAL_ERROR "${GIT_EXECUTABLE} fetch ${vcpkg_ref} failed with ${result}")
+      WARNING
+        "vcpkg is shallow now and unshallow to retrieve the Git tree object hash for a specific version port......"
+    )
+    execute_process(
+      COMMAND ${GIT_EXECUTABLE} fetch --unshallow
+      WORKING_DIRECTORY ${vcpkg_root}
+      RESULT_VARIABLE result)
+
+    if(NOT result EQUAL "0")
+      message(
+        FATAL_ERROR "${GIT_EXECUTABLE} fetch --unshallow failed with ${result}")
+    endif()
   endif()
 
   execute_process(
@@ -47,7 +53,7 @@ endfunction()
 # clone
 function(_vcpkg_clone vcpkg_root vcpkg_repo vcpkg_ref)
   execute_process(
-    COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root} --depth=1
+    COMMAND ${GIT_EXECUTABLE} clone ${vcpkg_repo} ${vcpkg_root}
     WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     RESULT_VARIABLE result)
 
@@ -123,7 +129,7 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
 
   message(STATUS "Upgrade vcpkg")
   message(STATUS "vcpkg current commit: ${current_git_hash}")
-  message(STATUS "vcpkg release:        ${vcpkg_ref}")
+  message(STATUS "vcpkg target commit:  ${vcpkg_ref}")
 
   execute_process(
     COMMAND ${GIT_EXECUTABLE} remote set-url origin ${vcpkg_repo}
@@ -150,9 +156,7 @@ endfunction()
 
 # find root
 function(_vcpkg_find_root cache_dir_name out_vcpkg_root)
-  if(DEFINED ENV{VCPKG_ROOT} AND NOT "$ENV{VCPKG_ROOT}" STREQUAL "")
-    set(root "$ENV{VCPKG_ROOT}")
-  elseif("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
+  if("${__vcpkg_bootstrap_host}" STREQUAL "Windows")
     set(root "$ENV{LOCALAPPDATA}/vcpkg/projects/${cache_dir_name}/cache")
   else()
     set(root "$ENV{HOME}/.cache/vcpkg/projects/${cache_dir_name}")
