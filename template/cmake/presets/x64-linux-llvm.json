@@ -30,24 +30,5 @@
       "inherits": "base",
       "configurePreset": "x64-linux-llvm"
     }
-  ],
-  "workflowPresets": [
-    {
-      "name": "x64-linux-llvm",
-      "steps": [
-        {
-          "type": "configure",
-          "name": "x64-linux-llvm"
-        },
-        {
-          "type": "build",
-          "name": "x64-linux-llvm"
-        },
-        {
-          "type": "test",
-          "name": "x64-linux-llvm"
-        }
-      ]
-    }
   ]
 }
