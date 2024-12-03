@@ -8,6 +8,7 @@
   ],
   "automergeType": "pr",
   "automergeStrategy": "merge-commit",
+  "ignoreScripts": false,
   "platformAutomerge": true,
   "packageRules": [
     {
@@ -93,27 +94,6 @@
         "renovate/renovate",
         "renovatebot/pre-commit-hooks"
       ]
-    },
-    {
-      "commitMessageTopic": "serious-scaffold-cpp",
-      "matchDepTypes": [
-        "copier-template"
-      ],
-      "postUpgradeTasks": {
-        "commands": [
-          "git stash",
-          "pip install copier==9.3.1",
-          "copier update --defaults --vcs-ref {{{newVersion}}}"
-        ]
-      },
-      "semanticCommitScope": "copier-template"
-    },
-    {
-      "description": "Group apt packages to avoid failure when multiple packages are outdated.",
-      "groupName": "apt packages",
-      "matchDepTypes": [
-        "apt"
-      ]
     }
   ],
   "customManagers": [
@@ -159,19 +139,6 @@
       "matchStrings": [
         "\"baseline\": \"(?<currentDigest>.*?)\"[^}]+?\"repository\": \"(?<depName>.*?)\""
       ]
-    },
-    {
-      "customType": "regex",
-      "datasourceTemplate": "git-tags",
-      "depNameTemplate": "https://github.com/serious-scaffold/ss-cpp.git",
-      "depTypeTemplate": "copier-template",
-      "fileMatch": [
-        "^\\.copier-answers\\.yml$"
-      ],
-      "matchStrings": [
-        "_commit: (?<currentValue>.*?)\n"
-      ],
-      "versioningTemplate": "semver"
     }
   ]
 }
