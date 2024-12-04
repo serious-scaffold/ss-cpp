@@ -14,7 +14,6 @@ include_guard(GLOBAL)
 # cmake-format: off
 set(CODE_COVERAGE OFF CACHE BOOL "Enables code coverage.")
 set(CODE_COVERAGE_GCOVR_REPORT_FORMAT xml CACHE STRING "Sets the gcovr report format.")
-set(CODE_COVERAGE_LCOV_EXTRA_FLAGS "--ignore-errors=gcov" CACHE STRING "Extra flags to pass to lcov")
 
 include(cmake-modules/test/Coverage)
 
@@ -26,7 +25,7 @@ endif()
 
 # Exclude system directories from code coverage
 if(NOT CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
-  list(APPEND _excludes "/usr" "/opt")
+  list(APPEND _excludes "/usr")
 endif()
 
 add_code_coverage_all_targets(
