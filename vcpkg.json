@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A continuously evolving basic template for cpp development.",
-  "builtin-baseline": "9558037875497b9db8cf38fcd7db68ec661bffe7",
+  "builtin-baseline": "55dec59d05cd1731a06a832302e80f6105a3d482",
   "homepage": "https://github.com/serious-scaffold/ss-cpp",
   "dependencies": [
     "fmt",
@@ -44,7 +44,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "6cf777a089eb4a9b2d44bec7c59c960802fca80a",
+        "baseline": "9d739d71af31a73a6000fb1e64b7cca54a962439",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",
