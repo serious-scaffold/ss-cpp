@@ -153,7 +153,7 @@ jobs:
 
 
   check-on-macos:
-    runs-on: macos-12
+    runs-on: macos-14
     needs: [pre-commit
 [%- if repo_name == 'ss-cpp' -%]
     , consistency
@@ -163,7 +163,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        triplet: [x64-osx]
+        triplet: [arm64-osx]
         compiler: [gcc@13, llvm@17]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
