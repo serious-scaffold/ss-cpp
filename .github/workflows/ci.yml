@@ -155,7 +155,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        triplet: [x64-osx]
+        triplet: [arm64-osx]
         compiler: [gcc@13, llvm@17]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
