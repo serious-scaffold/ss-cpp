@@ -25,7 +25,7 @@ endif()
 
 # Exclude system directories from code coverage
 if(NOT CMAKE_HOST_SYSTEM_NAME MATCHES "Windows")
-  list(APPEND _excludes "/usr" "/opt")
+  list(APPEND _excludes "/usr")
 endif()
 
 add_code_coverage_all_targets(
