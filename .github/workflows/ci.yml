@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   pre-commit:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
@@ -35,7 +35,7 @@ jobs:
 
   consistency:
     if: ${{ !cancelled() && ! failure() }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
         with:
@@ -71,7 +71,7 @@ jobs:
 
 
   check-on-linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
@@ -149,13 +149,13 @@ jobs:
 
 
   check-on-macos:
-    runs-on: macos-12
+    runs-on: macos-14
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
-        triplet: [x64-osx]
+        triplet: [arm64-osx]
         compiler: [gcc@13, llvm@17]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
@@ -371,7 +371,7 @@ jobs:
         run: cmake --build --preset=default --target ccov-all
 
   check-sanitizers:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
@@ -421,7 +421,7 @@ jobs:
         run: ctest --preset=default
 
   check-valgrind:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
     strategy:
@@ -489,7 +489,7 @@ jobs:
           path: out/valgrind-results.tar.gz
 
   clang-tidy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -538,7 +538,7 @@ jobs:
 
 
   cppcheck:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -587,7 +587,7 @@ jobs:
 
 
   check-docs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -636,7 +636,7 @@ jobs:
 
 
   codecov:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -695,7 +695,7 @@ jobs:
 
 
   check-export-mode:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -744,7 +744,7 @@ jobs:
 
 
   check-auto-vcpkg-install:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -795,7 +795,7 @@ jobs:
 
 
   check-auto-detect-triplet:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -842,7 +842,7 @@ jobs:
 
 
   check-auto-build-type:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -889,7 +889,7 @@ jobs:
 
 
   check-mkdocs-docs:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
     timeout-minutes: 15
 
@@ -963,7 +963,7 @@ jobs:
       - check-auto-detect-triplet
       - check-auto-build-type
       - check-mkdocs-docs
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 2
     permissions:
       pull-requests: write
