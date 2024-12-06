@@ -5,14 +5,29 @@
 [%- if repo_name == 'ss-cpp' or repo_platform == 'github' %]
     "helpers:pinGitHubActionDigests",
 [%- endif %]
-    ":enablePreCommit",
-    ":maintainLockFilesWeekly"
+    ":enablePreCommit"
   ],
   "automergeType": "pr",
   "automergeStrategy": "merge-commit",
   "ignoreScripts": false,
   "platformAutomerge": true,
   "packageRules": [
+    {
+      "automerge": true,
+      "addLabels": [
+        "auto-approval"
+      ],
+      "extends": [
+        "schedule:earlyMondays",
+        "schedule:automergeMonthly"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ]
+    },
 [%- if repo_name == 'ss-cpp' %]
     {
       "matchDepTypes": [
@@ -60,7 +75,6 @@
     {
       "description": "Group vcpkg.json baseline with auto-update",
       "groupName": "group vcpkg-baseline",
-      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
 [%- if repo_platform == 'github' %]
         "auto-approval",
@@ -74,7 +88,6 @@
       "matchFileNames": [
         "vcpkg.json"
       ],
-      "automerge": true,
       "postUpgradeTasks": {
         "commands": [
           "find template -type f -name 'vcpkg.json.jinja' -exec sed -i {{ '\'s|{{{currentDigest}}}|{{{newDigest}}}|g\'' }} {} +"
@@ -85,18 +98,13 @@
     {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
-      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
-[%- if repo_platform == 'github' %]
-        "auto-approval",
-[%- endif %]
         "renovate"
       ],
       "matchDatasources": [
         "docker",
         "github-tags"
       ],
-      "automerge": true,
       "matchDepNames": [
 [%- if repo_platform == 'github' %]
         "ghcr.io/renovatebot/renovate",
