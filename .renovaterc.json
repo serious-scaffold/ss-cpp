@@ -70,18 +70,8 @@
       }
     },
     {
-      "description": "Group vcpkg.json baseline with auto-update",
-      "groupName": "group vcpkg-baseline",
-      "addLabels": [
-        "auto-approval",
-        "vcpkg-baseline"
-      ],
       "matchDepTypes": [
-        "vcpkg-builtin-baseline",
-        "registration-baseline"
-      ],
-      "matchFileNames": [
-        "vcpkg.json"
+        "vcpkg-baseline"
       ],
       "postUpgradeTasks": {
         "commands": [
@@ -124,12 +114,12 @@
       ]
     },
     {
-      "description": "Update vcpkg.json builtin-baseline with git hash",
+      "description": "Update microsoft vcpkg baseline",
       "customType": "regex",
       "currentValueTemplate": "master",
       "datasourceTemplate": "git-refs",
       "depNameTemplate": "https://github.com/microsoft/vcpkg",
-      "depTypeTemplate": "vcpkg-builtin-baseline",
+      "depTypeTemplate": "vcpkg-baseline",
       "fileMatch": [
         "^vcpkg\\.json$"
       ],
@@ -138,11 +128,11 @@
       ]
     },
     {
-      "description": "Update registration baseline with git hash",
+      "description": "Update custom registry baseline",
       "customType": "regex",
       "currentValueTemplate": "master",
       "datasourceTemplate": "git-refs",
-      "depTypeTemplate": "registration-baseline",
+      "depTypeTemplate": "vcpkg-baseline",
       "fileMatch": [
         "^vcpkg\\.json$"
       ],
