@@ -1,0 +1,36 @@
+ss_cmake_repo_name:
+  help: 'Provide a name for the repository:'
+  type: str
+
+ss_cmake_repo_url:
+  help: 'Provide a url for the repository:'
+  type: str
+
+ss_cmake_project_description:
+  help: 'Provide a brief description for the project:'
+  type: str
+
+ss_cmake_configure_coverage:
+  default: true
+  help: Whether to configure coverage in cmake integration for C++.
+  type: bool
+
+ss_cmake_configure_version:
+  default: true
+  help: Whether to configure to detect git version in cmake integration for C++
+  type: bool
+
+ss_cmake_configure_warnings_and_hardening:
+  default: true
+  help: Whether to configure warnings and hardening compiling options in cmake integrationo for C++
+  type: bool
+
+ss_cmake_use_cpm:
+  default: false
+  help: Whether to use CPM to manage C++ dependencies that will break up vcpkg dependency management.
+  type: bool
+
+ss_cmake_use_conan:
+  default: false
+  help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
+  type: bool

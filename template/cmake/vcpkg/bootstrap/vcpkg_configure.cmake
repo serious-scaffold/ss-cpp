@@ -52,6 +52,30 @@ macro(detect_vcpkg)
   endif()
 endmacro()
 
+# Add VCPKG_INSTALL_REPORT_FAILURE option to report vcpkg failure in detail
+function(_vcpkg_install_report_failure)
+  if(DEFINED ENV{CI} AND NOT "$ENV{CI}" STREQUAL "")
+    set(VCPKG_INSTALL_REPORT_FAILURE
+        ON
+        CACHE INTERNAL "Enable vcpkg install failure report in detail")
+  endif()
+  file(READ "$CACHE{_VCPKG_TOOLCHAIN_FILE}" _vcpkg_toolchain_content)
+  if(VCPKG_INSTALL_REPORT_FAILURE
+     AND NOT "${_vcpkg_toolchain_content}" MATCHES
+         [[VCPKG INSTALL REPORT FAILURE IN DETAIL]])
+    string(
+      REPLACE
+        [[message(STATUS "Running vcpkg install - failed")]]
+        [[message(STATUS "Running vcpkg install - failed")
+            file(READ "${CMAKE_CURRENT_BINARY_DIR}/vcpkg_installed/vcpkg/issue_body.md" issue_body_content)
+            message(STATUS "")
+            set(Z_NATIVE_VCPKG_MANIFEST_INSTALL_LOGFILE "${Z_NATIVE_VCPKG_MANIFEST_INSTALL_LOGFILE}\nVCPKG INSTALL REPORT FAILURE IN DETAIL: ${CMAKE_CURRENT_BINARY_DIR}/vcpkg_installed/vcpkg/issue_body.md\n${issue_body_content}\n")]]
+        _vcpkg_toolchain_content
+        "${_vcpkg_toolchain_content}")
+    file(WRITE "$CACHE{_VCPKG_TOOLCHAIN_FILE}" "${_vcpkg_toolchain_content}")
+  endif()
+endfunction()
+
 # bootstrap and configure vcpkg
 macro(vcpkg_configure)
   detect_vcpkg()
@@ -68,6 +92,9 @@ macro(vcpkg_configure)
   endif()
 
   _vcpkg_chainload_toolchain()
+
+  _vcpkg_install_report_failure()
+
   message(STATUS "vcpkg_toolchain_file:$CACHE{_VCPKG_TOOLCHAIN_FILE}")
   include("$CACHE{_VCPKG_TOOLCHAIN_FILE}")
 endmacro()

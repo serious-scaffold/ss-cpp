@@ -73,4 +73,48 @@ include(cmake-modules/build/CompilerFlags)
 # Hardening
 # ##############################################################################
 
+# Comment `-Wl,-z,nodlopen` for dlopen call
+if(NOT MSVC)
+  set(USE_HARDENING_FLAGS
+      -D_GLIBCXX_ASSERTIONS # Enable assertions
+      -U_FORTIFY_SOURCE # Disable stack protector
+      -D_FORTIFY_SOURCE=3 # Enable stack protector
+      -fstack-protector-strong # Enable stack protector
+      -fcf-protection # Control Flow Guard
+      -fstack-clash-protection # Control Flow Guard
+      -Wimplicit-fallthrough # Enabled in compiler flags by default
+      -fstrict-flex-arrays=3 # Enable strict array bounds
+      -Wformat # Enabled in compiler flags by default
+      -Wformat=2 # Enabled in compiler flags by default
+      # -Wl,-z,nodlopen # Restrict dlopen(3) calls to shared objects
+      -Wl,-z,noexecstack # Enable data execution prevention by marking stack
+      # memory as non-executable
+      -Wl,-z,relro # Mark relocation table entries resolved at load-time as
+      # read-only
+      -Wl,-z,now # Mark relocation table entries resolved at load-time as
+      # read-only. It impacts startup performance
+      "-fsanitize=undefined -fsanitize-minimal-runtime" # Enable minimal runtime
+      # undefined behavior sanitizer
+      -fno-delete-null-pointer-checks
+      -fno-strict-overflow
+      -fno-strict-aliasing
+      -ftrivial-auto-var-init=zero
+      -Wtrampolines # Enable trampolines(gcc only)
+      -mbranch-protection=standard # Enable indirect branches(aarch64 only)
+      CACHE STRING "Additional hardening compilation flags for GCC/Clang")
+
+  set(USE_HARDENING_LINKS
+      -fstack-protector-strong # Enable stack protector
+      "-fsanitize=undefined -fsanitize-minimal-runtime" # Enable minimal runtime
+      # undefined behavior sanitizer -Wl,-z,nodlopen # Restrict dlopen(3) calls
+      # to shared objects
+      -Wl,-z,noexecstack # Enable data execution prevention by marking stack
+      # memory as non-executable
+      -Wl,-z,relro # Mark relocation table entries resolved at load-time as
+      # read-only
+      -Wl,-z,now # Mark relocation table entries resolved at load-time as
+      # read-only. It impacts startup performance
+      CACHE STRING "Additional hardening linking flags for GCC/Clang")
+endif()
+
 include(cmake-modules/build/Hardening)

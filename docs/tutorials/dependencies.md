@@ -36,7 +36,7 @@ copier copy gh:serious-scaffold/ss-cpp /path/to/project -d use_conan=true
 
 The above command will generate a cmake module file `cmake/ConfigureConanDependencies.cmake`, which presents an example of how to use Conan to manage dependencies.
 
-```{literalinclude} ../../template/cmake/[% if use_conan == true %]ConfigureConanDependencies.cmake[% endif %]
+```{literalinclude} ../../template/cmake/[% if ss_cmake_use_conan == true %]ConfigureConanDependencies.cmake[% endif %]
 :language: cmake
 ```
 
@@ -57,6 +57,6 @@ copier copy gh:serious-scaffold/ss-cpp /path/to/project -d use_cpm=true
 The above command will generate a cmake module file `cmake/ConfigureCPMDependencies.cmake`, which presents an example of how to use CPM to manage dependencies.
 
 
-```{literalinclude} ../../template/cmake/[% if use_cpm == true %]ConfigureCPMDependencies.cmake[% endif %]
+```{literalinclude} ../../template/cmake/[% if ss_cmake_use_cpm == true %]ConfigureCPMDependencies.cmake[% endif %]
 :language: cmake
 ```

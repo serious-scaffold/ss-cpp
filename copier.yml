@@ -1,3 +1,11 @@
+---
+# Copier will load all these files
+!include includes/copier.*.yml
+---
+_exclude:
+  - .copier-answers.*.yml
+  - copier.*.yml
+
 _envops:
   block_end_string: '%]'
   block_start_string: '[%'
@@ -193,3 +201,53 @@ use_codeql:
   help: 'Whether to add codeql integration:'
   type: bool
   when: '{{ repo_platform == "github" }}'
+
+# Override ss-cmake variables
+
+ss_cmake_repo_name:
+  default: '{{ repo_name }}'
+  help: 'Provide a name for the repository:'
+  type: str
+  when: false
+
+ss_cmake_repo_url:
+  default: '[% from pathjoin("includes", "variable.jinja") import repo_url with context %]{{ repo_url() }}'
+  help: 'Provide a url for the repository:'
+  type: str
+  when: false
+
+ss_cmake_project_description:
+  default: '{{ project_description }}'
+  help: 'Provide a brief description for the project:'
+  type: str
+  when: false
+
+ss_cmake_configure_coverage:
+  default: true
+  help: Whether to configure coverage in cmake integration for C++.
+  type: bool
+  when: false
+
+ss_cmake_configure_version:
+  default: true
+  help: Whether to configure to detect git version in cmake integration for C++
+  type: bool
+  when: false
+
+ss_cmake_configure_warnings_and_hardening:
+  default: true
+  help: Whether to configure warnings and hardening compiling options in cmake integrationo for C++
+  type: bool
+  when: false
+
+ss_cmake_use_cpm:
+  default: '{{ use_cpm }}'
+  help: Whether to use CPM to manage C++ dependencies that will break up vcpkg dependency management.
+  type: bool
+  when: false
+
+ss_cmake_use_conan:
+  default: '{{ use_conan }}'
+  help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
+  type: bool
+  when: false
