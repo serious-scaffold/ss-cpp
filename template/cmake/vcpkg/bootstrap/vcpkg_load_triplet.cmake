@@ -46,7 +46,7 @@ function(_vcpkg_detect_host_triplet)
       if(_detect_osx_arch_count EQUAL "0")
         message(
           WARNING
-            "Unable to determine target architecture. "
+            "Unable to determine target architecture from ${CMAKE_OSX_ARCHITECTURES}. "
             "Consider providing a value for the CMAKE_OSX_ARCHITECTURES cache variable. "
             "Continuing without vcpkg.")
         set(VCPKG_TOOLCHAIN ON)
@@ -57,7 +57,8 @@ function(_vcpkg_detect_host_triplet)
       if(_detect_osx_arch_count GREATER "1")
         message(
           WARNING
-            "Detected more than one target architecture. Using the first one.")
+            "Detected more than one target architecture from ${CMAKE_OSX_ARCHITECTURES}. Using the first one."
+        )
       endif()
       list(GET CMAKE_OSX_ARCHITECTURES "0" _detect_osx_target_arch)
       if(_detect_osx_target_arch STREQUAL "arm64")
@@ -75,7 +76,7 @@ function(_vcpkg_detect_host_triplet)
       else()
         message(
           WARNING
-            "Unable to determine target architecture, continuing without vcpkg."
+            "Unable to determine target architecture from ${CMAKE_OSX_ARCHITECTURES}, continuing without vcpkg."
         )
         set(VCPKG_TOOLCHAIN ON)
         cmake_policy(POP)
@@ -96,6 +97,8 @@ function(_vcpkg_detect_host_triplet)
         OR CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "AMD64"
         OR CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "amd64")
         set(_detect_target_triplet_arch x64)
+      elseif(CMAKE_HOST_SYSTEM_PROCESSOR MATCHES "^i.86$")
+        set(_detect_target_triplet_arch x86)
       elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "s390x")
         set(_detect_target_triplet_arch s390x)
       elseif(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "ppc64le")
@@ -115,7 +118,7 @@ function(_vcpkg_detect_host_triplet)
       else()
         message(
           WARNING
-            "Unable to determine target architecture, continuing without vcpkg."
+            "Unable to determine target architecture from ${CMAKE_HOST_SYSTEM_PROCESSOR}, continuing without vcpkg."
         )
         set(VCPKG_TOOLCHAIN ON)
         cmake_policy(POP)
@@ -166,6 +169,12 @@ function(_vcpkg_detect_host_triplet)
 
   if(NOT _detect_target_triplet_arch STREQUAL ""
      AND NOT _detect_target_triplet_plat STREQUAL "")
+    set(VCPKG_DETECT_TRIPLET_ARCH
+        ${_detect_target_triplet_arch}
+        PARENT_SCOPE)
+    set(VCPKG_DETECT_TRIPLET_PLAT
+        ${_detect_target_triplet_plat}
+        PARENT_SCOPE)
     set(VCPKG_HOST_TRIPLET
         "${_detect_target_triplet_arch}-${_detect_target_triplet_plat}"
         PARENT_SCOPE)
