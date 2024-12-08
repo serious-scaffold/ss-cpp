@@ -975,5 +975,5 @@ jobs:
           jobs: ${{ toJSON(needs) }}
 
       - name: Approve pr if all jobs succeeded
-        if: contains(github.event.pull_request.labels.*.name, 'auto-approval')
+        if: contains(github.event.pull_request.labels.*.name, 'auto-approval') && contains(github.actor, '[bot]')
         uses: hmarr/auto-approve-action@v4

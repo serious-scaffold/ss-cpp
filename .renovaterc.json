@@ -3,14 +3,29 @@
   "extends": [
     "config:recommended",
     "helpers:pinGitHubActionDigests",
-    ":enablePreCommit",
-    ":maintainLockFilesWeekly"
+    ":enablePreCommit"
   ],
   "automergeType": "pr",
   "automergeStrategy": "merge-commit",
   "ignoreScripts": false,
   "platformAutomerge": true,
   "packageRules": [
+    {
+      "automerge": true,
+      "addLabels": [
+        "auto-approval"
+      ],
+      "extends": [
+        "schedule:earlyMondays",
+        "schedule:automergeMonthly"
+      ],
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ]
+    },
     {
       "matchDepTypes": [
         "action"
@@ -57,7 +72,6 @@
     {
       "description": "Group vcpkg.json baseline with auto-update",
       "groupName": "group vcpkg-baseline",
-      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
         "auto-approval",
         "vcpkg-baseline"
@@ -69,7 +83,6 @@
       "matchFileNames": [
         "vcpkg.json"
       ],
-      "automerge": true,
       "postUpgradeTasks": {
         "commands": [
           "find template -type f -name 'vcpkg.json.jinja' -exec sed -i 's|{{{currentDigest}}}|{{{newDigest}}}|g' {} +"
@@ -79,16 +92,13 @@
     {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
-      "extends": ["schedule:automergeMonthly"],
       "addLabels": [
-        "auto-approval",
         "renovate"
       ],
       "matchDatasources": [
         "docker",
         "github-tags"
       ],
-      "automerge": true,
       "matchDepNames": [
         "ghcr.io/renovatebot/renovate",
         "renovate/renovate",
