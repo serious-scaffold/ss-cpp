@@ -734,7 +734,7 @@ jobs:
           token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
           fail_ci_if_error: true
           disable_search: true
-          file: ./out/build/default/code_coverage/coverage.info
+          files: ./out/build/default/code_coverage/coverage.info
           verbose: true
 [% endif %]
 [% if repo_name == 'ss-cpp' %]
