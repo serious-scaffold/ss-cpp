@@ -1,6 +1,6 @@
 ---
 # Copier will load all these files
-!include includes/copier.*.yml
+!include template/copier.*.yml
 ---
 _exclude:
   - .copier-answers.*.yml
