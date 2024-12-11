@@ -70,16 +70,6 @@
       }
     },
     {
-      "matchDepTypes": [
-        "vcpkg-baseline"
-      ],
-      "postUpgradeTasks": {
-        "commands": [
-          "find template -type f -name 'vcpkg.json.jinja' -exec sed -i 's|{{{currentDigest}}}|{{{newDigest}}}|g' {} +"
-        ]
-      }
-    },
-    {
       "description": "Group renovate docker tag and pre-commit-hooks tag",
       "groupName": "renovate group",
       "addLabels": [
@@ -121,7 +111,8 @@
       "depNameTemplate": "https://github.com/microsoft/vcpkg",
       "depTypeTemplate": "vcpkg-baseline",
       "fileMatch": [
-        "^vcpkg\\.json$"
+        "^vcpkg\\.json$",
+        "^template/vcpkg\\.json\\.jinja$"
       ],
       "matchStrings": [
         "\"builtin-baseline\": \"(?<currentDigest>.*?)\""
@@ -134,7 +125,8 @@
       "datasourceTemplate": "git-refs",
       "depTypeTemplate": "vcpkg-baseline",
       "fileMatch": [
-        "^vcpkg\\.json$"
+        "^vcpkg\\.json$",
+        "^template/vcpkg\\.json\\.jinja$"
       ],
       "matchStrings": [
         "\"baseline\": \"(?<currentDigest>.*?)\"[^}]+?\"repository\": \"(?<depName>.*?)\""
