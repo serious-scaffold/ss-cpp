@@ -40,12 +40,12 @@
 [%- if use_cpm == true %]
     {
       "name": "cmake-cpm",
-      "version": "0.38.6#2"
+      "version": "0.40.2#2"
     },
 [%- endif %]
     {
       "name": "cmake-modules",
-      "version": "1.6.8"
+      "version": "1.6.11"
     },
     {
       "name": "robotology-cmake-ycm",
@@ -67,13 +67,13 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "a1d862fc6df3883df4516ccdd0c204d14cf4dc64",
+        "baseline": "09ae1472980f5e2132654900bb48061444b1cea5",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
-[%- if use_conan == true %]
+[%- if ss_cmake_use_conan == true %]
           "cmake-conan",
 [%- endif %]
-[%- if use_cpm == true %]
+[%- if ss_cmake_use_cpm == true %]
           "cmake-cpm",
 [%- endif %]
           "cmake-modules",
