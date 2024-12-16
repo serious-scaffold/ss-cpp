@@ -13,7 +13,7 @@
 [%- if use_conan == true %]
     "cmake-conan",
 [%- endif %]
-[%- if ss_cmake_use_cpm == true %]
+[%- if use_cpm == true %]
     "cmake-cpm",
 [%- endif %]
     "cmake-modules",
@@ -37,10 +37,10 @@
       "version": "0.18.1"
     },
 [%- endif %]
-[%- if ss_cmake_use_cpm == true %]
+[%- if use_cpm == true %]
     {
       "name": "cmake-cpm",
-      "version": "0.38.6#2"
+      "version": "0.40.2#2"
     },
 [%- endif %]
     {
