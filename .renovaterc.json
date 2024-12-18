@@ -32,7 +32,8 @@
       ],
       "postUpgradeTasks": {
         "commands": [
-          "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +"
+          "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentDigest}}} # {{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +",
+          "find template -type f -exec sed -i -E 's/{{{replace \"/\" \"\\/\" depName}}}(.*)@{{{currentValue}}}/{{{replace \"/\" \"\\/\" depName}}}\\1@{{{newDigest}}} # {{{newValue}}}/g' {} +"
         ]
       }
     },
