@@ -1,0 +1,28 @@
+ss_license_project_name:
+  help: 'Enter the name of the project in CamelCase format:'
+  type: str
+
+ss_license_project_description:
+  help: 'Provide a brief description for the project:'
+  type: str
+
+ss_license_copyright_license:
+  choices:
+    - Apache Software License
+    - Boost Software License 1.0 (BSL-1.0)
+    - GNU Affero General Public License v3
+    - GNU General Public License v3 (GPLv3)
+    - GNU Lesser General Public License v3 (LGPLv3)
+    - MIT License
+    - Mozilla Public License 2.0 (MPL 2.0)
+    - The Unlicense (Unlicense)
+  help: Choose the project's license (e.g. "MIT", "GPL-3.0").
+  type: str
+
+ss_license_copyright_year:
+  help: Enter the copyright year or range (e.g. "2023", "2023-2024").
+  type: str
+
+ss_license_copyright_holder:
+  help: Name(s) or organization(s) holding the copyright.
+  type: str
