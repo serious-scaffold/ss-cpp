@@ -73,9 +73,8 @@ jobs:
   check-on-linux:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         triplet: [x64-linux]
         compiler: [gcc-13, llvm-17]
@@ -151,9 +150,8 @@ jobs:
   check-on-macos:
     runs-on: macos-14
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         triplet: [arm64-osx]
         compiler: [gcc@13, llvm@17]
@@ -237,9 +235,8 @@ jobs:
   check-on-windows:
     runs-on: windows-2022
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         triplet: [x64-windows]
         compiler: [msvc-2022, llvm-17]
@@ -303,9 +300,8 @@ jobs:
   check-mingw:
     runs-on: windows-2022
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         triplet: [x64-mingw-dynamic]
         compiler: [mingw]
@@ -373,9 +369,8 @@ jobs:
   check-sanitizers:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         sanitizer:
           - address,undefined
@@ -423,9 +418,8 @@ jobs:
   check-valgrind:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
+
     strategy:
-      fail-fast: false
       matrix:
         build_type: [Debug, RelWithDebInfo]
 
@@ -491,7 +485,6 @@ jobs:
   clang-tidy:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -540,7 +533,6 @@ jobs:
   cppcheck:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -589,7 +581,6 @@ jobs:
   check-docs:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -638,7 +629,6 @@ jobs:
   codecov:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -697,7 +687,6 @@ jobs:
   check-export-mode:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -746,7 +735,6 @@ jobs:
   check-auto-vcpkg-install:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -797,7 +785,6 @@ jobs:
   check-auto-detect-triplet:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -844,7 +831,6 @@ jobs:
   check-auto-build-type:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
@@ -891,7 +877,6 @@ jobs:
   check-mkdocs-docs:
     runs-on: ubuntu-24.04
     needs: [pre-commit, consistency]
-    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
