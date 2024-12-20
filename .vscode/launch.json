@@ -11,7 +11,7 @@
       "program": "${command:cmake.launchTargetPath}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${fileDirname}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
       "environment": [],
       "console": "integratedTerminal"
     },
@@ -22,7 +22,7 @@
       "program": "${command:cmake.launchTargetPath}",
       "args": [],
       "stopAtEntry": false,
-      "cwd": "${fileDirname}",
+      "cwd": "${command:cmake.launchTargetDirectory}",
       "environment": [],
       "externalConsole": false,
       "MIMode": "gdb",
