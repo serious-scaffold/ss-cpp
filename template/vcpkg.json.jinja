@@ -1,17 +1,9 @@
-[%- from pathjoin("includes", "variable.jinja") import repo_url with context -%]
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-<<<<<<< before updating
-  "name": "{{ repo_name }}",
-  "description": "{{ project_description }}",
-  "builtin-baseline": "4b6c50d962cc20aaa3ef457f8ba683b586263cfb",
-  "homepage": "https://{{ repo_url() }}",
-=======
   "name": "{{ ss_cmake_repo_name }}",
   "description": "{{ ss_cmake_project_description }}",
   "builtin-baseline": "4b6c50d962cc20aaa3ef457f8ba683b586263cfb",
   "homepage": "https://{{ ss_cmake_repo_url }}",
->>>>>>> after updating
   "dependencies": [
 [%- if compile_target != '' or exe_target != '' or header_target != '' %]
     "fmt",
@@ -52,11 +44,7 @@
 [%- endif %]
     {
       "name": "cmake-modules",
-<<<<<<< before updating
-      "version": "1.6.11"
-=======
       "version": "1.6.13"
->>>>>>> after updating
     },
     {
       "name": "robotology-cmake-ycm",
@@ -78,11 +66,7 @@
     "registries": [
       {
         "kind": "git",
-<<<<<<< before updating
-        "baseline": "09ae1472980f5e2132654900bb48061444b1cea5",
-=======
         "baseline": "acce0190fabf75096d6be7db6138cb714bc7aace",
->>>>>>> after updating
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
 [%- if ss_cmake_use_conan == true %]

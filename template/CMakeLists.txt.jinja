@@ -1,49 +1,30 @@
-[%- from pathjoin("includes", "variable.jinja") import repo_url with context -%]
-
 cmake_minimum_required(VERSION 3.25)
 message(STATUS "CMAKE VERSION:${CMAKE_VERSION}")
 
 project(
-  {{ repo_name }}
+  {{ ss_cmake_repo_name }}
   LANGUAGES CXX C
-  HOMEPAGE_URL "https://{{ repo_url() }}"
-  DESCRIPTION "{{ project_description }}")
+  HOMEPAGE_URL "https://{{ ss_cmake_repo_url }}"
+  DESCRIPTION "{{ ss_cmake_project_description }}")
 
-<<<<<<< before updating
-set(CMAKE_CXX_STANDARD
-    20
-    CACHE STRING "C++ standard")
-set(CMAKE_CXX_STANDARD_REQUIRED
-    ON
-    CACHE BOOL "C++ standard required")
-set(CMAKE_CXX_EXTENSIONS
-    OFF
-    CACHE BOOL "C++ extensions")
-
-# Source includes from vcpkg
-include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
-
-=======
->>>>>>> after updating
 # Project default module
 find_package(cmake-modules REQUIRED)
 include(cmake-modules/ProjectDefault)
 
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-<<<<<<< before updating
-include(ConfigureWarningsAndHardening)
-=======
 [%- if ss_cmake_configure_version == true %]
->>>>>>> after updating
 include(ConfigureVersion)
-include(ConfigureDocs)
+[%- endif %]
+[%- if ss_cmake_configure_coverage == true %]
 include(ConfigureCoverage)
-[%- if use_cpm == true %]
+[%- endif %]
+[%- if ss_cmake_use_cpm == true %]
 include(ConfigureCPMDependencies)
 [%- endif %]
-[%- if use_conan == true %]
+[%- if ss_cmake_use_conan == true %]
 include(ConfigureConanDependencies)
 [%- endif %]
+include(ConfigureDocs)
 
 add_subdirectory(src)
