@@ -9,6 +9,7 @@ project(
   HOMEPAGE_URL "https://{{ repo_url() }}"
   DESCRIPTION "{{ project_description }}")
 
+<<<<<<< before updating
 set(CMAKE_CXX_STANDARD
     20
     CACHE STRING "C++ standard")
@@ -22,13 +23,19 @@ set(CMAKE_CXX_EXTENSIONS
 # Source includes from vcpkg
 include_directories(${VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}/include)
 
+=======
+>>>>>>> after updating
 # Project default module
 find_package(cmake-modules REQUIRED)
 include(cmake-modules/ProjectDefault)
 
 # Project custom modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+<<<<<<< before updating
 include(ConfigureWarningsAndHardening)
+=======
+[%- if ss_cmake_configure_version == true %]
+>>>>>>> after updating
 include(ConfigureVersion)
 include(ConfigureDocs)
 include(ConfigureCoverage)

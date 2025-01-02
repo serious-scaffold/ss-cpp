@@ -1,26 +1,27 @@
 #[[
-This file configures the following things:
-  - dynamic tools: sanitizers, valgrind.
-  - static tools: clang-tidy, cppcheck.
-  - compiler flags
-  - hardening options
-
+ProjectOptions.cmake - Defines project-specific options for CMake.
 ]]
 
-include_guard(GLOBAL)
+set(CMAKE_CXX_STANDARD
+    20
+    CACHE STRING "C++ standard")
+set(CMAKE_CXX_STANDARD_REQUIRED
+    ON
+    CACHE BOOL "C++ standard required")
+set(CMAKE_CXX_EXTENSIONS
+    OFF
+    CACHE BOOL "C++ extensions")
 
 # ##############################################################################
-# Sanitizer
+# Sanitizer - cmake-modules/build/Sanitizer.cmake
 # ##############################################################################
 
 set(USE_SANITIZER
     OFF
     CACHE BOOL "Enable sanitizer")
 
-include(cmake-modules/build/Sanitizer)
-
 # ##############################################################################
-# Valgrind
+# Valgrind - cmake-modules/test/Valgrind.cmake
 # ##############################################################################
 
 set(USE_VALGRIND
@@ -37,20 +38,16 @@ set(USE_VALGRIND_OPTIONS
                         # Valgrind is unacceptably slow.
     CACHE STRING "valgrind options.")
 
-include(cmake-modules/test/Valgrind)
-
 # ##############################################################################
-# Clang-Tidy
+# Clang-Tidy - cmake-modules/build/ClangTidy.cmake
 # ##############################################################################
 
 set(USE_CLANGTIDY
     OFF
     CACHE BOOL "Enable Clang-Tidy")
 
-include(cmake-modules/build/ClangTidy)
-
 # ##############################################################################
-# Cppcheck
+# Cppcheck - cmake-modules/build/Cppcheck.cmake
 # ##############################################################################
 
 set(USE_CPPCHECK
@@ -61,16 +58,8 @@ set(USE_CPPCHECK_SUPPRESSION_FILE
     CACHE STRING
           "Customize the path to the Cppcheck suppressions file of the project")
 
-include(cmake-modules/build/Cppcheck)
-
 # ##############################################################################
-# CompilerFlags
-# ##############################################################################
-
-include(cmake-modules/build/CompilerFlags)
-
-# ##############################################################################
-# Hardening
+# Hardening - cmake-modules/build/Hardening.cmake
 # ##############################################################################
 
 # Comment `-Wl,-z,nodlopen` for dlopen call
@@ -105,9 +94,8 @@ if(NOT MSVC)
 
   set(USE_HARDENING_LINKS
       -fstack-protector-strong # Enable stack protector
-      "-fsanitize=undefined -fsanitize-minimal-runtime" # Enable minimal runtime
-      # undefined behavior sanitizer -Wl,-z,nodlopen # Restrict dlopen(3) calls
-      # to shared objects
+      "-fsanitize=undefined -fsanitize-minimal-runtime"
+      # -Wl,-z,nodlopen # Restrict dlopen(3) calls to shared objects
       -Wl,-z,noexecstack # Enable data execution prevention by marking stack
       # memory as non-executable
       -Wl,-z,relro # Mark relocation table entries resolved at load-time as
@@ -116,5 +104,3 @@ if(NOT MSVC)
       # read-only. It impacts startup performance
       CACHE STRING "Additional hardening linking flags for GCC/Clang")
 endif()
-
-include(cmake-modules/build/Hardening)
