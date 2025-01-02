@@ -27,5 +27,4 @@ set(VCPKG_VERBOSE
 
 file(READ ${CMAKE_SOURCE_DIR}/vcpkg.json _vcpkg_json)
 string(JSON _builtin_baseline GET ${_vcpkg_json} builtin-baseline)
-vcpkg_configure(CACHE_DIR_NAME ss-cpp REPO
-                https://github.com/microsoft/vcpkg.git REF ${_builtin_baseline})
+vcpkg_configure(CACHE_DIR_NAME ss-cpp REF ${_builtin_baseline})

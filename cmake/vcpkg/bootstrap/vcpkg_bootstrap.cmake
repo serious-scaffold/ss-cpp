@@ -188,6 +188,10 @@ function(_vcpkg_bootstrap)
                   "${arg_UNPARSED_ARGUMENTS}")
   endif()
 
+  if(NOT DEFINED arg_REPO)
+    set(arg_REPO https://github.com/microsoft/vcpkg.git)
+  endif()
+
   find_package(Git QUIET REQUIRED)
 
   if(DEFINED CACHE{_VCPKG_ROOT})

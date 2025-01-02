@@ -11,43 +11,5 @@
       "hidden": true,
       "generator": "Ninja Multi-Config"
     }
-  ],
-  "buildPresets": [
-    {
-      "name": "ninja",
-      "hidden": true,
-      "configurePreset": "ninja"
-    },
-    {
-      "name": "ninja-config-relwithdebinfo",
-      "hidden": true,
-      "configurePreset": "ninja-config",
-      "configuration": "RelWithDebInfo"
-    },
-    {
-      "name": "ninja-config-debug",
-      "hidden": true,
-      "configurePreset": "ninja-config",
-      "configuration": "Debug"
-    }
-  ],
-  "testPresets": [
-    {
-      "name": "ninja",
-      "hidden": true,
-      "configurePreset": "ninja"
-    },
-    {
-      "name": "ninja-config-relwithdebinfo",
-      "hidden": true,
-      "configurePreset": "ninja-config",
-      "configuration": "RelWithDebInfo"
-    },
-    {
-      "name": "ninja-config-debug",
-      "hidden": true,
-      "configurePreset": "ninja-config",
-      "configuration": "Debug"
-    }
   ]
 }
