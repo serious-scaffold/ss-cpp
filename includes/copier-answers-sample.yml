@@ -14,6 +14,7 @@ header_target: header
 organization_name: Serious Scaffold
 project_description: A continuously evolving basic template for cpp development.
 project_name: Serious Scaffold Cpp
+repo_host: github.com
 repo_name: ss-cpp
 repo_namespace: serious-scaffold
 repo_platform: github

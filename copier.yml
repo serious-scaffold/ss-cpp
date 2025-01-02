@@ -109,7 +109,6 @@ repo_host:
     [%- endif %]
   help: 'Specify the host of the self-managed GitLab:'
   type: str
-  when: '{{ repo_platform == "gitlab-self-managed" }}'
 
 page_host:
   default: |-

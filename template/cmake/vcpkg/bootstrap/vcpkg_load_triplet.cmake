@@ -207,19 +207,22 @@ macro(_vcpkg_load_triplet)
   set(_community_triplet "triplets/community/${VCPKG_TARGET_TRIPLET}.cmake")
 
   if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/${_triplet}")
-    include("${CMAKE_CURRENT_LIST_DIR}/${_triplet}")
+    set(_load_triplet "${CMAKE_CURRENT_LIST_DIR}/${_triplet}")
   elseif(EXISTS "${_VCPKG_ROOT}/${_triplet}")
-    include("${_VCPKG_ROOT}/${_triplet}")
-  elseif(EXISTS "${CMAKE_CURRENT_LIST_DIR}/${_community_triplet}")
-    include("${CMAKE_CURRENT_LIST_DIR}/${_community_triplet}")
+    set(_load_triplet "${_VCPKG_ROOT}/${_triplet}")
   elseif(EXISTS "${_VCPKG_ROOT}/${_community_triplet}")
-    include("${_VCPKG_ROOT}/${_community_triplet}")
+    set(_load_triplet "${_VCPKG_ROOT}/${_community_triplet}")
   else()
     message(
       FATAL_ERROR
         "Triplet ${VCPKG_TARGET_TRIPLET} not found at ${CMAKE_CURRENT_LIST_DIR}/${_triplet} or ${_VCPKG_ROOT}/${_triplet}"
     )
   endif()
+
+  message(STATUS "Loading triplet: ${_load_triplet}")
+  include(${_load_triplet})
+
   unset(_triplet)
   unset(_community_triplet)
+  unset(_load_triplet)
 endmacro(_vcpkg_load_triplet)

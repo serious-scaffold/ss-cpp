@@ -32,6 +32,11 @@
       "name": "default-config-debug",
       "inherits": "base-config-debug",
       "configurePreset": "default-config"
+    },
+    {
+      "name": "default-config-release",
+      "inherits": "base-config-release",
+      "configurePreset": "default-config"
     }
   ],
   "testPresets": [
@@ -48,6 +53,11 @@
     {
       "name": "default-config-debug",
       "inherits": "base-config-debug",
+      "configurePreset": "default-config"
+    },
+    {
+      "name": "default-config-release",
+      "inherits": "base-config-release",
       "configurePreset": "default-config"
     }
   ]

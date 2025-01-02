@@ -6,62 +6,67 @@
   ],
   "configurePresets": [
     {
+      "name": "base-common",
+      "hidden":true,
+      "binaryDir":"${sourceDir}/out/build/${presetName}",
+      "installDir":"${sourceDir}/out/install/${presetName}",
+      "cacheVariables":{
+        "CMAKE_COMPILE_WARNING_AS_ERROR":false,
+        "CMAKE_EXPORT_COMPILE_COMMANDS":true,
+        "CMAKE_VERBOSE_MAKEFILE":"FALSE"
+      }
+    },
+    {
       "name": "base",
       "hidden": true,
       "inherits": [
+        "base-common",
         "ninja",
         "vcpkg"
       ],
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
       "cacheVariables": {
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_COMPILE_WARNING_AS_ERROR": false,
-        "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_VERBOSE_MAKEFILE": "FALSE"
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     },
     {
       "name": "base-config",
       "hidden": true,
       "inherits": [
+        "base-common",
         "ninja-config",
         "vcpkg"
-      ],
-      "binaryDir": "${sourceDir}/out/build/${presetName}",
-      "installDir": "${sourceDir}/out/install/${presetName}",
-      "cacheVariables": {
-        "CMAKE_EXPORT_COMPILE_COMMANDS": true,
-        "CMAKE_COMPILE_WARNING_AS_ERROR": false,
-        "CMAKE_VERBOSE_MAKEFILE": "FALSE"
-      }
+      ]
     }
   ],
   "buildPresets": [
     {
       "name": "base",
       "hidden": true,
-      "inherits": "ninja",
       "configurePreset": "base"
-    },
-    {
-      "name": "base-config-relwithdebinfo",
-      "hidden": true,
-      "inherits": "ninja-config-relwithdebinfo",
-      "configurePreset": "base-config"
     },
     {
       "name": "base-config-debug",
       "hidden": true,
-      "inherits": "ninja-config-debug",
-      "configurePreset": "base-config"
+      "configurePreset": "base-config",
+      "configuration": "Debug"
+    },
+    {
+      "name": "base-config-relwithdebinfo",
+      "hidden": true,
+      "configurePreset": "base-config",
+      "configuration": "RelWithDebInfo"
+    },
+    {
+      "name": "base-config-release",
+      "hidden": true,
+      "configurePreset": "base-config",
+      "configuration": "Release"
     }
   ],
   "testPresets": [
     {
       "name": "base",
       "hidden": true,
-      "inherits": "ninja",
       "configurePreset": "base",
       "output": {
         "outputOnFailure": true
@@ -74,28 +79,29 @@
     {
       "name": "base-config-relwithdebinfo",
       "hidden": true,
-      "inherits": "ninja-config-relwithdebinfo",
+      "inherits": [
+        "base"
+      ],
       "configurePreset": "base-config",
-      "output": {
-        "outputOnFailure": true
-      },
-      "execution": {
-        "noTestsAction": "error",
-        "stopOnFailure": true
-      }
+      "configuration": "RelWithDebInfo"
     },
     {
       "name": "base-config-debug",
       "hidden": true,
-      "inherits": "ninja-config-debug",
+      "inherits": [
+        "base"
+      ],
       "configurePreset": "base-config",
-      "output": {
-        "outputOnFailure": true
-      },
-      "execution": {
-        "noTestsAction": "error",
-        "stopOnFailure": true
-      }
+      "configuration": "Debug"
+    },
+    {
+      "name": "base-config-release",
+      "hidden": true,
+      "inherits": [
+        "base"
+      ],
+      "configurePreset": "base-config",
+      "configuration": "Release"
     }
   ]
 }
