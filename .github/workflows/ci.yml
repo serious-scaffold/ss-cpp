@@ -561,7 +561,7 @@ jobs:
 
       - name: Install latest cppcheck
         run: |
-          pip install cppcheck==1.4.6
+          pip install cppcheck==1.4.7
 
       - name: Configure CMake
         run: >
