@@ -206,17 +206,14 @@ use_codeql:
 
 ss_cmake_repo_name:
   default: '{{ repo_name }}'
-  type: str
   when: false
 
 ss_cmake_repo_url:
   default: '[% from pathjoin("includes", "variable.jinja") import repo_url with context %]{{ repo_url() }}'
-  type: str
   when: false
 
 ss_cmake_project_description:
   default: '{{ project_description }}'
-  type: str
   when: false
 
 ss_cmake_configure_coverage:
@@ -235,12 +232,12 @@ ss_cmake_configure_warnings_and_hardening:
   when: false
 
 ss_cmake_use_cpm:
-  default: '{{ use_cpm }}'
+  default: '{{ use_cpm == true }}'
   type: bool
   when: false
 
 ss_cmake_use_conan:
-  default: '{{ use_conan }}'
+  default: '{{ use_conan == true }}'
   type: bool
   when: false
 
@@ -248,25 +245,20 @@ ss_cmake_use_conan:
 
 ss_license_project_name:
   default: '{{ project_name }}'
-  type: str
   when: false
 
 ss_license_project_description:
   default: '{{ project_description }}'
-  type: str
   when: false
 
 ss_license_copyright_license:
   default: '{{ copyright_license }}'
-  type: str
   when: false
 
 ss_license_copyright_year:
   default: '{{ copyright_year }}'
-  type: str
   when: false
 
 ss_license_copyright_holder:
   default: '{{ copyright_holder }}'
-  type: str
   when: false
