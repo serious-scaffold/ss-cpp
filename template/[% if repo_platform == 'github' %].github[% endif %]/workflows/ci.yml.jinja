@@ -81,7 +81,7 @@ jobs:
     strategy:
       matrix:
         triplet: [x64-linux]
-        compiler: [gcc-13, llvm-17]
+        compiler: [gcc-14, llvm-18]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
@@ -162,7 +162,7 @@ jobs:
     strategy:
       matrix:
         triplet: [arm64-osx]
-        compiler: [gcc@13, llvm@17]
+        compiler: [gcc@14, llvm@18]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
@@ -184,7 +184,7 @@ jobs:
 
       - name: Install compilers and tools
         run: |
-          brew install {{ '${{ matrix.compiler }}' }} cmake ninja ccache
+          brew install {{ '${{ matrix.compiler }}' }} cmake ninja ccache lcov
 
       - name: Prepare PATH for compilers
         run: echo "PATH=/usr/local/opt/{{ '${{ matrix.compiler }}' }}/bin:$PATH" >> $GITHUB_ENV
@@ -203,13 +203,6 @@ jobs:
           compiler={{ '${{ matrix.compiler }}' }}
           gcov_version=${compiler##*@}
           echo "GCOV=$(which gcov-$gcov_version)" >> $GITHUB_ENV
-
-      - name: Prepare for lcov
-        if: contains(matrix.compiler, 'gcc')
-        run: |
-          curl -o /tmp/lcov.rb https://raw.githubusercontent.com/Homebrew/homebrew-core/e92d2ae54954ebf485b484d8522104700b144fee/Formula/lcov.rb
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install --formula /tmp/lcov.rb
-          brew pin lcov
 
       - name: Configure CMake
         run: >
@@ -251,7 +244,7 @@ jobs:
     strategy:
       matrix:
         triplet: [x64-windows]
-        compiler: [msvc-2022, llvm-17]
+        compiler: [msvc-2022, llvm-18]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
@@ -409,12 +402,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -460,12 +453,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -525,12 +518,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -577,12 +570,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -630,12 +623,12 @@ jobs:
             ~/vcpkg
             ~/.cache/pip
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -685,12 +678,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -698,7 +691,7 @@ jobs:
       - name: Prepare for lcov
         run: |
           sudo apt-get update; sudo apt-get install lcov -y
-          gcc_compiler=gcc-13
+          gcc_compiler=gcc-14
           gcov_version=${gcc_compiler##*-}
           sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-$gcov_version 100
 
@@ -743,12 +736,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -791,12 +784,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -841,12 +834,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -887,12 +880,12 @@ jobs:
           path: |
             ~/vcpkg
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
@@ -939,12 +932,12 @@ jobs:
             ~/vcpkg
             ~/.cache/pip
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
