@@ -39,12 +39,12 @@ jobs:
             ~/vcpkg
             ~/.cache/pip
             ~/.cache/vcpkg
-          key: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
-          restore-keys: x64-linux-gcc-13-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          key: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
+          restore-keys: x64-linux-gcc-14-{{ '${{ hashFiles(\'vcpkg.json\') }}' }}
 
       - uses: aminya/setup-cpp@v1
         with:
-          compiler: gcc-13
+          compiler: gcc-14
           cmake: true
           ninja: true
           ccache: true
