@@ -111,6 +111,34 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
     return()
   endif()
 
+  # Check .gitconfig on linux or windows
+  if(EXISTS "$ENV{HOME}/.gitconfig" OR EXISTS "$ENV{USERPROFILE}/.gitconfig")
+    execute_process(
+      COMMAND ${GIT_EXECUTABLE} config --get-all safe.directory
+      WORKING_DIRECTORY ${vcpkg_root}
+      OUTPUT_VARIABLE safe_directory
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      RESULT_VARIABLE result)
+
+    if(NOT result EQUAL "0")
+      message(FATAL_ERROR "failed to get git safe directory")
+    endif()
+  endif()
+
+  if(NOT DEFINED safe_directory
+     OR (DEFINED safe_directory AND NOT safe_directory MATCHES "${vcpkg_root}"))
+    message(STATUS "vcpkg root is not in the git safe directory, adding...")
+
+    execute_process(
+      COMMAND ${GIT_EXECUTABLE} config --global safe.directory ${vcpkg_root}
+      WORKING_DIRECTORY ${vcpkg_root}
+      RESULT_VARIABLE result)
+
+    if(NOT result EQUAL "0")
+      message(FATAL_ERROR "${GIT_EXECUTABLE} config failed with ${result}")
+    endif()
+  endif()
+
   execute_process(
     COMMAND ${GIT_EXECUTABLE} rev-parse HEAD
     WORKING_DIRECTORY ${vcpkg_root}
@@ -210,4 +238,16 @@ function(_vcpkg_bootstrap)
   endif()
 
   _vcpkg_set_cache_variables("${vcpkg_root}")
+
+  # Make sure downloads folder is 755 on linux
+  if(CMAKE_HOST_UNIX)
+    execute_process(
+      COMMAND chmod 755 ${vcpkg_root}/downloads
+      WORKING_DIRECTORY ${vcpkg_root}
+      RESULT_VARIABLE result)
+
+    if(NOT result EQUAL "0")
+      message(STATUS "failed to chmod 755 ${vcpkg_root}/downloads")
+    endif()
+  endif()
 endfunction()
