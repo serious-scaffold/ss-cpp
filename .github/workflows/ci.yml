@@ -177,6 +177,7 @@ jobs:
       - name: Install compilers and tools
         run: |
           brew install ${{ matrix.compiler }} cmake ninja ccache lcov
+          brew link ${{ matrix.compiler }} --force
 
       - name: Prepare PATH for compilers
         run: echo "PATH=/usr/local/opt/${{ matrix.compiler }}/bin:$PATH" >> $GITHUB_ENV
@@ -184,14 +185,18 @@ jobs:
       - name: Prepare for llvm
         if: contains(matrix.compiler, 'llvm')
         run: |
+          clang --version
+          clang++ --version
           echo "CC=clang" >> $GITHUB_ENV
           echo "CXX=clang++" >> $GITHUB_ENV
 
       - name: Prepare for gcc
         if: contains(matrix.compiler, 'gcc')
         run: |
-          echo "CC=gcc" >> $GITHUB_ENV
-          echo "CXX=g++" >> $GITHUB_ENV
+          gcc-14 --version
+          g++-14 --version
+          echo "CC=gcc-14" >> $GITHUB_ENV
+          echo "CXX=g++-14" >> $GITHUB_ENV
           compiler=${{ matrix.compiler }}
           gcov_version=${compiler##*@}
           echo "GCOV=$(which gcov-$gcov_version)" >> $GITHUB_ENV
@@ -506,7 +511,7 @@ jobs:
 
       - name: Install latest clang-tidy
         run: |
-          pip install clang-tidy==19.1.0.1
+          pip install clang-tidy==20.1.0
 
       - name: Configure CMake
         run: >

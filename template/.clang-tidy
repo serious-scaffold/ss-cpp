@@ -36,6 +36,7 @@ Checks: >
   -misc-non-private-member-variables-in-classes,
   -misc-throw-by-value-catch-by-reference,
   -misc-use-anonymous-namespace,
+  -misc-use-internal-linkage,
   -misc-include-cleaner,
   -misc-unused-using-decls,
   -modernize-avoid-c-arrays,

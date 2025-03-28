@@ -1,0 +1,9 @@
+module;
+
+export module {{ compile_module_target }};
+
+namespace {{ compile_module_target }} {
+namespace distribution {
+export bool is_debug() noexcept;
+} // namespace distribution
+} // namespace {{ compile_module_target }}

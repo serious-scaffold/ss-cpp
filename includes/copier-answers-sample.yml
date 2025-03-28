@@ -4,6 +4,7 @@ author_name: msclock
 codecov_notify_builds: 1
 codecov_threshold: 5%
 compile_target: compile
+compile_module_target: compile_module
 copyright_holder: Serious Scaffold
 copyright_license: MIT License
 copyright_year: 2022-2024

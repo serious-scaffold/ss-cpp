@@ -179,6 +179,11 @@ compile_target:
   help: Add a compile lib target, and skip leaving it empty.
   type: str
 
+compile_module_target:
+  default: compile_module
+  help: Add a compile module lib target, and skip leaving it empty.
+  type: str
+
 use_codecov:
   default: true
   help: 'Whether to add codecov integration:'
