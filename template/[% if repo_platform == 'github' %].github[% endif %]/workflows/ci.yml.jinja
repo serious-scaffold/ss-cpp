@@ -24,7 +24,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.11
 
@@ -46,12 +46,12 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.11
 
       - name: Install copier
-        run: pipx install copier==9.5.0
+        run: pipx install copier==9.6.0
 
       - name: Verify template
         run: make template-build
@@ -342,7 +342,7 @@ jobs:
           ninja: true
           ccache: true
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.x
 
@@ -494,7 +494,7 @@ jobs:
 
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: valgrind-results
           path: out/valgrind-results.tar.gz
@@ -528,7 +528,7 @@ jobs:
           ninja: true
           ccache: true
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.x
 
@@ -580,13 +580,13 @@ jobs:
           ninja: true
           ccache: true
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.x
 
       - name: Install latest cppcheck
         run: |
-          pip install cppcheck==1.4.7
+          pip install cppcheck==1.5.0
 
       - name: Configure CMake
         run: >
@@ -635,7 +635,7 @@ jobs:
           doxygen: true
           graphviz: true
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.x
 
@@ -944,7 +944,7 @@ jobs:
           doxygen: true
           graphviz: true
 
-      - uses: actions/setup-python@42375524e23c412d93fb67b49958b491fce71c38 # v5
+      - uses: actions/setup-python@8d9ed9ac5c53483de85588cdf95a591a75ab9f55 # v5
         with:
           python-version: 3.x
 
@@ -958,7 +958,7 @@ jobs:
           "
 
       - name: Install copier
-        run: pipx install copier==9.5.0
+        run: pipx install copier==9.6.0
 
       - name: Apply mkdocs
         run: make template-build COPIER_EXTRA_OPTS="-d docs_type=mkdocs"
