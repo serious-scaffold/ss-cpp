@@ -28,7 +28,7 @@ jobs:
       - name: Generate a token with GitHub App if App ID exists
         id: generate-token
         if: vars.BOT_APP_ID
-        uses: actions/create-github-app-token@3ff1caaa28b64c9cc276ce0a02e2ff584f3900c5 # v2
+        uses: actions/create-github-app-token@v2
         with:
           app-id: ${{ vars.BOT_APP_ID }}
           private-key: ${{ secrets.BOT_PRIVATE_KEY }}
