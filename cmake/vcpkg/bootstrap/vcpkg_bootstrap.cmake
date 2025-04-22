@@ -119,10 +119,6 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
       OUTPUT_VARIABLE safe_directory
       OUTPUT_STRIP_TRAILING_WHITESPACE
       RESULT_VARIABLE result)
-
-    if(NOT result EQUAL "0")
-      message(FATAL_ERROR "failed to get git safe directory")
-    endif()
   endif()
 
   if(NOT DEFINED safe_directory
@@ -131,6 +127,7 @@ function(_vcpkg_upgrade vcpkg_root vcpkg_repo vcpkg_ref)
 
     execute_process(
       COMMAND ${GIT_EXECUTABLE} config --global safe.directory ${vcpkg_root}
+              --append
       WORKING_DIRECTORY ${vcpkg_root}
       RESULT_VARIABLE result)
 

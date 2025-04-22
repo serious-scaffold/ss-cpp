@@ -15,7 +15,6 @@
         "mingw",
         "x64-mingw-dynamic"
       ]
-
     }
   ],
   "buildPresets": [
