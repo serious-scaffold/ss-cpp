@@ -164,6 +164,14 @@ use_conan:
   help: Whether to use conan to manage C++ dependencies that will break up vcpkg dependency management.
   type: bool
 
+unit_test:
+  default: catch2
+  choices:
+    GoogleTest: gtest
+    Catch2: catch2
+  help: 'Choose the unit test framework:'
+  type: str
+
 exe_target:
   default: exe
   help: Add an executable target, and skip leaving it empty.

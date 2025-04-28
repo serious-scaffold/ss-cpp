@@ -1,8 +1,18 @@
+[%- if unit_test == 'gtest' -%]
 #include "gtest/gtest.h"
+[%- elif unit_test == 'catch2' -%]
+#include "catch.hpp"
+[%- endif %]
 
 #include "{{ header_target }}/{{ header_target }}.hpp"
+[%- if unit_test == 'gtest' %]
 
 TEST({{ header_target }}, version) {
-    const auto* const version = git_ProjectVersion();
-    EXPECT_STRNE(version, "");
+    EXPECT_TRUE(!{{ header_target }}::ProjectVersion().empty());
 }
+[%- elif unit_test == 'catch2' %]
+
+TEST_CASE("{{ header_target }}_version", "[{{ header_target }}]") {
+    REQUIRE(!{{ header_target }}::ProjectVersion().empty());
+}
+[%- endif %]

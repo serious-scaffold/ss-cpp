@@ -1,8 +1,7 @@
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
 #include "header/header.hpp"
 
-TEST(header, version) {
-    const auto* const version = git_ProjectVersion();
-    EXPECT_STRNE(version, "");
+TEST_CASE("header_version", "[header]") {
+    REQUIRE(!header::ProjectVersion().empty());
 }

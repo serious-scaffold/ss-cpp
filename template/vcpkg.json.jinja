@@ -55,10 +55,17 @@
     "test": {
       "description": "Dependencies for testing",
       "dependencies": [
+[%- if unit_test == 'gtest' %]
         {
           "name": "gtest",
           "version>=": "1.14.0"
         }
+[%- elif unit_test == 'catch2' %]
+        {
+          "name": "catch2",
+          "version>=": "3.7.1"
+        }
+[%- endif %]
       ]
     }
   },
