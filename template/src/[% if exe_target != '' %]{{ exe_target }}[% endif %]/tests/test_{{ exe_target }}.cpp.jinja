@@ -1,12 +1,23 @@
+[%- if unit_test == 'gtest' -%]
 #include "gtest/gtest.h"
+[%- elif unit_test == 'catch2' -%]
+#include "catch.hpp"
+[%- endif %]
 
 #include "_version.hpp"
 #include "distribution.hpp"
+[%- if unit_test == 'gtest' %]
 
 TEST({{ exe_target }}, version) {
-    const auto* const version = git_ProjectVersion();
-    EXPECT_STRNE(version, "");
+    EXPECT_TRUE(!{{ exe_target }}::ProjectVersion().empty());
 }
+[%- elif unit_test == 'catch2' %]
+
+TEST_CASE("{{ exe_target }}_version", "[{{ exe_target }}]") {
+    REQUIRE(!{{ exe_target }}::ProjectVersion().empty());
+}
+[%- endif %]
+[%- if unit_test == 'gtest' %]
 
 TEST({{ exe_target }}, distribution) {
     const auto is_debug = {{ exe_target }}::distribution::is_debug();
@@ -16,3 +27,14 @@ TEST({{ exe_target }}, distribution) {
     EXPECT_FALSE(is_debug);
 #endif
 }
+[%- elif unit_test == 'catch2' %]
+
+TEST_CASE("{{ exe_target }}_distribution", "[{{ exe_target }}]") {
+    const auto is_debug = {{ exe_target }}::distribution::is_debug();
+#ifdef _DEBUG
+    REQUIRE(is_debug == true);
+#else
+    REQUIRE(is_debug == false);
+#endif
+}
+[%- endif %]

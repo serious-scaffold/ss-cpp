@@ -1,18 +1,17 @@
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
 #include "_version.hpp"
 #include "distribution.hpp"
 
-TEST(exe, version) {
-    const auto* const version = git_ProjectVersion();
-    EXPECT_STRNE(version, "");
+TEST_CASE("exe_version", "[exe]") {
+    REQUIRE(!exe::ProjectVersion().empty());
 }
 
-TEST(exe, distribution) {
+TEST_CASE("exe_distribution", "[exe]") {
     const auto is_debug = exe::distribution::is_debug();
 #ifdef _DEBUG
-    EXPECT_TRUE(is_debug);
+    REQUIRE(is_debug == true);
 #else
-    EXPECT_FALSE(is_debug);
+    REQUIRE(is_debug == false);
 #endif
 }

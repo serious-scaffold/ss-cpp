@@ -1,17 +1,16 @@
-#include "gtest/gtest.h"
+#include "catch.hpp"
 
 #include "compile.hpp"
 
-TEST(compile, version) {
-    const auto* const version = git_ProjectVersion();
-    EXPECT_STRNE(version, "");
+TEST_CASE("compile_version", "[compile]") {
+    REQUIRE(!compile::ProjectVersion().empty());
 }
 
-TEST(compile, distribution) {
+TEST_CASE("compile_distribution", "[compile]") {
     const auto is_debug = compile::distribution::is_debug();
 #ifdef _DEBUG
-    EXPECT_TRUE(is_debug);
+    REQUIRE(is_debug == true);
 #else
-    EXPECT_FALSE(is_debug);
+    REQUIRE(is_debug == false);
 #endif
 }

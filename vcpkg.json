@@ -34,8 +34,8 @@
       "description": "Dependencies for testing",
       "dependencies": [
         {
-          "name": "gtest",
-          "version>=": "1.14.0"
+          "name": "catch2",
+          "version>=": "3.7.1"
         }
       ]
     }
