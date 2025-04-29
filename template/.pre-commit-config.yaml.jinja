@@ -66,6 +66,17 @@ repos:
         additional_dependencies: [pyyaml]
         types: [file]
         files: (\.cmake|CMakeLists.txt)(.in)?$
+        exclude: |
+          (?x)(
+              ^(cmake/vcpkg/ports/.*) |
+              ^(cmake/vcpkg/triplets/.*) |
+              ^(cmake/vcpkg/scripts/toolchains/.*)
+[%- if repo_name ==  'ss-cpp' %] |
+              ^(template/cmake/vcpkg/ports/.*) |
+              ^(template/cmake/vcpkg/triplets/.*) |
+              ^(template/cmake/vcpkg/scripts/toolchains/.*)
+[%- endif %]
+          )
 
   # Check for spelling
   - repo: https://github.com/codespell-project/codespell
