@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A continuously evolving basic template for cpp development.",
-  "builtin-baseline": "856505bb767458c99d8e3c3ed441f59a058d3687",
+  "builtin-baseline": "41c447cc210dc39aa85d4a5f58b4a1b9e573b3dc",
   "homepage": "https://github.com/serious-scaffold/ss-cpp",
   "dependencies": [
     "fmt",
@@ -34,8 +34,8 @@
       "description": "Dependencies for testing",
       "dependencies": [
         {
-          "name": "gtest",
-          "version>=": "1.14.0"
+          "name": "catch2",
+          "version>=": "3.7.1"
         }
       ]
     }
@@ -44,7 +44,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "4a7f3c0787dc6f43569ddf94f965759b1b53e1a1",
+        "baseline": "72847990e168d014e2918e26218e4ae492f5b569",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",

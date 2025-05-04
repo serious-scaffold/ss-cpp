@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "{{ ss_cmake_repo_name }}",
   "description": "{{ ss_cmake_project_description }}",
-  "builtin-baseline": "856505bb767458c99d8e3c3ed441f59a058d3687",
+  "builtin-baseline": "41c447cc210dc39aa85d4a5f58b4a1b9e573b3dc",
   "homepage": "https://{{ ss_cmake_repo_url }}",
   "dependencies": [
 [%- if compile_target != '' or exe_target != '' or header_target != '' %]
@@ -55,10 +55,17 @@
     "test": {
       "description": "Dependencies for testing",
       "dependencies": [
+[%- if unit_test == 'gtest' %]
         {
           "name": "gtest",
           "version>=": "1.14.0"
         }
+[%- elif unit_test == 'catch2' %]
+        {
+          "name": "catch2",
+          "version>=": "3.7.1"
+        }
+[%- endif %]
       ]
     }
   },
@@ -66,7 +73,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "4a7f3c0787dc6f43569ddf94f965759b1b53e1a1",
+        "baseline": "72847990e168d014e2918e26218e4ae492f5b569",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
 [%- if ss_cmake_use_conan == true %]

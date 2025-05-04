@@ -1,16 +1,34 @@
+[%- if unit_test == 'gtest' -%]
 find_package(GTest CONFIG REQUIRED)
+[%- elif unit_test == 'catch2' -%]
+find_package(Catch2 CONFIG REQUIRED)
+[%- endif %]
+[%- if unit_test == 'gtest' %]
 
 include(GoogleTest)
+[%- elif unit_test == 'catch2' %]
+
+include(Catch)
+[%- endif %]
 
 file(GLOB files "*.cpp")
 
 foreach(_file ${files})
   get_filename_component(file_basename ${_file} NAME_WE)
   add_executable(${file_basename} ${_file})
-  target_link_libraries(${file_basename} PRIVATE GTest::gtest_main {{ compile_target }})
+[%- if unit_test == 'gtest' %]
+  target_link_libraries(${file_basename} PRIVATE GTest::gtest_main)
+[%- elif unit_test == 'catch2' %]
+  target_link_libraries(${file_basename} PRIVATE Catch2::Catch2WithMain)
+[%- endif %]
+  target_link_libraries(${file_basename} PRIVATE ${target_name})
   warn_target(${file_basename})
   harden_target(${file_basename})
   sanitize_target(${file_basename})
   target_code_coverage(${file_basename} ALL)
+[%- if unit_test == 'gtest' %]
   gtest_discover_tests(${file_basename})
+[%- elif unit_test == 'catch2' %]
+  catch_discover_tests(${file_basename})
+[%- endif %]
 endforeach()

@@ -18,6 +18,7 @@ repo_host: github.com
 repo_name: ss-cpp
 repo_namespace: serious-scaffold
 repo_platform: github
+unit_test: catch2
 use_cdash: false
 use_codecov: true
 use_codeql: true

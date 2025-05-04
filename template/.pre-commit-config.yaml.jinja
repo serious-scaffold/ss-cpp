@@ -66,6 +66,17 @@ repos:
         additional_dependencies: [pyyaml]
         types: [file]
         files: (\.cmake|CMakeLists.txt)(.in)?$
+        exclude: |
+          (?x)(
+              ^(cmake/vcpkg/ports/.*) |
+              ^(cmake/vcpkg/triplets/.*) |
+              ^(cmake/vcpkg/scripts/toolchains/.*)
+[%- if repo_name ==  'ss-cpp' %] |
+              ^(template/cmake/vcpkg/ports/.*) |
+              ^(template/cmake/vcpkg/triplets/.*) |
+              ^(template/cmake/vcpkg/scripts/toolchains/.*)
+[%- endif %]
+          )
 
   # Check for spelling
   - repo: https://github.com/codespell-project/codespell
@@ -85,7 +96,7 @@ repos:
 
   # Clang format the codebase automatically
   - repo: https://github.com/pre-commit/mirrors-clang-format
-    rev: v20.1.0
+    rev: v20.1.3
     hooks:
       - id: clang-format
         types_or: [c++, c, cuda]
