@@ -5,7 +5,7 @@
     ":enablePreCommit"
   ],
   "automergeType": "pr",
-  "automergeStrategy": "merge-commit",
+  "automergeStrategy": "squash",
   "ignoreScripts": false,
   "platformAutomerge": false,
   "packageRules": [
