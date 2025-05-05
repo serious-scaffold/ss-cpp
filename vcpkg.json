@@ -13,12 +13,11 @@
   "overrides": [
     {
       "name": "fmt",
-      "version": "10.2.1",
-      "port-version": 2
+      "version": "11.2.0"
     },
     {
       "name": "spdlog",
-      "version": "1.13.0"
+      "version": "1.15.2"
     },
     {
       "name": "cmake-modules",
