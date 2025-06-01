@@ -43,7 +43,7 @@
     "registries": [
       {
         "kind": "git",
-        "baseline": "72847990e168d014e2918e26218e4ae492f5b569",
+        "baseline": "5909aec4d2a472ab4c734832c7391926bce7ce18",
         "repository": "https://github.com/msclock/cmake-registry",
         "packages": [
           "cmake-modules",
