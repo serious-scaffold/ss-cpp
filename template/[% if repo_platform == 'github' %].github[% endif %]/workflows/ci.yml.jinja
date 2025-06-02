@@ -712,7 +712,7 @@ jobs:
         run: cmake --build --preset=default --target ccov-all
 
       - name: Upload coverage report
-        uses: codecov/codecov-action@v5.4.2
+        uses: codecov/codecov-action@v5.4.3
         with:
           token: {{ '${{ secrets.CODECOV_TOKEN }}' }}
           fail_ci_if_error: true
