@@ -6,7 +6,7 @@ This section will guide you through setting up your development environment for 
 
 Before you begin, you will need to have the following installed on your system:
 
-- A C++ compiler: such as gcc, clang, Apple clang, or msvc (Microsoft Visual C++). See [here](https://en.cppreference.com/w/cpp/compiler_support) for a list of supported features by compiler.
+- A C++ compiler: such as gcc, clang, Apple clang, or msvc (Microsoft Visual C++). See [Compiler Support](https://en.cppreference.com/w/cpp/compiler_support) for a list of supported features by compiler.
 - [CMake](https://cmake.org/): a cross-platform build system.
 - Git: a version control system.
 - Ninja: a fast build system used by CMake.
