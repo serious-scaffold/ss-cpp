@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
   "name": "ss-cpp",
   "description": "A continuously evolving basic template for cpp development.",
-  "builtin-baseline": "bfed87b1938fbd406b9eef28c281b6219c889ae1",
+  "builtin-baseline": "5a2324f6667233aeb903d3117f6fd259a2be6f8b",
   "homepage": "https://github.com/serious-scaffold/ss-cpp",
   "dependencies": [
     "fmt",
