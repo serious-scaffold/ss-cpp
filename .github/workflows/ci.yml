@@ -77,7 +77,7 @@ jobs:
     strategy:
       matrix:
         triplet: [x64-linux]
-        compiler: [gcc-14, llvm-18]
+        compiler: [gcc-14, llvm-19]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
@@ -232,7 +232,7 @@ jobs:
     strategy:
       matrix:
         triplet: [x64-windows]
-        compiler: [msvc-2022, llvm-18]
+        compiler: [msvc-2022, llvm-19]
         std: [20]
         build_type: [Debug, RelWithDebInfo]
 
