@@ -51,7 +51,7 @@ jobs:
           python-version: 3.11
 
       - name: Install copier
-        run: pipx install copier==9.7.1
+        run: pipx install copier==9.9.0
 
       - name: Verify template
         run: make template-build
@@ -958,7 +958,7 @@ jobs:
           "
 
       - name: Install copier
-        run: pipx install copier==9.7.1
+        run: pipx install copier==9.9.0
 
       - name: Apply mkdocs
         run: make template-build COPIER_EXTRA_OPTS="-d docs_type=mkdocs"
