@@ -332,7 +332,7 @@ jobs:
 
       - name: Prepare for gcovr
         run: |
-          pip install gcovr==8.3
+          pip install gcovr==8.4
 
       - name: Configure CMake
         run: >
