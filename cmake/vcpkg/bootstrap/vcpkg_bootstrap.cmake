@@ -88,6 +88,13 @@ function(_vcpkg_tool_bootstrap vcpkg_root)
       string(REPLACE [[elif [ "$ARCH" = "x86_64" ]; then]]
                      [[elif [ "$ARCH" = "" ]; then]] file_contents
                      "${file_contents}")
+      message(STATUS "Replace vcpkg sources")
+      string(
+        REPLACE
+          [[(cd "$buildDir" && cmake --build .) || exit 1]]
+          [[(sed -i 's/InternalFeatureSet separate_features{{FeatureNameCore.to_string(), feature->name}};/InternalFeatureSet separate_features{{FeatureNameCore.to_string()}}; separate_features.push_back(feature->name);/' $srcDir/src/vcpkg/commands.test-features.cpp && cd "$buildDir" && cmake --build .) || exit 1]]
+          file_contents
+          "${file_contents}")
       file(WRITE "${bootstrap_impl}" "${file_contents}")
 
       execute_process(
