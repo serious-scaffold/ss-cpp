@@ -25,7 +25,7 @@ clean:
 
 # Install standalone tools
 prerequisites:
-	pipx install --force copier==9.10.3
+	pipx install --force copier==9.11.0
 	pipx install --force pre-commit==4.3.0
 	pipx install --force watchfiles==1.1.1
 
